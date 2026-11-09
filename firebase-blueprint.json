@@ -1,0 +1,346 @@
+{
+  "projects": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "name": "string",
+      "description": "string",
+      "projectType": "string",
+      "language": "string",
+      "framework": "string",
+      "status": "string",
+      "progress": "number",
+      "defaultAiProvider": "string",
+      "defaultAiModel": "string",
+      "githubRepo": "string",
+      "githubBranch": "string",
+      "googleDriveFolderId": "string",
+      "googleDriveAccountEmail": "string",
+      "telegramBotId": "string",
+      "openTasksCount": "number",
+      "completedTasksCount": "number",
+      "notes": "string",
+      "createdAt": "timestamp",
+      "updatedAt": "timestamp"
+    }
+  },
+  "tasks": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "title": "string",
+      "description": "string",
+      "assignedAgent": "string",
+      "status": "string",
+      "priority": "string",
+      "createdAt": "timestamp",
+      "updatedAt": "timestamp"
+    }
+  },
+  "stored_files": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "fileName": "string",
+      "fileType": "string",
+      "mimeType": "string",
+      "sizeBytes": "number",
+      "source": "string",
+      "storageDestination": "string",
+      "remoteUrl": "string",
+      "localPath": "string",
+      "checksumSha256": "string",
+      "isMalwareScanned": "boolean",
+      "scanResult": "string",
+      "version": "number",
+      "createdAt": "timestamp"
+    }
+  },
+  "github_accounts": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "username": "string",
+      "avatarUrl": "string",
+      "authType": "string",
+      "maskedToken": "string",
+      "encryptedToken": "string",
+      "isConnected": "boolean",
+      "createdAt": "timestamp"
+    }
+  },
+  "telegram_bots": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "botUsername": "string",
+      "botName": "string",
+      "maskedToken": "string",
+      "encryptedToken": "string",
+      "webhookUrl": "string",
+      "isActive": "boolean",
+      "createdAt": "timestamp"
+    }
+  },
+  "telegram_events": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "botId": "string",
+      "projectId": "string",
+      "senderUsername": "string",
+      "messageText": "string",
+      "hasAttachment": "boolean",
+      "attachmentType": "string",
+      "status": "string",
+      "createdAt": "timestamp"
+    }
+  },
+  "google_accounts": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "email": "string",
+      "displayName": "string",
+      "avatarUrl": "string",
+      "isDefault": "boolean",
+      "storageUsedBytes": "number",
+      "storageTotalBytes": "number",
+      "status": "string",
+      "lastSyncAt": "timestamp"
+    }
+  },
+  "api_credentials": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "provider": "string",
+      "keyName": "string",
+      "maskedKey": "string",
+      "encryptedKey": "string",
+      "defaultModel": "string",
+      "spendingLimitMonthly": "number",
+      "currentSpentMonthly": "number",
+      "rateLimitRpm": "number",
+      "isEnabled": "boolean",
+      "createdAt": "timestamp"
+    }
+  },
+  "ai_agents": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "name": "string",
+      "role": "string",
+      "description": "string",
+      "systemInstructions": "string",
+      "model": "string",
+      "status": "string",
+      "lastActiveTask": "string"
+    }
+  },
+  "audit_logs": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "action": "string",
+      "details": "string",
+      "severity": "string",
+      "timestamp": "timestamp"
+    }
+  },
+  "approval_requests": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "operationType": "string",
+      "description": "string",
+      "approvalToken": "string",
+      "status": "string",
+      "expiresAt": "number",
+      "requestedBy": "string",
+      "approvedBy": "string",
+      "createdAt": "timestamp",
+      "resolvedAt": "timestamp"
+    }
+  },
+  "sync_records": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "syncType": "string",
+      "status": "string",
+      "syncedFilesCount": "number",
+      "failedFilesCount": "number",
+      "details": "string",
+      "startedAt": "timestamp",
+      "completedAt": "timestamp"
+    }
+  },
+  "project_backups": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "projectName": "string",
+      "snapshotVersion": "string",
+      "encryptedData": "string",
+      "sha256Checksum": "string",
+      "backupSizeBytes": "number",
+      "status": "string",
+      "destination": "string",
+      "createdAt": "timestamp"
+    }
+  },
+  "app_notifications": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "title": "string",
+      "message": "string",
+      "type": "string",
+      "severity": "string",
+      "isRead": "boolean",
+      "sentToTelegram": "boolean",
+      "actionUrl": "string",
+      "createdAt": "timestamp"
+    }
+  },
+  "persistent_jobs": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "projectName": "string",
+      "title": "string",
+      "userPrompt": "string",
+      "status": "string",
+      "currentStepIndex": "number",
+      "totalSteps": "number",
+      "progressPercent": "number",
+      "workerId": "string",
+      "leaseToken": "string",
+      "leaseExpiresAt": "timestamp",
+      "heartbeatAt": "timestamp",
+      "retryCount": "number",
+      "maxRetries": "number",
+      "waitingApprovalId": "string",
+      "estimatedCostUsd": "number",
+      "totalTokensUsed": "number",
+      "createdAt": "timestamp",
+      "updatedAt": "timestamp",
+      "completedAt": "timestamp"
+    }
+  },
+  "job_checkpoints": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "jobId": "string",
+      "stepIndex": "number",
+      "stepName": "string",
+      "agentRole": "string",
+      "aiProvider": "string",
+      "aiModel": "string",
+      "status": "string",
+      "outputPayload": "string",
+      "tokensUsed": "number",
+      "costUsd": "number",
+      "completedAt": "timestamp"
+    }
+  },
+  "ai_model_registry": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "provider": "string",
+      "modelId": "string",
+      "displayName": "string",
+      "contextWindow": "number",
+      "maxOutputTokens": "number",
+      "supportsVision": "boolean",
+      "supportsFiles": "boolean",
+      "supportsTools": "boolean",
+      "supportsReasoning": "boolean",
+      "supportsStreaming": "boolean",
+      "costPer1kInputTokens": "number",
+      "costPer1kOutputTokens": "number",
+      "isAvailable": "boolean",
+      "lastVerifiedAt": "timestamp"
+    }
+  },
+  "failover_logs": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "jobId": "string",
+      "stepIndex": "number",
+      "primaryProvider": "string",
+      "primaryModel": "string",
+      "fallbackProvider": "string",
+      "fallbackModel": "string",
+      "failureReason": "string",
+      "costDifference": "number",
+      "timestamp": "timestamp"
+    }
+  },
+  "idempotency_records": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "idempotencyKey": "string",
+      "actionType": "string",
+      "status": "string",
+      "resultPayload": "string",
+      "executedAt": "timestamp"
+    }
+  },
+  "project_secrets_vault": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "secretName": "string",
+      "secretType": "string",
+      "description": "string",
+      "secretReferenceKey": "string",
+      "encryptedSecretValue": "string",
+      "maskedSecretValue": "string",
+      "allowedServices": "array",
+      "allowedAgents": "array",
+      "allowedOperations": "array",
+      "expiresAt": "timestamp",
+      "lastUsedAt": "timestamp",
+      "createdAt": "timestamp"
+    }
+  },
+  "database_connections": {
+    "type": "collection",
+    "fields": {
+      "userId": "string",
+      "projectId": "string",
+      "connectionName": "string",
+      "engineType": "string",
+      "host": "string",
+      "port": "number",
+      "databaseName": "string",
+      "username": "string",
+      "secretReferenceKey": "string",
+      "isReadOnly": "boolean",
+      "allowedSchemas": "array",
+      "queryTimeoutSeconds": "number",
+      "status": "string",
+      "lastTestedAt": "timestamp",
+      "createdAt": "timestamp"
+    }
+  }
+}
