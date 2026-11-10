@@ -44,6 +44,29 @@
 
 هذه المصفوفة تفسير معماري مقترح يجمع الوثائق، وليست اعتماداً نهائياً للملكية. أي اختلاف عن الفصل 134 أو قرار معتمد يجب تسجيله كقرار تغيير لا كتعديل صامت.
 
+## 2.1 سجل ملكية بيانات تشغيل الخدمات SH-01..SH-16
+
+| الخدمة | بيانات التشغيل التي تملكها الخدمة وفق العقود الأولية | البيانات التي لا تملكها |
+|---|---|---|
+| SH-01 | identities، identity_providers، sessions، authentication_events | سياسات المجال وصلاحيات الموارد وبيانات ملفات المستخدم الدلالية |
+| SH-02 | roles/permissions العامة، access_policies، policy_rules، grants، access_decisions | حقيقة بيانات المورد أو قرار موافقة المجال |
+| SH-03 | approval_requests، steps، decisions، assignments، evidence refs، delegation/events | منطق المجال الذي يحدد هل تتطلب العملية موافقة ومن هو الموافق |
+| SH-04 | audit_events، sources، integrity checkpoints، export jobs، retention policies | سجلات النشاط العادية أو أسرار الطلبات |
+| SH-05 | notification jobs/deliveries، templates، channel configs، attempts | قواعد الأعمال ومحتوى التنبيه الدلالي الذي يحدده المجال |
+| SH-06 | asset records/versions/storage refs/links/permissions/metadata/processing/checksums | محتوى الوثيقة المعرفي أو التصميم أو الكود الأصلي |
+| SH-07 | search documents/sources/index jobs/versions/query audit refs | المحتوى الأصلي أو قرار السماح النهائي |
+| SH-08 | tasks، attempts، dependencies، assignments، progress، outputs/errors، cancellation requests | منطق المهمة الخاص بالمركز أو ملكية ناتج المجال |
+| SH-09 | event outbox/inbox، subscriptions، delivery attempts، dead-letter references | حقيقة المجال ومحتوى المورد المصدر |
+| SH-10 | version metadata، relationships، change sets/items، approvals/tags/comparisons، project snapshots | محتوى المورد الدلالي الذي يملكه المركز |
+| SH-11 | normalized usage/cost records، budgets، forecasts، alerts، period aggregates | أسعار غير موثقة أو قياس مزود لم يتم إثباته |
+| SH-12 | setting definitions/schemas/values/versions/overrides/change history | الأسرار الخام وقواعد المجال التي لم يفوض مالكها إدارتها |
+| SH-13 | connector manifests، connection profiles/metadata، lifecycle and health refs، secret references | بيانات اعتماد المزود الخام أو ملكية حسابه الخارجي |
+| SH-14 | health checks، metrics، traces، alerts، incident references | نتائج الاختبارات الوظيفية أو بيانات الأعمال |
+| SH-15 | backup/restore catalog، job metadata، snapshot refs، integrity/restore evidence | ملكية بيانات المصدر أو مفتاح التشفير دون تفويض مستقل |
+| SH-16 | knowledge indexing jobs، source/citation refs، provenance links، semantic index metadata | المستند الأصلي ومحتواه وACL المصدر وقرار الاحتفاظ به |
+
+**حد الإثبات:** أسماء الكيانات في هذا الجدول مستمدة من العقود الأولية في الملف 23 والملف 32 ومن الفصل 134. هي حدود ملكية مقترحة، وليست أسماء جداول معتمدة أو schema منشوراً. يلزم تعيين system-of-record ومالك الحقول لكل كيان قبل ERD.
+
 ## 3. مصفوفة المراكز الأربعة عشر
 
 | المركز | مالك الحقيقة/البيانات | واجهات مشتركة يستخدمها | حد الكتابة |
