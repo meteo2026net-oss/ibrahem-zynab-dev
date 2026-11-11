@@ -8,19 +8,19 @@
     <div class="card-title">إنشاء مشروع جديد</div>
     <div class="form-group">
       <label class="form-label">اسم المشروع *</label>
-      <input class="form-control" [(ngModel)]="newProject.name" />
+      <input class="form-control" [(ngModel)]="newName" />
     </div>
     <div class="form-group">
       <label class="form-label">وصف الفكرة</label>
-      <textarea class="form-control" rows="3" [(ngModel)]="newProject.description"></textarea>
+      <textarea class="form-control" rows="3" [(ngModel)]="newDesc"></textarea>
     </div>
     <div class="form-group">
       <label class="form-label">المنصات</label>
       <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem">
-        <label><input type="checkbox" [(ngModel)]="newProject.platforms.android" /> Android</label>
-        <label><input type="checkbox" [(ngModel)]="newProject.platforms.ios" /> iOS</label>
-        <label><input type="checkbox" [(ngModel)]="newProject.platforms.web" /> Web</label>
-        <label><input type="checkbox" [(ngModel)]="newProject.platforms.desktop" /> Desktop</label>
+        <label><input type="checkbox" [(ngModel)]="platforms.android" /> Android</label>
+        <label><input type="checkbox" [(ngModel)]="platforms.ios" /> iOS</label>
+        <label><input type="checkbox" [(ngModel)]="platforms.web" /> Web</label>
+        <label><input type="checkbox" [(ngModel)]="platforms.desktop" /> Desktop</label>
       </div>
     </div>
     <button class="btn btn-primary" (click)="create()">إنشاء</button>
@@ -29,8 +29,8 @@
 }
 
 <div class="grid-3">
-  @for (p of projects; track p.id) {
-    <div class="project-card">
+  @for (p of filtered(); track p.id) {
+    <div class="project-card" [class.selected]="p.id === activeId()" (click)="select(p.id)">
       <div style="display:flex;justify-content:space-between;align-items:start">
         <h3>{{ p.name }}</h3>
         <span class="badge" [ngClass]="statusClass(p.status)">{{ statusLabel(p.status) }}</span>

@@ -1,0 +1,49 @@
+<section class="hero">
+  <div>
+    <h1>مصمم التطبيقات الذكي</h1>
+    <p>حوّل فكرتك إلى تطبيق عبر مراحل منظمة: تحليل → تصميم → وظائف → بيانات → بناء → اختبار → إطلاق</p>
+    <div class="hero-actions">
+      <a routerLink="/projects" class="btn btn-primary">المشاريع</a>
+      <a routerLink="/analysis" class="btn btn-secondary">بدء التحليل</a>
+    </div>
+  </div>
+  @if (project(); as p) {
+    <div class="hero-project">
+      <div class="label">المشروع النشط</div>
+      <h2>{{ p.name }}</h2>
+      <p>{{ p.description }}</p>
+      <div class="progress"><div class="progress-bar" [style.width.%]="p.progress"></div></div>
+      <div class="meta">المرحلة {{ p.phase }} · {{ p.progress }}% · {{ p.platforms.join(' + ') }}</div>
+    </div>
+  }
+</section>
+
+<div class="grid-4 stats">
+  <div class="stat-card">
+    <div class="stat-value">{{ projectsCount() }}</div>
+    <div class="stat-label">مشاريع</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ approvedReqs() }}/{{ totalReqs() }}</div>
+    <div class="stat-label">متطلبات معتمدة</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ testsPass() }}/{{ testsTotal() }}</div>
+    <div class="stat-label">اختبارات ناجحة</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">14</div>
+    <div class="stat-label">مراكز وظيفية</div>
+  </div>
+</div>
+
+<h2 class="section-title">المراكز</h2>
+<div class="centers">
+  @for (c of centers; track c.path) {
+    <a class="center-card" [routerLink]="c.path">
+      <span class="icon">{{ c.icon }}</span>
+      <strong>{{ c.label }}</strong>
+      <span class="desc">{{ c.desc }}</span>
+    </a>
+  }
+</div>

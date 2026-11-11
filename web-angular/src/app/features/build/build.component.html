@@ -1,13 +1,21 @@
-<div class="card"><div class="card-title">{{ title }}</div>
-<div class="toolbar">
-<select class="form-control" style="width:140px"><option>Android</option><option>Web</option><option>iOS</option></select>
-<button class="btn btn-primary">توليد الكود</button>
-<button class="btn btn-success">بناء الحزمة</button>
+<div class="card">
+  <div class="card-title">مركز البناء</div>
+  <div class="toolbar">
+    <select class="form-control" style="width:140px" [value]="platform" (change)="platform = $any($event.target).value">
+      <option>Android</option>
+      <option>Web</option>
+      <option>iOS</option>
+    </select>
+    <button class="btn btn-primary" (click)="build()">توليد الكود وبناء الحزمة</button>
+  </div>
+  <pre class="log">@for (line of store.buildLog(); track $index) {{{ line }}&#10;}</pre>
+  @if (store.lastApk(); as apk) {
+    <div class="apk" [class.ready]="apk.ready">
+      <div>
+        <strong>{{ apk.name }}</strong>
+        <div class="hint">{{ platform }} · {{ apk.size }} · {{ apk.ready ? 'جاهز' : 'قيد البناء...' }}</div>
+      </div>
+      <button class="btn btn-primary btn-sm" [disabled]="!apk.ready">تحميل</button>
+    </div>
+  }
 </div>
-<pre style="background:#1a202c;color:#a0aec0;padding:14px;border-radius:8px;font-size:.8rem;direction:ltr;text-align:left">[10:01] بدء توليد الكود — 8 شاشات
-[10:04] اكتمال التوليد — 42 ملفاً
-[10:08] نجاح البناء — app-debug.apk (18.4 MB)</pre>
-<div style="margin-top:12px;padding:14px;background:#f0fff4;border-radius:8px;display:flex;justify-content:space-between;align-items:center">
-<strong>app-debug.apk</strong>
-<button class="btn btn-primary btn-sm">تحميل</button>
-</div></div>

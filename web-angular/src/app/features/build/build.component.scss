@@ -1,1 +1,23 @@
-/* build */
+.log {
+  background: #1a202c;
+  color: #a0aec0;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: .8rem;
+  direction: ltr;
+  text-align: left;
+  min-height: 140px;
+  white-space: pre-wrap;
+  margin-top: 12px;
+}
+.apk {
+  margin-top: 12px;
+  padding: 14px;
+  background: #edf2f7;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &.ready { background: #f0fff4; }
+  .hint { font-size: .8rem; color: var(--text-muted); }
+}

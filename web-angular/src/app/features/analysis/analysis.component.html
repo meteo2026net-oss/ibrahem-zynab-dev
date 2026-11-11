@@ -1,33 +1,50 @@
-
 <div class="card">
-  <div class="card-title">{{ title }} — مشروع متجري</div>
+  <div class="card-title">
+    مركز التحليل
+    @if (store.activeProject(); as p) {
+      <span class="badge badge-primary" style="margin-right:8px">{{ p.name }}</span>
+    }
+  </div>
   <div class="form-group">
     <label class="form-label">وصف الفكرة</label>
-    <textarea class="form-control" rows="5">أريد تطبيق متجر إلكتروني بسيط. الزبون يتصفح المنتجات حسب التصنيف، يضيف للسلة، ثم يطلب بعد تسجيل الدخول. البائع يدير المنتجات والطلبات.</textarea>
+    <textarea class="form-control" rows="5" [(ngModel)]="idea"></textarea>
   </div>
   <div class="toolbar">
-    <button class="btn btn-primary">تحليل الآن</button>
-    <button class="btn btn-secondary">رفع ملف مواصفات</button>
-    <button class="btn btn-secondary">حفظ كمسودة</button>
-  </div>
-</div>
-<div class="card">
-  <div class="card-title">نتائج التحليل — المتطلبات</div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>المعرف</th><th>المتطلب</th><th>الأولوية</th></tr></thead>
-      <tbody>
-        <tr><td>R-01</td><td>تصفح قائمة المنتجات</td><td><span class="badge badge-danger">عالي</span></td></tr>
-        <tr><td>R-02</td><td>إضافة منتج إلى السلة</td><td><span class="badge badge-danger">عالي</span></td></tr>
-        <tr><td>R-03</td><td>إتمام الطلب بعد تسجيل الدخول</td><td><span class="badge badge-danger">عالي</span></td></tr>
-        <tr><td>R-04</td><td>إدارة المنتجات من لوحة البائع</td><td><span class="badge badge-danger">عالي</span></td></tr>
-        <tr><td>R-05</td><td>عرض حالة الطلب</td><td><span class="badge badge-warning">متوسط</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="toolbar" style="margin-top:12px">
-    <button class="btn btn-success">اعتماد والانتقال للتصميم</button>
-    <button class="btn btn-secondary">إعادة التحليل</button>
+    <button class="btn btn-primary" (click)="run()" [disabled]="analyzing">
+      {{ analyzing ? 'جاري التحليل...' : 'تحليل الآن' }}
+    </button>
+    <button class="btn btn-secondary" type="button">رفع ملف مواصفات</button>
   </div>
 </div>
 
+@if (store.analysisDone()) {
+  <div class="card">
+    <div class="card-title">نتائج التحليل — المتطلبات</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>المعرف</th><th>المتطلب</th><th>الأولوية</th><th>الاعتماد</th></tr>
+        </thead>
+        <tbody>
+          @for (r of store.requirements(); track r.id) {
+            <tr>
+              <td>{{ r.id }}</td>
+              <td>{{ r.text }}</td>
+              <td><span class="badge" [class]="priorityClass(r.priority)">{{ priorityLabel(r.priority) }}</span></td>
+              <td>
+                <button class="btn btn-sm" [class]="r.approved ? 'btn-success' : 'btn-secondary'" (click)="store.toggleRequirement(r.id)">
+                  {{ r.approved ? 'معتمد' : 'اعتماد' }}
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="toolbar" style="margin-top:12px">
+      <button class="btn btn-success" (click)="store.approveAllRequirements()">اعتماد الكل والانتقال للتصميم</button>
+      <a routerLink="/design" class="btn btn-primary">فتح التصميم</a>
+      <button class="btn btn-secondary" (click)="run()">إعادة التحليل</button>
+    </div>
+  </div>
+}

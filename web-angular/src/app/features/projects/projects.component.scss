@@ -6,7 +6,11 @@
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: box-shadow .15s, border-color .15s;
-  &:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); border-color: var(--accent); }
+  &:hover, &.selected {
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    border-color: var(--accent);
+  }
+  &.selected { background: var(--primary-soft); }
   h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 6px; }
   .desc { font-size: .85rem; color: var(--text-muted); }
   .meta {

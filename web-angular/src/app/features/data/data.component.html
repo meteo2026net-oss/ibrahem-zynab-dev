@@ -1,14 +1,27 @@
-<div class="card"><div class="card-title">{{ title }} — كيان Product</div>
-<div class="toolbar"><button class="btn btn-primary">+ كيان</button><button class="btn btn-secondary">مخطط العلاقات</button></div>
-<div class="table-wrap"><table>
-<thead><tr><th>الحقل</th><th>النوع</th><th>إلزامي</th><th>فريد</th><th>ملاحظات</th></tr></thead>
-<tbody>
-<tr><td>id</td><td>UUID</td><td>نعم</td><td>نعم</td><td>مفتاح أساسي</td></tr>
-<tr><td>name</td><td>String</td><td>نعم</td><td>لا</td><td>اسم المنتج</td></tr>
-<tr><td>price</td><td>Decimal</td><td>نعم</td><td>لا</td><td>&gt; 0</td></tr>
-<tr><td>stock</td><td>Integer</td><td>نعم</td><td>لا</td><td>≥ 0</td></tr>
-<tr><td>categoryId</td><td>UUID (FK)</td><td>نعم</td><td>لا</td><td>علاقة Category</td></tr>
-</tbody></table></div>
-<button class="btn btn-secondary btn-sm" style="margin-top:12px">+ حقل</button>
-<button class="btn btn-success btn-sm" style="margin-top:12px;margin-right:8px">حفظ الكيان</button>
-</div>
+@for (entity of store.entities(); track entity.name) {
+  <div class="card">
+    <div class="card-title">مركز البيانات — كيان {{ entity.name }}</div>
+    <div class="toolbar">
+      <button class="btn btn-primary" type="button">+ كيان</button>
+      <button class="btn btn-secondary" type="button">مخطط العلاقات</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>الحقل</th><th>النوع</th><th>إلزامي</th><th>فريد</th><th>ملاحظات</th></tr>
+        </thead>
+        <tbody>
+          @for (f of entity.fields; track f.name) {
+            <tr>
+              <td>{{ f.name }}</td>
+              <td>{{ f.type }}</td>
+              <td>{{ f.required ? 'نعم' : 'لا' }}</td>
+              <td>{{ f.unique ? 'نعم' : 'لا' }}</td>
+              <td>{{ f.notes }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+}

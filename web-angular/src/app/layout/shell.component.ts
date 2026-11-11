@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { ProjectService } from '../core/project.service';
 
 interface NavItem {
   path: string;
@@ -11,12 +11,15 @@ interface NavItem {
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgFor],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
 })
 export class ShellComponent {
+  readonly store = inject(ProjectService);
+
   readonly centers: NavItem[] = [
+    { path: '/home', label: 'الرئيسية', icon: '🏠' },
     { path: '/projects', label: '01 المشاريع', icon: '📁' },
     { path: '/analysis', label: '02 التحليل', icon: '🔍' },
     { path: '/design', label: '03 التصميم', icon: '🎨' },

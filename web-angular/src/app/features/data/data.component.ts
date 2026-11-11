@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ProjectService } from '../../core/project.service';
+
 @Component({
   selector: 'app-data',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './data.component.html',
   styleUrl: './data.component.scss',
 })
-export class DataComponent { title = 'مركز البيانات'; }
+export class DataComponent {
+  readonly store = inject(ProjectService);
+}

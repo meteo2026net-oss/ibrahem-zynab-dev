@@ -5,23 +5,23 @@
       <span>مصمم التطبيقات الذكي</span>
     </div>
     <nav class="nav">
-      <div class="nav-section">المراكز</div>
-      <a
-        *ngFor="let item of centers"
-        class="nav-item"
-        [routerLink]="item.path"
-        routerLinkActive="active"
-      >
-        <span class="icon">{{ item.icon }}</span>
-        <span>{{ item.label }}</span>
-      </a>
+      <div class="nav-section">التنقل</div>
+      @for (item of centers; track item.path) {
+        <a class="nav-item" [routerLink]="item.path" routerLinkActive="active">
+          <span class="icon">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+        </a>
+      }
     </nav>
   </aside>
   <div class="main">
     <header class="topbar">
       <div class="topbar-title">مصمم التطبيقات الذكي</div>
       <div class="topbar-actions">
-        <span class="badge badge-primary">Angular · متجري</span>
+        @if (store.activeProject(); as p) {
+          <span class="badge badge-primary">{{ p.name }} · مرحلة {{ p.phase }}</span>
+        }
+        <span class="badge badge-muted">v0.1.0</span>
       </div>
     </header>
     <main class="content">

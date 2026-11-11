@@ -6,7 +6,8 @@ export const routes: Routes = [
     path: '',
     component: ShellComponent,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'projects' },
+      { path: '', pathMatch: 'full', redirectTo: 'home' },
+      { path: 'home', loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) },
       { path: 'projects', loadComponent: () => import('./features/projects/projects.component').then(m => m.ProjectsComponent) },
       { path: 'analysis', loadComponent: () => import('./features/analysis/analysis.component').then(m => m.AnalysisComponent) },
       { path: 'design', loadComponent: () => import('./features/design/design.component').then(m => m.DesignComponent) },
@@ -23,5 +24,5 @@ export const routes: Routes = [
       { path: 'reports', loadComponent: () => import('./features/reports/reports.component').then(m => m.ReportsComponent) },
     ],
   },
-  { path: '**', redirectTo: 'projects' },
+  { path: '**', redirectTo: 'home' },
 ];

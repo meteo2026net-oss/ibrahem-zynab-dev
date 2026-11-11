@@ -1,12 +1,23 @@
 <div class="grid-3">
-<div class="stat-card"><div class="stat-value">3</div><div class="stat-label">وكلاء نشطون</div></div>
-<div class="stat-card"><div class="stat-value">1</div><div class="stat-label">قيد التنفيذ</div></div>
-<div class="stat-card"><div class="stat-value">5</div><div class="stat-label">بانتظار المراجعة</div></div>
+  <div class="stat-card"><div class="stat-value">{{ counts().done }}</div><div class="stat-label">مكتمل</div></div>
+  <div class="stat-card"><div class="stat-value">{{ counts().review }}</div><div class="stat-label">بانتظار المراجعة</div></div>
+  <div class="stat-card"><div class="stat-value">{{ counts().running }}</div><div class="stat-label">قيد التنفيذ</div></div>
 </div>
-<div class="card" style="margin-top:16px"><div class="card-title">{{ title }}</div>
-<div class="table-wrap"><table>
-<thead><tr><th>المعرف</th><th>الوكيل</th><th>الوصف</th><th>الحالة</th><th></th></tr></thead>
-<tbody>
-<tr><td>#A-102</td><td>Analysis</td><td>تحليل فكرة متجري</td><td><span class="badge badge-success">مكتمل</span></td><td><button class="btn btn-primary btn-sm">مراجعة</button></td></tr>
-<tr><td>#D-045</td><td>Design</td><td>توليد قائمة المنتجات</td><td><span class="badge badge-warning">مراجعة</span></td><td><button class="btn btn-primary btn-sm">مراجعة</button></td></tr>
-</tbody></table></div></div>
+<div class="card" style="margin-top:16px">
+  <div class="card-title">مركز الوكلاء — المهام</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>المعرف</th><th>الوكيل</th><th>الوصف</th><th>الحالة</th></tr></thead>
+      <tbody>
+        @for (t of store.agentTasks(); track t.id) {
+          <tr>
+            <td>{{ t.id }}</td>
+            <td>{{ t.agent }}</td>
+            <td>{{ t.description }}</td>
+            <td><span class="badge" [class]="cls(t.status)">{{ label(t.status) }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
