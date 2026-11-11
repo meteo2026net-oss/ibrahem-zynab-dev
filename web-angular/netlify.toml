@@ -1,0 +1,12 @@
+# يمكن استخدام هذا الملف إذا اخترت Base directory = web-angular فقط
+[build]
+  command = "npm install && npm run build"
+  publish = "dist/intelligent-app-designer/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  NODE_VERSION = "20"
