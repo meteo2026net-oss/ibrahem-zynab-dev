@@ -1,10 +1,20 @@
-@for (entity of store.entities(); track entity.name) {
+<div class="page-header">
+  <div>
+    <h1>مركز البيانات</h1>
+    <p>الكيانات، الحقول، والعلاقات لتطبيق {{ store.activeProject().name }}</p>
+  </div>
+  <button class="btn btn-success" type="button" (click)="save()">حفظ النموذج</button>
+</div>
+
+<div class="entity-tabs">
+  @for (e of store.entities(); track e.name; let i = $index) {
+    <button type="button" class="tab" [class.active]="selected() === i" (click)="select(i)">{{ e.name }}</button>
+  }
+</div>
+
+@if (store.entities()[selected()]; as entity) {
   <div class="card">
-    <div class="card-title">مركز البيانات — كيان {{ entity.name }}</div>
-    <div class="toolbar">
-      <button class="btn btn-primary" type="button">+ كيان</button>
-      <button class="btn btn-secondary" type="button">مخطط العلاقات</button>
-    </div>
+    <div class="card-title">كيان {{ entity.name }}</div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -13,7 +23,7 @@
         <tbody>
           @for (f of entity.fields; track f.name) {
             <tr>
-              <td>{{ f.name }}</td>
+              <td><code>{{ f.name }}</code></td>
               <td>{{ f.type }}</td>
               <td>{{ f.required ? 'نعم' : 'لا' }}</td>
               <td>{{ f.unique ? 'نعم' : 'لا' }}</td>
@@ -25,3 +35,14 @@
     </div>
   </div>
 }
+
+<div class="card">
+  <div class="card-title">العلاقات</div>
+  <ul class="rels">
+    <li>Product <strong>N—1</strong> Category</li>
+    <li>CartItem <strong>N—1</strong> Product</li>
+    <li>OrderItem <strong>N—1</strong> Product</li>
+    <li>Order <strong>N—1</strong> User</li>
+    <li>Order <strong>1—N</strong> OrderItem</li>
+  </ul>
+</div>

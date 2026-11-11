@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ProjectService } from '../core/project.service';
 import { AuthService } from '../core/auth.service';
+import { ToastService } from '../core/toast.service';
 
 interface NavItem {
   path: string;
@@ -20,6 +21,7 @@ interface NavItem {
 export class ShellComponent {
   readonly store = inject(ProjectService);
   readonly auth = inject(AuthService);
+  readonly toast = inject(ToastService);
   private readonly router = inject(Router);
 
   readonly centers: NavItem[] = [

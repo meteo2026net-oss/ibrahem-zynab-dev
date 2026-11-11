@@ -1,18 +1,18 @@
 <div class="page-header">
   <div>
     <h1>مركز التحليل</h1>
-    <p>حوّل وصف الفكرة إلى متطلبات وكيانات وشاشات قابلة للمراجعة</p>
+    <p>حوّل وصف الفكرة إلى متطلبات وشاشات قابلة للمراجعة</p>
   </div>
 </div>
+
 <div class="card">
   <div class="card-title">
-    مركز التحليل
+    وصف الفكرة
     @if (store.activeProject(); as p) {
       <span class="badge badge-primary" style="margin-right:8px">{{ p.name }}</span>
     }
   </div>
   <div class="form-group">
-    <label class="form-label">وصف الفكرة</label>
     <textarea class="form-control" rows="5" [(ngModel)]="idea"></textarea>
   </div>
   <div class="toolbar">
@@ -48,9 +48,27 @@
       </table>
     </div>
     <div class="toolbar" style="margin-top:12px">
-      <button class="btn btn-success" (click)="store.approveAllRequirements()">اعتماد الكل والانتقال للتصميم</button>
+      <button class="btn btn-success" (click)="store.approveAllRequirements(); toast.success('تم اعتماد كل المتطلبات')">اعتماد الكل</button>
       <a routerLink="/design" class="btn btn-primary">فتح التصميم</a>
       <button class="btn btn-secondary" (click)="run()">إعادة التحليل</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">شاشات مقترحة لتطبيق متجري</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>الشاشة</th><th>الدور</th><th>الوصف</th></tr></thead>
+        <tbody>
+          @for (s of screens; track s.id) {
+            <tr>
+              <td>{{ s.name }}</td>
+              <td><span class="badge badge-muted">{{ s.role }}</span></td>
+              <td>{{ s.description }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </div>
 }

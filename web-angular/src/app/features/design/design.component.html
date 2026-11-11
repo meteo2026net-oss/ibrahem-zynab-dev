@@ -1,18 +1,33 @@
-<div class="toolbar">
-  <select class="form-control" style="width:130px" [(ngModel)]="platform">
-    <option>Android</option><option>iOS</option><option>Web</option>
-  </select>
-  <input class="form-control" style="max-width:180px" placeholder="اسم صفحة جديدة" [(ngModel)]="newPageName" />
-  <button class="btn btn-secondary btn-sm" (click)="addPage()">+ صفحة</button>
-  <button class="btn btn-primary btn-sm">✨ إنشاء بالذكاء الاصطناعي</button>
+<div class="page-header">
+  <div>
+    <h1>مركز التصميم</h1>
+    <p>صمّم شاشات «متجري» بمعاينة هاتف حية لكل صفحة</p>
+  </div>
+  <div class="toolbar" style="margin:0">
+    <select class="form-control" style="width:120px" [(ngModel)]="platform">
+      <option>Android</option><option>iOS</option><option>Web</option>
+    </select>
+    <button class="btn btn-primary btn-sm" (click)="aiGenerate()">✨ توليد بالذكاء الاصطناعي</button>
+  </div>
+</div>
+
+<div class="screen-catalog">
+  @for (s of screenDefs; track s.id) {
+    <button type="button" class="sc-chip" (click)="selectScreen(s.name)">
+      <strong>{{ s.name }}</strong>
+      <small>{{ s.role }}</small>
+    </button>
+  }
 </div>
 
 <div class="pages">
   @for (p of store.designPages(); track p.id) {
-    <button class="page-chip" [class.active]="store.currentDesignPage()?.id === p.id" (click)="store.selectDesignPage(p.id)">
+    <button type="button" class="page-chip" [class.active]="store.currentDesignPage().id === p.id" (click)="store.selectDesignPage(p.id)">
       {{ p.name }}
     </button>
   }
+  <input class="form-control" style="max-width:160px;padding:6px 10px" placeholder="صفحة جديدة" [(ngModel)]="newPageName" />
+  <button class="btn btn-secondary btn-sm" (click)="addPage()">+</button>
 </div>
 
 <div class="design-layout">
@@ -24,31 +39,116 @@
     <div class="palette-item">حقل إدخال</div>
     <div class="palette-item">بطاقة منتج</div>
     <div class="palette-item">شبكة</div>
+    <div class="palette-item">شريط تنقل</div>
+    <div class="palette-item">قائمة</div>
   </div>
+
   <div class="canvas card">
     <div class="phone">
-      <div class="phone-bar">{{ store.currentDesignPage()?.name || 'صفحة' }} · 🛒 2</div>
+      <div class="phone-status"><span>9:41</span><span>{{ platform }}</span></div>
+      <div class="phone-bar">{{ store.currentDesignPage().name }} · 🛒 {{ cartQty }}</div>
       <div class="phone-body">
-        <input class="form-control" placeholder="ابحث عن منتج..." style="margin-bottom:8px;padding:8px;font-size:.8rem" />
-        <div class="chips">
-          <span class="badge badge-primary">الكل</span>
-          <span class="badge badge-muted">إلكترونيات</span>
-          <span class="badge badge-muted">ملابس</span>
-        </div>
-        <div class="products">
-          <div class="p-card"><div class="img">🎧</div><strong>سماعات</strong><div class="price">149 ر.س</div><button class="btn btn-primary btn-sm">أضف للسلة</button></div>
-          <div class="p-card"><div class="img">⌚</div><strong>ساعة ذكية</strong><div class="price">299 ر.س</div><button class="btn btn-primary btn-sm">أضف للسلة</button></div>
-          <div class="p-card"><div class="img">📱</div><strong>غطاء</strong><div class="price">39 ر.س</div><button class="btn btn-primary btn-sm">أضف للسلة</button></div>
-          <div class="p-card"><div class="img">🔌</div><strong>شاحن</strong><div class="price">79 ر.س</div><button class="btn btn-primary btn-sm">أضف للسلة</button></div>
-        </div>
+
+        @if (pageHint() === 'products') {
+          <input class="form-control mini" placeholder="ابحث عن منتج..." />
+          <div class="chips">
+            <span class="badge badge-primary">الكل</span>
+            <span class="badge badge-muted">إلكترونيات</span>
+            <span class="badge badge-muted">إكسسوارات</span>
+          </div>
+          <div class="products">
+            @for (p of products; track p.id) {
+              <button type="button" class="p-card" (click)="selectedProduct = p; selectScreen('تفاصيل المنتج')">
+                <div class="img">{{ p.emoji }}</div>
+                <strong>{{ p.name }}</strong>
+                <div class="price">{{ p.price }} ر.س</div>
+                <span class="btn btn-primary btn-sm fake">أضف للسلة</span>
+              </button>
+            }
+          </div>
+        }
+
+        @if (pageHint() === 'detail') {
+          <div class="detail">
+            <div class="detail-img">{{ selectedProduct.emoji }}</div>
+            <h3>{{ selectedProduct.name }}</h3>
+            <div class="price big">{{ selectedProduct.price }} ر.س</div>
+            <p class="muted">{{ selectedProduct.category }} · متوفر في المخزون</p>
+            <button class="btn btn-primary" style="width:100%;margin-top:12px" type="button" (click)="cartQty = cartQty + 1; toast.success('أُضيف للسلة')">أضف للسلة</button>
+            <button class="btn btn-secondary" style="width:100%;margin-top:8px" type="button" (click)="selectScreen('السلة')">عرض السلة</button>
+          </div>
+        }
+
+        @if (pageHint() === 'cart') {
+          <div class="cart-list">
+            @for (p of products.slice(0, cartQty); track p.id) {
+              <div class="cart-row">
+                <span class="img">{{ p.emoji }}</span>
+                <div>
+                  <strong>{{ p.name }}</strong>
+                  <div class="price">{{ p.price }} ر.س × 1</div>
+                </div>
+              </div>
+            }
+            <div class="cart-total">المجموع: {{ cartTotal() }} ر.س</div>
+            <button class="btn btn-primary" style="width:100%" type="button" (click)="selectScreen('إتمام الطلب')">إتمام الطلب</button>
+          </div>
+        }
+
+        @if (pageHint() === 'checkout') {
+          <div class="form-group"><label class="form-label">العنوان</label><input class="form-control mini" value="الرياض، حي النرجس" /></div>
+          <div class="form-group"><label class="form-label">الجوال</label><input class="form-control mini" value="05xxxxxxx" /></div>
+          <div class="cart-total">المبلغ: {{ selectedProduct.price * cartQty }} ر.س</div>
+          <button class="btn btn-success" style="width:100%" type="button" (click)="toast.success('تم تأكيد الطلب'); selectScreen('طلباتي')">تأكيد الطلب</button>
+        }
+
+        @if (pageHint() === 'orders') {
+          <div class="order-card">
+            <strong>طلب #1042</strong>
+            <span class="badge badge-warning">قيد التجهيز</span>
+            <p class="muted">{{ selectedProduct.name }} و{{ cartQty - 1 }} أخرى</p>
+          </div>
+          <div class="order-card">
+            <strong>طلب #1038</strong>
+            <span class="badge badge-success">مكتمل</span>
+            <p class="muted">سماعات لاسلكية</p>
+          </div>
+        }
+
+        @if (pageHint() === 'seller') {
+          <div class="stat-mini">
+            <div><strong>12</strong><small>طلبات اليوم</small></div>
+            <div><strong>4.2k</strong><small>مبيعات</small></div>
+          </div>
+          <div class="order-card">
+            <strong>طلب #1042</strong>
+            <div class="toolbar" style="margin:8px 0 0">
+              <button class="btn btn-sm btn-secondary" type="button">تجهيز</button>
+              <button class="btn btn-sm btn-primary" type="button">شحن</button>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:8px" type="button">+ منتج جديد</button>
+        }
+
       </div>
     </div>
   </div>
+
   <div class="card props">
-    <div class="card-title">خصائص</div>
-    <p style="font-size:.8rem;color:var(--text-muted)">المنصة: {{ platform }}</p>
-    <p style="font-size:.8rem;color:var(--text-muted)">الصفحة: {{ store.currentDesignPage()?.name }}</p>
-    <div class="form-group"><label class="form-label">نص الزر</label><input class="form-control" value="أضف للسلة" /></div>
-    <button class="btn btn-primary btn-sm" style="width:100%">ربط وظيفة</button>
+    <div class="card-title">خصائص الشاشة</div>
+    <p class="muted">المنصة: {{ platform }}</p>
+    <p class="muted">الصفحة: {{ store.currentDesignPage().name }}</p>
+    <div class="form-group">
+      <label class="form-label">اسم الشاشة</label>
+      <input class="form-control" [value]="store.currentDesignPage().name" readonly />
+    </div>
+    <div class="form-group">
+      <label class="form-label">عند نقر «أضف للسلة»</label>
+      <select class="form-control">
+        <option>وظيفة addToCart</option>
+        <option>فتح تسجيل الدخول</option>
+      </select>
+    </div>
+    <button class="btn btn-primary btn-sm" style="width:100%" type="button" (click)="toast.info('تم ربط الوظيفة (محاكاة)')">ربط وظيفة</button>
   </div>
 </div>
