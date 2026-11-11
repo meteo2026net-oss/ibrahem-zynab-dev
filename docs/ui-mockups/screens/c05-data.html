@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مركز البيانات — كيان Product — مصمم التطبيقات الذكي</title>
+  <link rel="stylesheet" href="../css/app.css" />
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo">م</div><span>مصمم التطبيقات الذكي</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">المراكز</div>
+      <a class="nav-item" href="c01-projects.html"><span class="icon">📁</span><span>01 المشاريع</span></a>
+      <a class="nav-item" href="c02-analysis.html"><span class="icon">🔍</span><span>02 التحليل</span></a>
+      <a class="nav-item" href="c03-design.html"><span class="icon">🎨</span><span>03 التصميم</span></a>
+      <a class="nav-item" href="c04-functions.html"><span class="icon">⚡</span><span>04 الوظائف</span></a>
+      <a class="nav-item active" href="c05-data.html"><span class="icon">🗄️</span><span>05 البيانات</span></a>
+      <a class="nav-item" href="c06-agents.html"><span class="icon">🤖</span><span>06 الوكلاء</span></a>
+      <a class="nav-item" href="c07-build.html"><span class="icon">📦</span><span>07 البناء</span></a>
+      <a class="nav-item" href="c08-test.html"><span class="icon">🧪</span><span>08 الاختبار</span></a>
+      <a class="nav-item" href="c09-release.html"><span class="icon">🚀</span><span>09 الإطلاق</span></a>
+      <a class="nav-item" href="c10-monitor.html"><span class="icon">📊</span><span>10 المراقبة</span></a>
+      <a class="nav-item" href="c11-security.html"><span class="icon">🔒</span><span>11 الأمان</span></a>
+      <a class="nav-item" href="c12-settings.html"><span class="icon">⚙️</span><span>12 الإعدادات</span></a>
+      <a class="nav-item" href="c13-collab.html"><span class="icon">👥</span><span>13 التعاون</span></a>
+      <a class="nav-item" href="c14-reports.html"><span class="icon">📈</span><span>14 التقارير</span></a>
+      <a class="nav-item" href="../index.html"><span class="icon">🏠</span><span>الفهرس</span></a>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title">مركز البيانات — كيان Product</div>
+      <div class="topbar-actions"><span class="badge badge-primary">Mockup</span></div>
+    </header>
+    <div class="content">
+
+      <div class="toolbar">
+        <button class="btn btn-primary">+ كيان جديد</button>
+        <button class="btn btn-secondary">مخطط العلاقات</button>
+        <button class="btn btn-secondary">بيانات تجريبية</button>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">محرر الكيان: Product</div>
+          <button class="btn btn-success btn-sm">حفظ الكيان</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>الحقل</th><th>النوع</th><th>إلزامي</th><th>فريد</th><th>ملاحظات</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>UUID</td><td>نعم</td><td>نعم</td><td>مفتاح أساسي</td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>name</td><td>String</td><td>نعم</td><td>لا</td><td>اسم المنتج</td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>price</td><td>Decimal</td><td>نعم</td><td>لا</td><td>&gt; 0</td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>stock</td><td>Integer</td><td>نعم</td><td>لا</td><td>≥ 0</td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>categoryId</td><td>UUID (FK)</td><td>نعم</td><td>لا</td><td>علاقة مع Category</td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>imageUrl</td><td>String</td><td>لا</td><td>لا</td><td>رابط الصورة</td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>isActive</td><td>Boolean</td><td>نعم</td><td>لا</td><td>افتراضي: true</td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary btn-sm" style="margin-top:12px">+ حقل</button>
+      </div>
+      <div class="card">
+        <div class="card-title">العلاقات</div>
+        <ul style="margin:12px 20px;font-size:.9rem">
+          <li>Product <strong>N—1</strong> Category</li>
+          <li>CartItem <strong>N—1</strong> Product</li>
+          <li>OrderItem <strong>N—1</strong> Product</li>
+        </ul>
+      </div>
+
+      <div class="mock-footer">c05-data | Mockup — سيناريو متجري</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

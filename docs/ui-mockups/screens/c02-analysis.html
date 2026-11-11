@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مركز التحليل — مصمم التطبيقات الذكي</title>
+  <link rel="stylesheet" href="../css/app.css" />
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo">م</div><span>مصمم التطبيقات الذكي</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">المراكز</div>
+      <a class="nav-item" href="c01-projects.html"><span class="icon">📁</span><span>01 المشاريع</span></a>
+      <a class="nav-item active" href="c02-analysis.html"><span class="icon">🔍</span><span>02 التحليل</span></a>
+      <a class="nav-item" href="c03-design.html"><span class="icon">🎨</span><span>03 التصميم</span></a>
+      <a class="nav-item" href="c04-functions.html"><span class="icon">⚡</span><span>04 الوظائف</span></a>
+      <a class="nav-item" href="c05-data.html"><span class="icon">🗄️</span><span>05 البيانات</span></a>
+      <a class="nav-item" href="c06-agents.html"><span class="icon">🤖</span><span>06 الوكلاء</span></a>
+      <a class="nav-item" href="c07-build.html"><span class="icon">📦</span><span>07 البناء</span></a>
+      <a class="nav-item" href="c08-test.html"><span class="icon">🧪</span><span>08 الاختبار</span></a>
+      <a class="nav-item" href="c09-release.html"><span class="icon">🚀</span><span>09 الإطلاق</span></a>
+      <a class="nav-item" href="c10-monitor.html"><span class="icon">📊</span><span>10 المراقبة</span></a>
+      <a class="nav-item" href="c11-security.html"><span class="icon">🔒</span><span>11 الأمان</span></a>
+      <a class="nav-item" href="c12-settings.html"><span class="icon">⚙️</span><span>12 الإعدادات</span></a>
+      <a class="nav-item" href="c13-collab.html"><span class="icon">👥</span><span>13 التعاون</span></a>
+      <a class="nav-item" href="c14-reports.html"><span class="icon">📈</span><span>14 التقارير</span></a>
+      <a class="nav-item" href="../index.html"><span class="icon">🏠</span><span>الفهرس</span></a>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title">مركز التحليل — مشروع متجري</div>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary">حفظ كمسودة</button>
+        <button class="btn btn-primary">تحليل الآن</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">وصف الفكرة</div>
+          <textarea class="form-control" style="min-height:160px;margin-top:12px">أريد تطبيق متجر إلكتروني بسيط. الزبون يتصفح المنتجات حسب التصنيف، يشاهد التفاصيل والصورة والسعر، يضيف للسلة، ثم يطلب بعد تسجيل الدخول. البائع يدير المنتجات ويرى الطلبات ويغيّر حالتها (جديد، قيد التجهيز، تم الشحن، مكتمل).</textarea>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn btn-secondary btn-sm">رفع ملف مواصفات</button>
+            <span class="hint">Markdown / DOCX / PDF</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">حالة التحليل</div>
+          <div style="margin-top:12px">
+            <p style="font-size:.9rem">آخر تحليل: اليوم 09:14</p>
+            <p style="font-size:.9rem;margin-top:6px">الوكيل: <span class="badge badge-primary">Analysis Agent</span></p>
+            <p style="font-size:.9rem;margin-top:6px">النتيجة: <span class="badge badge-success">مكتمل — بانتظار المراجعة</span></p>
+            <div class="progress" style="margin-top:14px"><div class="progress-bar" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">نتائج التحليل</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-secondary btn-sm">إعادة التحليل</button>
+            <button class="btn btn-success btn-sm">اعتماد والانتقال للتصميم</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm">المتطلبات (5)</button>
+          <button class="btn btn-secondary btn-sm">الكيانات (6)</button>
+          <button class="btn btn-secondary btn-sm">الشاشات (8)</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>المعرف</th><th>المتطلب</th><th>الأولوية</th><th>إجراءات</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>R-01</td><td>يجب أن يتمكن الزائر من تصفح قائمة المنتجات</td><td><span class="badge badge-danger">عالي</span></td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>R-02</td><td>يجب أن يتمكن المستخدم من إضافة منتج إلى السلة</td><td><span class="badge badge-danger">عالي</span></td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>R-03</td><td>يجب أن يتمكن المستخدم من إتمام الطلب بعد تسجيل الدخول</td><td><span class="badge badge-danger">عالي</span></td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>R-04</td><td>يجب أن يتمكن البائع من إضافة/تعديل/حذف منتج</td><td><span class="badge badge-danger">عالي</span></td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+              <tr><td>R-05</td><td>يجب عرض حالة الطلب للمستخدم</td><td><span class="badge badge-warning">متوسط</span></td><td><button class="btn btn-ghost btn-sm">تعديل</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="mock-footer">C02 — مركز التحليل | Mockup — سيناريو متجري</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

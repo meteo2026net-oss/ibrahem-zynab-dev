@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مركز المشاريع — مصمم التطبيقات الذكي</title>
+  <link rel="stylesheet" href="../css/app.css" />
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo">م</div><span>مصمم التطبيقات الذكي</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">المراكز</div>
+      <a class="nav-item active" href="c01-projects.html"><span class="icon">📁</span><span>01 المشاريع</span></a>
+      <a class="nav-item" href="c02-analysis.html"><span class="icon">🔍</span><span>02 التحليل</span></a>
+      <a class="nav-item" href="c03-design.html"><span class="icon">🎨</span><span>03 التصميم</span></a>
+      <a class="nav-item" href="c04-functions.html"><span class="icon">⚡</span><span>04 الوظائف</span></a>
+      <a class="nav-item" href="c05-data.html"><span class="icon">🗄️</span><span>05 البيانات</span></a>
+      <a class="nav-item" href="c06-agents.html"><span class="icon">🤖</span><span>06 الوكلاء</span></a>
+      <a class="nav-item" href="c07-build.html"><span class="icon">📦</span><span>07 البناء</span></a>
+      <a class="nav-item" href="c08-test.html"><span class="icon">🧪</span><span>08 الاختبار</span></a>
+      <a class="nav-item" href="c09-release.html"><span class="icon">🚀</span><span>09 الإطلاق</span></a>
+      <a class="nav-item" href="c10-monitor.html"><span class="icon">📊</span><span>10 المراقبة</span></a>
+      <a class="nav-item" href="c11-security.html"><span class="icon">🔒</span><span>11 الأمان</span></a>
+      <a class="nav-item" href="c12-settings.html"><span class="icon">⚙️</span><span>12 الإعدادات</span></a>
+      <a class="nav-item" href="c13-collab.html"><span class="icon">👥</span><span>13 التعاون</span></a>
+      <a class="nav-item" href="c14-reports.html"><span class="icon">📈</span><span>14 التقارير</span></a>
+      <div class="nav-section">أخرى</div>
+      <a class="nav-item" href="../index.html"><span class="icon">🏠</span><span>الفهرس</span></a>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title">مركز المشاريع — قائمة المشاريع</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary">+ مشروع جديد</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="toolbar">
+        <input class="form-control search-box" type="search" placeholder="بحث عن مشروع..." />
+        <select class="form-control" style="width:140px">
+          <option>كل الحالات</option>
+          <option>نشط</option>
+          <option>مؤرشف</option>
+          <option>مسودة</option>
+        </select>
+        <select class="form-control" style="width:160px">
+          <option>كل المراحل</option>
+          <option>0 التأسيس</option>
+          <option>1 التحليل</option>
+          <option>2 المعمارية</option>
+        </select>
+      </div>
+
+      <div class="grid-3">
+        <div class="project-card">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h3>متجري</h3>
+            <span class="badge badge-success">نشط</span>
+          </div>
+          <p style="font-size:.85rem;color:var(--text-muted)">تطبيق تجارة إلكترونية — منتجات، سلة، طلبات، لوحة بائع</p>
+          <div class="phases">
+            <span class="phase-chip done">0</span>
+            <span class="phase-chip current">1 تحليل</span>
+            <span class="phase-chip">2</span>
+            <span class="phase-chip">3</span>
+            <span class="phase-chip">…</span>
+          </div>
+          <div class="progress"><div class="progress-bar" style="width:18%"></div></div>
+          <div class="project-meta">
+            <span>📱 Android + Web</span>
+            <span>آخر تحديث: اليوم</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h3>نظام الحجوزات</h3>
+            <span class="badge badge-primary">مسودة</span>
+          </div>
+          <p style="font-size:.85rem;color:var(--text-muted)">حجز مواعيد عيادات مع تذكيرات</p>
+          <div class="phases">
+            <span class="phase-chip current">0 تأسيس</span>
+            <span class="phase-chip">1</span>
+            <span class="phase-chip">2</span>
+          </div>
+          <div class="progress"><div class="progress-bar" style="width:5%"></div></div>
+          <div class="project-meta"><span>🌐 Web</span><span>أمس</span></div>
+        </div>
+        <div class="project-card">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <h3>تطبيق التوصيل</h3>
+            <span class="badge badge-muted">مؤرشف</span>
+          </div>
+          <p style="font-size:.85rem;color:var(--text-muted)">تتبع طلبات التوصيل للسائقين</p>
+          <div class="progress"><div class="progress-bar" style="width:42%"></div></div>
+          <div class="project-meta"><span>📱 Android</span><span>قبل أسبوع</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:24px">
+        <div class="card-header">
+          <div class="card-title">إنشاء مشروع جديد (معاينة النموذج)</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">اسم المشروع *</label>
+            <input class="form-control" value="متجري" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">القالب</label>
+            <select class="form-control"><option>فارغ</option><option>من قالب جاهز</option><option>استيراد مواصفات</option></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">وصف الفكرة</label>
+          <textarea class="form-control">أريد تطبيقاً لبيع المنتجات. المستخدم يتصفح المنتجات، يضيفها للسلة، يكمل الطلب...</textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">المنصات المستهدفة</label>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem">
+            <label><input type="checkbox" checked /> Android</label>
+            <label><input type="checkbox" /> iOS</label>
+            <label><input type="checkbox" checked /> Web</label>
+            <label><input type="checkbox" /> Desktop</label>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <button class="btn btn-primary">إنشاء</button>
+          <button class="btn btn-secondary">إلغاء</button>
+        </div>
+      </div>
+
+      <div class="mock-footer">C01 — مركز المشاريع | Mockup</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

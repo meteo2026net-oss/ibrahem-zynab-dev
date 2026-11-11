@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مركز التصميم — مصمم التطبيقات الذكي</title>
+  <link rel="stylesheet" href="../css/app.css" />
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo">م</div><span>مصمم التطبيقات الذكي</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">المراكز</div>
+      <a class="nav-item" href="c01-projects.html"><span class="icon">📁</span><span>01 المشاريع</span></a>
+      <a class="nav-item" href="c02-analysis.html"><span class="icon">🔍</span><span>02 التحليل</span></a>
+      <a class="nav-item active" href="c03-design.html"><span class="icon">🎨</span><span>03 التصميم</span></a>
+      <a class="nav-item" href="c04-functions.html"><span class="icon">⚡</span><span>04 الوظائف</span></a>
+      <a class="nav-item" href="c05-data.html"><span class="icon">🗄️</span><span>05 البيانات</span></a>
+      <a class="nav-item" href="c06-agents.html"><span class="icon">🤖</span><span>06 الوكلاء</span></a>
+      <a class="nav-item" href="c07-build.html"><span class="icon">📦</span><span>07 البناء</span></a>
+      <a class="nav-item" href="c08-test.html"><span class="icon">🧪</span><span>08 الاختبار</span></a>
+      <a class="nav-item" href="c09-release.html"><span class="icon">🚀</span><span>09 الإطلاق</span></a>
+      <a class="nav-item" href="c10-monitor.html"><span class="icon">📊</span><span>10 المراقبة</span></a>
+      <a class="nav-item" href="c11-security.html"><span class="icon">🔒</span><span>11 الأمان</span></a>
+      <a class="nav-item" href="c12-settings.html"><span class="icon">⚙️</span><span>12 الإعدادات</span></a>
+      <a class="nav-item" href="c13-collab.html"><span class="icon">👥</span><span>13 التعاون</span></a>
+      <a class="nav-item" href="c14-reports.html"><span class="icon">📈</span><span>14 التقارير</span></a>
+      <a class="nav-item" href="../index.html"><span class="icon">🏠</span><span>الفهرس</span></a>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title">مركز التصميم — قائمة المنتجات</div>
+      <div class="topbar-actions">
+        <button class="btn btn-ghost btn-sm">↩ تراجع</button>
+        <button class="btn btn-ghost btn-sm">إعادة ↪</button>
+        <button class="btn btn-secondary btn-sm">حفظ</button>
+        <button class="btn btn-secondary btn-sm">معاينة</button>
+        <select class="form-control" style="width:120px;padding:6px 10px">
+          <option>Android</option>
+          <option>iOS</option>
+          <option>Web</option>
+        </select>
+        <button class="btn btn-primary btn-sm">✨ إنشاء بالذكاء الاصطناعي</button>
+      </div>
+    </header>
+    <div class="content" style="display:grid;grid-template-columns:200px 1fr 240px;gap:16px">
+      <!-- Components palette -->
+      <div class="card" style="padding:14px">
+        <div class="card-title" style="font-size:.9rem">المكونات</div>
+        <input class="form-control" placeholder="بحث..." style="margin:10px 0;padding:6px 10px;font-size:.8rem" />
+        <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:6px">أساسيات</div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-size:.85rem">
+          <div style="padding:6px 8px;background:#f7fafc;border-radius:6px;cursor:grab">نص</div>
+          <div style="padding:6px 8px;background:#f7fafc;border-radius:6px;cursor:grab">زر</div>
+          <div style="padding:6px 8px;background:#f7fafc;border-radius:6px;cursor:grab">صورة</div>
+          <div style="padding:6px 8px;background:#f7fafc;border-radius:6px;cursor:grab">حقل إدخال</div>
+        </div>
+        <div style="font-size:.8rem;color:var(--text-muted);margin:12px 0 6px">عرض بيانات</div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-size:.85rem">
+          <div style="padding:6px 8px;background:#f7fafc;border-radius:6px;cursor:grab">بطاقة منتج</div>
+          <div style="padding:6px 8px;background:#f7fafc;border-radius:6px;cursor:grab">شبكة</div>
+          <div style="padding:6px 8px;background:#f7fafc;border-radius:6px;cursor:grab">قائمة</div>
+        </div>
+      </div>
+
+      <!-- Canvas / phone preview -->
+      <div class="canvas-mock">
+        <div class="phone-frame">
+          <div class="phone-status"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="phone-appbar"><span>المنتجات</span><span>🛒 2</span></div>
+          <div class="phone-content">
+            <input class="form-control" placeholder="ابحث عن منتج..." style="padding:8px;font-size:.8rem;margin-bottom:8px" />
+            <div style="display:flex;gap:6px;overflow-x:auto;margin-bottom:8px">
+              <span class="badge badge-primary">الكل</span>
+              <span class="badge badge-muted">إلكترونيات</span>
+              <span class="badge badge-muted">ملابس</span>
+            </div>
+            <div class="product-grid">
+              <div class="product-card-mini">
+                <div class="product-img">🎧</div>
+                <div class="product-info"><strong>سماعات لاسلكية</strong><span class="price">149 ر.س</span>
+                  <button class="btn btn-primary btn-sm" style="width:100%;margin-top:4px;padding:4px;font-size:.7rem">أضف للسلة</button>
+                </div>
+              </div>
+              <div class="product-card-mini">
+                <div class="product-img">⌚</div>
+                <div class="product-info"><strong>ساعة ذكية</strong><span class="price">299 ر.س</span>
+                  <button class="btn btn-primary btn-sm" style="width:100%;margin-top:4px;padding:4px;font-size:.7rem">أضف للسلة</button>
+                </div>
+              </div>
+              <div class="product-card-mini">
+                <div class="product-img">📱</div>
+                <div class="product-info"><strong>غطاء حماية</strong><span class="price">39 ر.س</span>
+                  <button class="btn btn-primary btn-sm" style="width:100%;margin-top:4px;padding:4px;font-size:.7rem">أضف للسلة</button>
+                </div>
+              </div>
+              <div class="product-card-mini">
+                <div class="product-img">🔌</div>
+                <div class="product-info"><strong>شاحن سريع</strong><span class="price">79 ر.س</span>
+                  <button class="btn btn-primary btn-sm" style="width:100%;margin-top:4px;padding:4px;font-size:.7rem">أضف للسلة</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Properties -->
+      <div class="card" style="padding:14px">
+        <div class="card-title" style="font-size:.9rem">خصائص العنصر</div>
+        <p class="hint" style="margin:8px 0">محدّد: زر «أضف للسلة»</p>
+        <div class="form-group">
+          <label class="form-label">النص</label>
+          <input class="form-control" value="أضف للسلة" style="padding:6px 10px" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">اللون</label>
+          <input class="form-control" value="#3182ce" style="padding:6px 10px" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">عند النقر</label>
+          <select class="form-control" style="padding:6px 10px">
+            <option>أضف للسلة (وظيفة)</option>
+            <option>فتح صفحة</option>
+            <option>لا شيء</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px">ربط وظيفة</button>
+        <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:6px;color:var(--danger)">حذف العنصر</button>
+        <hr style="margin:16px 0;border:none;border-top:1px solid var(--border)" />
+        <div class="card-title" style="font-size:.85rem">مشاكل التخطيط</div>
+        <div style="margin-top:8px;padding:8px;background:var(--warning-bg);border-radius:8px;font-size:.78rem;color:var(--warning)">
+          لا توجد مشاكل حالياً على عرض 360px
+        </div>
+      </div>
+    </div>
+    <div class="mock-footer" style="margin-right:0">C03 — مركز التصميم | Mockup — شاشة قائمة المنتجات</div>
+  </div>
+</div>
+</body>
+</html>
