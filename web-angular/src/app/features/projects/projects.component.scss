@@ -1,0 +1,16 @@
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: box-shadow .15s, border-color .15s;
+  &:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); border-color: var(--accent); }
+  h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 6px; }
+  .desc { font-size: .85rem; color: var(--text-muted); }
+  .meta {
+    font-size: .8rem; color: var(--text-muted);
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;
+  }
+}

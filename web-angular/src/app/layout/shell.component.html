@@ -1,0 +1,31 @@
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">م</div>
+      <span>مصمم التطبيقات الذكي</span>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">المراكز</div>
+      <a
+        *ngFor="let item of centers"
+        class="nav-item"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+      >
+        <span class="icon">{{ item.icon }}</span>
+        <span>{{ item.label }}</span>
+      </a>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title">مصمم التطبيقات الذكي</div>
+      <div class="topbar-actions">
+        <span class="badge badge-primary">Angular · متجري</span>
+      </div>
+    </header>
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

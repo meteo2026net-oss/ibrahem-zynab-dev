@@ -1,0 +1,47 @@
+<div class="toolbar">
+  <input class="form-control" style="max-width:280px" placeholder="بحث عن مشروع..." [(ngModel)]="search" />
+  <button class="btn btn-primary" (click)="showCreate = !showCreate">+ مشروع جديد</button>
+</div>
+
+@if (showCreate) {
+  <div class="card">
+    <div class="card-title">إنشاء مشروع جديد</div>
+    <div class="form-group">
+      <label class="form-label">اسم المشروع *</label>
+      <input class="form-control" [(ngModel)]="newProject.name" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">وصف الفكرة</label>
+      <textarea class="form-control" rows="3" [(ngModel)]="newProject.description"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">المنصات</label>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem">
+        <label><input type="checkbox" [(ngModel)]="newProject.platforms.android" /> Android</label>
+        <label><input type="checkbox" [(ngModel)]="newProject.platforms.ios" /> iOS</label>
+        <label><input type="checkbox" [(ngModel)]="newProject.platforms.web" /> Web</label>
+        <label><input type="checkbox" [(ngModel)]="newProject.platforms.desktop" /> Desktop</label>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="create()">إنشاء</button>
+    <button class="btn btn-secondary" style="margin-right:8px" (click)="showCreate = false">إلغاء</button>
+  </div>
+}
+
+<div class="grid-3">
+  @for (p of projects; track p.id) {
+    <div class="project-card">
+      <div style="display:flex;justify-content:space-between;align-items:start">
+        <h3>{{ p.name }}</h3>
+        <span class="badge" [ngClass]="statusClass(p.status)">{{ statusLabel(p.status) }}</span>
+      </div>
+      <p class="desc">{{ p.description }}</p>
+      <div class="progress"><div class="progress-bar" [style.width.%]="p.progress"></div></div>
+      <div class="meta">
+        <span>{{ p.platforms.join(' + ') }}</span>
+        <span>المرحلة {{ p.phase }}</span>
+        <span>{{ p.updatedAt }}</span>
+      </div>
+    </div>
+  }
+</div>
