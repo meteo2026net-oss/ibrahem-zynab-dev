@@ -1,7 +1,4 @@
-# النسخة الجاهزة للعمل — وفق المواصفات المرجعية
-
-**المرجع:** `docs/specifications/00_MASTER_APPROVED_SPECIFICATIONS_SOURCE.docx`  
-**التشغيل:** `web-angular` · الإصدار 1.2.0
+# مصمم التطبيقات الذكي — جاهز للعمل v1.3.0
 
 ## تشغيل
 
@@ -14,36 +11,19 @@ npm start
 
 http://localhost:4200
 
-## المراكز والمسارات (مواءمة المواصفات)
+## المسارات
 
-| المواصفة | المسار |
-|----------|--------|
-| لوحة / رئيسية | `/home` |
-| مشاريع | `/projects` |
-| إنشاء مشروع ذكي | `/wizard` |
-| التحليل | `/analysis` |
-| مساحة التصميم | `/design` |
-| مدير الصفحات | `/pages` |
-| الوظائف | `/functions` |
-| البيانات | `/data` |
-| الوكلاء | `/agents` |
-| البرمجة/البناء | `/build` |
-| الاختبارات | `/test` |
-| الوسائط | `/media` |
-| التكاملات | `/integrations` |
-| الأمان + سجل تدقيق | `/security` |
-| النشر | `/release` |
-| المعرفة | `/knowledge` |
-| التعاون / التقارير / إعدادات | `/collab` `/reports` `/settings` |
-| **متجري الحقيقي** | `/shop` |
+| المسار | الوظيفة |
+|--------|---------|
+| `/wizard` | إنشاء مشروع ذكي |
+| `/projects` `/analysis` `/design` `/pages` `/functions` `/data` | البناء |
+| `/code` | هيكل كود مولَّد + تنزيل |
+| `/agents` `/build` `/test` `/release` | جودة ونشر |
+| `/knowledge` `/integrations` `/security` `/media` | حوكمة |
+| `/shop` | **متجري الحقيقي** |
 
-## حسابات متجري
+### متجري
+- زبون: customer@matjari.demo / 123456  
+- بائع: seller@matjari.demo / 123456  
 
-- زبون: `customer@matjari.demo` / `123456`
-- بائع: `seller@matjari.demo` / `123456`
-
-## البناء
-
-```bash
-npm run build
-```
+المرجع: `docs/specifications/00_MASTER_APPROVED_SPECIFICATIONS_SOURCE.docx`

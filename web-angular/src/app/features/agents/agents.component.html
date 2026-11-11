@@ -1,10 +1,27 @@
-<div class="grid-3">
-  <div class="stat-card"><div class="stat-value">{{ counts().done }}</div><div class="stat-label">مكتمل</div></div>
-  <div class="stat-card"><div class="stat-value">{{ counts().review }}</div><div class="stat-label">بانتظار المراجعة</div></div>
-  <div class="stat-card"><div class="stat-value">{{ counts().running }}</div><div class="stat-label">قيد التنفيذ</div></div>
+<div class="page-header">
+  <div>
+    <h1>فريق الذكاء الاصطناعي</h1>
+    <p>مهام الوكلاء وحالاتها — مع طابور وتشغيل</p>
+  </div>
 </div>
-<div class="card" style="margin-top:16px">
-  <div class="card-title">مركز الوكلاء — المهام</div>
+
+<div class="card">
+  <div class="card-title">مهمة جديدة</div>
+  <div class="toolbar">
+    <select class="form-control" style="width:160px" [(ngModel)]="agent">
+      <option>Analysis</option>
+      <option>Design</option>
+      <option>Build</option>
+      <option>Test</option>
+      <option>Security</option>
+    </select>
+    <input class="form-control" style="flex:1;min-width:180px" [(ngModel)]="taskDesc" placeholder="وصف المهمة" />
+    <button class="btn btn-primary" type="button" (click)="enqueue()">إضافة</button>
+    <button class="btn btn-secondary" type="button" (click)="runQueued()">تشغيل الانتظار</button>
+  </div>
+</div>
+
+<div class="card">
   <div class="table-wrap">
     <table>
       <thead><tr><th>المعرف</th><th>الوكيل</th><th>الوصف</th><th>الحالة</th></tr></thead>
@@ -14,7 +31,7 @@
             <td>{{ t.id }}</td>
             <td>{{ t.agent }}</td>
             <td>{{ t.description }}</td>
-            <td><span class="badge" [class]="cls(t.status)">{{ label(t.status) }}</span></td>
+            <td><span class="badge" [class]="statusClass(t.status)">{{ statusLabel(t.status) }}</span></td>
           </tr>
         }
       </tbody>

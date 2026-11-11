@@ -34,6 +34,7 @@ export const routes: Routes = [
       { path: 'data', loadComponent: () => import('./features/data/data.component').then(m => m.DataComponent) },
       { path: 'agents', loadComponent: () => import('./features/agents/agents.component').then(m => m.AgentsComponent) },
       { path: 'build', loadComponent: () => import('./features/build/build.component').then(m => m.BuildComponent) },
+      { path: 'code', loadComponent: () => import('./features/code/code.component').then(m => m.CodeComponent) },
       { path: 'test', loadComponent: () => import('./features/test/test.component').then(m => m.TestComponent) },
       { path: 'release', loadComponent: () => import('./features/release/release.component').then(m => m.ReleaseComponent) },
       { path: 'monitor', loadComponent: () => import('./features/monitor/monitor.component').then(m => m.MonitorComponent) },

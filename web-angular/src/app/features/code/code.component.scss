@@ -1,0 +1,12 @@
+.code-layout { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
+.tree .file {
+  display: block; width: 100%; text-align: right; padding: 8px 10px;
+  border: none; background: transparent; cursor: pointer; font-family: inherit;
+  font-size: .8rem; border-radius: 6px; color: var(--text);
+  &:hover, &.active { background: var(--primary-soft); color: var(--primary); }
+}
+.editor pre {
+  background: #1a202c; color: #e2e8f0; padding: 16px; border-radius: 8px;
+  overflow: auto; font-size: .8rem; min-height: 360px; direction: ltr; text-align: left;
+}
+@media (max-width: 900px) { .code-layout { grid-template-columns: 1fr; } }

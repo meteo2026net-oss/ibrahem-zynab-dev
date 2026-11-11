@@ -415,6 +415,31 @@ export class ProjectService {
     }));
   }
 
+  enqueueAgent(agent: string, description: string): void {
+    const id = '#' + agent[0] + '-' + Date.now().toString().slice(-4);
+    this.state.update((s) => ({
+      ...s,
+      agentTasks: [{ id, agent, description, status: 'queued' as const }, ...s.agentTasks],
+    }));
+  }
+
+  runQueuedAgents(): void {
+    this.state.update((s) => ({
+      ...s,
+      agentTasks: s.agentTasks.map((t) =>
+        t.status === 'queued' ? { ...t, status: 'running' as const } : t
+      ),
+    }));
+    setTimeout(() => {
+      this.state.update((s) => ({
+        ...s,
+        agentTasks: s.agentTasks.map((t) =>
+          t.status === 'running' ? { ...t, status: 'review' as const } : t
+        ),
+      }));
+    }, 1200);
+  }
+
   resetDemoData(): void {
     localStorage.removeItem(STORAGE_KEY);
     this.state.set(defaultState());

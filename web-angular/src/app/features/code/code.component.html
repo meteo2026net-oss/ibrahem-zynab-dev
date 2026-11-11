@@ -1,0 +1,22 @@
+<div class="page-header">
+  <div>
+    <h1>مركز البرمجة</h1>
+    <p>هيكل ملفات مولَّد من صفحات وكيانات ومتطلبات المشروع النشط</p>
+  </div>
+  <button class="btn btn-primary" type="button" (click)="downloadAll()">تنزيل الهيكل</button>
+</div>
+
+<div class="code-layout">
+  <div class="card tree">
+    <div class="card-title">المستودع الافتراضي</div>
+    @for (f of tree(); track f.path) {
+      <button type="button" class="file" [class.active]="selectedPath === f.path" (click)="open(f.path, f.content)">
+        {{ f.path }}
+      </button>
+    }
+  </div>
+  <div class="card editor">
+    <div class="card-title">{{ selectedPath || 'اختر ملفاً' }}</div>
+    <pre>{{ selectedContent || 'لا يوجد محتوى' }}</pre>
+  </div>
+</div>

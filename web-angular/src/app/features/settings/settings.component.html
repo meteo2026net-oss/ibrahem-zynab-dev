@@ -1,5 +1,19 @@
+<div class="page-header">
+  <div>
+    <h1>الإعدادات</h1>
+    <p>الحساب، المظهر، والتصدير</p>
+  </div>
+</div>
+
 <div class="card" style="max-width:520px">
-  <div class="card-title">مركز الإعدادات</div>
+  <div class="card-title">الواجهة</div>
+  <div class="form-group">
+    <label class="form-label">الوضع (حسب المواصفات)</label>
+    <select class="form-control" [(ngModel)]="uiMode">
+      <option value="simple">بسيط — تركيز على الوصف والمتابعة</option>
+      <option value="pro">احترافي — كل المراكز والأدوات</option>
+    </select>
+  </div>
   <div class="form-group">
     <label class="form-label">اللغة</label>
     <select class="form-control" [(ngModel)]="language">
@@ -17,10 +31,15 @@
   <div class="form-group">
     <label class="form-label">الإشعارات</label>
     <label class="chk"><input type="checkbox" [(ngModel)]="notifyBuild" /> عند اكتمال البناء</label>
-    <label class="chk"><input type="checkbox" [(ngModel)]="notifyRelease" /> عند فشل/نجاح النشر</label>
+    <label class="chk"><input type="checkbox" [(ngModel)]="notifyRelease" /> عند النشر</label>
     <label class="chk"><input type="checkbox" [(ngModel)]="notifyComments" /> تعليقات الفريق</label>
   </div>
-  <button class="btn btn-primary" (click)="save()">حفظ</button>
-  <button class="btn btn-secondary" style="margin-right:8px" (click)="reset()">إعادة ضبط البيانات</button>
-  @if (saved) { <span class="ok">تم الحفظ</span> }
+  <button class="btn btn-primary" type="button" (click)="save()">حفظ</button>
+  @if (saved) { <span class="ok">تم</span> }
+</div>
+
+<div class="card" style="max-width:520px">
+  <div class="card-title">تصدير واستعادة</div>
+  <button class="btn btn-secondary" type="button" (click)="exportProject()">تصدير المشروع JSON</button>
+  <button class="btn btn-secondary" type="button" style="margin-right:8px" (click)="reset()">إعادة ضبط البيانات</button>
 </div>

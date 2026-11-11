@@ -37,6 +37,7 @@ export class ShellComponent {
     { path: '/data', label: 'البيانات', icon: '🗄️', section: 'البناء' },
     { path: '/agents', label: 'الوكلاء', icon: '🤖', section: 'البناء' },
     { path: '/build', label: 'البناء', icon: '📦', section: 'البناء' },
+    { path: '/code', label: 'البرمجة', icon: '💻', section: 'البناء' },
     { path: '/test', label: 'الاختبار', icon: '🧪', section: 'الجودة' },
     { path: '/release', label: 'الإطلاق', icon: '🚀', section: 'الجودة' },
     { path: '/monitor', label: 'المراقبة', icon: '📊', section: 'الجودة' },
