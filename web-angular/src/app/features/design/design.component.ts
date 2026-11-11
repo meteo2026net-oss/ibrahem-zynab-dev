@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NgFor, NgIf, NgClass } from '@angular/common';
+import { } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-design',
   standalone: true,
-  imports: [NgFor, NgIf, NgClass, FormsModule],
+  imports: [FormsModule],
   templateUrl: './design.component.html',
   styleUrl: './design.component.scss',
 })
