@@ -23,6 +23,7 @@ export class ShellComponent {
   readonly auth = inject(AuthService);
   readonly toast = inject(ToastService);
   private readonly router = inject(Router);
+  menuOpen = false;
 
   readonly centers: NavItem[] = [
     { path: '/home', label: 'الرئيسية', icon: '🏠', section: 'عام' },

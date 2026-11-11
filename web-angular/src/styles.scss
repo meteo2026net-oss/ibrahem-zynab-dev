@@ -98,3 +98,9 @@ table {
 @media (max-width: 900px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
 }
+@media (max-width: 900px) {
+  .page-header h1 { font-size: 1.15rem; }
+  .card { padding: 14px; }
+  .btn { min-height: 40px; }
+  .form-control { min-height: 42px; font-size: 16px; } /* منع زوم iOS */
+}

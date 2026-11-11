@@ -33,29 +33,47 @@
   </aside>
   <div class="main">
     <header class="topbar">
+      <button type="button" class="menu-btn" (click)="menuOpen = !menuOpen" aria-label="القائمة">☰</button>
       <div class="topbar-title">
         @if (store.activeProject(); as p) {
           <span class="proj">{{ p.name }}</span>
           <span class="sep">/</span>
-          <span class="phase">المرحلة {{ p.phase }} · {{ p.progress }}%</span>
+          <span class="phase">{{ p.progress }}%</span>
         } @else {
-          مصمم التطبيقات الذكي
+          مصمم التطبيقات
         }
       </div>
       <div class="topbar-actions">
-        <div class="progress-mini" title="تقدم المشروع">
-          <div class="bar" [style.width.%]="store.activeProject()?.progress || 0"></div>
-        </div>
-        <span class="badge badge-primary">v1.3.0</span>
+        <div class="progress-mini"><div class="bar" [style.width.%]="store.activeProject()?.progress || 0"></div></div>
+        <span class="badge badge-primary">v1.4.0</span>
       </div>
     </header>
     <main class="content">
       <router-outlet />
     </main>
-    <div class="toast-host">
-      @for (t of toast.toasts(); track t.id) {
-        <div class="toast" [class]="t.type">{{ t.message }}</div>
+    <nav class="mobile-bottom">
+      <a routerLink="/home" routerLinkActive="active"><span>🏠</span><small>رئيسية</small></a>
+      <a routerLink="/wizard" routerLinkActive="active"><span>✨</span><small>جديد</small></a>
+      <a routerLink="/design" routerLinkActive="active"><span>🎨</span><small>تصميم</small></a>
+      <a routerLink="/shop" routerLinkActive="active"><span>🛒</span><small>متجري</small></a>
+      <a routerLink="/settings" routerLinkActive="active"><span>⚙️</span><small>إعدادات</small></a>
+    </nav>
+  </div>
+  @if (menuOpen) {
+    <div class="drawer-backdrop" (click)="menuOpen = false"></div>
+    <div class="drawer">
+      <div class="drawer-head">القائمة الكاملة</div>
+      @for (item of centers; track item.path) {
+        <a class="drawer-item" [routerLink]="item.path" routerLinkActive="active" (click)="menuOpen = false">
+          <span>{{ item.icon }}</span> {{ item.label }}
+        </a>
       }
+      <a class="drawer-item" routerLink="/shop" (click)="menuOpen = false"><span>🛒</span> متجري</a>
     </div>
+  }
+  <div class="toast-host">
+    @for (t of toast.toasts(); track t.id) {
+      <div class="toast" [class]="t.type">{{ t.message }}</div>
+    }
   </div>
 </div>
