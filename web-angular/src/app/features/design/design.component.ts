@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ProjectService } from '../../core/project.service';
 
 @Component({
   selector: 'app-design',
@@ -10,5 +10,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './design.component.scss',
 })
 export class DesignComponent {
-  title = 'مركز التصميم';
+  readonly store = inject(ProjectService);
+  newPageName = '';
+  platform = 'Android';
+
+  addPage(): void {
+    if (!this.newPageName.trim()) return;
+    this.store.addDesignPage(this.newPageName.trim());
+    this.newPageName = '';
+  }
 }

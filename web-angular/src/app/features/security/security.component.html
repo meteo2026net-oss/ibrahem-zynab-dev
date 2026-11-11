@@ -1,8 +1,13 @@
-<div class="card"><div class="card-title">{{ title }} — الأدوار</div>
-<div class="table-wrap"><table>
-<thead><tr><th>الدور</th><th>الصلاحيات</th></tr></thead>
-<tbody>
-<tr><td>customer</td><td>تصفح، سلة، طلب، عرض طلباته</td></tr>
-<tr><td>seller</td><td>إدارة منتجاته وطلبات منتجاته</td></tr>
-<tr><td>admin</td><td>كامل الصلاحيات</td></tr>
-</tbody></table></div></div>
+<div class="card">
+  <div class="card-title">مركز الأمان — الأدوار</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>الدور</th><th>الصلاحيات</th></tr></thead>
+      <tbody>
+        @for (r of store.roles(); track r.role) {
+          <tr><td>{{ r.role }}</td><td>{{ r.permissions }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

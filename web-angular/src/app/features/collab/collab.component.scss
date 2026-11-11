@@ -1,1 +1,8 @@
-/* collab */
+.member {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--border); font-size: .9rem;
+}
+.comment {
+  padding: 12px; background: #f7fafc; border-radius: 8px; margin-top: 10px;
+  p { margin: 8px 0; font-size: .9rem; }
+}

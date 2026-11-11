@@ -14,14 +14,10 @@ export class HomeComponent {
 
   readonly project = this.store.activeProject;
   readonly projectsCount = computed(() => this.store.projects().length);
-  readonly approvedReqs = computed(
-    () => this.store.requirements().filter((r) => r.approved).length
-  );
+  readonly approvedReqs = this.store.approvedCount;
   readonly totalReqs = computed(() => this.store.requirements().length);
-  readonly testsPass = computed(
-    () => this.store.tests().filter((t) => t.result === 'pass').length
-  );
-  readonly testsTotal = computed(() => this.store.tests().length);
+  readonly testsPass = computed(() => this.store.testsSummary().pass);
+  readonly testsTotal = computed(() => this.store.testsSummary().total);
 
   readonly centers = [
     { path: '/projects', label: 'المشاريع', icon: '📁', desc: 'إدارة وإنشاء المشاريع' },

@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ProjectService } from '../../core/project.service';
+
 @Component({
   selector: 'app-security',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './security.component.html',
   styleUrl: './security.component.scss',
 })
-export class SecurityComponent { title = 'مركز الأمان'; }
+export class SecurityComponent {
+  readonly store = inject(ProjectService);
+}

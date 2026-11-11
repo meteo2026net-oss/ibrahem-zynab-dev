@@ -17,17 +17,16 @@ export class AnalysisComponent {
 
   run(): void {
     this.analyzing = true;
-    this.store.ideaText.set(this.idea);
+    this.store.setIdeaText(this.idea);
     setTimeout(() => {
       this.store.runAnalysis();
       this.analyzing = false;
-    }, 800);
+    }, 700);
   }
 
   priorityLabel(p: string): string {
     return p === 'high' ? 'عالي' : p === 'medium' ? 'متوسط' : 'منخفض';
   }
-
   priorityClass(p: string): string {
     return p === 'high' ? 'badge-danger' : p === 'medium' ? 'badge-warning' : 'badge-muted';
   }

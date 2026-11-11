@@ -1,14 +1,20 @@
-
 <div class="toolbar">
-  <button class="btn btn-ghost btn-sm">↩ تراجع</button>
-  <button class="btn btn-ghost btn-sm">إعادة ↪</button>
-  <button class="btn btn-secondary btn-sm">حفظ</button>
-  <button class="btn btn-secondary btn-sm">معاينة</button>
-  <select class="form-control" style="width:120px;padding:6px 10px">
+  <select class="form-control" style="width:130px" [(ngModel)]="platform">
     <option>Android</option><option>iOS</option><option>Web</option>
   </select>
+  <input class="form-control" style="max-width:180px" placeholder="اسم صفحة جديدة" [(ngModel)]="newPageName" />
+  <button class="btn btn-secondary btn-sm" (click)="addPage()">+ صفحة</button>
   <button class="btn btn-primary btn-sm">✨ إنشاء بالذكاء الاصطناعي</button>
 </div>
+
+<div class="pages">
+  @for (p of store.designPages(); track p.id) {
+    <button class="page-chip" [class.active]="store.currentDesignPage()?.id === p.id" (click)="store.selectDesignPage(p.id)">
+      {{ p.name }}
+    </button>
+  }
+</div>
+
 <div class="design-layout">
   <div class="card palette">
     <div class="card-title">المكونات</div>
@@ -21,7 +27,7 @@
   </div>
   <div class="canvas card">
     <div class="phone">
-      <div class="phone-bar">المنتجات · 🛒 2</div>
+      <div class="phone-bar">{{ store.currentDesignPage()?.name || 'صفحة' }} · 🛒 2</div>
       <div class="phone-body">
         <input class="form-control" placeholder="ابحث عن منتج..." style="margin-bottom:8px;padding:8px;font-size:.8rem" />
         <div class="chips">
@@ -39,13 +45,10 @@
     </div>
   </div>
   <div class="card props">
-    <div class="card-title">خصائص العنصر</div>
-    <p style="font-size:.8rem;color:var(--text-muted)">محدّد: زر «أضف للسلة»</p>
-    <div class="form-group"><label class="form-label">النص</label><input class="form-control" value="أضف للسلة" /></div>
-    <div class="form-group"><label class="form-label">عند النقر</label>
-      <select class="form-control"><option>أضف للسلة (وظيفة)</option><option>فتح صفحة</option></select>
-    </div>
+    <div class="card-title">خصائص</div>
+    <p style="font-size:.8rem;color:var(--text-muted)">المنصة: {{ platform }}</p>
+    <p style="font-size:.8rem;color:var(--text-muted)">الصفحة: {{ store.currentDesignPage()?.name }}</p>
+    <div class="form-group"><label class="form-label">نص الزر</label><input class="form-control" value="أضف للسلة" /></div>
     <button class="btn btn-primary btn-sm" style="width:100%">ربط وظيفة</button>
   </div>
 </div>
-

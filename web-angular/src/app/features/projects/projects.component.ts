@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../../core/project.service';
@@ -18,7 +18,6 @@ export class ProjectsComponent {
   readonly activeId = this.store.activeProjectId;
   showCreate = false;
   search = '';
-
   newName = 'مشروع جديد';
   newDesc = '';
   platforms = { android: true, ios: false, web: true, desktop: false };
@@ -27,23 +26,16 @@ export class ProjectsComponent {
     const q = this.search.trim();
     const list = this.projects();
     if (!q) return list;
-    return list.filter(
-      (p) => p.name.includes(q) || p.description.includes(q)
-    );
+    return list.filter((p) => p.name.includes(q) || p.description.includes(q));
   });
 
   statusLabel(s: ProjectStatus): string {
     return ({ active: 'نشط', draft: 'مسودة', archived: 'مؤرشف' } as const)[s];
   }
-
   statusClass(s: ProjectStatus): string {
     return ({ active: 'badge-success', draft: 'badge-primary', archived: 'badge-muted' } as const)[s];
   }
-
-  select(id: string): void {
-    this.store.selectProject(id);
-  }
-
+  select(id: string): void { this.store.selectProject(id); }
   create(): void {
     const selected: Platform[] = [];
     if (this.platforms.android) selected.push('Android');
@@ -56,7 +48,5 @@ export class ProjectsComponent {
       platforms: selected.length ? selected : ['Web'],
     });
     this.showCreate = false;
-    this.newName = 'مشروع جديد';
-    this.newDesc = '';
   }
 }

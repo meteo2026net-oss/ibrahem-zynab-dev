@@ -1,7 +1,27 @@
-<div class="card"><div class="card-title">{{ title }}</div>
-<div class="form-group"><label class="form-label">الإصدار</label><input class="form-control" value="0.1.0-beta" /></div>
-<div class="form-group"><label class="form-label">ملاحظات</label><textarea class="form-control" rows="3">أول نسخة تجريبية — تصفح وسلة وطلب</textarea></div>
-<div style="font-size:.85rem;margin-bottom:12px">✓ نجاح البناء · ✓ اختبارات حرجة · ✓ مراجعة أمان</div>
-<button class="btn btn-success">تأكيد النشر</button>
-<button class="btn btn-secondary" style="margin-right:8px">تراجع</button>
+<div class="card">
+  <div class="card-title">مركز الإطلاق</div>
+  <div class="form-group">
+    <label class="form-label">الإصدار</label>
+    <input class="form-control" [(ngModel)]="version" />
+  </div>
+  <div class="form-group">
+    <label class="form-label">ملاحظات الإصدار</label>
+    <textarea class="form-control" rows="3" [(ngModel)]="notes"></textarea>
+  </div>
+  <div class="checks">
+    @for (c of store.release().checklist; track c.label) {
+      <div class="check-row">
+        <span>{{ c.done ? '✓' : '○' }}</span>
+        <span [style.color]="c.done ? 'var(--success)' : 'var(--text-muted)'">{{ c.label }}</span>
+      </div>
+    }
+  </div>
+  @if (store.release().lastPublished) {
+    <p class="hint">آخر نشر: {{ store.release().lastPublished }}</p>
+  }
+  <div class="toolbar">
+    <button class="btn btn-secondary" (click)="save()">حفظ</button>
+    <button class="btn btn-success" (click)="publish()">تأكيد النشر</button>
+  </div>
+  @if (message) { <p class="msg">{{ message }}</p> }
 </div>

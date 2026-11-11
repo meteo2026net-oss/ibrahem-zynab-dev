@@ -1,1 +1,12 @@
-/* functions */
+.sub { color: var(--primary); margin-bottom: 10px; font-size: .95rem; }
+.step {
+  padding: 12px; border-radius: 8px; margin-bottom: 8px;
+  border-right: 3px solid var(--primary-light); background: #f7fafc;
+  .detail { font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
+}
+.step-success { background: #f0fff4; border-right-color: var(--success); }
+.step-error { background: #fff5f5; border-right-color: var(--danger); }
+.test-ok {
+  margin-top: 10px; padding: 10px; background: #f0fff4; border-radius: 8px;
+  font-size: .85rem; color: var(--success);
+}

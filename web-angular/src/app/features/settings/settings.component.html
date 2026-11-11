@@ -1,9 +1,26 @@
-<div class="card" style="max-width:520px"><div class="card-title">{{ title }}</div>
-<div class="form-group"><label class="form-label">اللغة</label><select class="form-control"><option>العربية</option><option>English</option></select></div>
-<div class="form-group"><label class="form-label">المنطقة الزمنية</label><select class="form-control"><option>Asia/Riyadh</option></select></div>
-<div class="form-group"><label class="form-label">الإشعارات</label>
-<label style="display:block;margin:6px 0"><input type="checkbox" checked /> عند اكتمال البناء</label>
-<label style="display:block;margin:6px 0"><input type="checkbox" checked /> عند فشل النشر</label>
-</div>
-<button class="btn btn-primary">حفظ</button>
+<div class="card" style="max-width:520px">
+  <div class="card-title">مركز الإعدادات</div>
+  <div class="form-group">
+    <label class="form-label">اللغة</label>
+    <select class="form-control" [(ngModel)]="language">
+      <option value="ar">العربية</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">المنطقة الزمنية</label>
+    <select class="form-control" [(ngModel)]="timezone">
+      <option>Asia/Riyadh</option>
+      <option>UTC</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">الإشعارات</label>
+    <label class="chk"><input type="checkbox" [(ngModel)]="notifyBuild" /> عند اكتمال البناء</label>
+    <label class="chk"><input type="checkbox" [(ngModel)]="notifyRelease" /> عند فشل/نجاح النشر</label>
+    <label class="chk"><input type="checkbox" [(ngModel)]="notifyComments" /> تعليقات الفريق</label>
+  </div>
+  <button class="btn btn-primary" (click)="save()">حفظ</button>
+  <button class="btn btn-secondary" style="margin-right:8px" (click)="reset()">إعادة ضبط البيانات</button>
+  @if (saved) { <span class="ok">تم الحفظ</span> }
 </div>

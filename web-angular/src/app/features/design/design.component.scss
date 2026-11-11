@@ -1,16 +1,13 @@
-.design-layout {
-  display: grid;
-  grid-template-columns: 180px 1fr 220px;
-  gap: 16px;
+.pages { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.page-chip {
+  border: 1px solid var(--border); background: #fff; border-radius: 999px;
+  padding: 6px 12px; font-size: .8rem; cursor: pointer; font-family: inherit;
+  &.active { background: var(--primary-soft); border-color: var(--accent); color: var(--primary); font-weight: 600; }
 }
-.palette-item {
-  padding: 8px; background: #f7fafc; border-radius: 6px; margin-bottom: 6px;
-  font-size: .85rem; cursor: grab;
-}
+.design-layout { display: grid; grid-template-columns: 180px 1fr 220px; gap: 16px; }
+.palette-item { padding: 8px; background: #f7fafc; border-radius: 6px; margin-bottom: 6px; font-size: .85rem; cursor: grab; }
 .canvas { display: flex; justify-content: center; align-items: center; min-height: 480px; background: #edf2f7; }
-.phone {
-  width: 280px; background: #fff; border-radius: 24px; border: 3px solid #2d3748; overflow: hidden;
-}
+.phone { width: 280px; background: #fff; border-radius: 24px; border: 3px solid #2d3748; overflow: hidden; }
 .phone-bar { background: var(--primary); color: #fff; padding: 12px; font-weight: 600; font-size: .9rem; }
 .phone-body { padding: 12px; }
 .chips { display: flex; gap: 6px; margin-bottom: 8px; }
@@ -21,6 +18,4 @@
   .price { color: var(--primary-light); font-weight: 700; margin: 4px 0; }
   button { width: 100%; margin-top: 4px; }
 }
-@media (max-width: 900px) {
-  .design-layout { grid-template-columns: 1fr; }
-}
+@media (max-width: 900px) { .design-layout { grid-template-columns: 1fr; } }

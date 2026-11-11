@@ -1,15 +1,35 @@
 <div class="grid-3">
-<div class="stat-card"><div class="stat-value">18%</div><div class="stat-label">تقدم المشروع</div></div>
-<div class="stat-card"><div class="stat-value">21/24</div><div class="stat-label">اختبارات ناجحة</div></div>
-<div class="stat-card"><div class="stat-value">85%</div><div class="stat-label">تغطية حرجة</div></div>
+  <div class="stat-card">
+    <div class="stat-value">{{ store.activeProject()?.progress || 0 }}%</div>
+    <div class="stat-label">تقدم {{ store.activeProject()?.name }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ store.testsSummary().pass }}/{{ store.testsSummary().total }}</div>
+    <div class="stat-label">اختبارات ناجحة</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ store.approvedCount() }}/{{ store.requirements().length }}</div>
+    <div class="stat-label">متطلبات معتمدة</div>
+  </div>
 </div>
-<div class="card" style="margin-top:16px"><div class="card-title">{{ title }} — المراحل</div>
-<div class="table-wrap"><table>
-<thead><tr><th>المرحلة</th><th>الحالة</th><th>النسبة</th></tr></thead>
-<tbody>
-<tr><td>0 التأسيس</td><td><span class="badge badge-success">مكتمل</span></td><td>100%</td></tr>
-<tr><td>1 التحليل</td><td><span class="badge badge-success">مكتمل</span></td><td>100%</td></tr>
-<tr><td>2 المعمارية</td><td><span class="badge badge-warning">قيد التنفيذ</span></td><td>40%</td></tr>
-</tbody></table></div>
-<div class="toolbar" style="margin-top:12px"><button class="btn btn-secondary btn-sm">تصدير PDF</button><button class="btn btn-secondary btn-sm">تصدير Excel</button></div>
+<div class="card" style="margin-top:16px">
+  <div class="card-title">تقرير المراحل</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>المرحلة</th><th>الحالة</th><th>النسبة</th></tr></thead>
+      <tbody>
+        @for (p of phases(); track p.name) {
+          <tr>
+            <td>{{ p.name }}</td>
+            <td>
+              <span class="badge" [class]="p.status === 'done' ? 'badge-success' : p.status === 'current' ? 'badge-warning' : 'badge-muted'">
+                {{ p.status === 'done' ? 'مكتمل' : p.status === 'current' ? 'قيد التنفيذ' : 'لم تبدأ' }}
+              </span>
+            </td>
+            <td>{{ p.pct }}%</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>

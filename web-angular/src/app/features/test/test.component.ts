@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProjectService } from '../../core/project.service';
 
 @Component({
@@ -10,15 +10,6 @@ import { ProjectService } from '../../core/project.service';
 })
 export class TestComponent {
   readonly store = inject(ProjectService);
-  readonly summary = computed(() => {
-    const t = this.store.tests();
-    return {
-      pass: t.filter((x) => x.result === 'pass').length,
-      fail: t.filter((x) => x.result === 'fail').length,
-      pending: t.filter((x) => x.result === 'pending').length,
-    };
-  });
-
   label(r: string): string {
     return r === 'pass' ? 'نجح' : r === 'fail' ? 'فشل' : 'لم يُنفَّذ';
   }

@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ProjectService } from '../../core/project.service';
+
 @Component({
   selector: 'app-collab',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './collab.component.html',
   styleUrl: './collab.component.scss',
 })
-export class CollabComponent { title = 'مركز التعاون'; }
+export class CollabComponent {
+  readonly store = inject(ProjectService);
+}

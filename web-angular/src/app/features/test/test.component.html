@@ -1,7 +1,7 @@
 <div class="grid-3" style="margin-bottom:16px">
-  <div class="stat-card"><div class="stat-value">{{ summary().pass }}</div><div class="stat-label">ناجح</div></div>
-  <div class="stat-card"><div class="stat-value">{{ summary().fail }}</div><div class="stat-label">فشل</div></div>
-  <div class="stat-card"><div class="stat-value">{{ summary().pending }}</div><div class="stat-label">معلّق</div></div>
+  <div class="stat-card"><div class="stat-value">{{ store.testsSummary().pass }}</div><div class="stat-label">ناجح</div></div>
+  <div class="stat-card"><div class="stat-value">{{ store.testsSummary().fail }}</div><div class="stat-label">فشل</div></div>
+  <div class="stat-card"><div class="stat-value">{{ store.testsSummary().pending }}</div><div class="stat-label">معلّق</div></div>
 </div>
 <div class="card">
   <div class="card-title">مركز الاختبار — مسار السلة والطلب</div>
