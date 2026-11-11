@@ -1,0 +1,31 @@
+<div class="page-header">
+  <div>
+    <h1>مركز التكاملات</h1>
+    <p>GitHub والخدمات الخارجية ومزودو الذكاء الاصطناعي — وفق المواصفات المعتمدة</p>
+  </div>
+</div>
+
+@for (i of items(); track i.id) {
+  <div class="card">
+    <div class="row">
+      <div>
+        <strong>{{ i.name }}</strong>
+        <span class="badge" [class]="statusClass(i.status)" style="margin-right:8px">{{ statusLabel(i.status) }}</span>
+        <p class="note">{{ i.note }}</p>
+      </div>
+      @if (i.status === 'connected') {
+        <button class="btn btn-secondary btn-sm" type="button" (click)="disconnect(i.id)">قطع</button>
+      }
+    </div>
+  </div>
+}
+
+<div class="card">
+  <div class="card-title">ربط GitHub</div>
+  <p class="note">الصلاحيات: repo فقط عند الحاجة. لا تُعطَّل حماية الفروع ولا يُدمَج PR دون موافقة.</p>
+  <div class="form-group">
+    <label class="form-label">Personal Access Token</label>
+    <input class="form-control" type="password" [(ngModel)]="githubToken" placeholder="ghp_..." autocomplete="off" />
+  </div>
+  <button class="btn btn-primary" type="button" (click)="connectGithub()">حفظ حالة الربط</button>
+</div>

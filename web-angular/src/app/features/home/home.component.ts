@@ -32,5 +32,8 @@ export class HomeComponent {
     { path: '/monitor', label: 'المراقبة', icon: '📊', desc: 'الأداء والأخطاء' },
     { path: '/security', label: 'الأمان', icon: '🔒', desc: 'الأدوار والصلاحيات' },
     { path: '/reports', label: 'التقارير', icon: '📈', desc: 'التقدم والجودة' },
+    { path: '/knowledge', label: 'المعرفة', icon: '📚', desc: 'وثائق المشروع' },
+    { path: '/integrations', label: 'التكاملات', icon: '🔗', desc: 'GitHub والخدمات' },
+    { path: '/shop', label: 'متجري', icon: '🛒', desc: 'المتجر الحقيقي' },
   ];
 }

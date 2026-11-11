@@ -41,6 +41,8 @@ export const routes: Routes = [
       { path: 'settings', loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent) },
       { path: 'collab', loadComponent: () => import('./features/collab/collab.component').then(m => m.CollabComponent) },
       { path: 'reports', loadComponent: () => import('./features/reports/reports.component').then(m => m.ReportsComponent) },
+      { path: 'knowledge', loadComponent: () => import('./features/knowledge/knowledge.component').then(m => m.KnowledgeComponent) },
+      { path: 'integrations', loadComponent: () => import('./features/integrations/integrations.component').then(m => m.IntegrationsComponent) },
     ],
   },
   { path: '**', redirectTo: 'home' },

@@ -40,6 +40,8 @@ export class ShellComponent {
     { path: '/security', label: 'الأمان', icon: '🔒', section: 'الحوكمة' },
     { path: '/collab', label: 'التعاون', icon: '👥', section: 'الحوكمة' },
     { path: '/reports', label: 'التقارير', icon: '📈', section: 'الحوكمة' },
+    { path: '/knowledge', label: 'المعرفة', icon: '📚', section: 'الحوكمة' },
+    { path: '/integrations', label: 'التكاملات', icon: '🔗', section: 'الحوكمة' },
     { path: '/settings', label: 'الإعدادات', icon: '⚙️', section: 'الحوكمة' },
   ];
 
