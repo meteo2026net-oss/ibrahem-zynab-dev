@@ -1,10 +1,11 @@
 <section class="hero">
   <div>
     <h1>مصمم التطبيقات الذكي</h1>
-    <p>حوّل فكرتك إلى تطبيق عبر مراحل منظمة: تحليل → تصميم → وظائف → بيانات → بناء → اختبار → إطلاق</p>
+    <p>من الفكرة إلى التطبيق: تحليل، تصميم، وظائف، بيانات، بناء، اختبار، إطلاق — في مسار واحد منظم.</p>
     <div class="hero-actions">
-      <a routerLink="/projects" class="btn btn-primary">المشاريع</a>
-      <a routerLink="/analysis" class="btn btn-secondary">بدء التحليل</a>
+      <a routerLink="/projects" class="btn btn-primary">إدارة المشاريع</a>
+      <a routerLink="/analysis" class="btn btn-secondary">متابعة التحليل</a>
+      <a routerLink="/design" class="btn btn-secondary">فتح التصميم</a>
     </div>
   </div>
   @if (project(); as p) {
@@ -14,6 +15,13 @@
       <p>{{ p.description }}</p>
       <div class="progress"><div class="progress-bar" [style.width.%]="p.progress"></div></div>
       <div class="meta">المرحلة {{ p.phase }} · {{ p.progress }}% · {{ p.platforms.join(' + ') }}</div>
+      <div class="flow">
+        <span class="flow-step" [class.on]="p.phase >= 0">تأسيس</span>
+        <span class="flow-step" [class.on]="p.phase >= 1">تحليل</span>
+        <span class="flow-step" [class.on]="p.phase >= 2">تصميم</span>
+        <span class="flow-step" [class.on]="p.phase >= 7">بناء</span>
+        <span class="flow-step" [class.on]="p.phase >= 9">إطلاق</span>
+      </div>
     </div>
   }
 </section>
@@ -33,8 +41,19 @@
   </div>
   <div class="stat-card">
     <div class="stat-value">14</div>
-    <div class="stat-label">مراكز وظيفية</div>
+    <div class="stat-label">مركزاً وظيفياً</div>
   </div>
+</div>
+
+<h2 class="section-title">مسار العمل السريع</h2>
+<div class="quick-path">
+  <a routerLink="/analysis" class="qp"><span>1</span> تحليل الفكرة</a>
+  <a routerLink="/design" class="qp"><span>2</span> تصميم الشاشات</a>
+  <a routerLink="/functions" class="qp"><span>3</span> ربط الوظائف</a>
+  <a routerLink="/data" class="qp"><span>4</span> نموذج البيانات</a>
+  <a routerLink="/build" class="qp"><span>5</span> البناء</a>
+  <a routerLink="/test" class="qp"><span>6</span> الاختبار</a>
+  <a routerLink="/release" class="qp"><span>7</span> الإطلاق</a>
 </div>
 
 <h2 class="section-title">المراكز</h2>

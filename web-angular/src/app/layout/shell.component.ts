@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ProjectService } from '../core/project.service';
+import { AuthService } from '../core/auth.service';
 
 interface NavItem {
   path: string;
   label: string;
   icon: string;
+  section?: string;
 }
 
 @Component({
@@ -17,22 +19,35 @@ interface NavItem {
 })
 export class ShellComponent {
   readonly store = inject(ProjectService);
+  readonly auth = inject(AuthService);
+  private readonly router = inject(Router);
 
   readonly centers: NavItem[] = [
-    { path: '/home', label: 'الرئيسية', icon: '🏠' },
-    { path: '/projects', label: '01 المشاريع', icon: '📁' },
-    { path: '/analysis', label: '02 التحليل', icon: '🔍' },
-    { path: '/design', label: '03 التصميم', icon: '🎨' },
-    { path: '/functions', label: '04 الوظائف', icon: '⚡' },
-    { path: '/data', label: '05 البيانات', icon: '🗄️' },
-    { path: '/agents', label: '06 الوكلاء', icon: '🤖' },
-    { path: '/build', label: '07 البناء', icon: '📦' },
-    { path: '/test', label: '08 الاختبار', icon: '🧪' },
-    { path: '/release', label: '09 الإطلاق', icon: '🚀' },
-    { path: '/monitor', label: '10 المراقبة', icon: '📊' },
-    { path: '/security', label: '11 الأمان', icon: '🔒' },
-    { path: '/settings', label: '12 الإعدادات', icon: '⚙️' },
-    { path: '/collab', label: '13 التعاون', icon: '👥' },
-    { path: '/reports', label: '14 التقارير', icon: '📈' },
+    { path: '/home', label: 'الرئيسية', icon: '🏠', section: 'عام' },
+    { path: '/projects', label: 'المشاريع', icon: '📁', section: 'عام' },
+    { path: '/analysis', label: 'التحليل', icon: '🔍', section: 'البناء' },
+    { path: '/design', label: 'التصميم', icon: '🎨', section: 'البناء' },
+    { path: '/functions', label: 'الوظائف', icon: '⚡', section: 'البناء' },
+    { path: '/data', label: 'البيانات', icon: '🗄️', section: 'البناء' },
+    { path: '/agents', label: 'الوكلاء', icon: '🤖', section: 'البناء' },
+    { path: '/build', label: 'البناء', icon: '📦', section: 'البناء' },
+    { path: '/test', label: 'الاختبار', icon: '🧪', section: 'الجودة' },
+    { path: '/release', label: 'الإطلاق', icon: '🚀', section: 'الجودة' },
+    { path: '/monitor', label: 'المراقبة', icon: '📊', section: 'الجودة' },
+    { path: '/security', label: 'الأمان', icon: '🔒', section: 'الحوكمة' },
+    { path: '/collab', label: 'التعاون', icon: '👥', section: 'الحوكمة' },
+    { path: '/reports', label: 'التقارير', icon: '📈', section: 'الحوكمة' },
+    { path: '/settings', label: 'الإعدادات', icon: '⚙️', section: 'الحوكمة' },
   ];
+
+  sectionOf(index: number): string | null {
+    const cur = this.centers[index]?.section;
+    const prev = index > 0 ? this.centers[index - 1]?.section : null;
+    return cur !== prev ? cur ?? null : null;
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigateByUrl('/login');
+  }
 }

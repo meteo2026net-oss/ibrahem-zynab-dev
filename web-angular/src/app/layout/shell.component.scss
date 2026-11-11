@@ -1,74 +1,94 @@
 .shell { display: flex; min-height: 100vh; }
 .sidebar {
   width: var(--sidebar-w);
-  background: var(--primary);
+  background: linear-gradient(180deg, #0f2744 0%, var(--primary) 100%);
   color: #fff;
-  position: fixed;
-  top: 0; right: 0; bottom: 0;
-  z-index: 100;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  position: fixed; top: 0; right: 0; bottom: 0;
+  z-index: 100; overflow-y: auto;
+  display: flex; flex-direction: column;
 }
 .brand {
-  padding: 18px 20px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  border-bottom: 1px solid rgba(255,255,255,.12);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  padding: 18px 16px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
   .logo {
-    width: 32px; height: 32px;
+    width: 36px; height: 36px;
     background: #fff; color: var(--primary);
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 800;
+    font-weight: 800; flex-shrink: 0;
+  }
+  .brand-text {
+    display: flex; flex-direction: column; line-height: 1.2;
+    strong { font-size: .95rem; }
+    small { font-size: .75rem; opacity: .7; }
   }
 }
-.nav { padding: 12px 0; flex: 1; }
+.nav { padding: 10px 0; flex: 1; }
 .nav-section {
-  font-size: .7rem;
-  color: rgba(255,255,255,.45);
-  padding: 12px 20px 6px;
+  font-size: .68rem; color: rgba(255,255,255,.4);
+  padding: 14px 18px 6px; letter-spacing: .04em;
 }
 .nav-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 10px 20px;
-  color: rgba(255,255,255,.85);
-  font-size: .9rem;
-  transition: background .15s;
+  padding: 9px 18px; color: rgba(255,255,255,.82);
+  font-size: .88rem; transition: background .15s;
   &:hover, &.active {
-    background: rgba(255,255,255,.12);
-    color: #fff;
+    background: rgba(255,255,255,.12); color: #fff;
   }
+  &.active { border-right: 3px solid #63b3ed; }
   .icon { width: 22px; text-align: center; }
+}
+.sidebar-foot {
+  padding: 12px 14px 16px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.user-chip {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; font-size: .85rem;
+  .avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  strong { display: block; }
+  small { opacity: .65; font-size: .75rem; }
+}
+.btn-logout {
+  width: 100%; padding: 8px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: transparent; color: rgba(255,255,255,.85);
+  cursor: pointer; font-family: inherit; font-size: .8rem;
+  &:hover { background: rgba(255,255,255,.1); }
 }
 .main {
   margin-right: var(--sidebar-w);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  flex: 1; display: flex; flex-direction: column; min-height: 100vh;
 }
 .topbar {
   height: var(--header-h);
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; position: sticky; top: 0; z-index: 50;
 }
-.topbar-title { font-size: 1.05rem; font-weight: 600; color: var(--primary); }
-.topbar-actions { display: flex; align-items: center; gap: 10px; }
+.topbar-title {
+  font-size: .95rem; color: var(--text-muted);
+  .proj { color: var(--primary); font-weight: 700; font-size: 1.05rem; }
+  .sep { margin: 0 6px; opacity: .5; }
+  .phase { font-size: .85rem; }
+}
+.topbar-actions { display: flex; align-items: center; gap: 12px; }
+.progress-mini {
+  width: 80px; height: 6px; background: #e2e8f0; border-radius: 999px; overflow: hidden;
+  .bar { height: 100%; background: var(--primary-light); border-radius: 999px; }
+}
 .content { padding: 24px; flex: 1; }
 
 @media (max-width: 900px) {
   .sidebar { width: 64px; }
-  .brand span, .nav-item span:not(.icon), .nav-section { display: none; }
+  .brand-text, .nav-item span:not(.icon), .nav-section, .user-chip div:not(.avatar), .btn-logout { display: none; }
+  .user-chip { justify-content: center; }
   .main { margin-right: 64px; }
 }

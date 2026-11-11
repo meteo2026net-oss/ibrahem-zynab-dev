@@ -2,26 +2,51 @@
   <aside class="sidebar">
     <div class="brand">
       <div class="logo">م</div>
-      <span>مصمم التطبيقات الذكي</span>
+      <div class="brand-text">
+        <strong>مصمم التطبيقات</strong>
+        <small>الذكي</small>
+      </div>
     </div>
     <nav class="nav">
-      <div class="nav-section">التنقل</div>
-      @for (item of centers; track item.path) {
+      @for (item of centers; track item.path; let i = $index) {
+        @if (sectionOf(i); as sec) {
+          <div class="nav-section">{{ sec }}</div>
+        }
         <a class="nav-item" [routerLink]="item.path" routerLinkActive="active">
           <span class="icon">{{ item.icon }}</span>
           <span>{{ item.label }}</span>
         </a>
       }
     </nav>
+    <div class="sidebar-foot">
+      @if (auth.user(); as u) {
+        <div class="user-chip">
+          <div class="avatar">{{ u.name.charAt(0) }}</div>
+          <div>
+            <strong>{{ u.name }}</strong>
+            <small>{{ u.role }}</small>
+          </div>
+        </div>
+        <button class="btn-logout" type="button" (click)="logout()">خروج</button>
+      }
+    </div>
   </aside>
   <div class="main">
     <header class="topbar">
-      <div class="topbar-title">مصمم التطبيقات الذكي</div>
-      <div class="topbar-actions">
+      <div class="topbar-title">
         @if (store.activeProject(); as p) {
-          <span class="badge badge-primary">{{ p.name }} · مرحلة {{ p.phase }}</span>
+          <span class="proj">{{ p.name }}</span>
+          <span class="sep">/</span>
+          <span class="phase">المرحلة {{ p.phase }} · {{ p.progress }}%</span>
+        } @else {
+          مصمم التطبيقات الذكي
         }
-        <span class="badge badge-muted">v0.1.0</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="progress-mini" title="تقدم المشروع">
+          <div class="bar" [style.width.%]="store.activeProject()?.progress || 0"></div>
+        </div>
+        <span class="badge badge-primary">v0.2.0</span>
       </div>
     </header>
     <main class="content">
