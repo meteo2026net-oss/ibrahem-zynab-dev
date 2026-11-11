@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { StoreService } from '../../services/store.service';
 import { ToastService } from '../../../core/toast.service';
+import { AuditService } from '../../../core/audit.service';
 
 @Component({
   selector: 'app-shop-login',
@@ -14,6 +15,7 @@ import { ToastService } from '../../../core/toast.service';
 export class ShopLoginComponent {
   private readonly store = inject(StoreService);
   private readonly toast = inject(ToastService);
+  private readonly audit = inject(AuditService);
   private readonly router = inject(Router);
 
   mode: 'login' | 'register' = 'login';
@@ -27,6 +29,7 @@ export class ShopLoginComponent {
       const r = this.store.login(this.email, this.password);
       if (r.ok) {
         this.toast.success(r.message);
+        this.audit.log(this.email, 'login', 'shop', 'success');
         this.router.navigateByUrl('/shop');
       } else this.toast.error(r.message);
     } else {

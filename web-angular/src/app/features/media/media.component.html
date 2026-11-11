@@ -1,0 +1,21 @@
+<div class="page-header">
+  <div>
+    <h1>مركز الملفات والوسائط</h1>
+    <p>مكتبة الأصول مع فحص نوع وحجم الملف قبل الإضافة</p>
+  </div>
+  <label class="btn btn-primary">
+    رفع ملف
+    <input type="file" accept="image/*" hidden (change)="onFile($event)" />
+  </label>
+</div>
+
+<div class="grid-3">
+  @for (a of assets(); track a.id) {
+    <div class="card asset">
+      <div class="icon">📁</div>
+      <strong>{{ a.name }}</strong>
+      <span class="badge badge-muted">{{ a.kind }}</span>
+      <p>{{ a.note }}</p>
+    </div>
+  }
+</div>

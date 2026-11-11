@@ -1,0 +1,76 @@
+<div class="page-header">
+  <div>
+    <h1>إنشاء مشروع ذكي</h1>
+    <p>وفق المواصفات: وصف الفكرة → تحليل → تصور صفحات وبيانات → اعتماد</p>
+  </div>
+  <a routerLink="/projects" class="btn btn-secondary">المشاريع</a>
+</div>
+
+<div class="steps">
+  <span [class.on]="step() >= 1">1 الفكرة</span>
+  <span [class.on]="step() >= 2">2 التحليل</span>
+  <span [class.on]="step() >= 3">3 المنصات</span>
+  <span [class.on]="step() >= 4">4 الاعتماد</span>
+</div>
+
+@if (step() === 1) {
+  <div class="card">
+    <div class="card-title">اشرح فكرة التطبيق بلغتك</div>
+    <textarea class="form-control" rows="6" [(ngModel)]="idea"
+      placeholder="مثال: أريد تطبيق متجر إلكتروني للمنتجات مع سلة وطلبات ولوحة بائع..."></textarea>
+    <div class="form-group" style="margin-top:12px">
+      <label class="form-label">اسم المشروع (اختياري)</label>
+      <input class="form-control" [(ngModel)]="name" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">الجمهور المستهدف (اختياري)</label>
+      <input class="form-control" [(ngModel)]="audience" placeholder="زبائن ومتاجر صغيرة..." />
+    </div>
+    <button class="btn btn-primary" type="button" (click)="next()">تحليل الفكرة</button>
+  </div>
+}
+
+@if (step() === 2 && analysisPreview(); as a) {
+  <div class="card">
+    <div class="card-title">نتائج التحليل الأولي</div>
+    <p><strong>نوع التطبيق:</strong> {{ a.type }}</p>
+    <p><strong>التعقيد التقديري:</strong> {{ a.complexity }}</p>
+    <h4>الصفحات المقترحة</h4>
+    <ul>@for (s of a.screens; track s) { <li>{{ s }}</li> }</ul>
+    <h4>الكيانات</h4>
+    <p>{{ a.entities.join(' · ') }}</p>
+    <div class="toolbar">
+      <button class="btn btn-secondary" type="button" (click)="back()">رجوع</button>
+      <button class="btn btn-primary" type="button" (click)="next()">متابعة</button>
+    </div>
+  </div>
+}
+
+@if (step() === 3) {
+  <div class="card">
+    <div class="card-title">المنصات المستهدفة</div>
+    <label class="chk"><input type="checkbox" [(ngModel)]="platforms.android" /> Android</label>
+    <label class="chk"><input type="checkbox" [(ngModel)]="platforms.ios" /> iOS</label>
+    <label class="chk"><input type="checkbox" [(ngModel)]="platforms.web" /> Web</label>
+    <label class="chk"><input type="checkbox" [(ngModel)]="platforms.desktop" /> Desktop</label>
+    <div class="toolbar" style="margin-top:16px">
+      <button class="btn btn-secondary" type="button" (click)="back()">رجوع</button>
+      <button class="btn btn-primary" type="button" (click)="next()">مراجعة الاعتماد</button>
+    </div>
+  </div>
+}
+
+@if (step() === 4) {
+  <div class="card">
+    <div class="card-title">اعتماد إنشاء المشروع</div>
+    <p><strong>الاسم:</strong> {{ name || 'مشروع جديد' }}</p>
+    <p><strong>الفكرة:</strong> {{ idea }}</p>
+    @if (analysisPreview(); as a) {
+      <p><strong>النوع:</strong> {{ a.type }} · {{ a.screens.length }} شاشة · {{ a.entities.length }} كيان</p>
+    }
+    <div class="toolbar">
+      <button class="btn btn-secondary" type="button" (click)="back()">رجوع</button>
+      <button class="btn btn-success" type="button" (click)="create()">اعتماد وإنشاء</button>
+    </div>
+  </div>
+}

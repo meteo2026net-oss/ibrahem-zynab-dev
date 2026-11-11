@@ -1,0 +1,11 @@
+.steps {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+  span {
+    padding: 6px 12px; border-radius: 999px; background: #edf2f7;
+    font-size: .8rem; color: var(--text-muted);
+    &.on { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
+  }
+}
+.chk { display: block; margin: 8px 0; font-size: .95rem; }
+h4 { margin: 12px 0 6px; color: var(--primary); font-size: .95rem; }
+ul { margin: 0 18px; }

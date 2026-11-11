@@ -1,5 +1,12 @@
+<div class="page-header">
+  <div>
+    <h1>مركز الأمان</h1>
+    <p>أدوار، صلاحيات، وسجل تدقيق للعمليات الحساسة</p>
+  </div>
+</div>
+
 <div class="card">
-  <div class="card-title">مركز الأمان — الأدوار</div>
+  <div class="card-title">أدوار المشروع</div>
   <div class="table-wrap">
     <table>
       <thead><tr><th>الدور</th><th>الصلاحيات</th></tr></thead>
@@ -10,4 +17,41 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="card">
+  <div class="card-title">سجل التدقيق (آخر العمليات)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>الوقت</th><th>المنفّذ</th><th>الإجراء</th><th>الهدف</th><th>النتيجة</th></tr></thead>
+      <tbody>
+        @for (e of audit.entries(); track e.id) {
+          <tr>
+            <td>{{ e.at | date:'short' }}</td>
+            <td>{{ e.actor }}</td>
+            <td>{{ e.action }}</td>
+            <td>{{ e.target }}</td>
+            <td>
+              <span class="badge" [class]="e.result === 'success' ? 'badge-success' : e.result === 'denied' ? 'badge-danger' : 'badge-warning'">
+                {{ e.result }}
+              </span>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="5">لا إدخالات بعد — تُسجَّل عند إنشاء المشاريع والعمليات الحساسة</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">ضوابط معتمدة (من المواصفات)</div>
+  <ul class="rules">
+    <li>إدارة الأسرار — عدم حفظ التوكنات في المستودع</li>
+    <li>عزل المشاريع — وثائق المعرفة مربوطة بـ projectId</li>
+    <li>أقل صلاحية — بائع/زبون/مدير في متجري</li>
+    <li>فحص الملفات المرفوعة في مركز الوسائط</li>
+    <li>سجل تدقيق لا يعتمد على تعديل الوكيل</li>
+  </ul>
 </div>

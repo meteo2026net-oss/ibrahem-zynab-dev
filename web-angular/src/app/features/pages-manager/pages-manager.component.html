@@ -1,0 +1,40 @@
+<div class="page-header">
+  <div>
+    <h1>مدير الصفحات</h1>
+    <p>قائمة صفحات المشروع وخريطة التنقل — {{ store.activeProject().name }}</p>
+  </div>
+  <a routerLink="/design" class="btn btn-primary">فتح مساحة التصميم</a>
+</div>
+
+<div class="toolbar">
+  <input class="form-control" style="max-width:220px" placeholder="اسم صفحة جديدة" [(ngModel)]="newName" />
+  <button class="btn btn-secondary" type="button" (click)="add()">إضافة</button>
+  <button class="btn btn-primary" type="button" (click)="importCatalog()">استيراد شاشات متجري</button>
+</div>
+
+<div class="card">
+  <div class="card-title">صفحات المشروع ({{ store.designPages().length }})</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>الاسم</th><th>المنصة</th><th></th></tr></thead>
+      <tbody>
+        @for (p of store.designPages(); track p.id; let i = $index) {
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.platform }}</td>
+            <td><a routerLink="/design" class="btn btn-sm btn-secondary" (click)="store.selectDesignPage(p.id)">تصميم</a></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">خريطة تنقل مقترحة (متجري)</div>
+  <div class="flow">
+    تسجيل الدخول → قائمة المنتجات → تفاصيل → سلة → إتمام الطلب → طلباتي
+  </div>
+  <div class="flow">لوحة البائع → منتجات البائع → طلبات البائع</div>
+</div>

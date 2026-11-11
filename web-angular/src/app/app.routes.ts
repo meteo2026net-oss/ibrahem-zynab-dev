@@ -43,6 +43,10 @@ export const routes: Routes = [
       { path: 'reports', loadComponent: () => import('./features/reports/reports.component').then(m => m.ReportsComponent) },
       { path: 'knowledge', loadComponent: () => import('./features/knowledge/knowledge.component').then(m => m.KnowledgeComponent) },
       { path: 'integrations', loadComponent: () => import('./features/integrations/integrations.component').then(m => m.IntegrationsComponent) },
+      { path: 'wizard', loadComponent: () => import('./features/wizard/wizard.component').then(m => m.WizardComponent) },
+      { path: 'pages', loadComponent: () => import('./features/pages-manager/pages-manager.component').then(m => m.PagesManagerComponent) },
+      { path: 'media', loadComponent: () => import('./features/media/media.component').then(m => m.MediaComponent) },
+
     ],
   },
   { path: '**', redirectTo: 'home' },
