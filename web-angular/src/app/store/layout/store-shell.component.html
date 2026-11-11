@@ -1,0 +1,25 @@
+<div class="store-shell">
+  <header class="store-nav">
+    <a routerLink="/shop" class="logo">متجري</a>
+    <nav>
+      <a routerLink="/shop" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">المنتجات</a>
+      <a routerLink="/shop/cart" routerLinkActive="active">السلة ({{ store.cartCount() }})</a>
+      <a routerLink="/shop/orders" routerLinkActive="active">طلباتي</a>
+      @if (store.isSeller()) {
+        <a routerLink="/shop/seller" routerLinkActive="active">لوحة البائع</a>
+      }
+    </nav>
+    <div class="user">
+      @if (store.currentUser(); as u) {
+        <span>{{ u.name }}</span>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="logout()">خروج</button>
+      } @else {
+        <a routerLink="/shop/login" class="btn btn-sm btn-primary">دخول</a>
+      }
+      <a routerLink="/home" class="btn btn-sm btn-ghost">المنصة</a>
+    </div>
+  </header>
+  <main class="store-main">
+    <router-outlet />
+  </main>
+</div>

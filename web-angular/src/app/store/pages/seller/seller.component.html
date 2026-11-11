@@ -1,0 +1,60 @@
+@if (!store.isSeller()) {
+  <div class="card">هذه الصفحة للبائع فقط. <a routerLink="/shop/login">دخول كبائع</a> (seller&#64;matjari.demo / 123456)</div>
+} @else {
+  <div class="page-header">
+    <div>
+      <h1>لوحة البائع</h1>
+      <p>إدارة المنتجات والطلبات — بيانات حقيقية مخزّنة محلياً</p>
+    </div>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:16px">
+    <div class="stat-card"><div class="stat-value">{{ store.allProducts().length }}</div><div class="stat-label">منتجات</div></div>
+    <div class="stat-card"><div class="stat-value">{{ store.orders().length }}</div><div class="stat-label">طلبات</div></div>
+    <div class="stat-card"><div class="stat-value">{{ store.cartCount() }}</div><div class="stat-label">عناصر سلة (جلسة)</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">{{ form.id ? 'تعديل منتج' : 'إضافة منتج' }}</div>
+      <div class="form-group"><label class="form-label">الاسم</label><input class="form-control" [(ngModel)]="form.name" /></div>
+      <div class="form-group"><label class="form-label">الوصف</label><textarea class="form-control" rows="2" [(ngModel)]="form.description"></textarea></div>
+      <div class="form-group"><label class="form-label">السعر</label><input class="form-control" type="number" [(ngModel)]="form.price" /></div>
+      <div class="form-group"><label class="form-label">المخزون</label><input class="form-control" type="number" [(ngModel)]="form.stock" /></div>
+      <div class="form-group"><label class="form-label">التصنيف</label><input class="form-control" [(ngModel)]="form.category" /></div>
+      <div class="form-group"><label class="form-label">رمز</label><input class="form-control" [(ngModel)]="form.emoji" /></div>
+      <button class="btn btn-primary" type="button" (click)="save()">حفظ</button>
+    </div>
+    <div class="card">
+      <div class="card-title">المنتجات</div>
+      @for (p of store.allProducts(); track p.id) {
+        <div class="p-row">
+          <span>{{ p.emoji }} {{ p.name }} — {{ p.price }} ر.س ({{ p.stock }})</span>
+          <span>
+            <button class="btn btn-sm btn-secondary" type="button" (click)="edit(p.id)">تعديل</button>
+            <button class="btn btn-sm btn-danger" type="button" (click)="remove(p.id)">إخفاء</button>
+          </span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">الطلبات — تغيير الحالة</div>
+    @for (o of store.orders(); track o.id) {
+      <div class="o-row">
+        <div>
+          <strong>{{ o.id }}</strong> — {{ o.userName }} — {{ o.total }} ر.س
+          <div class="muted">{{ o.status }}</div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-sm btn-secondary" type="button" (click)="setStatus(o.id, 'preparing')">تجهيز</button>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="setStatus(o.id, 'shipped')">شحن</button>
+          <button class="btn btn-sm btn-success" type="button" (click)="setStatus(o.id, 'completed')">إكمال</button>
+        </div>
+      </div>
+    } @empty {
+      <p>لا طلبات بعد</p>
+    }
+  </div>
+}

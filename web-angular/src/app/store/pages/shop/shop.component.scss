@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+.product {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; box-shadow: var(--shadow);
+  .img {
+    display: flex; align-items: center; justify-content: center;
+    height: 120px; background: linear-gradient(135deg, #ebf8ff, #bee3f8);
+    font-size: 3rem; text-decoration: none;
+  }
+  .body { padding: 12px; }
+  .price { color: var(--primary-light); font-weight: 700; margin: 4px 0; }
+  .meta { font-size: .75rem; color: var(--text-muted); margin-bottom: 8px; }
+  button { width: 100%; }
+}

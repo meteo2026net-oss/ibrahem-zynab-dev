@@ -1,0 +1,18 @@
+@if (product(); as p) {
+  <div class="detail card">
+    <div class="emoji">{{ p.emoji }}</div>
+    <div>
+      <h1>{{ p.name }}</h1>
+      <div class="price">{{ p.price }} ر.س</div>
+      <p>{{ p.description }}</p>
+      <p class="meta">{{ p.category }} · المخزون: {{ p.stock }}</p>
+      <div class="toolbar">
+        <input class="form-control" type="number" min="1" [max]="p.stock" style="width:90px" [(ngModel)]="qty" />
+        <button class="btn btn-primary" type="button" (click)="add()" [disabled]="p.stock < 1">أضف للسلة</button>
+        <a routerLink="/shop/cart" class="btn btn-secondary">عرض السلة</a>
+      </div>
+    </div>
+  </div>
+} @else {
+  <p>المنتج غير موجود. <a routerLink="/shop">العودة</a></p>
+}

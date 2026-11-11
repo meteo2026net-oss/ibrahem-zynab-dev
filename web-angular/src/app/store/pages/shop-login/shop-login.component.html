@@ -1,0 +1,42 @@
+<div class="card login-card">
+  <div class="card-title">{{ mode === 'login' ? 'دخول متجري' : 'حساب جديد' }}</div>
+  @if (mode === 'register') {
+    <div class="form-group">
+      <label class="form-label">الاسم</label>
+      <input class="form-control" [(ngModel)]="name" />
+    </div>
+  }
+  <div class="form-group">
+    <label class="form-label">البريد</label>
+    <input class="form-control" type="email" [(ngModel)]="email" />
+  </div>
+  <div class="form-group">
+    <label class="form-label">كلمة المرور</label>
+    <input class="form-control" type="password" [(ngModel)]="password" />
+  </div>
+  @if (mode === 'register') {
+    <div class="form-group">
+      <label class="form-label">نوع الحساب</label>
+      <select class="form-control" [(ngModel)]="role">
+        <option value="customer">زبون</option>
+        <option value="seller">بائع</option>
+      </select>
+    </div>
+  }
+  <button class="btn btn-primary" type="button" (click)="submit()" style="width:100%">
+    {{ mode === 'login' ? 'دخول' : 'إنشاء حساب' }}
+  </button>
+  <p class="switch">
+    @if (mode === 'login') {
+      <button type="button" class="btn btn-ghost btn-sm" (click)="mode='register'">إنشاء حساب</button>
+    } @else {
+      <button type="button" class="btn btn-ghost btn-sm" (click)="mode='login'">لدي حساب</button>
+    }
+  </p>
+  <div class="demo">
+    <strong>حسابات تجريبية:</strong>
+    <div>زبون: customer&#64;matjari.demo / 123456</div>
+    <div>بائع: seller&#64;matjari.demo / 123456</div>
+  </div>
+  <a routerLink="/shop" class="back">← العودة للمتجر</a>
+</div>

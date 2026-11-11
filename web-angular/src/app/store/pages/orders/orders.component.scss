@@ -1,0 +1,6 @@
+.order {
+  .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .meta { font-size: .8rem; color: var(--text-muted); margin-bottom: 8px; }
+  ul { margin: 0 18px 8px; font-size: .9rem; }
+  .total { font-weight: 700; color: var(--primary); }
+}

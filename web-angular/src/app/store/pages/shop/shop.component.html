@@ -1,0 +1,31 @@
+<div class="page-header">
+  <div>
+    <h1>متجري — المنتجات</h1>
+    <p>متجر حقيقي: مخزون، سلة، طلبات، وصلاحيات بائع/زبون</p>
+  </div>
+</div>
+
+<div class="toolbar">
+  <input class="form-control" style="max-width:260px" placeholder="بحث..." [ngModel]="search" (ngModelChange)="onSearch($event)" />
+  <select class="form-control" style="width:160px" [ngModel]="category" (ngModelChange)="onCat($event)">
+    @for (c of categories(); track c) {
+      <option [value]="c">{{ c }}</option>
+    }
+  </select>
+</div>
+
+<div class="grid">
+  @for (p of filtered2(); track p.id) {
+    <div class="product">
+      <a [routerLink]="['/shop/product', p.id]" class="img">{{ p.emoji }}</a>
+      <div class="body">
+        <a [routerLink]="['/shop/product', p.id]"><strong>{{ p.name }}</strong></a>
+        <div class="price">{{ p.price }} ر.س</div>
+        <div class="meta">{{ p.category }} · المتبقي {{ p.stock }}</div>
+        <button class="btn btn-primary btn-sm" type="button" (click)="add(p.id)" [disabled]="p.stock < 1">أضف للسلة</button>
+      </div>
+    </div>
+  } @empty {
+    <p>لا توجد منتجات</p>
+  }
+</div>

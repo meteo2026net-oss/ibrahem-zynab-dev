@@ -1,0 +1,13 @@
+.row {
+  display: flex; align-items: center; gap: 12px; padding: 12px 0;
+  border-bottom: 1px solid var(--border); flex-wrap: wrap;
+  .emoji { font-size: 1.8rem; }
+  .info { flex: 1; min-width: 120px; }
+  .qty { display: flex; align-items: center; gap: 8px; }
+  .line-total { font-weight: 700; min-width: 80px; }
+}
+.footer {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 16px; flex-wrap: wrap; gap: 12px;
+  strong { font-size: 1.1rem; color: var(--primary); }
+}

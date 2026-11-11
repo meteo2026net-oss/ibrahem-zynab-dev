@@ -1,0 +1,7 @@
+.p-row, .o-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+  font-size: .9rem;
+}
+.muted { font-size: .8rem; color: var(--text-muted); }
+.actions { display: flex; gap: 6px; flex-wrap: wrap; }

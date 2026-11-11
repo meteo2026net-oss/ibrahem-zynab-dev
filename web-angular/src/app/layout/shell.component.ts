@@ -26,6 +26,7 @@ export class ShellComponent {
 
   readonly centers: NavItem[] = [
     { path: '/home', label: 'الرئيسية', icon: '🏠', section: 'عام' },
+    { path: '/shop', label: 'متجري (حقيقي)', icon: '🛒', section: 'عام' },
     { path: '/projects', label: 'المشاريع', icon: '📁', section: 'عام' },
     { path: '/analysis', label: 'التحليل', icon: '🔍', section: 'البناء' },
     { path: '/design', label: 'التصميم', icon: '🎨', section: 'البناء' },

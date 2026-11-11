@@ -8,6 +8,19 @@ export const routes: Routes = [
     loadComponent: () => import('./features/login/login.component').then((m) => m.LoginComponent),
   },
   {
+    path: 'shop',
+    loadComponent: () => import('./store/layout/store-shell.component').then((m) => m.StoreShellComponent),
+    children: [
+      { path: '', loadComponent: () => import('./store/pages/shop/shop.component').then((m) => m.ShopComponent) },
+      { path: 'product/:id', loadComponent: () => import('./store/pages/product/product.component').then((m) => m.ProductComponent) },
+      { path: 'cart', loadComponent: () => import('./store/pages/cart/cart.component').then((m) => m.CartComponent) },
+      { path: 'checkout', loadComponent: () => import('./store/pages/checkout/checkout.component').then((m) => m.CheckoutComponent) },
+      { path: 'orders', loadComponent: () => import('./store/pages/orders/orders.component').then((m) => m.OrdersComponent) },
+      { path: 'seller', loadComponent: () => import('./store/pages/seller/seller.component').then((m) => m.SellerComponent) },
+      { path: 'login', loadComponent: () => import('./store/pages/shop-login/shop-login.component').then((m) => m.ShopLoginComponent) },
+    ],
+  },
+  {
     path: '',
     component: ShellComponent,
     canActivate: [authGuard],

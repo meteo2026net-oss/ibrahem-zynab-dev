@@ -1,0 +1,11 @@
+.detail {
+  display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start;
+  .emoji {
+    font-size: 5rem; text-align: center; background: var(--primary-soft);
+    border-radius: 16px; padding: 24px;
+  }
+  h1 { color: var(--primary); margin-bottom: 8px; }
+  .price { font-size: 1.4rem; font-weight: 700; color: var(--primary-light); margin-bottom: 10px; }
+  .meta { color: var(--text-muted); font-size: .9rem; margin: 10px 0; }
+}
+@media (max-width: 600px) { .detail { grid-template-columns: 1fr; } }

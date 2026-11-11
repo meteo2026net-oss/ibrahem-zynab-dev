@@ -1,0 +1,30 @@
+<div class="page-header">
+  <div><h1>السلة</h1><p>{{ store.cartCount() }} عنصر</p></div>
+</div>
+
+@if (store.cartLines().length === 0) {
+  <div class="card">السلة فارغة. <a routerLink="/shop">تسوق الآن</a></div>
+} @else {
+  <div class="card">
+    @for (line of store.cartLines(); track line.product.id) {
+      <div class="row">
+        <span class="emoji">{{ line.product.emoji }}</span>
+        <div class="info">
+          <strong>{{ line.product.name }}</strong>
+          <div>{{ line.product.price }} ر.س</div>
+        </div>
+        <div class="qty">
+          <button class="btn btn-sm btn-secondary" type="button" (click)="dec(line.product.id, line.quantity)">−</button>
+          <span>{{ line.quantity }}</span>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="inc(line.product.id, line.quantity, line.product.stock)">+</button>
+        </div>
+        <div class="line-total">{{ line.lineTotal }} ر.س</div>
+        <button class="btn btn-sm btn-ghost" type="button" (click)="remove(line.product.id)">حذف</button>
+      </div>
+    }
+    <div class="footer">
+      <strong>المجموع: {{ store.cartTotal() }} ر.س</strong>
+      <a routerLink="/shop/checkout" class="btn btn-primary">إتمام الطلب</a>
+    </div>
+  </div>
+}

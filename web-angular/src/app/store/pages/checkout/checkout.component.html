@@ -1,0 +1,25 @@
+<div class="page-header"><div><h1>إتمام الطلب</h1></div></div>
+@if (store.cartLines().length === 0) {
+  <div class="card">لا يوجد شيء للدفع. <a routerLink="/shop">تسوق</a></div>
+} @else {
+  <div class="grid-2">
+    <div class="card">
+      <div class="form-group">
+        <label class="form-label">العنوان</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="address"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">الجوال</label>
+        <input class="form-control" [(ngModel)]="phone" />
+      </div>
+      <button class="btn btn-success" type="button" (click)="submit()">تأكيد الطلب · {{ store.cartTotal() }} ر.س</button>
+    </div>
+    <div class="card">
+      <div class="card-title">ملخص</div>
+      @for (l of store.cartLines(); track l.product.id) {
+        <div class="sum-row">{{ l.product.name }} × {{ l.quantity }} <span>{{ l.lineTotal }} ر.س</span></div>
+      }
+      <div class="sum-total">المجموع {{ store.cartTotal() }} ر.س</div>
+    </div>
+  </div>
+}

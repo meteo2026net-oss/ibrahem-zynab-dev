@@ -1,0 +1,27 @@
+<div class="page-header">
+  <div>
+    <h1>{{ store.isSeller() ? 'كل الطلبات' : 'طلباتي' }}</h1>
+  </div>
+</div>
+
+@if (!store.isLoggedIn()) {
+  <div class="card">يجب <a routerLink="/shop/login">تسجيل الدخول</a> لعرض الطلبات.</div>
+} @else if (store.myOrders().length === 0) {
+  <div class="card">لا توجد طلبات بعد. <a routerLink="/shop">ابدأ التسوق</a></div>
+} @else {
+  @for (o of store.myOrders(); track o.id) {
+    <div class="card order">
+      <div class="head">
+        <strong>{{ o.id }}</strong>
+        <span class="badge" [class]="statusClass(o.status)">{{ statusLabel(o.status) }}</span>
+      </div>
+      <div class="meta">{{ o.userName }} · {{ o.createdAt | date:'medium' }} · {{ o.address }}</div>
+      <ul>
+        @for (it of o.items; track it.productId) {
+          <li>{{ it.name }} × {{ it.quantity }} — {{ it.price * it.quantity }} ر.س</li>
+        }
+      </ul>
+      <div class="total">الإجمالي: {{ o.total }} ر.س</div>
+    </div>
+  }
+}
