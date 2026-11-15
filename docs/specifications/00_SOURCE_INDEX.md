@@ -404,3 +404,8 @@
 ## Workpaper 176 — الخطة الموحدة لإغلاق اختبارات المراكز الأربعة عشر
 - الملف: [176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md](176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md)
 - توحيد خط أساس 14 مركزاً: 201 عملية، 106 أحداث، 26 موافقة، و254 سيناريو workpaper؛ توثيق فجوات الملكية والاختبارات والقرارات وبوابات الإغلاق. لا اعتماد أو تنفيذ اختبارات جديد.
+
+
+## Workpaper 177 — تدقيق التنفيذ الحالي وجاهزية الإصدار
+- الملف: [177-current-implementation-and-release-readiness-audit.md](177-current-implementation-and-release-readiness-audit.md)
+- تدقيق قراءة فقط لبنية Angular وAndroid وFirebase وملفات build/auth/persistence؛ يميز الموجود فعلياً عن المحاكاة والوظائف غير المثبتة، ويحدد اختبارات وبوابات الإصدار غير المنفذة.
