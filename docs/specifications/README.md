@@ -237,3 +237,6 @@
 
 
 | [84 حزمة حسم ملكية المؤسسة ومساحة العمل والأدوار والأذونات](84-tenant-workspace-role-ownership-decision-dossier.md) | تفصل مصدر حقيقة المؤسسة/مساحة العمل والعضوية عن الهوية والتفويض، وتحدد قرارات TENANT/ROLE واختبارات العزل؛ مفتوحة وغير معتمدة |
+
+
+| [85 حزمة حسم ملكية الإصدارات ودورة حياة SH-10](85-sh10-version-ownership-and-lifecycle-decision-dossier.md) | تفصل metadata الإصدارات ومجموعات التغيير عن محتوى المجال وrelease lifecycle في C11 وartifact registry؛ قرارات مفتوحة واختبارات غير منفذة |
