@@ -236,7 +236,7 @@
 | APR-C06-01 | C06 | requestToolGrant / tool capability | OP-C06-090 | OWN72-10 | TBD / OWNER REVIEW |
 | APR-C06-02 | C06 | reviewAgentOutput / AI output | OP-C06-099 | OWN72-10 + domain owner | TBD / OWNER REVIEW |
 | APR-C07-01 | C07 | approveTestResults / QA result | OP-C07-119 | OWN36-03 / OWN72-08 | TBD / OWNER REVIEW |
-| APR-C07-02 | C07 | approveQualityWaiver / quality waiver | NO EXACT NAME MATCH — OWNER LINK REQUIRED | OWN36-03 / OWN72-08 | TBD / OWNER REVIEW |
+| APR-C07-02 | C07 | approveQualityWaiver / quality waiver | OP-C07-118 requestQualityWaiver (related request; decision endpoint/SH-03 operation TBD) | OWN36-03 / OWN72-08 | TBD / OWNER REVIEW |
 | APR-C08-01 | C08 | requestDeletion / asset deletion | OP-C08-131 | OWN72-01 | TBD / OWNER REVIEW |
 | APR-C08-02 | C08 | requestExport / asset export | OP-C08-130 | OWN72-01 | TBD / OWNER REVIEW |
 | APR-C09-01 | C09 | startSync / external write | OP-C09-138 | OWN72-02 | TBD / OWNER REVIEW |
