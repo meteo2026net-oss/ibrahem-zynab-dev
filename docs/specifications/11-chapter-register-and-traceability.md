@@ -151,3 +151,8 @@ The detailed C01–C07 screen, function, and acceptance-test identifiers previou
 ## Acceptance test source reconciliation — 2026-11-16
 
 Workpaper [142](142-acceptance-id-vs-recovered-scenario-reconciliation.md) separates 130 unique `Cxx-AT-nn` identifiers in Export 07 B-01..B-07 from 86 local `SRC-AT` locators recovered from the master DOCX in document 104. The two inventories have different source provenance and granularity; no one-to-one equivalence or combined total is valid without owner-reviewed mapping. Document 80's DRAFT-AT and other derived test families remain distinct. All test definitions/evidence and execution states remain open/NOT RUN.
+
+
+## Full acceptance ID transcription — 2026-11-16
+
+Workpaper [143](143-full-source-acceptance-id-register-c01-c07.md) transcribes all 130 unique C01–C07 acceptance IDs from Export 07 B-01..B-07 with their scenario labels and source line locators. Only 15 entries contain a separate expected-result cell in the source table; 115 provide a scenario label without a separate expected result. This source limitation must remain visible. None of the IDs are evidence of execution.
