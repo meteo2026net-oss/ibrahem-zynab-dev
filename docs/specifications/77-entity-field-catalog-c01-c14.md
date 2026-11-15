@@ -160,3 +160,8 @@
 ## ملحق 85 — فصل معرفات الإصدارات
 
 لا تخلط record_version/expected_version (تزامن سجل المجال)، وversion_id/parent_version (هوية إصدار المورد وmetadata SH-10 عند انطباقها)، وcontractVersion (توافق API/event)، وartifactVersion، وreleaseVersion في C11، وchangeSetId. تظل أنواع الموارد وقواعد branching/merge/restore ومالك artifact registry مفتوحة وفق حزمة القرار 85؛ لا تعتمد هذه الإضافة schema أو types.
+
+
+## ملاحق 86–88 — حقول الإعدادات والنسخ والخصوصية
+
+تعريفات settings/value/schema/version/override ومصدر effective value تخضع لقرارات الوثيقة 86؛ تبقى أنواع الحقول وprecedence وnullability TBD حيث لا يثبتها المصدر. كتالوج backup/restore/manifests/evidence ومراجع مفاتيح التشفير يخضع للوثيقة 87، ولا يعني ملكية بيانات المصدر. classification/purpose/legal_basis/retention/deletion/legal_hold/replica propagation تخضع للوثيقة 88؛ لا توجد مدد أو أسس قانونية أو سلوك حذف نهائي معتمد. لا تغلق هذه الملاحق FLD-19 أو FLD-22/26.
