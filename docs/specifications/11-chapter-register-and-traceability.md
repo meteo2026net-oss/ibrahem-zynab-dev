@@ -182,3 +182,8 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 - النتيجة: 0/81 Operation→Test exact، 0/55 Event→Test exact، و14/14 موافقة OWNER REVIEW؛ Qualified OWN وDomain SoR للأحداث TBD.
 - 124 سيناريو محلياً SPECIFIED / NOT RUN؛ لا دليل تشغيل. لا تخلط هذه النتائج مع فحص وجود المعرفات في الوثيقة 147.
 
+## Candidate operation-to-test crosswalk C08–C10 — 2026-11-16
+- Workpaper 149: [ربط العمليات بسيناريوهات القبول المرشحة](149-c08-c10-operation-to-local-acceptance-candidate-crosswalk.md).
+- مرشحات صريحة لـ34/81 عملية (11 C08، 12 C09، 11 C10)، و47/81 بلا crosswalk صريح (C11–C14).
+- لا تمثل الروابط اعتماداً exact أو اختباراً منفذاً؛ تبقى SPECIFIED / NOT RUN.
+
