@@ -250,3 +250,9 @@
 - أُعدت 55 مرشحات دلالية لأحداث C08–C14 وربطها بسيناريوهات القبول المحلية: C08 (11)، C09 (10)، C10 (6)، C11 (14)، C12 (9)، C13 (4)، C14 (1).
 - المرشحات تحتاج اعتماد event owner وtest owner؛ لا تغير 0/55 Exact Event→Test في سجل 100، ولا تثبت producer أو Domain SoR أو schema.
 - كل السيناريوهات SPECIFIED / NOT RUN؛ C08 deletion/retention test T08 محجوب حتى اعتماد policy.
+
+## Workpaper 152 — C08–C14 historical source content recovery
+- الملف: [152-c08-c14-historical-source-content-recovery-and-version-map.md](152-c08-c14-historical-source-content-recovery-and-version-map.md)
+- استعادة فصول تاريخية من Export 01–03 للمراكز C08–C14: 27–33، 93، 102، 142، 150، 152، 153.
+- توجد تفاصيل 20 شاشة في الفصول 93 و102 و150 و152 و153، و16 شاشة في 142؛ لا تجمع الإصدارات المتداخلة ولا تفترض أنها canonical.
+- يظل غياب B08–B14 من Export 07 صحيحاً على مستوى سلسلة IDs، وليس دليلاً على فقد كل المحتوى التاريخي.
