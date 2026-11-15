@@ -156,3 +156,8 @@ Workpaper [142](142-acceptance-id-vs-recovered-scenario-reconciliation.md) separ
 ## Full acceptance ID transcription — 2026-11-16
 
 Workpaper [143](143-full-source-acceptance-id-register-c01-c07.md) transcribes all 130 unique C01–C07 acceptance IDs from Export 07 B-01..B-07 with their scenario labels and source line locators. Only 15 entries contain a separate expected-result cell in the source table; 115 provide a scenario label without a separate expected result. This source limitation must remain visible. None of the IDs are evidence of execution.
+
+
+## Source function ID registry — 2026-11-16
+
+Workpaper [144](144-source-function-id-registry-and-catalog-gap-audit-c01-c07.md) recovers 109 source function IDs and titles from Export 07 B-01..B-07. It records a catalog-preservation gap for C01–C04 (57 IDs absent as source IDs from current operational catalog 19) and notes that C05–C07 IDs are preserved in catalog 12 but still require detailed content reconciliation. This is an ID/source inventory, not approval of function contracts or mappings to operations/tests.
