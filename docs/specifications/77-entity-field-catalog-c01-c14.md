@@ -155,3 +155,8 @@
 ## ملحق 84 — ملكية tenant / organization / workspace / roles
 
 تبقى FLD-01 وحقول organization_id وtenant_id وworkspace_id مفتوحة: لا تفترض أن tenant_id مرادف organization_id، وأن workspace_id مرجع نطاق لا يمنح صلاحية. حزمة القرار 84 تفصل بين مالك سجل المؤسسة ومساحة العمل والعضوية وبين SH-01 للهوية وSH-02 لمحرك التفويض وC10 لسياسات الأمن. كما تفصل معنى الدور المجالّي عن role/grant runtime. لا توجد أنواع أو nullability أو علاقات نهائية معتمدة، ولا تُغلق FLD-01 أو FLD-10 أو FLD-13 بهذا الملحق.
+
+
+## ملحق 85 — فصل معرفات الإصدارات
+
+لا تخلط record_version/expected_version (تزامن سجل المجال)، وversion_id/parent_version (هوية إصدار المورد وmetadata SH-10 عند انطباقها)، وcontractVersion (توافق API/event)، وartifactVersion، وreleaseVersion في C11، وchangeSetId. تظل أنواع الموارد وقواعد branching/merge/restore ومالك artifact registry مفتوحة وفق حزمة القرار 85؛ لا تعتمد هذه الإضافة schema أو types.
