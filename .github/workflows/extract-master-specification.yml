@@ -40,5 +40,7 @@ jobs:
           path: |
             extracted/master-approved-specification.txt
             extracted/master-approved-specification.metadata.json
+            extracted/master-approved-specification.media-index.json
+            docs/specifications/00_MASTER_APPROVED_SPECIFICATIONS_SOURCE.docx
           if-no-files-found: error
           retention-days: 14
