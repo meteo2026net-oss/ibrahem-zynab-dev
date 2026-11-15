@@ -204,3 +204,6 @@
 
 ## روابط اختبار مرشحة لعمليات C08–C10 — 2026-11-16
 أضيف workpaper 149: [ربط مرشح بين العمليات وسيناريوهات القبول](docs/specifications/149-c08-c10-operation-to-local-acceptance-candidate-crosswalk.md). حُددت روابط مرشحة صريحة لـ34 عملية (C08: 11، C09: 12، C10: 11)، بينما 47 عملية في C11–C14 لا تملك crosswalk صريحاً في جداولها الحالية. هذه روابط CANDIDATE وليست exact approved links؛ كل السيناريوهات SPECIFIED / NOT RUN.
+
+## مرشحات الربط الدلالي لعمليات C11–C14 — 2026-11-16
+أضيف workpaper 150: [مرشحات ربط العمليات بسيناريوهات القبول](docs/specifications/150-c11-c14-operation-to-local-acceptance-semantic-candidates.md). اقترحت 47 رابطاً دلالياً للعمليات في C11–C14 من السيناريوهات المحلية الموجودة. هذه اقتراحات تحتاج مراجعة المالك وليست روابط exact معتمدة؛ لم يتغير سجل 97 أو حالة 0/81 exact links، والاختبارات كلها SPECIFIED / NOT RUN.
