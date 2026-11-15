@@ -256,3 +256,7 @@
 - استعادة فصول تاريخية من Export 01–03 للمراكز C08–C14: 27–33، 93، 102، 142، 150، 152، 153.
 - توجد تفاصيل 20 شاشة في الفصول 93 و102 و150 و152 و153، و16 شاشة في 142؛ لا تجمع الإصدارات المتداخلة ولا تفترض أنها canonical.
 - يظل غياب B08–B14 من Export 07 صحيحاً على مستوى سلسلة IDs، وليس دليلاً على فقد كل المحتوى التاريخي.
+
+## Workpaper 153 — C08–C14 historical screen-title inventory
+- [153-c08-c14-historical-screen-title-inventory-and-contract-gap.md](153-c08-c14-historical-screen-title-inventory-and-contract-gap.md) يحفظ العناوين التاريخية للشاشات من Export 01–03: C08 (20)، C09 (20)، C13 (20)، C12 (11–20)، وC14 بنسختين تاريخيتين (16/20). كما يسجل وحدات C10/C11.
+- العقود 64–70 لا تحتوي screen lists أو IDs؛ exact screen-to-contract mapping غير متاح. لا تُنشأ معرفات canonical بالتخمين.
