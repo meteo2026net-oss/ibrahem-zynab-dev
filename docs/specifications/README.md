@@ -240,3 +240,9 @@
 
 
 | [85 حزمة حسم ملكية الإصدارات ودورة حياة SH-10](85-sh10-version-ownership-and-lifecycle-decision-dossier.md) | تفصل metadata الإصدارات ومجموعات التغيير عن محتوى المجال وrelease lifecycle في C11 وartifact registry؛ قرارات مفتوحة واختبارات غير منفذة |
+
+
+| [86 حزمة ملكية الإعدادات SH-12](86-sh12-configuration-ownership-and-precedence-decision-dossier.md) | تفصل إعدادات المنصة والمجال وC13 والأسرار، وتترك precedence مفتوحة |
+| [87 حزمة النسخ والاستعادة SH-15](87-sh15-backup-recovery-ownership-decision-dossier.md) | تفصل كتالوج النسخ عن ملكية بيانات المصدر والتشفير؛ RTO/RPO TBD |
+| [88 حزمة الخصوصية والاحتفاظ والحذف](88-privacy-retention-deletion-and-legal-hold-decision-dossier.md) | تصنيف وغرض واحتفاظ وحذف وحجز قانوني؛ لا مدد أو أسس مخترعة |
+| [89 سجل Zero Trust وأهداف التعافي](89-zero-trust-and-operational-recovery-objectives-decision-register.md) | يحفظ التعارض ويحدد قرارات SLO/RTO/RPO/freshness المفتوحة |
