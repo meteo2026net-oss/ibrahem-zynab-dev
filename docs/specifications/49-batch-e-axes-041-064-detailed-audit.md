@@ -38,7 +38,7 @@
 - **المراجع:** 12/C07؛ 20/C07؛ 25؛ 27؛ 31/اختبارات الوثائق.
 - **المتاح:** unit/integration/UI/E2E/API/database/security/performance/compatibility/accessibility/offline-sync/regression؛ تتبع المتطلبات؛ تقارير جودة وبوابات.
 - **الناقص:** النص الأصلي الكامل لحالات الاختبار، مصفوفة المنصات والبيئات، test data strategy، flaky test policy، evidence schema، thresholds والاستثناءات، CI workflows، ونتائج تشغيل موثقة.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-RECOVERED؛ SCR=SOURCE-REFERENCE-FOUND؛ DATA/API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** نطاق الاختبارات معروف، لكن التغطية التنفيذية غير مثبتة.
 
 ### AX-045 — مركز التعاون والتواصل
@@ -171,7 +171,7 @@
 - **المراجع:** 01/أدوار الوكلاء وPRD-FR-013..020؛ 12/C06؛ 16/الفصل 158؛ 20؛ 23/SH-02/03/04؛ 37/استقلالية التنفيذ؛ 43/Zero Trust.
 - **المتاح:** صلاحيات للوكلاء؛ موافقات؛ سجل تدقيق لا يستطيع الوكيل تعديله؛ عزل الذاكرة؛ مراجعة المخرجات؛ إيقاف الوكلاء؛ حدود الميزانية؛ منع تجاوز السياسات؛ كشف التعليمات الخبيثة في الملفات.
 - **الناقص:** AI policy registry؛ threat model للـprompt injection/tool abuse؛ قياس المخاطر؛ سياسات بيانات المزود؛ red-team/evaluation suites؛ kill switch موحد؛ immutable audit proof؛ فصل مسؤوليات المشغل والموافق والمدقق؛ حسم تعارض Zero Trust SEC-REV-01 من مصدر الموافقة.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA/API=SCHEMA-MISSING؛ AUTH=SOURCE-REFERENCE-FOUND / MATRIX-INCOMPLETE؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** مبادئ الحوكمة الأساسية معتمدة؛ نموذج الضوابط والاختبارات والتعارض المفتوح يحتاج حسمًا.
 
 ### AX-064 — الاعتمادية واستمرارية التشغيل والتعافي من الكوارث
