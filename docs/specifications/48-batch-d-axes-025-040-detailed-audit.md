@@ -17,7 +17,7 @@
 - **المراجع:** 01 (رحلة المستخدم من إنشاء المشروع إلى التسليم)، 02/C01، 19/C01.
 - **المتاح:** رحلة من وصف الفكرة والمراجع والتحليل والأسئلة والمتطلبات والتقنيات والتقدير إلى baseline معتمد، ثم التصميم والبيانات والتنفيذ والاختبار والنشر والتوثيق.
 - **الناقص:** مخطط حالة موحد للمشروع، قواعد الانتقال والتراجع، شروط الانتقال بين البوابات، أحداث الرحلة، الاستئناف، تخصيص المراحل حسب نوع المشروع.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA/API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** رحلة المستخدم واضحة كمراحل، لكن workflow schema والبوابات التفصيلية لم تعتمد.
 
 ### AX-026 — حفظ العمل وإدارة الإصدارات
