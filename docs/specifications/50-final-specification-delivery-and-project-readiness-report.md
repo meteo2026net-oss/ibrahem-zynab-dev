@@ -440,3 +440,8 @@
 ## تحديث 2026-11-15 — حزمة تتبع C14 للوحة التحكم والإسقاطات (131)
 
 أضيفت الوثيقة 131 لتتبع 13 عملية C14 من سجل 97، وحدث واحد PROPOSED من سجل 100، ونوع موافقة واحد من سجل 98، و22 سيناريو قبول محلياً. أكدت الحزمة أن C14 طبقة قراءة وتجميع وتخصيص عرض؛ بيانات التخطيطات والتفضيلات فقط هي بيانات C14، أما مؤشرات المشاريع والمهام والموافقات والجودة والأمن والتكاملات والإصدارات والتشغيل فهي projections/cache مشتقة لا تصبح Source of Record. وثقت ضوابط source_ref/source_version/as_of/freshness/tenant/permission context، وفجوات KPI/cache invalidation/export. جميع السيناريوهات SPECIFIED / NOT RUN والقرارات OWNER REVIEW؛ لا API أو schema أو cache implementation أو كود منتج معتمد، ولم يتغير التطبيق. C14 يبقى DERIVED / OWNER REVIEW / NOT APPROVED / NOT IMPLEMENTED، وبوابة اعتماد المواصفات وموافقة البرمجة المستقلة قائمة.
+
+
+## تحديث 2026-11-15 — حزمة الإغلاق التتبعي الموحدة C01–C07 (132)
+
+أضيفت الوثيقة 132 لتجميع مراجعة المراكز C01–C07: 120 عملية من سجل 97، و51 حدثاً من سجل 100، و12 نوع موافقة من سجل 98، مع مراجعة حدود الملكية والتبعيات والاختبارات. فصلت الوثيقة مسؤوليات C01 requirements baseline، وC02 design versions، وC03 navigation graph، وC04 schema/migration/restore، وC05 code/IR/sandbox، وC06 agent delegation/tool grants، وC07 QA/evidence/quality gates. أكدت فجوة APR-C07-02: approveQualityWaiver لا يقابله قرار في سجل 97، وrequestQualityWaiver في OP-C07-118 هو طلب لا قرار. كما أن exact Event→Test ID ما زال 0/51، والسيناريوهات المحلية SPECIFIED / NOT RUN. لا اعتماد عقود أو APIs أو schemas أو migrations، ولا تشغيل اختبارات أو تعديل لكود التطبيق. تبقى C01–C07 DERIVED / OWNER REVIEW / NOT APPROVED / NOT IMPLEMENTED، وتظل موافقة بدء البرمجة المستقلة مطلوبة.
