@@ -221,3 +221,8 @@
 - الجرد الحالي: 81 عملية مرشحة، 55 حدثاً، 14 نوع موافقة، 124 سيناريو قبول محلياً SPECIFIED / NOT RUN. لا تجمع هذه الأعداد مع خطوط الأساس 201/106/26 دون crosswalk وإزالة التداخل.
 - يوضح حدود Domain SoR مقابل Shared Service SoR لكل مركز، ويثبت أن B08–B14 غير مستعادة من Export 07.
 - الحالة: REVIEWED AS DERIVED, NOT APPROVED؛ لا مصدر أصلي بديل ولا اعتماد مالك ولا تنفيذ أو اختبار منتج.
+
+## Workpaper 147 — C08–C14 master registry ID reconciliation
+- الملف: [147-c08-c14-master-registry-id-reconciliation.md](./147-c08-c14-master-registry-id-reconciliation.md)
+- نتيجة مطابقة المعرفات: 81/81 Operation IDs موجودة في سجل 97؛ 55/55 Event IDs موجودة في سجل 100؛ 14/14 Approval IDs موجودة في سجل 98.
+- هذا تحقق وجود معرفات فقط، لا يثبت تطابق API/payload/producer/approval semantics ولا الاعتماد أو التنفيذ. لا يغير خط الأساس 201/106/26.
