@@ -1,3 +1,6 @@
+
+> **تحديث النطاق:** أُنجز لاحقاً التدقيق الحرفي الشامل لجميع العمليات الـ201 في الوثيقة [114](114-full-inventory-api-operation-source-name-audit.md). أرقام هذه الوثيقة تخص تقسيم التدقيق السابق (95 عملية مدققة في 108 و106 خارج ذلك النطاق)، ولا تستخدم كحصيلة نهائية للمخزون كله. الحصيلة الكاملة: 11 EXACT-NAME، و7 SEMANTIC-CANDIDATE، و183 بلا اسم حرفي مطابق؛ مع تعارض مركز واحد موثق في 114.
+
 # 110 — تدقيق منشأ أسماء سجل العمليات الكامل C01–C14
 
 **الحالة:** FULL INVENTORY PROVENANCE STATUS / DERIVED AUDIT / OWNER REVIEW REQUIRED / NOT APPROVED / NOT IMPLEMENTED  
