@@ -165,3 +165,8 @@
 ## ملاحق 86–88 — حقول الإعدادات والنسخ والخصوصية
 
 تعريفات settings/value/schema/version/override ومصدر effective value تخضع لقرارات الوثيقة 86؛ تبقى أنواع الحقول وprecedence وnullability TBD حيث لا يثبتها المصدر. كتالوج backup/restore/manifests/evidence ومراجع مفاتيح التشفير يخضع للوثيقة 87، ولا يعني ملكية بيانات المصدر. classification/purpose/legal_basis/retention/deletion/legal_hold/replica propagation تخضع للوثيقة 88؛ لا توجد مدد أو أسس قانونية أو سلوك حذف نهائي معتمد. لا تغلق هذه الملاحق FLD-19 أو FLD-22/26.
+
+
+## ملحق 90 — حقول المعرفة ومراجع المصدر
+
+حقول documentId/canonicalOwner/sourceRef/sourceVersion/contentHash/scope/classification/ACL/provenance/chunk/index/citation/freshness/retention/legalHold/deletion تخضع لحزمة القرار 90. يجب أن يبقى المستند الأصلي لدى C12/مالك المجال، بينما SH-16 يملك metadata الفهرسة والمعرفة وSH-07 البحث العام. الأنواع والقيود وSLA غير محددة حيث لا يثبتها المصدر؛ لا تغلق OWN36-04 أو OWN72-04.
