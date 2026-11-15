@@ -319,3 +319,5 @@
 - [113 — تدقيق الإغلاق المتكامل لمحاور العمليات والأحداث والموافقات](docs/specifications/113-cross-axis-traceability-closure-audit.md) — يجمع 201 عملية و106 أحداث و26 نوع موافقة، ويحدد فجوات التتبع المفرد والملكية والاعتماد.
 
 - [114 — تدقيق المطابقة المصدرية الشامل لأسماء عمليات API الـ201](docs/specifications/114-full-inventory-api-operation-source-name-audit.md) — 201/201 مفحوصة: 11 مطابقة حرفية، 7 مرشحات دلالية، 183 بلا اسم حرفي مطابق، وتعارض مركز واحد.
+
+- [115 — تدقيق المطابقة الحرفية لأسماء أحداث المجال الـ106](docs/specifications/115-full-inventory-domain-event-source-name-audit.md) — لم يثبت أي اسم حدث حرفياً في DOCX (0/106)؛ 95 حدثاً SOURCE-RECOVERED مفهوماً و11 PROPOSED، وجميعها تحتاج مراجعة الاسم والعقد.
