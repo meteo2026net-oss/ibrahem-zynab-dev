@@ -241,3 +241,9 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 ## ملحق 95 — عمليات Artifact Registry المرشحة
 
 تظل عمليات artifact في C11 ضمن قائمة مرشحة غير معتمدة. تراجع الحزمة 95 فصل سجل المخرج عن binary storage وprovenance/signing وrelease lifecycle. لا تعتمد هذه الإضافة عمليات جديدة أو schemas أو endpoints، وتظل FLD-16 وVER-85-09 OPEN.
+
+
+
+## ملحق 97 — سجل العمليات المفردة
+
+أضيفت الوثيقة 97 لتفكيك 201 اسماً من عمليات C01–C14 إلى Operation IDs مفردة، مع تصنيف نوعي أولي ومالك API مرشح وعائلة اختبار ومرجع OWN/TBD. هذه مرحلة inventory فقط؛ يجب اعتماد نوع كل عملية وAPI Owner وربط AX/source وexact test ID وschema قبل تثبيت العقد. لا تنشئ هذه الخطوة endpoints.
