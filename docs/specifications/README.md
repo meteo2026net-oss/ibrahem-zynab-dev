@@ -460,3 +460,7 @@
 
 ## 159 — تسوية كتالوج وظائف وشاشات C01–C04
 [159-c01-c04-function-vs-screen-catalog-reconciliation.md](159-c01-c04-function-vs-screen-catalog-reconciliation.md) — يوضح أن الوثيقة 19 كتالوج شاشات بمعرفات SCR وليست كتالوج وظائف بمعرفات F؛ 57 وظيفة مصدرية مقابل 58 شاشة، وروابط الوظائف بالشاشات لا تزال بحاجة إلى مراجعة واعتماد.
+
+
+## 160 — خريطة الوظائف إلى الشاشات للمراكز C01–C04
+[160-c01-c04-function-to-screen-candidate-crosswalk.md](160-c01-c04-function-to-screen-candidate-crosswalk.md) — تغطي الوظائف المصدرية الـ57 بمرشحات واجهة: 54 مرشحاً دلالياً و3 وظائف عابرة للشاشات. جميع الروابط تحتاج مراجعة المالك ولا تعد exact أو approved.
