@@ -249,3 +249,9 @@
 
 
 | [90 حزمة ملكية المعرفة SH-16 وحدود C12](90-sh16-knowledge-ownership-and-c12-boundary-dossier.md) | تفصل المحتوى الأصلي عن الفهرسة والاستشهاد والبحث العام، مع ACL/provenance/freshness؛ مفتوحة وغير منفذة |
+
+
+
+| [91 حزمة ملكية SH-13 والتكاملات](91-sh13-integration-connector-ownership-decision-dossier.md) | تفصل C09 عن connector runtime ومراجع الأسرار وOAuth/webhooks والمزامنة؛ قرارات مفتوحة واختبارات غير منفذة |
+| [92 حزمة ملكية SH-08 وتنفيذ المهام](92-sh08-shared-task-execution-ownership-decision-dossier.md) | تفصل Domain Job ونتيجته عن Shared Execution Job والمحاولات والجدولة؛ قرارات مفتوحة |
+| [93 حزمة ملكية SH-14 والمراقبة التشغيلية](93-sh14-operational-monitoring-ownership-decision-dossier.md) | تفصل telemetry عن نتائج C07 وبيانات المجال ولوحات C14؛ لا SLO رقمية معتمدة والاختبارات غير منفذة |
