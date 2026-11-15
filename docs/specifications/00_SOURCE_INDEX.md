@@ -307,3 +307,10 @@
 - **Scope:** all 57 source functions in C01–C04 mapped to candidate screen locations in catalog 19.
 - **Result:** 54 semantic candidates and 3 cross-cutting candidates; C04-SCR-01 remains an unassigned dashboard/entry screen. Candidate relationships are not exact or approved and include potential many-to-many mappings.
 - **Status:** owner review required; no code/API/schema/database changes.
+
+
+## Workpaper 161 — C01–C04 three-axis function/screen/API reconciliation
+- الملف: [161-c01-c04-three-axis-function-screen-api-reconciliation.md](./161-c01-c04-three-axis-function-screen-api-reconciliation.md)
+- يجمع مطابقتي 145 (وظيفة→API) و160 (وظيفة→شاشة): 57 وظيفة مصدرية، 58 شاشة، 53 وظيفة لها مرشح API، 4 وظائف بلا مرشح واضح، وعملية واحدة OP-C02-019 بلا وظيفة مرشحة.
+- يحدد مراجعات حدود C03/C06/C08/C10 وC04-SCR-01، دون اختراع APIs أو تعيين مالكي Domain SoR. الروابط كلها SEMANTIC CANDIDATE؛ لا توجد روابط exact/approved أو اختبارات منفذة.
+- الحالة: تدقيق مشتق للمراجعة؛ لا تغييرات على كود التطبيق أو API أو قاعدة البيانات؛ البرمجة غير مصرح بها.
