@@ -81,3 +81,9 @@ approvalRef, approvalTypeId, resourceRef, resourceVersion, contentHash, organiza
 - ربط retention/privacy/legal hold وسياسة الأدلة.
 
 **لا تعتمد هذه الوثيقة أنواع الموافقات أو أدوار الموافقين ولا تنشئ workflow. جميع APR-Cxx وAPR-98 OPEN؛ الاختبارات SPECIFIED / NOT RUN.**
+
+
+
+## ملحق 99 — ربط الموافقات بالعمليات
+
+أضافت الوثيقة 99 جدول ربط أولياً لأنواع الموافقات الـ26 بعمليات 97. تطابق 25 نوعاً اسم عملية حرفياً، بينما APR-C07-02 مرتبط بطلب `requestQualityWaiver` في OP-C07-118؛ أما عملية قرار الموافقة النهائية فتظل TBD، ولا يجوز اعتبار عملية الطلب نفسها قرار اعتماد. يلزم تحديد عملية القرار ومالكها وtest ID من المالكين.
