@@ -187,3 +187,7 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 - مرشحات صريحة لـ34/81 عملية (11 C08، 12 C09، 11 C10)، و47/81 بلا crosswalk صريح (C11–C14).
 - لا تمثل الروابط اعتماداً exact أو اختباراً منفذاً؛ تبقى SPECIFIED / NOT RUN.
 
+## Semantic candidate links C11–C14 — 2026-11-16
+- Workpaper 150: [مرشحات ربط العمليات بالاختبارات المحلية](150-c11-c14-operation-to-local-acceptance-semantic-candidates.md).
+- 47 مرشحاً دلالياً لعمليات C11–C14، يحتاج كل منها مراجعة مالك المركز والاختبار. لا تتحول المرشحات إلى روابط exact ولا تغير 0/81 exact links في سجل 97.
+
