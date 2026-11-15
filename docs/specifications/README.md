@@ -529,3 +529,8 @@
 ## 173 — مراجعة روابط القبول C08–C10 وفجوات تعريف الاختبار
 
 [173-c08-c10-acceptance-crosswalk-review-and-test-definition-gaps.md](173-c08-c10-acceptance-crosswalk-review-and-test-definition-gaps.md) — مراجعة 34 عملية و38 سيناريو محلياً، مع تصنيف فجوات تعريف الاختبار والبيئة والبيانات والأدلة. الروابط تظل مرشحة والاختبارات غير منفذة.
+
+
+## 174 — مراجعة النتائج المتوقعة وجاهزية تنفيذ اختبارات C11–C14
+
+[174-c11-c14-acceptance-oracle-and-execution-readiness-review.md](174-c11-c14-acceptance-oracle-and-execution-readiness-review.md) — مراجعة 86 نتيجة متوقعة موجزة عبر C11–C14، مع تمييز النتائج المشروطة بالسياسات وفجوات مالك الاختبار والبيانات والبيئة والأدلة. لا تعني المراجعة أن الاختبارات منفذة أو معتمدة.
