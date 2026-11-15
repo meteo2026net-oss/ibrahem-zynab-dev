@@ -278,3 +278,7 @@
 
 ## تحديث حدود الخدمات المشتركة — الوثيقة 107
 فُصلت 95 عملية من C04/C06/C07/C09/C11/C14 إلى حدود SH-08/13/14/15 المرشحة في الوثيقة 107. لا تعد هذه المصفوفة API contract أو owner sign-off؛ تبقى exact Test IDs وschemas وauthorization decisions مفتوحة.
+
+
+## تدقيق منشأ أسماء العمليات — الوثيقة 108
+فحصت الوثيقة 108 أسماء 95 عملية في C04/C06/C07/C09/C11/C14 مقابل DOCX. المطابقات الحرفية الخمس: OP-C04-049 validateSchema، OP-C07-107 createTestPlan، OP-C07-110 createTestRun، OP-C07-112 executeTestSuite، OP-C11-159 createReleaseCandidate. بقية الأسماء لا تظهر حرفياً؛ بعضها له نظير دلالي محتمل موثق في 108، ولا يجوز اعتمادها أو دمجها دون مراجعة المالك. كل ذلك لا يغير الحالة DERIVED/OWNER REVIEW.
