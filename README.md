@@ -111,4 +111,6 @@
 
 
 
+**سجل الأحداث:** أضيفت [الوثيقة 96](docs/specifications/96-center-event-inventory-and-producer-boundary-crosswalk.md) لتجميع أحداث C01–C14 من مسودات العقود وتمييز المستعاد عن المقترح.
+
 **استكمال تدقيق المواصفات:** أضيفت [الوثيقة 94](docs/specifications/94-api-event-approval-test-referential-integrity-audit.md) لتحديد فجوات ربط العقود والاختبارات، و[الوثيقة 95](docs/specifications/95-c11-artifact-registry-ownership-decision-dossier.md) لحسم أسئلة ملكية سجل المخرجات. كلاهما مسودات قرارات وتدقيق؛ لم يبدأ تنفيذ التطبيق أو تشغيل الاختبارات.
