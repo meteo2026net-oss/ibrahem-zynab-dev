@@ -104,3 +104,9 @@
 ## إضافة 2026-11-15 — سجل العمليات المفردة
 
 - `97-operation-level-api-test-ownership-inventory.md`: تفكيك 201 عملية API من 79 إلى Operation IDs مفردة، مع type/API Owner candidates وعائلة اختبار وOWN/TBD؛ لا schemas أو endpoints منفذة.
+
+
+
+## إضافة 2026-11-15 — سجل أنواع الموافقات
+
+- `98-approval-type-registry-c01-c14.md`: جرد 27 نوع موافقة مرشحاً، وحقول القرار وضوابطه واختبارات القبول؛ لا workflows منفذة ولا قرارات معتمدة.
