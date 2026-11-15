@@ -155,3 +155,6 @@
 
 
 **تدقيق معرفات الاختبارات:** أضيفت [الوثيقة 105](docs/specifications/105-test-id-source-provenance-and-derived-catalog-audit.md) لتحديد معرفات الاختبار الأصلية في DOCX وتصحيح التمييز بينها وبين المعرفات المشتقة في كتالوج 80.
+
+
+**استكمال حدود الخدمات المشتركة:** أضيفت [مصفوفة الأحداث 106](docs/specifications/106-shared-service-event-boundary-crosswalk.md) لـ50 حدثاً، و[مصفوفة عمليات API 107](docs/specifications/107-shared-service-operation-boundary-crosswalk.md) لـ95 عملية من المراكز ذات التقاطع المباشر مع SH-08/13/14/15. هذه مراجعات ملكية مشتقة ولا تمثل عقوداً معتمدة أو تنفيذاً.
