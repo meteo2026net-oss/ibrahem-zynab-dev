@@ -384,3 +384,8 @@
 ## Workpaper 172 — تسوية معرفات وسيناريوهات اختبارات القبول C08–C14
 - الملف: [172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md](172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md)
 - جرد 76 معرفاً في مسودات عقود 64–70 مقابل 124 معرفاً/سيناريو في workpapers 126/127/150؛ فرق 48 سيناريو مشتقاً. لا aliases معتمدة ولا تغييرات في حالة الاختبارات.
+
+
+## Workpaper 173 — مراجعة روابط القبول C08–C10 وفجوات تعريف الاختبار
+- الملف: [173-c08-c10-acceptance-crosswalk-review-and-test-definition-gaps.md](173-c08-c10-acceptance-crosswalk-review-and-test-definition-gaps.md)
+- مراجعة 34 عملية وروابطها المرشحة، وتحليل 38 سيناريو محلي؛ تحديد نواقص setup/steps/data/oracle/owner/evidence/environment دون اعتماد روابط أو ادعاء تنفيذ.
