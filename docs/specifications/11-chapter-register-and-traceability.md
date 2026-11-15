@@ -202,3 +202,7 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 ## Historical screen inventory C08–C14 — 2026-11-16
 - Workpaper 153: [سجل عناوين الشاشات التاريخية](153-c08-c14-historical-screen-title-inventory-and-contract-gap.md).
 - يحفظ قوائم C08/C09/C13 (20 شاشة لكل مركز)، C12 (الشاشات 11–20)، وC14 (نسختان تاريخيتان 16/20)، إضافة إلى وحدات C10/C11. لا IDs canonical ولا exact mapping للعقود 64–70.
+
+## Historical screen-to-operation crosswalk C08–C14 — 2026-11-16
+- Workpaper 154: [مصفوفة مطابقة الشاشات التاريخية بالعمليات](154-c08-c14-historical-screen-to-operation-semantic-crosswalk.md).
+- 106 screen-title mappings + 16 C10/C11 functional module mappings. جميعها semantic candidates فقط؛ exact/approved = 0 في هذا العمل، ولا تغيير لخط الأساس 0/201 Operation→Test exact.
