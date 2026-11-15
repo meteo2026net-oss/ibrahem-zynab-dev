@@ -70,3 +70,5 @@
 - `83-sh11-cost-budget-ownership-decision-dossier.md`: حزمة قرارات SH-11 للتكلفة والميزانيات، وتفصل القياس عن ledger والتقديرات عن الفعلي وتحدد سياسات العملة والتسوية والاختبارات المفتوحة؛ غير معتمدة وغير منفذة.
 
 - `84-tenant-workspace-role-ownership-decision-dossier.md`: حزمة قرارات ملكية tenant/organization/workspace والعضويات والأدوار والأذونات، وتفصل SH-01/SH-02/C10 عن مالك المجال؛ جميع القرارات مفتوحة وغير منفذة.
+
+- `85-sh10-version-ownership-and-lifecycle-decision-dossier.md`: حزمة قرارات SH-10 لملكية metadata الإصدارات ومجموعات التغيير واللقطات، وفصلها عن محتوى المجال وC11 release lifecycle وartifact registry؛ غير معتمدة وغير منفذة.
