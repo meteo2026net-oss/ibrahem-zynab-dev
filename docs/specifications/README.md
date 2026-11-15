@@ -379,3 +379,8 @@
 ## 129 — حزمة تتبع C12 للمعرفة والتوثيق
 
 [129-c12-knowledge-documentation-traceability-workpaper.md](129-c12-knowledge-documentation-traceability-workpaper.md) — تتبع 12 عملية و9 أحداث وموافقتين مرشحتين و22 سيناريو محلياً؛ يوضح حدود C12 مقابل C08 وSH-07/16 وSH-03/04، مع فجوات ACL وretention وinvalidation وprovenance. الحالات OWNER REVIEW / NOT RUN ولا اعتماد أو تنفيذ.
+
+
+## 130 — حزمة تتبع C13 للإعدادات والتوريث
+
+[130-c13-settings-inheritance-traceability-workpaper.md](130-c13-settings-inheritance-traceability-workpaper.md) — تتبع 10 عمليات و4 أحداث مقترحة ونوعي موافقة و20 سيناريو محلياً؛ يوضح ملكية C13 مقابل SH-12 ومالكي إعدادات المجالات، مع فجوات precedence والأسرار والتطبيق والتراجع. جميع الاختبارات NOT RUN والقرارات OWNER REVIEW.
