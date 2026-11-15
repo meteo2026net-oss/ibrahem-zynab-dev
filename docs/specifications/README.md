@@ -389,3 +389,8 @@
 ## 131 — حزمة تتبع C14 للوحة التحكم والإسقاطات
 
 [131-c14-dashboard-projection-traceability-workpaper.md](131-c14-dashboard-projection-traceability-workpaper.md) — تتبع 13 عملية وحدثاً واحداً مقترحاً وموافقة تصدير واحدة و22 سيناريو محلياً؛ يثبت حدود C14 كطبقة قراءة وتجميع وتخصيص لا تملك مصادر المجالات، مع فجوات KPI/freshness/cache/ACL/export. الاختبارات NOT RUN والقرارات OWNER REVIEW.
+
+
+## 132 — حزمة الإغلاق التتبعي الموحدة للمراكز C01–C07
+
+[132-c01-c07-unified-traceability-closure-workpaper.md](132-c01-c07-unified-traceability-closure-workpaper.md) — مراجعة 120 عملية و51 حدثاً و12 موافقة مرشحة عبر المراكز السبعة، وتفصيل حدود الملكية والاعتماد والاختبار؛ توثق فجوة APR-C07-02 وغياب exact Event→Test IDs. جميع القرارات OWNER REVIEW والاختبارات NOT RUN.
