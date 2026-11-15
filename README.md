@@ -158,3 +158,6 @@
 
 
 **استكمال حدود الخدمات المشتركة:** أضيفت [مصفوفة الأحداث 106](docs/specifications/106-shared-service-event-boundary-crosswalk.md) لـ50 حدثاً، و[مصفوفة عمليات API 107](docs/specifications/107-shared-service-operation-boundary-crosswalk.md) لـ95 عملية من المراكز ذات التقاطع المباشر مع SH-08/13/14/15. هذه مراجعات ملكية مشتقة ولا تمثل عقوداً معتمدة أو تنفيذاً.
+
+
+**تدقيق أسماء عمليات API:** أضيفت [الوثيقة 108](docs/specifications/108-source-name-audit-for-shared-service-affected-api-operations.md)، وتراجع 95 عملية من المراكز المتقاطعة مع الخدمات المشتركة. وجدت خمس مطابقات حرفية فقط في DOCX، وميّزت الأسماء المشتقة والنظائر الدلالية التي تحتاج مراجعة المالكين.
