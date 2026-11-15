@@ -262,7 +262,7 @@
 - العقود 64–70 لا تحتوي screen lists أو IDs؛ exact screen-to-contract mapping غير متاح. لا تُنشأ معرفات canonical بالتخمين.
 
 ## Workpaper 154 — historical screen-to-operation crosswalk
-- [154-c08-c14-historical-screen-to-operation-semantic-crosswalk.md](154-c08-c14-historical-screen-to-operation-semantic-crosswalk.md) يحتوي 106 صفوف مطابقة مرشحة لعناوين C08/C09/C12-11..20/C13/نسختي C14، و16 وحدة وظيفية C10/C11.
+- [154-c08-c14-historical-screen-to-operation-semantic-crosswalk.md](154-c08-c14-historical-screen-to-operation-semantic-crosswalk.md) يحتوي 106 صفوف مطابقة مرشحة لعناوين C08/C09/C12-11..20/C13/نسختي C14، و19 وحدة وظيفية C10/C11.
 - كل الروابط SEMANTIC CANDIDATE / OWNER REVIEW؛ ليست Exact Source Match أو Approved. لا تغير الوثيقة سجل 97 أو OWN/SoR.
 - فجوات ظاهرة: backup/restore والبحث والتراخيص C08، secrets/provider boundaries C09، نوع evaluatePolicy وعمليات IAM C10، نشر/rollback C11، شاشات C12-01..10، نطاق كتابة C13، وSoR إسقاطات C14.
 
