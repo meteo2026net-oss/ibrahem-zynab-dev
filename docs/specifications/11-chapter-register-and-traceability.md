@@ -206,3 +206,6 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 ## Historical screen-to-operation crosswalk C08–C14 — 2026-11-16
 - Workpaper 154: [مصفوفة مطابقة الشاشات التاريخية بالعمليات](154-c08-c14-historical-screen-to-operation-semantic-crosswalk.md).
 - 106 screen-title mappings + 16 C10/C11 functional module mappings. جميعها semantic candidates فقط؛ exact/approved = 0 في هذا العمل، ولا تغيير لخط الأساس 0/201 Operation→Test exact.
+
+### تحديث Workpaper 154 — تغطية العمليات
+80/81 من عمليات C08–C14 لها مرشح شاشة/وحدة وظيفية؛ OP-C14-201 `invalidateProjection` موثقة كعملية داخلية وليست شاشة. أضيفت عمليات تغيير السياسات والاستثناءات الأمنية في C10 وإثبات artifact في C11. الحالة لا تزال semantic candidates، ولا تتغير نتيجة 0/81 exact Operation→Test.
