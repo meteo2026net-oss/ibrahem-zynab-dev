@@ -72,3 +72,8 @@
 - `84-tenant-workspace-role-ownership-decision-dossier.md`: حزمة قرارات ملكية tenant/organization/workspace والعضويات والأدوار والأذونات، وتفصل SH-01/SH-02/C10 عن مالك المجال؛ جميع القرارات مفتوحة وغير منفذة.
 
 - `85-sh10-version-ownership-and-lifecycle-decision-dossier.md`: حزمة قرارات SH-10 لملكية metadata الإصدارات ومجموعات التغيير واللقطات، وفصلها عن محتوى المجال وC11 release lifecycle وartifact registry؛ غير معتمدة وغير منفذة.
+
+- `86-sh12-configuration-ownership-and-precedence-decision-dossier.md`: ملكية SH-12 وأولوية الإعدادات والأسرار؛ مفتوحة وغير معتمدة.
+- `87-sh15-backup-recovery-ownership-decision-dossier.md`: ملكية النسخ والاستعادة ومفاتيح التشفير وأهداف RTO/RPO؛ مفتوحة وغير منفذة.
+- `88-privacy-retention-deletion-and-legal-hold-decision-dossier.md`: تصنيف البيانات والغرض والاحتفاظ والحذف والحجز القانوني؛ مفتوحة وغير معتمدة.
+- `89-zero-trust-and-operational-recovery-objectives-decision-register.md`: تعارض Zero Trust وأهداف SLO/RTO/RPO/freshness؛ مفتوحة ولا تحسم الموافقات.
