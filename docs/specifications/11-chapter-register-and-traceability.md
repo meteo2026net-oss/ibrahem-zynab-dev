@@ -177,3 +177,8 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 - تطابق معرفات: العمليات 81/81، الأحداث 55/55، الموافقات 14/14 مع السجلات 97/100/98 على الترتيب.
 - لا يعني ذلك اعتماداً دلالياً أو تنفيذاً أو نجاح اختبار، ولا يغير خط الأساس العام 201/106/26.
 
+## Test linkage and owner approval gap audit C08–C14 — 2026-11-16
+- Workpaper 148: [تدقيق روابط الاختبارات والملكية والموافقات](148-c08-c14-operation-event-approval-test-linkage-gap-audit.md).
+- النتيجة: 0/81 Operation→Test exact، 0/55 Event→Test exact، و14/14 موافقة OWNER REVIEW؛ Qualified OWN وDomain SoR للأحداث TBD.
+- 124 سيناريو محلياً SPECIFIED / NOT RUN؛ لا دليل تشغيل. لا تخلط هذه النتائج مع فحص وجود المعرفات في الوثيقة 147.
+
