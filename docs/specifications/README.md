@@ -489,3 +489,8 @@
 ## 165 — تسوية ملكية المجال والخدمات المشتركة
 
 [165-domain-and-shared-service-ownership-reconciliation.md](165-domain-and-shared-service-ownership-reconciliation.md) — يوحد حدود Domain SoR والخدمات المشتركة، ويكشف تصادم معرفات OWN بين الوثيقتين 36 و72، ويثبت نطاق SH-03 المركزي لجميع المراكز C01–C14 مع إبقاء تفاصيل الاستهلاك والقرارات مفتوحة. يسجل SH-17–SH-20 كفجوة مصدر في المواد التي تمت مراجعتها، دون افتراض أسمائها أو وظائفها. لا يغير التطبيق أو يمنح إذناً بالبرمجة.
+
+
+## 166 — سجل إغلاق قرارات الأمن والتكلفة واللوحة والتعافي
+
+[166-security-cost-dashboard-and-recovery-decision-closure-register.md](166-security-cost-dashboard-and-recovery-decision-closure-register.md) — يجمع بوابات حسم Zero Trust، وتصادم معرفات COST/DASH، وملكية SH-11 والميزانيات، وأهداف RTO/RPO/SLO/freshness، واعتماديات المراكز. لا يحسم قرارات تحتاج موافقة، ولا يحدد أرقاماً مفترضة، ولا يغير التطبيق أو يمنح إذناً بالبرمجة.
