@@ -79,3 +79,11 @@
 - `89-zero-trust-and-operational-recovery-objectives-decision-register.md`: تعارض Zero Trust وأهداف SLO/RTO/RPO/freshness؛ مفتوحة ولا تحسم الموافقات.
 
 - `90-sh16-knowledge-ownership-and-c12-boundary-dossier.md`: حدود C12/SH-16/SH-07 وملكية المحتوى والفهرسة والاستشهاد وACL/provenance؛ مفتوحة وغير منفذة.
+
+
+
+## إضافات 2026-11-15 — SH-13 وSH-08 وSH-14
+
+- `91-sh13-integration-connector-ownership-decision-dossier.md`: حزمة ملكية SH-13 مقابل C09، مع مراجع الأسرار وOAuth/webhooks والمزامنة؛ جميع القرارات مفتوحة والاختبارات غير منفذة.
+- `92-sh08-shared-task-execution-ownership-decision-dossier.md`: فصل Domain Job عن Shared Execution Job ونتائج المجال عن حالة التنفيذ؛ جميع القرارات مفتوحة.
+- `93-sh14-operational-monitoring-ownership-decision-dossier.md`: فصل telemetry التشغيلية عن جودة C07 ونشر C11 وعرض C14؛ SLO/freshness والاحتفاظ ما زالت TBD.
