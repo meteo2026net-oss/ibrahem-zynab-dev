@@ -255,3 +255,8 @@
 | [91 حزمة ملكية SH-13 والتكاملات](91-sh13-integration-connector-ownership-decision-dossier.md) | تفصل C09 عن connector runtime ومراجع الأسرار وOAuth/webhooks والمزامنة؛ قرارات مفتوحة واختبارات غير منفذة |
 | [92 حزمة ملكية SH-08 وتنفيذ المهام](92-sh08-shared-task-execution-ownership-decision-dossier.md) | تفصل Domain Job ونتيجته عن Shared Execution Job والمحاولات والجدولة؛ قرارات مفتوحة |
 | [93 حزمة ملكية SH-14 والمراقبة التشغيلية](93-sh14-operational-monitoring-ownership-decision-dossier.md) | تفصل telemetry عن نتائج C07 وبيانات المجال ولوحات C14؛ لا SLO رقمية معتمدة والاختبارات غير منفذة |
+
+
+
+| [94 تدقيق تكامل API/Event/Approval/Tests](94-api-event-approval-test-referential-integrity-audit.md) | يسجل فجوات الربط المفرد بين كل عقد ومالك الحقيقة والقرار المؤهل ومحور المتطلب واختبار القبول |
+| [95 حزمة ملكية Artifact Registry في C11](95-c11-artifact-registry-ownership-decision-dossier.md) | تفصل سجل المخرج عن binary storage والتوقيع وprovenance ودورة الإصدار؛ قرارات مفتوحة |
