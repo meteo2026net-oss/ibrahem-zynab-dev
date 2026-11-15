@@ -494,3 +494,8 @@
 ## 166 — سجل إغلاق قرارات الأمن والتكلفة واللوحة والتعافي
 
 [166-security-cost-dashboard-and-recovery-decision-closure-register.md](166-security-cost-dashboard-and-recovery-decision-closure-register.md) — يجمع بوابات حسم Zero Trust، وتصادم معرفات COST/DASH، وملكية SH-11 والميزانيات، وأهداف RTO/RPO/SLO/freshness، واعتماديات المراكز. لا يحسم قرارات تحتاج موافقة، ولا يحدد أرقاماً مفترضة، ولا يغير التطبيق أو يمنح إذناً بالبرمجة.
+
+
+## 167 — لقطة بوابة الجاهزية الموحدة G-01..G-15
+
+[167-unified-g01-g15-readiness-snapshot-after-audits-164-166.md](167-unified-g01-g15-readiness-snapshot-after-audits-164-166.md) — تحديث شامل لحالة بوابات الجاهزية بعد أعمال التدقيق 164–166، مع أرقام العمليات والأحداث والموافقات والاختبارات والملكية. يوضح أن المواصفات لم تعتمد بعد وأن بدء البرمجة غير مصرح به.
