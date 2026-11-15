@@ -186,3 +186,12 @@
 - **Equivalence:** no automatic one-to-one mapping is established between these groups or the derived DRAFT-AT catalog in document 80.
 - **Execution:** all remain NOT RUN; no run evidence is established by ID presence.
 - **Reference:** `docs/specifications/142-acceptance-id-vs-recovered-scenario-reconciliation.md`.
+
+
+## Workpaper 143 — full source acceptance ID register
+
+- **Source:** Export 07, sections B-01..B-07.
+- **Recovered:** all 130 unique C01–C07 acceptance IDs, their scenario labels, and source line locators.
+- **Source detail level:** 15 IDs have a separate expected-result entry in the source table; 115 have a scenario label only. No missing expected result was invented.
+- **Execution:** NOT RUN; no run evidence.
+- **Reference:** `docs/specifications/143-full-source-acceptance-id-register-c01-c07.md`.
