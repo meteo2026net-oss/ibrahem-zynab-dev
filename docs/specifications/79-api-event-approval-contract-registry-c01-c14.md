@@ -205,3 +205,8 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 ## ملحق 85 — عقود الإصدارات والموافقات
 
 كل أمر تغيير versioned resource يجب أن يميز baseVersion/expectedVersion عن contractVersion، ويربط approvalRef ببصمة المورد والإصدار المقصود، ويعيد التحقق قبل التطبيق. SH-10 يحتفظ metadata المقترحة، ومالك المجال يتحقق من المحتوى، وC11 يملك release lifecycle. راجع الوثيقة 85؛ هذه متطلبات عقد مقترحة وليست API منفذة.
+
+
+## ملاحق 86–88 — عقود الإعدادات والنسخ والخصوصية
+
+كل تغيير إعداد حساس يربط scope وexpectedVersion وschema/version وactor/reason ومصدر الوراثة؛ كل backup/restore يربط sourceOwner وconsistencyPoint وmanifest/checksums وapprovalRef وevidenceRef؛ وكل deletion/hold يربط data owner وpurpose/classification/policy version والنطاق والمشتقات. هذه حقول تعاقدية مرشحة فقط في الوثائق 86–88 وليست schemas أو APIs منشورة.
