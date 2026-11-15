@@ -424,3 +424,8 @@
 ## 138 — مطابقة نموذج اعتماديات المراكز الأربعة عشر والفصل 159
 
 [138-chapter159-fourteen-center-dependency-model-and-validation-workpaper.md](138-chapter159-fourteen-center-dependency-model-and-validation-workpaper.md) — استعادة أنواع الاعتماديات الستة ومصفوفة C01–C14، وحالات الاعتماد، وقواعد الدورات والاستثناءات، واختبارات DEP-01..14 والقرارات المقترحة. لا يثبت تنفيذ الاختبارات أو اعتماد القرارات، ولا يغلق فجوات OWN أو الاختبارات المفردة. Workpaper وليست فصلاً مصدرياً.
+
+
+## 139 — مطابقة الفصول 160–162: سجل القرارات والتدقيق وإصدار المواصفات
+
+[139-chapters160-162-decision-register-final-audit-and-mprts-release-workpaper.md](139-chapters160-162-decision-register-final-audit-and-mprts-release-workpaper.md) — مطابقة سجل القرارات وحالاته ومجالاته، محاور التدقيق العشرة واختباراته، وهيكل MPRTS وقوالب المراكز والوظائف والإصدارات. تربط النتائج بالفجوات المثبتة في المستودع وتؤكد أن التدقيق لم يجتز وأن MPRTS 1.0 لم تصدر. Workpaper وليست اعتماداً أو إذناً بالبرمجة.
