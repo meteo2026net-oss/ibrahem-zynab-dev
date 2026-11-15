@@ -1,0 +1,43 @@
+name: Extract approved master specification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/extract-master-specification.yml"
+      - "tools/specifications/extract_master_docx.py"
+      - "docs/specifications/00_MASTER_APPROVED_SPECIFICATIONS_SOURCE.docx"
+      - "docs/specifications/00_المواصفات_المعتمدة_الكاملة_مصدر_رئيسي.docx"
+
+permissions:
+  contents: read
+
+jobs:
+  extract:
+    name: Extract DOCX text for specification reconciliation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Extract master specification
+        run: |
+          python tools/specifications/extract_master_docx.py \
+            --input docs/specifications/00_MASTER_APPROVED_SPECIFICATIONS_SOURCE.docx \
+            --output extracted/master-approved-specification.txt
+
+      - name: Upload extracted text and metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-specification-text
+          path: |
+            extracted/master-approved-specification.txt
+            extracted/master-approved-specification.metadata.json
+          if-no-files-found: error
+          retention-days: 14
