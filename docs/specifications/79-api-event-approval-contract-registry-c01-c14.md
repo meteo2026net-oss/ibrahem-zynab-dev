@@ -227,3 +227,13 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 | 93 / SH-14 | ingestMetric, publishHealthCheck, queryServiceHealth, evaluateAlertRule, acknowledgeAlert, resolveAlert | MetricIngested, HealthStatusChanged, AlertTriggered, AlertResolved, TelemetryBecameStale | OWN36-03 وOWN72-06/08 | PROPOSED / NOT APPROVED |
 
 كل عملية تحتاج schema/version وactor/scope/correlation، وidempotency عند اللزوم، وAPI Owner وDomain SoR. لا تعتبر هذه الإضافة endpoints أو topics منشورة. راجع الحزم 91–93.
+
+
+
+## ملحق 94 — متطلبات سجل العملية/الحدث/الموافقة المفرد
+
+كشف التدقيق 94 أن مجموعات العمليات والأحداث في هذا السجل لا تكفي وحدها لإثبات التتبع. قبل الاعتماد يجب تفكيك كل اسم إلى Contract ID مفرد وربطه بـDomain Owner/SoR وAPI Owner أو Event Producer/Consumer وOWN مؤهل وAX/source وtest ID، أو N/A بمبرر مالك. كما يجب فصل أحداث C06 عن C07، وتثبيت C01 event inventory، وفصل معنى C09/C11 عن خدمات التنفيذ والنقل والمراقبة والنسخ. راجع RI-94-01..14.
+
+## ملحق 95 — عمليات Artifact Registry المرشحة
+
+تظل عمليات artifact في C11 ضمن قائمة مرشحة غير معتمدة. تراجع الحزمة 95 فصل سجل المخرج عن binary storage وprovenance/signing وrelease lifecycle. لا تعتمد هذه الإضافة عمليات جديدة أو schemas أو endpoints، وتظل FLD-16 وVER-85-09 OPEN.
