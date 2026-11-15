@@ -247,3 +247,9 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 ## ملحق 97 — سجل العمليات المفردة
 
 أضيفت الوثيقة 97 لتفكيك 201 اسماً من عمليات C01–C14 إلى Operation IDs مفردة، مع تصنيف نوعي أولي ومالك API مرشح وعائلة اختبار ومرجع OWN/TBD. هذه مرحلة inventory فقط؛ يجب اعتماد نوع كل عملية وAPI Owner وربط AX/source وexact test ID وschema قبل تثبيت العقد. لا تنشئ هذه الخطوة endpoints.
+
+
+
+## ملحق 98 — سجل أنواع الموافقات
+
+أضيفت الوثيقة 98 لتجميع 27 نوع موافقة مرشحاً عبر C01–C14، مع العملية/المورد ومالك قرار المجال المقترح وSH-03 كمنفذ workflow ومرجع OWN وعائلة اختبار. جميع الأنواع OWNER REVIEW وليست إلزامية أو معتمدة حتى يحدد مالك المجال والسياسة ذلك. راجع APR-98-T01..T12؛ SPECIFIED / NOT RUN.
