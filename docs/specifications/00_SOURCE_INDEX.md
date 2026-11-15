@@ -214,3 +214,10 @@
 - **Exact/approved links:** 0; all candidates require domain and API owner review.
 - **Execution:** no tests or operations executed by this mapping.
 - **Reference:** `docs/specifications/145-c01-c07-function-to-api-operation-candidate-crosswalk.md`.
+
+## Workpaper 146 — C08–C14 derived contract inventory and source gap matrix
+- الملف: [146-c08-c14-derived-contract-inventory-source-gap-matrix.md](./146-c08-c14-derived-contract-inventory-source-gap-matrix.md)
+- يراجع العقود المشتقة 64–70 وحزم التتبع 126–131 عبر سبعة مراكز.
+- الجرد الحالي: 81 عملية مرشحة، 55 حدثاً، 14 نوع موافقة، 124 سيناريو قبول محلياً SPECIFIED / NOT RUN. لا تجمع هذه الأعداد مع خطوط الأساس 201/106/26 دون crosswalk وإزالة التداخل.
+- يوضح حدود Domain SoR مقابل Shared Service SoR لكل مركز، ويثبت أن B08–B14 غير مستعادة من Export 07.
+- الحالة: REVIEWED AS DERIVED, NOT APPROVED؛ لا مصدر أصلي بديل ولا اعتماد مالك ولا تنفيذ أو اختبار منتج.
