@@ -149,3 +149,15 @@
 ## ملحق 90 — اختبارات ملكية المعرفة
 
 أضيفت KNOW-90-T01..T12 في الوثيقة 90 لاختبار ACL عند retrieval، عزل النطاقات، freshness، provenance، citations، prompt injection في المصادر، حذف المشتقات، واعتماد المحتوى المولد. جميعها SPECIFIED / NOT RUN أو BLOCKED؛ لا توجد نتائج تنفيذ.
+
+
+
+## ملحق 91–93 — اختبارات ملكية الخدمات المشتركة
+
+| الحزمة | مجموعة الاختبارات | التغطية | الحالة |
+|---|---|---|---|
+| 91 / SH-13 | INT-91-T01..T12 | SSRF/OAuth/secrets/webhooks/idempotency/approval/tenant isolation/revocation | SPECIFIED / NOT RUN أو BLOCKED |
+| 92 / SH-08 | TASK-92-T01..T14 | idempotency/re-authorization/worker lease/cancellation/dependencies/tenant isolation/replay/domain-result separation | SPECIFIED / NOT RUN أو BLOCKED |
+| 93 / SH-14 | MON-93-T01..T14 | stale telemetry/health taxonomy/alert provenance/C07 separation/C14 read projection/privacy/tenant isolation | SPECIFIED / NOT RUN أو BLOCKED |
+
+تظل هذه اختبارات موصوفة لا منفذة. لا تسجل PASS دون test run ID وcommit/build وenvironment وactor والبيانات والأدلة وفق شروط هذه الوثيقة.
