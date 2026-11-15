@@ -76,7 +76,7 @@
 - **مراجع المتطلبات:** الوثيقة 01، PRD-FR-007؛ الوثيقة 02، قرارات C02؛ الوثيقة 19، C02-SCR-02 و03 و07.
 - **المتاح:** التحرير المباشر من المعاينة قرار معتمد؛ كتالوج C02 يصف Canvas وشريط الأدوات والخصائص.
 - **الناقص:** نموذج اختيار العنصر وحالاته؛ مزامنة التعديل بين المعاينة والنموذج التصميمي؛ التراجع/الإعادة؛ إدارة التعارض والتحرير المتزامن؛ قيود الخصائص والتحقق؛ قواعد منع تعديل إصدار معتمد دون موافقة.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** القرار الوظيفي مثبت؛ مواصفات سلوك المحرر وعقوده واختباراته غير مكتملة.
 
 ### AX-007 — إدارة المكونات
@@ -84,7 +84,7 @@
 - **مراجع المتطلبات:** الوثيقة 01، PRD-FR-008؛ الوثيقة 02، C02 وقرار نظام المكونات المختلط؛ الوثيقة 19، C02-SCR-06 و12.
 - **المتاح:** نظام مكونات مختلط: مشتركة حيث تكون إعادة الاستخدام مناسبة، ومخصصة للصفحات عند الحاجة؛ Design System لإدارة الرموز والأنماط.
 - **الناقص:** component schema ونسخها؛ slots/props/events؛ قواعد التوريث وoverrides؛ توافق الإصدارات؛ نشر المكونات ومشاركتها؛ إدارة الاعتمادية والتبعيات؛ اختبارات عدم كسر المشاريع عند تحديث المكون.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** مبدأ المكونات المختلطة معتمد؛ العقد التقني ودورة الحياة غير محسومين.
 
 ### AX-008 — مدير الصفحات وخريطة التنقل
@@ -92,7 +92,7 @@
 - **مراجع المتطلبات:** الوثيقة 01، PRD-FR-009؛ الوثيقة 02، C03؛ الوثيقة 19، C03-SCR-02..14.
 - **المتاح:** قائمة صفحات، خريطة تنقل مرئية، محرر Routes، انتقالات وقوائم وحراس وصفحات ديناميكية وروابط عميقة وحالات تنقل وتشخيص ومراجعة واعتماد. توجد قاعدة صريحة: إخفاء عنصر من القائمة لا يحمي الصفحة أو الخدمة الخلفية. يقترح AI التغيير ولا يغير المسارات المعتمدة دون موافقة.
 - **الناقص:** schema موحد للصفحة والمسار والانتقال؛ أولوية المسارات وfallback؛ back-stack؛ universal/app links؛ مصفوفة حراس وتفويض خادمي؛ كشف حلقات التنقل؛ ربط التحليل باختبارات E2E.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** النطاق الوظيفي واضح، لكن قواعد التنقل والتفويض وعقود التنفيذ لم تُغلق.
 
 ### AX-009 — إنشاء الصفحات بالذكاء الاصطناعي والإنشاء اليدوي والدمج
@@ -100,7 +100,7 @@
 - **مراجع المتطلبات:** الوثيقة 01، PRD-FR-006 و008؛ الوثيقة 02، C02؛ الوثيقة 19، C02-SCR-02 و04 و06 و14 و15.
 - **المتاح:** الإنشاء اليدوي عبر أدوات التصميم والـCanvas؛ والإنشاء بمساعدة AI؛ ومراجعة مقترح AI قبل تطبيقه؛ اعتماد إصدار التصميم.
 - **الناقص:** قواعد الدمج بين التعديلات اليدوية ومخرجات AI؛ أولوية التعارض؛ سجل provenance لكل عنصر؛ diff مرئي؛ منع الكتابة فوق تعديل يدوي؛ قواعد تطبيق جزئي أو رفض المقترح؛ اختبار حفظ سلامة التصميم.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** دعم الطريقتين معاً معتمد؛ قواعد الدمج والتعارض لا تزال فجوة.
 
 ### AX-010 — بناء وظائف العناصر
@@ -108,7 +108,7 @@
 - **مراجع المتطلبات:** الوثيقة 02، C02؛ الوثيقة 19، C02-SCR-10 و11؛ قرار المستخدم المحفوظ بشأن بناء الوظائف عبر محرر إجراءات مرئي ولغة طبيعية مع مراجعة المنطق واختباره قبل الاعتماد.
 - **المتاح:** تعريف التفاعلات عبر trigger/action/target، وتمثيل حالات المكونات والصفحات؛ اعتماد طريقتين لبناء الوظائف: محرر مرئي ولغة طبيعية؛ مراجعة المنطق واختباره قبل اعتماده.
 - **الناقص:** صيغة workflow/behavior schema؛ أنواع الأحداث والإجراءات؛ التحقق من الأنواع؛ إدارة الحالة والآثار الجانبية؛ حدود تشغيل الإجراءات؛ sandbox؛ عقود استدعاء الخدمات؛ سياسات الصلاحيات؛ اختبارات التفرع والتكرار والفشل والتعويض.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** طريقة إنشاء الوظائف معتمدة على مستوى التجربة؛ محرك التنفيذ وعقوده وحدود أمانه غير مكتملة.
 
 ## 4. ملخص نتائج الدفعة A
