@@ -38,7 +38,7 @@
 - **المراجع:** 01/PRD-FR-011 و012؛ 03/المحركات المستقلة وIR والمحولات؛ 12/C05-F01..F16؛ 20/C05.
 - **المتاح:** توليد من التصميم والمتطلبات؛ نموذج وسيط IR؛ محولات تقنيات؛ Monaco؛ حماية التعديلات اليدوية؛ Sandbox؛ مراجعة الاعتماديات والأمن والتراخيص؛ GitHub.
 - **الناقص:** schema للـIR، قواعد mapping، قائمة محولات الإصدار الأول، قواعد الحفاظ على اليدوي، provenance لكل ملف/مقطع، مواصفات إعادة التوليد الجزئي، واختبارات التكافؤ.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-RECOVERED؛ SCR=SOURCE-REFERENCE-FOUND؛ DATA=SCHEMA-MISSING؛ API=DERIVED-DRAFT-AVAILABLE؛ AUTH=OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-RECOVERED؛ SCR=SOURCE-REFERENCE-FOUND؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** محرك التوليد مستقل عن Angular وIR اتجاه معماري معتمد؛ تفاصيل التنفيذ والمحولات غير معتمدة بالكامل.
 
 ### AX-029 — نظام الإضافات
@@ -115,7 +115,7 @@
 - **المراجع:** 03/المبادئ المعمارية؛ 12/C05-F07 وF15؛ 20/C05؛ 27؛ 25.
 - **المتاح:** Modular Monolith أولاً؛ حدود نطاقية؛ مراجعة جودة وأمن وتراخيص؛ تحليل الاعتماديات؛ منع الدورات والتجاوزات؛ مراجعة قبل التسليم.
 - **الناقص:** architecture ruleset؛ معايير lint/static analysis؛ thresholds؛ سياسة الاستثناءات؛ SBOM/provenance؛ مراجعة تراخيص؛ quality score قابل للتفسير؛ اختبار حدود الوحدات؛ تقارير drift.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DETAIL-PENDING؛ DATA=SCHEMA-MISSING؛ API=DERIVED-DRAFT-AVAILABLE؛ AUTH=OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DETAIL-PENDING؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** مبادئ الجودة والمعمارية واضحة؛ قواعد القياس والقبول لم تعتمد بالكامل.
 
 ### AX-040 — إدارة APIs والتكاملات الخارجية
