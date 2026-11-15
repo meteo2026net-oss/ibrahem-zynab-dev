@@ -64,3 +64,9 @@ eventId, eventType, eventVersion, producerService, domainOwner, domainSoR, consu
 تفكيك الأحداث إلى records منفردة؛ استكمال أحداث المراكز التي لا تملك inventory مصدرياً؛ اعتماد producer/consumer/schema owners؛ ربط كل event بمحور AX وقرار OWN مؤهل واختبار؛ اعتماد security/retention/replay policies؛ تنفيذ اختبارات التوافق والعزل والتكرار مع الأدلة.
 
 **هذه الوثيقة لا تنشئ topics أو event bus أو schemas أو consumers، ولا تعتمد أسماء PROPOSED-IN-79، ولا تغلق RI-94.**
+
+
+
+## ملحق 100 — تفكيك الأحداث إلى سجلات مفردة
+
+أضيفت الوثيقة 100 لتفكيك 106 أحداث من event families أعلاه إلى Event IDs مستقلة، مع حفظ حالة المصدر والمرجع الوسيط ومحاور AX المرشحة وعائلة الاختبارات العامة. لا تعتبر هذه الخطوة اعتماداً للـproducer أو Domain SoR أو OWN أو schema أو exact test ID؛ تبقى كلها مفتوحة حسب سجل 100.
