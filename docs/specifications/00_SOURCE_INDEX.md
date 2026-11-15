@@ -244,3 +244,9 @@
 - أُعدت 47 مرشحات دلالية للعمليات: C11 (12)، C12 (12)، C13 (10)، C14 (13)، اعتماداً على أوصاف العمليات والسيناريوهات المحلية 128–131.
 - الروابط SEMANTIC CANDIDATES / OWNER REVIEW REQUIRED؛ لم تُنقل إلى سجل 97 ولم تصبح exact approved links.
 - مع الوثيقة 149 توجد مرشحات لجميع العمليات الـ81، لكن 0/81 فقط exact approved؛ جميع السيناريوهات SPECIFIED / NOT RUN.
+
+## Workpaper 151 — C08–C14 event-to-local-acceptance semantic candidates
+- الملف: [151-c08-c14-event-to-local-acceptance-semantic-candidates.md](./151-c08-c14-event-to-local-acceptance-semantic-candidates.md)
+- أُعدت 55 مرشحات دلالية لأحداث C08–C14 وربطها بسيناريوهات القبول المحلية: C08 (11)، C09 (10)، C10 (6)، C11 (14)، C12 (9)، C13 (4)، C14 (1).
+- المرشحات تحتاج اعتماد event owner وtest owner؛ لا تغير 0/55 Exact Event→Test في سجل 100، ولا تثبت producer أو Domain SoR أو schema.
+- كل السيناريوهات SPECIFIED / NOT RUN؛ C08 deletion/retention test T08 محجوب حتى اعتماد policy.
