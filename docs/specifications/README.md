@@ -414,3 +414,8 @@
 ## 136 — مطابقة معرفات الشاشات والوظائف للمراكز C01–C07
 
 [136-c01-c07-chapter163-screen-function-id-crosswalk.md](136-c01-c07-chapter163-screen-function-id-crosswalk.md) — مطابقة معرفات Snn/Fnn/AT من الفصل 163 مع كتالوجات 02 و12 و19 و20؛ توثق أن C05–C07 محفوظة عددياً في 12، وأن C01–C04 تحتاج canonical ID crosswalk، وأن SCR IDs في 19 مشتقة وليست بديلاً تلقائياً لمعرفات المصدر.
+
+
+## 137 — إغلاق الفصول 141–143: التكلفة ولوحة التحكم والتدقيق
+
+[137-cost-dashboard-architecture-audit-closure-workpaper.md](137-cost-dashboard-architecture-audit-closure-workpaper.md) — تفصيل COST/DASH/AUD، ملكية بيانات C14، عتبات التكلفة المقترحة، وتعارض namespaces بين معرفات الاختبارات والقرارات. الوثيقة workpaper وليست استعادة للفصل المصدر 137، ولا اعتماداً أو اختباراً منفذاً.
