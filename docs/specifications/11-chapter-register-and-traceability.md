@@ -191,3 +191,7 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 - Workpaper 150: [مرشحات ربط العمليات بالاختبارات المحلية](150-c11-c14-operation-to-local-acceptance-semantic-candidates.md).
 - 47 مرشحاً دلالياً لعمليات C11–C14، يحتاج كل منها مراجعة مالك المركز والاختبار. لا تتحول المرشحات إلى روابط exact ولا تغير 0/81 exact links في سجل 97.
 
+## Event-to-test semantic candidates C08–C14 — 2026-11-16
+- Workpaper 151: [مرشحات ربط الأحداث بالاختبارات المحلية](151-c08-c14-event-to-local-acceptance-semantic-candidates.md).
+- 55 مرشحاً دلالياً (11 C08، 10 C09، 6 C10، 14 C11، 9 C12، 4 C13، 1 C14). ليست روابط exact أو معتمدة؛ تبقى 0/55 exact Event→Test، والاختبارات NOT RUN.
+
