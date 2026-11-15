@@ -295,3 +295,9 @@
 - **Scope:** exact source-ID and title comparison for 52 source functions in C05–C07 against catalog 12.
 - **Result:** all 52 IDs are present; 47 titles match exactly; five title differences are isolated to C06-F09, F10, F11, F14 and F17.
 - **Status:** exact-ID/title audit completed; differences require center-owner decision. No aliases were silently approved and no product code/API/schema/database was changed.
+
+## Workpaper 159 — C01–C04 function vs screen catalog reconciliation
+- **File:** [159-c01-c04-function-vs-screen-catalog-reconciliation.md](159-c01-c04-function-vs-screen-catalog-reconciliation.md)
+- **Scope:** distinguishes 57 source function IDs (C01–C04) from 58 proposed screen records in catalog 19.
+- **Result:** catalog 19 is a screen catalog using Cxx-SCR IDs, not a canonical function catalog using Cxx-F IDs. C01–C03 have equal counts but no proven 1:1 mapping; C04 has 16 source functions and 17 screens. Function-to-screen links remain unapproved.
+- **Status:** gap type clarified; no source IDs renamed, no product code/API/schema/database changed.
