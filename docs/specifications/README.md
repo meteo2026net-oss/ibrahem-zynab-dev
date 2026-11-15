@@ -404,3 +404,8 @@
 ## 134 — مطابقة الفصول المصدرية 144–155
 
 [134-source-chapters-144-155-detailed-reconciliation.md](134-source-chapters-144-155-detailed-reconciliation.md) — مطابقة مباشرة للتصدير 06، تشمل MRTM والمعمارية الموحدة وخارطة التنفيذ والتقدير وبوابة الجاهزية وهيكل MPRTS وتفاصيل C12/C14 والخصوصية وعقود المراكز؛ تميز المتون الكاملة عن الإحالات والفصل 150 التمهيدي، وتحفظ المقترحات دون اعتماد.
+ 
+
+## 135 — مطابقة الفصول 158–163: الأمن والاعتماديات والقرارات والإصدار
+
+[135-source-chapters-158-163-security-dependencies-decisions-and-release-reconciliation.md](135-source-chapters-158-163-security-dependencies-decisions-and-release-reconciliation.md) — استعادة ومطابقة مباشرة للتصدير 07، تشمل 15 محوراً أمنياً، 7 بوابات، 12 اختبار أمن، نموذج الاعتماديات بستة أنواع و14 اختباراً، سجل القرارات، تدقيق الاتساق، هيكل MPRTS، وتفاصيل C01–C07 في الفصل 163. توثق تعارض C14 وZero Trust ونقص تفاصيل C08–C14 في الجزء المتاح. NOT APPROVED / NOT READY FOR CODING.
