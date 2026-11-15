@@ -177,3 +177,12 @@
 - **Attribution correction:** the screen/function/acceptance IDs are in B-01..B-07, not in chapter 163. Chapter 163 (around lines 3832–4280) is the executive summary and approval gate.
 - **Inventory:** 111 unique screen IDs, 109 unique function IDs, and 130 unique acceptance-test IDs across C01–C07.
 - **Status:** source IDs verified; catalog mapping partial; acceptance definitions/evidence and owner approvals remain open; B-08..B-14 detail not recovered from Export 07.
+
+
+## Workpaper 142 — acceptance ID / scenario reconciliation
+
+- **Export 07:** 130 unique `Cxx-AT-nn` IDs across C01–C07 in B-01..B-07.
+- **DOCX inventory 104:** 86 local `SRC-AT` locators across C01–C09; these are derived locators, not source Test IDs.
+- **Equivalence:** no automatic one-to-one mapping is established between these groups or the derived DRAFT-AT catalog in document 80.
+- **Execution:** all remain NOT RUN; no run evidence is established by ID presence.
+- **Reference:** `docs/specifications/142-acceptance-id-vs-recovered-scenario-reconciliation.md`.
