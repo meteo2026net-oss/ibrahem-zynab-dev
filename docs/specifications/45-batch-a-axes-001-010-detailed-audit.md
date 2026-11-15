@@ -33,7 +33,7 @@
 - **المراكز ذات الصلة:** C01 أساساً؛ C12 وC14 مساندة وفق crosswalk الوثيقة 40.
 - **المتاح:** تعريف المصمم كمنصة هندسة برمجيات بمساعدة AI؛ تحويل الأفكار والمتطلبات والتصميمات إلى تطبيقات قابلة للمراجعة والاختبار والنشر والصيانة؛ إدارة المحركات والوكلاء والسياسات والصلاحيات.
 - **الناقص:** بيان حدود المنتج النهائي ومصفوفة capabilities-to-requirements مفصلة، وربط كل نتيجة منتج بوظائف وشاشات وبيانات وواجهات واختبارات.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE (C01-SCR-01..12 مقترحة في 19)؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** الرؤية العامة موثقة، لكن المحور غير جاهز كعقد تنفيذ كامل.
 
 ### AX-002 — التصميم قبل البرمجة
@@ -42,7 +42,7 @@
 - **المتاح:** إنشاء وثيقة متطلبات ومراجعتها قبل التصميم؛ تصميم الصفحات والتدفقات والمكونات ثم اعتماد التصميم قبل توليد خطة التنفيذ؛ دعم الإنشاء المرئي ومساعدة AI معاً.
 - **تفصيل مشتق:** C02-SCR-01..15، خصوصاً الاستوديو والـCanvas والمكونات والتفاعلات والمعاينة ومراجعة التصميم؛ جميع المعرفات والتفاصيل التشغيلية في 19 مسودة مقترحة.
 - **الناقص:** بوابات حالة صريحة تربط baseline المتطلبات وإصدار التصميم وإذن الانتقال إلى البرمجة؛ مخطط تصميم معياري قابل للتحويل إلى IR؛ آلية تغيير المتطلبات بعد اعتماد التصميم.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** المبدأ ورحلة المراحل موثقان؛ تفاصيل البوابات والعقود تحتاج استكمالاً.
 
 ### AX-003 — دعم جميع المنصات
@@ -50,7 +50,7 @@
 - **مراجع المتطلبات:** الوثيقة 01، PRD-FR-021؛ الوثيقة 03، المبادئ المعمارية وطبقات المنتج ومحولات المنصات؛ الوثيقة 10 لتمييز النطاق عن خيارات التقنيات.
 - **المتاح:** نطاق متعدد المنصات، وطبقة محولات، وفصل واجهة المصمم عن محركات التصميم والبرمجة. نطاق المنتج المحفوظ يشمل Android وiOS والويب وسطح المكتب Windows/macOS/Linux.
 - **الناقص:** قائمة دعم الإصدار الأول مقابل الرؤية طويلة الأمد؛ مصفوفة قدرات كل منصة؛ إصدارات SDK والأطر؛ عقود المحولات؛ اختبارات توافق وبناء وتوقيع وتوزيع لكل منصة.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=SOURCE-REFERENCE-FOUND (C01 شاشة المنصات والتقنيات)؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=SOURCE-REFERENCE-FOUND (C01 شاشة المنصات والتقنيات)؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** دعم تعدد المنصات قرار نطاقي، لكن مصفوفة المنصات المدعومة في الإصدار الأول وعقود المحولات لم تُعتمد بالكامل. لا تعتبر قائمة التقنيات في 10 اعتماداً نهائياً.
 
 ### AX-004 — الحوار وتحليل المتطلبات
@@ -59,7 +59,7 @@
 - **المتاح:** تحليل المجال والمستخدمين والأهداف؛ أسئلة توضيحية تدريجية، سؤال واحد كل مرة عند الحاجة؛ استخراج المتطلبات؛ كشف النواقص والتعارضات والافتراضات؛ توثيق مصادر المعلومات.
 - **تفصيل مشتق:** كتالوج C01 يحدد مدخلات ومخرجات أولية للتحليل والحوار وسجل المتطلبات والفجوات، ويضع اعتماد الإنسان على المخرجات.
 - **الناقص:** مخطط بيانات الحوار والأسئلة والإجابات والمصادر والثقة؛ قواعد عدم تكرار السؤال المحسوم؛ آلية فض التعارضات؛ إصدار المتطلبات وتاريخ تعديلها؛ عقد استيراد مراجع الملفات والروابط.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** الوظيفة الأساسية مثبتة في الرؤية، والتفصيل التشغيلي لا يزال مسودة.
 
 ### AX-005 — استقلالية التنفيذ والموافقات
@@ -68,7 +68,7 @@
 - **المتاح:** الوكلاء يعملون بأدوار وأدوات وصلاحيات محددة؛ لا يرفع الوكيل صلاحياته بنفسه؛ الموافقات مطلوبة للعمليات عالية الأثر؛ سجل التدقيق لا يكون تحت سيطرة الوكيل.
 - **تفصيل مشتق:** الوثيقة 19 تعرض أدواراً عامة واشتراط التحقق الخادمي وتسجيل التغييرات؛ لكنها ليست مصفوفة تفويض معتمدة.
 - **الناقص:** مصفوفة تفويض تفصيلية حسب الفاعل والفعل والمورد والنطاق؛ قائمة العمليات عالية الأثر؛ حدود الاستقلالية التلقائية؛ حالات انتظار الموافقة والرفض والإلغاء والاستئناف؛ إثبات عدم قدرة الوكيل على تعديل سجل التدقيق.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW (المبدأ ثابت، التفويض التفصيلي غير مكتمل)؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** مبدأ الاستقلالية المقيدة والموافقات معتمد؛ لا تُعتبر سياسة التفويض التنفيذية مكتملة.
 
 ### AX-006 — تعديل التصميم مباشرة
