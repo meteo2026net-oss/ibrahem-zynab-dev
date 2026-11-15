@@ -161,3 +161,11 @@
 | 93 / SH-14 | MON-93-T01..T14 | stale telemetry/health taxonomy/alert provenance/C07 separation/C14 read projection/privacy/tenant isolation | SPECIFIED / NOT RUN أو BLOCKED |
 
 تظل هذه اختبارات موصوفة لا منفذة. لا تسجل PASS دون test run ID وcommit/build وenvironment وactor والبيانات والأدلة وفق شروط هذه الوثيقة.
+
+
+
+## ملحق 94–95 — ربط الاختبارات بالعقود المفردة
+
+تؤكد مراجعة 94 أن مجموعات الاختبارات في هذا الملف لا ترتبط بعد بكل عملية API وحدث وموافقة على نحو مفرد. يجب أن يضاف لكل عقد test ID أو N/A مبرر من المالك، مع محور AX/source وقرار OWN مؤهل. تظل API-79 وEVT-79 وAPR-79 وINT-80 وSEC-80 واختبارات 91–95 SPECIFIED / NOT RUN أو BLOCKED؛ لا توجد run IDs جديدة.
+
+أضيفت مجموعة ART-95-T01..T14 في الوثيقة 95 لفحص artifact digest/provenance/signature/immutability/tenant access/promotion/revocation/retention/recovery. تبقى الاختبارات SPECIFIED / NOT RUN أو BLOCKED.
