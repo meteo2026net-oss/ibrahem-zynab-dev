@@ -504,3 +504,8 @@
 ## 168 — مصفوفة مصدر الحقيقة وملكية الحقول FLD-01..26
 
 [168-field-level-source-of-record-and-ownership-closure-matrix.md](168-field-level-source-of-record-and-ownership-closure-matrix.md) — مصفوفة موحدة لمفاهيم الحقول الـ26، وحدود Domain SoR/Shared Service SoR للمراكز C01–C14، وقاموس الحقول المشتركة وقواعد التتبع المطلوبة قبل ERD/API. التحقق المصدرّي لا يعد اعتماداً للملكية؛ القرارات والقيود والاختبارات لا تزال مفتوحة، ولا توجد تغييرات تنفيذية.
+
+
+## 169 — سجل قرارات وأدلة إغلاق فجوات الحقول FLD-01..26
+
+[169-field-gap-decision-and-evidence-closure-workplan.md](169-field-gap-decision-and-evidence-closure-workplan.md) — يحول الفجوات الـ26 إلى قرارات قابلة للتوقيع، وأدوار مراجعة، وأدلة تحقق واختبارات مطلوبة، وترتيب إغلاق مرحلي. لا يفترض ملاكاً أو أنواع بيانات أو موافقات غير موجودة، ولا ينفذ أي تغيير في التطبيق أو API أو قاعدة البيانات.
