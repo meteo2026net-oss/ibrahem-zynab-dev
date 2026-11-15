@@ -204,3 +204,13 @@
 - **Catalog gap:** C01–C04 source IDs are not preserved in current operational catalog 19; C05–C07 IDs are present in catalog 12 but still require content reconciliation.
 - **No inference:** screen/function ordering does not establish equivalence; no operation or test mapping is approved by this registry.
 - **Reference:** `docs/specifications/144-source-function-id-registry-and-catalog-gap-audit-c01-c07.md`.
+
+
+## Workpaper 145 — C01–C07 function/API candidate crosswalk
+
+- **Scope:** 109 source functions against 120 proposed operations in inventory 97.
+- **Candidate coverage:** 100 functions have one or more semantic candidate operations; 9 have no clear operation in the current C01–C07 list.
+- **Candidate operation IDs used:** 113 distinct operation IDs.
+- **Exact/approved links:** 0; all candidates require domain and API owner review.
+- **Execution:** no tests or operations executed by this mapping.
+- **Reference:** `docs/specifications/145-c01-c07-function-to-api-operation-candidate-crosswalk.md`.
