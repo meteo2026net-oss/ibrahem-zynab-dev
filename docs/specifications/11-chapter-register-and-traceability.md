@@ -199,3 +199,6 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 - [152-c08-c14-historical-source-content-recovery-and-version-map.md](152-c08-c14-historical-source-content-recovery-and-version-map.md) يسجل الفصول التاريخية المستعادة من Export 01–03: 27–33، 93، 102، 142، 150، 152، 153.
 - تصحيح نطاق الفجوة: B08–B14 IDs غير مستعادة من Export 07، لكن محتوى تاريخياً للمراكز السبعة موجود ويحتاج version-aware reconciliation قبل اعتماده.
 
+## Historical screen inventory C08–C14 — 2026-11-16
+- Workpaper 153: [سجل عناوين الشاشات التاريخية](153-c08-c14-historical-screen-title-inventory-and-contract-gap.md).
+- يحفظ قوائم C08/C09/C13 (20 شاشة لكل مركز)، C12 (الشاشات 11–20)، وC14 (نسختان تاريخيتان 16/20)، إضافة إلى وحدات C10/C11. لا IDs canonical ولا exact mapping للعقود 64–70.
