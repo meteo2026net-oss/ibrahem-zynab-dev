@@ -399,3 +399,8 @@
 ## 133 — المراجعة النهائية الموحدة للمراكز الأربعة عشر وجاهزية المواصفات
 
 [133-global-fourteen-center-specification-readiness-consolidation.md](133-global-fourteen-center-specification-readiness-consolidation.md) — تجميع نتائج المراكز C01–C14: 64 محوراً، 201 عملية، 106 أحداث، 26 موافقة، و26 فجوة حقول؛ يحدد فجوات الملكية والاختبارات والمصدر وبوابة اعتماد المواصفات. الحكم NOT APPROVED / NOT READY FOR CODING.
+
+
+## 134 — مطابقة الفصول المصدرية 144–155
+
+[134-source-chapters-144-155-detailed-reconciliation.md](134-source-chapters-144-155-detailed-reconciliation.md) — مطابقة مباشرة للتصدير 06، تشمل MRTM والمعمارية الموحدة وخارطة التنفيذ والتقدير وبوابة الجاهزية وهيكل MPRTS وتفاصيل C12/C14 والخصوصية وعقود المراكز؛ تميز المتون الكاملة عن الإحالات والفصل 150 التمهيدي، وتحفظ المقترحات دون اعتماد.
