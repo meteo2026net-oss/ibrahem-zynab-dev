@@ -73,3 +73,8 @@ BuildRequested, BuildStarted, BuildCompleted, BuildFailed, ArtifactAttested, Rel
 C11 يعتمد على C05 للمصدر والكود، C07 للاختبارات، C10 للأمن والحوكمة، C13 للإعدادات، C04 للمخططات والترحيلات، C08 للوسائط/المخرجات، C14 للعرض، SH-03/04/08/10/11/14/15. يلزم اعتماد منصات البناء والتوزيع، artifact registry، pipeline runners، توقيع artifacts، SBOM، release channels، موافقات المتاجر، سياسات rollback، SLO/RTO/RPO، وميزانية الموارد.
 
 **الحكم:** لا يثبت وجود pipeline أو نشر أو build ناجح.
+
+
+## ملحق 85 — الفصل بين resource version وrelease lifecycle
+
+لا تخلط إصدار المورد وmetadata في SH-10 مع release lifecycle الذي يملكه C11. C11 يستهلك refs وبصمات الإصدارات والـartifacts وفق عقود موثقة، ولا ينقل إلى SH-10 ملكية حالة الإصدار المنشور أو النشر والترقية والتراجع. مالك artifact registry والتوقيع والاحتفاظ لا يزال مفتوحاً. راجع الوثيقة 85؛ لا توجد registry أو pipeline منفذة بهذا الملحق.
