@@ -108,3 +108,7 @@
 
 
 **حزم الخدمات المشتركة SH-13 وSH-08 وSH-14:** أضيفت الوثائق [91](docs/specifications/91-sh13-integration-connector-ownership-decision-dossier.md) و[92](docs/specifications/92-sh08-shared-task-execution-ownership-decision-dossier.md) و[93](docs/specifications/93-sh14-operational-monitoring-ownership-decision-dossier.md). تفصل ملكية الموصلات عن تكاملات المجال، ومهام المجال عن التنفيذ المشترك، والقياسات التشغيلية عن اختبارات الجودة وبيانات الأعمال. هذه حزم قرارات غير معتمدة؛ لم تنشئ APIs أو خدمات ولم تنفذ اختبارات أو تغييرات على كود التطبيق.
+
+
+
+**استكمال تدقيق المواصفات:** أضيفت [الوثيقة 94](docs/specifications/94-api-event-approval-test-referential-integrity-audit.md) لتحديد فجوات ربط العقود والاختبارات، و[الوثيقة 95](docs/specifications/95-c11-artifact-registry-ownership-decision-dossier.md) لحسم أسئلة ملكية سجل المخرجات. كلاهما مسودات قرارات وتدقيق؛ لم يبدأ تنفيذ التطبيق أو تشغيل الاختبارات.
