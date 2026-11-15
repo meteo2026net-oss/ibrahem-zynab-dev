@@ -306,3 +306,5 @@
 | [108 تدقيق أسماء عمليات API مقابل المصدر الأصلي](108-source-name-audit-for-shared-service-affected-api-operations.md) | فحص 95 عملية من C04/C06/C07/C09/C11/C14: خمس مطابقات حرفية و90 اسماً غير مطابق حرفياً، مع locators ونظائر دلالية تحتاج قراراً |
 
 | [109 مرشحات الاختبار المصدرية لأحداث الخدمات المشتركة](109-source-test-scenario-candidates-for-shared-service-events.md) | يربط 50 حدثاً بمرشحات DATA/API/AT/DASH-INT أو سيناريوهات مصدر غير مرقمة؛ جميع الروابط دلالية مرشحة وليست Exact، ولا اختبارات منفذة |
+
+| [108 تدقيق أسماء عمليات API مقابل المصدر الأصلي](108-source-name-audit-for-shared-service-affected-api-operations.md) | يثبت 5 أسماء مطابقة حرفياً ضمن 95 عملية، و90 اسماً مشتقاً، و15 اسماً مصدرّياً غير ممثل في قائمة المركز المقصود؛ يكشف أيضاً اختلاف موضع validateBuildConfiguration بين C05/C11 |
