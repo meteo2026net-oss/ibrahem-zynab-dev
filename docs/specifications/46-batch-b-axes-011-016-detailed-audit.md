@@ -19,7 +19,7 @@
 - **المتاح:** مصمم بيانات مرئي؛ الجداول والحقول والعلاقات والقيود؛ ربط Firebase وSupabase وAPIs وقواعد أخرى؛ migrations؛ RLS؛ فصل بيانات المصمم عن بيانات التطبيقات؛ عزل المؤسسات؛ النسخ الاحتياطي والاستعادة.
 - **قوة الدليل:** المتطلبات العامة موجودة؛ نموذج 24 مستعاد تفصيلياً لكنه يصرح بأن كثيراً من الجداول والحقول مقترحة وليست مخططاً معتمداً أو SQL منفذاً؛ كتالوج 19 تشغيلي مشتق.
 - **الناقص:** schema نهائي لكل مركز، قاموس أنواع وقيود، استراتيجية migrations متعددة المزودين، ملكية كل حقل ومصدر حقيقة، سياسات retention/deletion، حدود المعاملات والتزامن، عقود مزودي قواعد البيانات، واختبارات RLS/tenant isolation/restore.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=RECOVERED-PROPOSED-SCHEMA / SCHEMA-REVIEW-PENDING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=RECOVERED-PROPOSED-SCHEMA + DERIVED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
 - **الحكم:** أساس منطقي قوي موجود، لكنه ليس schema تنفيذياً معتمداً.
 
 ### AX-012 — تسجيل الدخول والمستخدمون والصلاحيات
