@@ -68,3 +68,5 @@
 - `82-qualified-ownership-decision-id-registry.md`: سجل namespace مؤهل لقرارات الملكية OWN36-nn وOWN72-nn، ومطابقة إحالات 77–80، وفجوات الملكية المستقلة؛ غير معتمد ولا ينشئ تغييرات تنفيذية.
 
 - `83-sh11-cost-budget-ownership-decision-dossier.md`: حزمة قرارات SH-11 للتكلفة والميزانيات، وتفصل القياس عن ledger والتقديرات عن الفعلي وتحدد سياسات العملة والتسوية والاختبارات المفتوحة؛ غير معتمدة وغير منفذة.
+
+- `84-tenant-workspace-role-ownership-decision-dossier.md`: حزمة قرارات ملكية tenant/organization/workspace والعضويات والأدوار والأذونات، وتفصل SH-01/SH-02/C10 عن مالك المجال؛ جميع القرارات مفتوحة وغير منفذة.
