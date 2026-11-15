@@ -195,3 +195,12 @@
 - **Source detail level:** 15 IDs have a separate expected-result entry in the source table; 115 have a scenario label only. No missing expected result was invented.
 - **Execution:** NOT RUN; no run evidence.
 - **Reference:** `docs/specifications/143-full-source-acceptance-id-register-c01-c07.md`.
+
+
+## Workpaper 144 — source function ID registry
+
+- **Source:** Export 07 B-01..B-07.
+- **Recovered:** 109 unique source function IDs across C01–C07 with source titles and line locators.
+- **Catalog gap:** C01–C04 source IDs are not preserved in current operational catalog 19; C05–C07 IDs are present in catalog 12 but still require content reconciliation.
+- **No inference:** screen/function ordering does not establish equivalence; no operation or test mapping is approved by this registry.
+- **Reference:** `docs/specifications/144-source-function-id-registry-and-catalog-gap-audit-c01-c07.md`.
