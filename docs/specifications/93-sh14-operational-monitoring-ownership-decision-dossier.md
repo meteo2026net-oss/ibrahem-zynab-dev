@@ -93,3 +93,7 @@
 تعيين مالك SH-14 وملاك المؤشرات؛ اعتماد health taxonomy وSLI/SLO/alert/incident lifecycle؛ تحديد retention/sampling/cardinality/privacy؛ تحديد العلاقة مع SH-05/09 وC07 وC14؛ اعتماد مصدر كل قياس؛ ربط API/events/approvals باختبارات OWN36-03 وOWN72-06/08؛ ثم تنفيذ الاختبارات وإرفاق run IDs/evidence.
 
 **لا تغلق هذه الوثيقة OWN36-03 أو OWN72-06/08 ولا تنشئ monitoring stack أو dashboards أو alert routes أو SLOs رقمية.**
+
+
+## تحديث التتبع المفرد — الوثيقتان 106 و107
+أضيفت 106 لتحديد مواضع SH-14 المرشحة في أحداث صحة البيانات والاختبار والنشر ولوحة C14، و107 لتمييز استعلامات الصحة الإسقاطية عن نتائج المجال. لا يملك SH-14 QA results أو release outcomes أو data quality. تبقى MON-93 وSLO/freshness/alert thresholds وOWN36-03/OWN72-08 قرارات مفتوحة؛ لم تنفذ الاختبارات.
