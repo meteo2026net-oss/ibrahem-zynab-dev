@@ -101,3 +101,92 @@
 - إسناد exact Test ID أو N/A مبرر لكل عملية بعد اعتماد العقد واختبار oracle.
 
 **بوابة التنفيذ:** تدقيق منشأ أسماء فقط؛ لا ينشئ API أو schema أو endpoint، ولا يعدل كود التطبيق ولا يمنح إذناً ببدء البرمجة.
+
+
+## 7. قائمة العمليات الـ90 التي لم يظهر اسمها حرفياً
+
+هذه القائمة هي نتيجة فحص حرفي للأسماء كما وردت في 97. لا تعني أن الوظائف غائبة عن المصدر؛ لكنها تمنع وصف الأسماء نفسها بأنها SOURCE-VERBATIM.
+
+### C04 — 22 اسماً غير مطابق
+- OP-C04-040 `registerDataSource`
+- OP-C04-041 `validateDataSource`
+- OP-C04-042 `createSchema`
+- OP-C04-043 `addEntity`
+- OP-C04-044 `addField`
+- OP-C04-045 `defineRelation`
+- OP-C04-046 `defineConstraint`
+- OP-C04-047 `defineIndex`
+- OP-C04-048 `defineRowPolicy`
+- OP-C04-050 `previewQuery`
+- OP-C04-051 `createDataBinding`
+- OP-C04-052 `generateTestFixtures`
+- OP-C04-053 `configureSync`
+- OP-C04-054 `createMigrationPlan`
+- OP-C04-055 `dryRunMigration`
+- OP-C04-056 `applyMigration`
+- OP-C04-057 `createRollbackPlan`
+- OP-C04-058 `startBackup`
+- OP-C04-059 `requestRestore`
+- OP-C04-060 `verifyRestore`
+- OP-C04-061 `submitSchemaForApproval`
+- OP-C04-062 `decideSchemaApproval`
+
+### C06 — 21 اسماً غير مطابق
+`registerAgent`, `createAgentVersion`, `registerSkill`, `registerToolManifest`, `requestToolGrant`, `createAITask`, `planAITask`, `assignAgents`, `executeTaskStep`, `pauseTask`, `resumeTask`, `cancelTask`, `submitAgentOutput`, `reviewAgentOutput`, `resolveAgentConflict`, `evaluateAgent`, `registerAIProvider`, `validateAIProvider`, `selectModelForTask`, `recordProviderUsage`, `disableAIProvider`.
+
+المعرفات: OP-C06-086..OP-C06-106.
+
+### C07 — 11 اسماً غير مطابق
+`createTestCase`, `linkTestToRequirement`, `executeTestCase`, `recordDefect`, `transitionDefect`, `retestDefect`, `calculateCoverage`, `evaluateQualityGate`, `requestQualityWaiver`, `approveTestResults`, `exportQualityReport`.
+
+المعرفات: OP-C07-108، OP-C07-109، OP-C07-111، OP-C07-113..OP-C07-120.
+
+### C09 — 12 اسماً غير مطابق
+`registerIntegration`, `configureIntegration`, `beginAuthorization`, `completeAuthorization`, `validateConnection`, `testMapping`, `startSync`, `receiveWebhook`, `pauseIntegration`, `revokeConnection`, `rotateSecretReference`, `getIntegrationStatus`.
+
+المعرفات: OP-C09-132..OP-C09-143.
+
+### C11 — 11 اسماً غير مطابق
+`validateBuildProfile`, `requestBuild`, `getBuildResult`, `attestArtifact`, `submitReleaseForApproval`, `approveRelease`, `deployRelease`, `promoteEnvironment`, `runPostDeployChecks`, `requestRollback`, `getReleaseStatus`.
+
+المعرفات: OP-C11-155..OP-C11-158 وOP-C11-160..OP-C11-166.
+
+### C14 — 13 اسماً غير مطابق
+`getDashboardOverview`, `getCenterSummary`, `getMyTasksOverview`, `getApprovalQueue`, `getQualityOverview`, `getSecurityOverview`, `getIntegrationHealth`, `getReleaseOverview`, `getOperationalHealth`, `saveDashboardLayout`, `pinWidget`, `exportDashboardReport`, `invalidateProjection`.
+
+المعرفات: OP-C14-189..OP-C14-201.
+
+## 8. أسماء API الموجودة في DOCX ولكنها لا تظهر بالاسم نفسه في قائمة 97
+
+هذه فجوة مقابلة مهمة: بعض أسماء العمليات الأصلية في نماذج الفصل 135 لم تُدرج بالاسم نفسه في 97.
+
+| المركز | الاسم المصدر الأصلي غير الممثل حرفياً في 97 | locator |
+|---|---|---:|
+| C04 | `getSchema` | 11278 |
+| C04 | `getDataBindings` | 11280 |
+| C04 | `generateMigrationPlan` | 11281 |
+| C04 | `validateMigrationPlan` | 11282 |
+| C04 | `getApprovedDataContracts` | 11283 |
+| C07 | `getTestResults` | 11315 |
+| C07 | `validateQualityGate` | 11316 |
+| C07 | `submitQualityReport` | 11317 |
+| C11 | `prepareBuild` | 11330 |
+| C11 | `validateBuildConfiguration` | 11331 |
+| C11 | `createBuildJob` | 11332 |
+| C11 | `getBuildStatus` | 11333 |
+| C11 | `requestDeploymentApproval` | 11335 |
+| C11 | `executeApprovedDeployment` | 11336 |
+| C11 | `rollbackDeployment` | 11337 |
+
+لا يعني غياب الاسم من 97 أن العملية غير موجودة في أي مكان؛ بل يعني أن سجل 97 لا يعكس قائمة الفصل 135 حرفياً. يجب على مالكي C04/C07/C11 تقرير: هل تضاف الأسماء المصدرية كما هي؟ أم يُحتفظ بأسماء مشتقة مع crosswalk واضح؟ أم تفصل العمليات التي دمجت في مسودة 97؟
+
+## 9. الإجراء التصحيحي المطلوب
+
+1. مراجعة قائمة 97 مقابل أسماء الفصل 135، لا الاكتفاء بإضافة ملاحظة provenance.
+2. عدم حذف أي عملية مشتقة تلقائياً؛ يجب الحفاظ على تاريخها وقرار سبب الإبقاء/الدمج/التقسيم.
+3. إنشاء crosswalk source_operation → candidate_operation → owner decision.
+4. فصل عمليات C11 request/prepare/create/execute/verify، وفصل C07 validate/evaluate/export/submit.
+5. تحديد API names الأصلية لمراكز C06/C09/C14 من مصدر معتمد أو قرار مالك موثق؛ لا يُخترع مصدر مفقود.
+6. بعد اعتماد الأسماء، استكمال schema/version/authz/error/idempotency/test links.
+
+**الحالة:** جميع الفروقات تتطلب مراجعة مالكي المراكز؛ لا يوجد rename أو merge أو حذف معتمد في هذه الجولة.
