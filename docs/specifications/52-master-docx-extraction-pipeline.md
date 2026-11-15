@@ -23,7 +23,7 @@ https://github.com/meteo2026net-oss/ibrahem-zynab-dev/actions/workflows/extract-
 
 ## 3. نتيجة التشغيل الفعلي
 
-<badge color="success">نجاح</badge>
+**نتيجة التشغيل: ناجح**
 
 نجح التشغيل رقم 6:
 https://github.com/meteo2026net-oss/ibrahem-zynab-dev/actions/runs/43661141728
