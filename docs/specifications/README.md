@@ -524,3 +524,8 @@
 ## 172 — تسوية معرفات وسيناريوهات اختبارات القبول C08–C14
 
 [172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md](172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md) — يقارن فضاءات معرفات الاختبارات في مسودات عقود C08–C14 مع workpapers اللاحقة، ويوثق فرق 76 مقابل 124 (+48) دون افتراض aliases أو روابط exact معتمدة.
+
+
+## 173 — مراجعة روابط القبول C08–C10 وفجوات تعريف الاختبار
+
+[173-c08-c10-acceptance-crosswalk-review-and-test-definition-gaps.md](173-c08-c10-acceptance-crosswalk-review-and-test-definition-gaps.md) — مراجعة 34 عملية و38 سيناريو محلياً، مع تصنيف فجوات تعريف الاختبار والبيئة والبيانات والأدلة. الروابط تظل مرشحة والاختبارات غير منفذة.
