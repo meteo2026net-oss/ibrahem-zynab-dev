@@ -183,3 +183,6 @@
 - [115 — تدقيق المطابقة الحرفية لأسماء أحداث المجال الـ106](docs/specifications/115-full-inventory-domain-event-source-name-audit.md) — لم يثبت أي اسم حدث حرفياً في DOCX (0/106)؛ 95 حدثاً SOURCE-RECOVERED مفهوماً و11 PROPOSED، وجميعها تحتاج مراجعة الاسم والعقد.
 
 - [116 — تدقيق ترابط أنواع الموافقات الـ26 مع العمليات والاختبارات](docs/specifications/116-approval-type-operation-test-traceability-audit.md) — 25 نوعاً تشير إلى عملية موجودة في 97، وAPR-C07-02 يشير إلى approveQualityWaiver غير الموجود؛ لا توجد اختبارات مفردة معتمدة.
+
+
+**مصفوفة ربط SH-03 (118):** أضيفت الوثيقة [118](docs/specifications/118-approval-sh03-consumer-and-lifecycle-crosswalk.md) لربط أنواع الموافقات الـ26 بدورة SH-03 المقترحة وبالفعل المحمي، وكشفت اختلاف قائمة مستهلكي SH-03 بين الوثيقتين 23 و98. المصفوفة مشتقة وغير معتمدة؛ لا توجد workflows أو اختبارات منفذة.
