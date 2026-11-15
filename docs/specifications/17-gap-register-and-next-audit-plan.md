@@ -482,3 +482,9 @@
 ## تحديث 2026-11-15 — تفكيك 106 أحداث (100)
 
 أضيفت الوثيقة 100 لتفكيك 106 event records من inventory في 96، موزعة على C01–C14، مع حفظ حالة SOURCE-RECOVERED/PROPOSED وإضافة AX candidates وعائلات الاختبار العامة. لم تعتمد Domain SoR أو OWN أو schemas أو exact test IDs. تبقى EVT-100-T05/T06/T07/T09 BLOCKED، ولا يغلق ذلك RI-94 أو فجوات التتبع الأصلية.
+
+
+
+### تصحيح سجل 100 — حالة المصدر
+
+تم تدقيق حقل Source status في 100 وتصحيح خلط سابق بين OWNER REVIEW وحالة مصدر الاسم. أصبحت الأعداد 95 SOURCE-RECOVERED و11 PROPOSED عبر 106 أحداث. لم يتغير عدد الأحداث أو أسماءها. يبقى SOURCE-RECOVERED مرجعاً إلى العقود الوسيطة وليس دليلاً على اقتباس حرفي من DOCX.
