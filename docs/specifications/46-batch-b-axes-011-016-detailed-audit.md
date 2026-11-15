@@ -56,7 +56,7 @@
 - **المتاح:** خطط وحالات اختبار؛ تتبع تغطية المتطلبات؛ unit/integration/UI/E2E/API/database/security/performance/compatibility/accessibility/offline-sync/regression؛ إدارة العيوب؛ تقارير الجودة وبوابات الاعتماد؛ فصل نجاح الجودة عن قرار النشر.
 - **قوة الدليل:** قائمة الوظائف ومعرفاتها في 12 مستعادة؛ تفاصيل 20 مشتقة؛ العمليات في 25 أمثلة مقترحة؛ متطلبات العقود في 27 تصف ما يجب اختباره لكنها لا تثبت التشغيل.
 - **الناقص:** استعادة النص الأصلي لكل حالة اختبار C07-AT؛ ربط المتطلبات والوظائف والبيانات والبيئات؛ بيانات اختبار آمنة؛ سياسة flaky tests؛ بوابات severity/waivers؛ تقارير artifact provenance؛ نتائج تشغيل فعلية عبر المنصات.
-- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-RECOVERED؛ SCR=SOURCE-REFERENCE-FOUND / DETAILS-PENDING؛ DATA=SCHEMA-MISSING؛ API=DERIVED-DRAFT-AVAILABLE؛ AUTH=OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING.
+- **حالة الحقول:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** نطاق الجودة معروف، لكن نصوص الاختبارات والأدلة التنفيذية غير مكتملة.
 
 ### AX-016 — البناء والنشر
