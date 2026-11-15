@@ -379,3 +379,8 @@
 - الملف: [171-c08-c14-approval-operation-exact-name-reconciliation.md](171-c08-c14-approval-operation-exact-name-reconciliation.md)
 - تمت مطابقة أسماء العمليات المذكورة في 14 نوع موافقة في السجل 98 حرفياً مع Operation IDs في السجل 97 (14/14). هذا يثبت المطابقة الاسمية فقط ولا يعتمد تنفيذ الموافقات أو الملكية أو الاختبارات.
 - تبقى APR-C07-02 فجوة مستقلة؛ Exact Test links والاختبارات والاعتمادات دون تغيير.
+
+
+## Workpaper 172 — تسوية معرفات وسيناريوهات اختبارات القبول C08–C14
+- الملف: [172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md](172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md)
+- جرد 76 معرفاً في مسودات عقود 64–70 مقابل 124 معرفاً/سيناريو في workpapers 126/127/150؛ فرق 48 سيناريو مشتقاً. لا aliases معتمدة ولا تغييرات في حالة الاختبارات.
