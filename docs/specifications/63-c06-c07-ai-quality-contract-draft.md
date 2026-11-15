@@ -93,6 +93,11 @@
 | reviewAgentOutput | Approval | output_ref, criteria, evidence | review_decision_ref | مراجع مستقل |
 | resolveAgentConflict | Approval/Command | conflict_ref, chosen_version, rationale | resolution_ref | مالك المورد |
 | evaluateAgent | Job | agent_version, samples, criteria | evaluation_report_ref | عينة ومقاييس قابلة للتدقيق |
+| registerAIProvider | Command | provider_metadata, secret_ref, capability_profile | provider_ref, status | لا أسرار مكشوفة؛ مراجعة أمنية |
+| validateAIProvider | Job | provider_ref, test_scope | provider_health_report_ref | اختبار اتصال محدود دون كشف مفاتيح |
+| selectModelForTask | Query/Decision | task_ref, constraints, budget, policy | model_selection_ref, rationale | اختيار ضمن allowlist والميزانية |
+| recordProviderUsage | Command | task_run_ref, provider_ref, model_ref, usage_metrics | usage_record_ref | قياس تكلفة قابل للتدقيق |
+| disableAIProvider | Command | provider_ref, reason, impact_scope | provider_status, affected_tasks | موافقة تشغيلية وإعادة توجيه المهام بأمان |
 
 ## 6. عقود C07 المقترحة
 
@@ -171,6 +176,7 @@
 | C06-DRAFT-AT-24 | وكيل يحاول اعتماد مخرجاته | رفض self-approval |
 | C06-DRAFT-AT-25 | محاولة تعديل audit log | رفض وتسجيل تنبيه |
 | C06-DRAFT-AT-26 | استئناف checkpoint بصلاحية منتهية | إعادة التحقق ورفض/إعادة تفويض |
+| C06-DRAFT-AT-27 | مزود AI غير متاح أو نموذج متقاعد | إظهار الحالة واختيار بديل مسموح دون تجاوز الميزانية أو السياسة |
 | C07-DRAFT-AT-23 | نتيجة اختبار بلا build hash | عدم قبولها كدليل |
 | C07-DRAFT-AT-24 | requirement بلا test coverage | إظهار gap ومنع gate حسب السياسة |
 | C07-DRAFT-AT-25 | عيب Fixed دون retest | لا ينتقل إلى Verified |
