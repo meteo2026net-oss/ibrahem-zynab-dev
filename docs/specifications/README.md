@@ -369,3 +369,8 @@
 | [126 حزمة تتبع C08/C09 للعمليات والأحداث والاختبارات](126-c08-c09-operation-event-test-traceability-workpaper.md) | تفكيك 23 عملية و21 حدثاً و4 موافقات مرشحة و20 سيناريو قبول؛ ربط تشغيلي مرشح لا اعتماد أو تنفيذ |
 
 | [127 حزمة تتبع C10 للأمن والحوكمة والاختبارات](127-c10-security-governance-operation-event-test-traceability-workpaper.md) | 11 عملية مشتقة و6 أحداث مقترحة وموافقتان و18 سيناريو قبول؛ Zero Trust وOWN72-03 والاختبارات لا تزال مفتوحة |
+
+
+## 128 — حزمة تتبع C11 للبناء والإصدارات والنشر
+
+[128-c11-build-release-deployment-traceability-workpaper.md](128-c11-build-release-deployment-traceability-workpaper.md) — تتبع 12 عملية و14 حدثاً و3 موافقات مرشحة و22 سيناريو قبول محلياً؛ يوضح حدود SH-03/08/10/11/14/15 وتعارض validateBuildConfiguration بين C05 وC11. جميع القرارات والاختبارات ما زالت OWNER REVIEW / NOT RUN، ولا توجد موافقة تنفيذ.
