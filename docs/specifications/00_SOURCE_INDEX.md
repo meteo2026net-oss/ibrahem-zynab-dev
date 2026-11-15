@@ -349,3 +349,9 @@
 - الملف: [166-security-cost-dashboard-and-recovery-decision-closure-register.md](166-security-cost-dashboard-and-recovery-decision-closure-register.md)
 - يوحد تعارض Zero Trust، وتصادم معرفات COST/DASH بين الاختبارات والقرارات، وملكية SH-11 والميزانيات، وأهداف RTO/RPO/SLO/freshness، واعتماديات DEP. يفصل النص المصدر عن القرار المقترح، ولا يضع قيماً رقمية أو يعين ملاكاً أو يحول الاختبارات غير المنفذة إلى نتائج.
 - الحالة: SOURCE-BASED / DERIVED / OWNER REVIEW REQUIRED / NOT APPROVED / NOT IMPLEMENTED. لا تغيير في كود التطبيق أو APIs أو قاعدة البيانات.
+
+
+## Workpaper 167 — لقطة بوابة الجاهزية الموحدة G-01..G-15
+- الملف: [167-unified-g01-g15-readiness-snapshot-after-audits-164-166.md](167-unified-g01-g15-readiness-snapshot-after-audits-164-166.md)
+- يحدث حالات بوابات الجاهزية الخمس عشرة وفق الأدلة حتى الوثيقة 166، ويجمع خط الأساس الكمي للعمليات والأحداث والموافقات والاختبارات والملكية. يؤكد أن G-14 اعتماد المواصفات غير حاصل وG-15 إذن البرمجة غير مصرح به.
+- الحالة: لقطة مشتقة قابلة للتدقيق؛ لا تستبدل المصادر ولا تغير التطبيق أو APIs أو قاعدة البيانات.
