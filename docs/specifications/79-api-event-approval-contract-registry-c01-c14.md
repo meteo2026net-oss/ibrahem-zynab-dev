@@ -215,3 +215,15 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 ## ملحق 90 — عقود المعرفة والاستشهاد
 
 كل عملية ingestion/retrieval/citation المرشحة يجب أن تحمل sourceRef وsourceVersion وowner scope وACL reference/version وprovenance/freshness، مع إعادة التحقق من ACL عند الاسترجاع. إبطال المصدر/حذفه يجب أن ينتشر إلى المشتقات والفهارس وفق SLA معتمد. راجع الوثيقة 90؛ أسماء الحقول والعمليات مرشحة وليست API منشورة.
+
+
+
+## ملحق 91–93 — ربط عمليات الخدمات المشتركة
+
+| الحزمة | عمليات مرشحة يجب تسجيلها كعقود مستقلة | أحداث مرشحة | الملكية المرجعية | الحالة |
+|---|---|---|---|---|
+| 91 / SH-13 | validateManifest, createConnection, testConnection, rotateCredentialReference, revokeConnection, startSync | IntegrationConnected, IntegrationSyncStarted, IntegrationSyncFailed, IntegrationRevoked, WebhookRejected | OWN72-02؛ C09 domain mapping / SH-13 runtime | PROPOSED / NOT APPROVED |
+| 92 / SH-08 | submitExecution, getExecution, cancelExecution, retryExecution, replayExecution, getAttemptHistory, heartbeatWorker | ExecutionQueued, ExecutionStarted, ExecutionCancelRequested, ExecutionSucceeded, ExecutionFailed, WorkerLost | OWN72-06؛ domain owner يحتفظ بنتيجة المجال | PROPOSED / NOT APPROVED |
+| 93 / SH-14 | ingestMetric, publishHealthCheck, queryServiceHealth, evaluateAlertRule, acknowledgeAlert, resolveAlert | MetricIngested, HealthStatusChanged, AlertTriggered, AlertResolved, TelemetryBecameStale | OWN36-03 وOWN72-06/08 | PROPOSED / NOT APPROVED |
+
+كل عملية تحتاج schema/version وactor/scope/correlation، وidempotency عند اللزوم، وAPI Owner وDomain SoR. لا تعتبر هذه الإضافة endpoints أو topics منشورة. راجع الحزم 91–93.
