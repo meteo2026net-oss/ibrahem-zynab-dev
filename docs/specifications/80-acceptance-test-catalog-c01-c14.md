@@ -144,3 +144,8 @@
 ## ملاحق 86–89 — اختبارات الإعدادات والنسخ والخصوصية والتعافي
 
 أضيفت مجموعات CFG-86-T01..T10 وBAK-87-T01..T12 وPRIV-88-T01..T12 وOPS-89-T01..T08. جميعها SPECIFIED / NOT RUN أو BLOCKED حيث أشير إلى TBD. تعارض Zero Trust لا يعد نتيجة اختبار ولا قراراً معتمداً. يلزم تسجيل run/build/environment/actor/evidence عند التنفيذ الفعلي.
+
+
+## ملحق 90 — اختبارات ملكية المعرفة
+
+أضيفت KNOW-90-T01..T12 في الوثيقة 90 لاختبار ACL عند retrieval، عزل النطاقات، freshness، provenance، citations، prompt injection في المصادر، حذف المشتقات، واعتماد المحتوى المولد. جميعها SPECIFIED / NOT RUN أو BLOCKED؛ لا توجد نتائج تنفيذ.
