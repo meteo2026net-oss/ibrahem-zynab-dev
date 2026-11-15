@@ -534,3 +534,8 @@
 ## 174 — مراجعة النتائج المتوقعة وجاهزية تنفيذ اختبارات C11–C14
 
 [174-c11-c14-acceptance-oracle-and-execution-readiness-review.md](174-c11-c14-acceptance-oracle-and-execution-readiness-review.md) — مراجعة 86 نتيجة متوقعة موجزة عبر C11–C14، مع تمييز النتائج المشروطة بالسياسات وفجوات مالك الاختبار والبيانات والبيئة والأدلة. لا تعني المراجعة أن الاختبارات منفذة أو معتمدة.
+
+
+## 175 — مرشحات ربط أحداث وموافقات C11–C14
+
+[175-c11-c14-event-approval-to-acceptance-candidate-crosswalk.md](175-c11-c14-event-approval-to-acceptance-candidate-crosswalk.md) — 28 مرشح حدث و8 مرشحات موافقة إلى سيناريوهات القبول؛ كلها غير معتمدة وغير منفذة وتحتاج مراجعة المالك.
