@@ -210,3 +210,8 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 ## ملاحق 86–88 — عقود الإعدادات والنسخ والخصوصية
 
 كل تغيير إعداد حساس يربط scope وexpectedVersion وschema/version وactor/reason ومصدر الوراثة؛ كل backup/restore يربط sourceOwner وconsistencyPoint وmanifest/checksums وapprovalRef وevidenceRef؛ وكل deletion/hold يربط data owner وpurpose/classification/policy version والنطاق والمشتقات. هذه حقول تعاقدية مرشحة فقط في الوثائق 86–88 وليست schemas أو APIs منشورة.
+
+
+## ملحق 90 — عقود المعرفة والاستشهاد
+
+كل عملية ingestion/retrieval/citation المرشحة يجب أن تحمل sourceRef وsourceVersion وowner scope وACL reference/version وprovenance/freshness، مع إعادة التحقق من ACL عند الاسترجاع. إبطال المصدر/حذفه يجب أن ينتشر إلى المشتقات والفهارس وفق SLA معتمد. راجع الوثيقة 90؛ أسماء الحقول والعمليات مرشحة وليست API منشورة.
