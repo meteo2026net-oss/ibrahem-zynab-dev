@@ -226,3 +226,9 @@
 - الملف: [147-c08-c14-master-registry-id-reconciliation.md](./147-c08-c14-master-registry-id-reconciliation.md)
 - نتيجة مطابقة المعرفات: 81/81 Operation IDs موجودة في سجل 97؛ 55/55 Event IDs موجودة في سجل 100؛ 14/14 Approval IDs موجودة في سجل 98.
 - هذا تحقق وجود معرفات فقط، لا يثبت تطابق API/payload/producer/approval semantics ولا الاعتماد أو التنفيذ. لا يغير خط الأساس 201/106/26.
+
+## Workpaper 148 — C08–C14 operation/event/approval test-linkage gap audit
+- الملف: [148-c08-c14-operation-event-approval-test-linkage-gap-audit.md](./148-c08-c14-operation-event-approval-test-linkage-gap-audit.md)
+- تدقيق الحقول الفعلية: 0/81 Operation→Test exact؛ 0/55 Event→Test exact؛ 14/14 Approval OWNER REVIEW؛ حقلا Qualified OWN وDomain SoR للأحداث ما زالا TBD.
+- توجد 124 سيناريو قبول محلياً لكنها SPECIFIED / NOT RUN، ولا تُعد روابط exact أو أدلة تنفيذ.
+- النتيجة تفصل Identifier presence عن traceability definition وعن execution evidence.
