@@ -265,3 +265,9 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 ## ملحق 99.1 — مصدر عقد كل عملية
 
 تحتوي الوثيقة 99 الآن مرجع عقد المركز لكل Operation ID (59–70)، مع التصريح بأن locator القسم/الفقرة في المصدر الأصلي ما زال TBD. لا يحل هذا محل source trace الأصلي.
+
+
+
+## ملحق 100 — event-level traceability
+
+تضيف الوثيقة 100 سجلاً مفرداً لـ106 أحداث من 96. لا يفترض وجود تطابق واحد-إلى-واحد بين API operation وdomain event. يجب أن يراجع مالك المجال العلاقة بين كل command/event، مع اعتماد producer/SoR/schema/consumer/ACL/idempotency/exact test ID قبل التنفيذ.
