@@ -409,3 +409,8 @@
 ## 135 — مطابقة الفصول 158–163: الأمن والاعتماديات والقرارات والإصدار
 
 [135-source-chapters-158-163-security-dependencies-decisions-and-release-reconciliation.md](135-source-chapters-158-163-security-dependencies-decisions-and-release-reconciliation.md) — استعادة ومطابقة مباشرة للتصدير 07، تشمل 15 محوراً أمنياً، 7 بوابات، 12 اختبار أمن، نموذج الاعتماديات بستة أنواع و14 اختباراً، سجل القرارات، تدقيق الاتساق، هيكل MPRTS، وتفاصيل C01–C07 في الفصل 163. توثق تعارض C14 وZero Trust ونقص تفاصيل C08–C14 في الجزء المتاح. NOT APPROVED / NOT READY FOR CODING.
+
+
+## 136 — مطابقة معرفات الشاشات والوظائف للمراكز C01–C07
+
+[136-c01-c07-chapter163-screen-function-id-crosswalk.md](136-c01-c07-chapter163-screen-function-id-crosswalk.md) — مطابقة معرفات Snn/Fnn/AT من الفصل 163 مع كتالوجات 02 و12 و19 و20؛ توثق أن C05–C07 محفوظة عددياً في 12، وأن C01–C04 تحتاج canonical ID crosswalk، وأن SCR IDs في 19 مشتقة وليست بديلاً تلقائياً لمعرفات المصدر.
