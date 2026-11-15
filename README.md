@@ -98,3 +98,6 @@
 
 
 **حزمة SH-10 للإصدارات:** أضيفت الوثيقة [85 — حزمة حسم ملكية الإصدارات](docs/specifications/85-sh10-version-ownership-and-lifecycle-decision-dossier.md)، وتفصل metadata الإصدارات عن محتوى المجالات ودورة النشر في C11؛ لا يوجد تنفيذ لخدمة الإصدارات أو artifact registry.
+
+
+**حزم الإعدادات والتعافي والخصوصية:** أضيفت الوثائق [86](docs/specifications/86-sh12-configuration-ownership-and-precedence-decision-dossier.md) و[87](docs/specifications/87-sh15-backup-recovery-ownership-decision-dossier.md) و[88](docs/specifications/88-privacy-retention-deletion-and-legal-hold-decision-dossier.md) و[89](docs/specifications/89-zero-trust-and-operational-recovery-objectives-decision-register.md). جميعها توثيق قرارات مفتوحة؛ لا تعني اعتماد السياسات أو تنفيذ خدمات النسخ والخصوصية والتعافي.
