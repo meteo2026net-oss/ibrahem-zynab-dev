@@ -70,3 +70,9 @@ eventId, eventType, eventVersion, producerService, domainOwner, domainSoR, consu
 ## ملحق 100 — تفكيك الأحداث إلى سجلات مفردة
 
 أضيفت الوثيقة 100 لتفكيك 106 أحداث من event families أعلاه إلى Event IDs مستقلة، مع حفظ حالة المصدر والمرجع الوسيط ومحاور AX المرشحة وعائلة الاختبارات العامة. لا تعتبر هذه الخطوة اعتماداً للـproducer أو Domain SoR أو OWN أو schema أو exact test ID؛ تبقى كلها مفتوحة حسب سجل 100.
+
+
+
+## تصحيح 100.1 — حالة المصدر لكل حدث
+
+صححت الوثيقة 100 نقل حالة المصدر؛ فتمت مطابقة كل Event ID مع عمود مصدر الاسم في 96 بدلاً من نسخ OWNER REVIEW. العدد الحالي 95 SOURCE-RECOVERED و11 PROPOSED. حالة OWNER REVIEW تبقى مستقلة ولا تعني حالة المصدر.
