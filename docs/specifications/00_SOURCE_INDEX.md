@@ -415,3 +415,9 @@
 - الملف: [178-firebase-firestore-security-testing-release-audit.md](178-firebase-firestore-security-testing-release-audit.md)
 - تدقيق قراءة ساكنة لقواعد Firestore وFirebase config وAngular auth/persistence واختبارات Android/Angular وGitHub Actions. يحدد مخاطر P0 مؤكدة من نص القواعد: قابلية تغيير userId عند التحديث، قابلية تعديل/حذف audit logs وapproval requests من العميل، وقراءة/كتابة سجلات الأسرار والاعتمادات مباشرة؛ ويصنف فجوات Emulator/indexes/App Check والـCI.
 - لا Emulator tests أو builds أو deploy في هذه الجولة؛ لا تغييرات على الكود أو القواعد أو API أو schema أو قاعدة البيانات. النتائج ليست موافقة على بدء البرمجة.
+
+
+## Workpaper 179 — تدقيق مستودعات Android والتكاملات وخزنة الأسرار
+- الملف: [179-android-integrations-and-secrets-vault-implementation-audit.md](179-android-integrations-and-secrets-vault-implementation-audit.md)
+- يراجع ProjectRepository وSecretsVaultRepository وCryptoUtils وIntegrationsRepository؛ يثبت وجود مفتاح تشفير ثابت داخل العميل وfallback إلى plaintext عند فشل التشفير، وأن فك الأسرار يتم داخل Android رغم تسمية Backend-only، وأن عمليات GitHub/Telegram المعروضة تتضمن محاكاة لا اتصالات حقيقية.
+- تدقيق قراءة ساكنة فقط؛ لا اتصالات خارجية أو اختبارات أو تغييرات كود. لا يعد إذناً ببدء البرمجة.
