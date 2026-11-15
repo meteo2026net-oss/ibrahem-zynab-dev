@@ -209,7 +209,7 @@
 ## Workpaper 145 — C01–C07 function/API candidate crosswalk
 
 - **Scope:** 109 source functions against 120 proposed operations in inventory 97.
-- **Candidate coverage:** 100 functions have one or more semantic candidate operations; 9 have no clear operation in the current C01–C07 list.
+- **Candidate coverage:** 100 functions have one or more semantic candidate operations; 9 have no clear operation in the current C01–C07 list; 7 of the 120 operations remain unmatched to any function candidate.
 - **Candidate operation IDs used:** 113 distinct operation IDs.
 - **Exact/approved links:** 0; all candidates require domain and API owner review.
 - **Execution:** no tests or operations executed by this mapping.
