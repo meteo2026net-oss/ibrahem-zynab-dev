@@ -33,7 +33,7 @@
 | AX-008 | مدير الصفحات وخريطة التنقل | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [45](./45-batch-a-axes-001-010-detailed-audit.md) |
 | AX-009 | إنشاء الصفحات بالذكاء الاصطناعي والإنشاء اليدوي والدمج | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [45](./45-batch-a-axes-001-010-detailed-audit.md) |
 | AX-010 | بناء وظائف العناصر | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [45](./45-batch-a-axes-001-010-detailed-audit.md) |
-| AX-011 | إدارة البيانات وقواعد البيانات | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=RECOVERED-PROPOSED-SCHEMA / SCHEMA-REVIEW-PENDING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [46](./46-batch-b-axes-011-016-detailed-audit.md) |
+| AX-011 | إدارة البيانات وقواعد البيانات | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=RECOVERED-PROPOSED-SCHEMA + DERIVED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [46](./46-batch-b-axes-011-016-detailed-audit.md) |
 | AX-012 | تسجيل الدخول والمستخدمون والصلاحيات | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=RECOVERED-PROPOSED-SCHEMA؛ API=DERIVED-DRAFT-AVAILABLE / SCHEMA-PENDING؛ AUTH=SOURCE-REFERENCE-FOUND / MATRIX-INCOMPLETE؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [46](./46-batch-b-axes-011-016-detailed-audit.md) |
 | AX-013 | الإشعارات | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-RECOVERED؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=SOURCE-REFERENCE-FOUND / DETAIL-PENDING؛ TEST=TEST-SPECIFIED / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [46](./46-batch-b-axes-011-016-detailed-audit.md) |
 | AX-014 | الملفات والوسائط | REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-RECOVERED؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=RECOVERED-PROPOSED-SCHEMA؛ API=SCHEMA-MISSING؛ AUTH=SOURCE-REFERENCE-FOUND / DETAIL-PENDING؛ TEST=TEST-SPECIFIED / NOT-EXECUTED؛ EVIDENCE=EVIDENCE-MISSING. | [46](./46-batch-b-axes-011-016-detailed-audit.md) |
@@ -98,17 +98,17 @@
 | وظيفة SOURCE-REFERENCE-FOUND أو SOURCE-RECOVERED | 35/64 | توجد وظيفة/مادة مصدرية أو مستعادة، مع اختلاف مستوى التفصيل |
 | وظيفة DERIVED-DRAFT-AVAILABLE | 62/64 | يتوفر تفصيل وظيفي مشتق/مسودة في معظم المحاور؛ ليس اعتماداً نهائياً |
 | مخطط بيانات SCHEMA-MISSING | 44/64 | لم يثبت مخطط بيانات تفصيلي كافٍ في المراجعة |
-| عقد API SCHEMA-MISSING | 39/64 | لم يثبت عقد API تفصيلي كافٍ في المراجعة |
-| صلاحيات OWNER-REVIEW أو MATRIX-INCOMPLETE | 46/64 | مراجعة الملكية/التفويض أو المصفوفة غير مكتملة |
+| عقد API SCHEMA-MISSING | 38/64 | لم يثبت عقد API تفصيلي كافٍ في المراجعة |
+| صلاحيات OWNER-REVIEW أو MATRIX-INCOMPLETE | 45/64 | مراجعة الملكية/التفويض أو المصفوفة غير مكتملة |
 | اختبار NOT-EXECUTED | 64/64 | لم تقدم هذه الجولة دليل تشغيل اختبار منتج مرتبطاً بالمحور |
 | دليل EVIDENCE-MISSING | 64/64 | لم يقدم التدقيق دليلاً تنفيذياً/قبولياً مرتبطاً بالمحور |
 | اختبار موصوف جزئياً/محدداً لكنه غير منفذ | 37/64 | تظهر في الحالة إشارة TEST-SPECIFIED، مع بقاء NOT-EXECUTED |
 | لا يظهر توصيف اختبار في سطر الحالة | 27/64 | لا يعني عدم وجود أي اختبار في جميع المصادر؛ يعني أن تدقيق الدفعة لم يثبت حالة TEST-SPECIFIED لهذا المحور |
-| نموذج بيانات مقترح/مستعاد غير نهائي | 19/64 | يوجد تصور بيانات، لكنه ما زال مقترحاً أو بانتظار مراجعة المخطط |
-| API/عقد مشتق DRAFT | 23/64 | يوجد مرجع عقد مشتق، لا schema منشوراً أو معتمداً |
+| نموذج بيانات مقترح/مستعاد غير نهائي | 20/64 | يوجد تصور بيانات، لكنه ما زال مقترحاً أو بانتظار مراجعة المخطط |
+| API/عقد مشتق DRAFT | 24/64 | يوجد مرجع عقد مشتق، لا schema منشوراً أو معتمداً |
 | مرجع صلاحيات موجود مع تفاصيل/مصفوفة غير مكتملة | 11/64 | يوجد مبدأ أو مرجع تفويض، لكن المصفوفة التفصيلية لا تزال ناقصة |
 | مسودة بيانات/API/صلاحيات للمراكز C01–C03 | 11/64 | توجد مسودة مشتقة في الوثيقتين 59 و60؛ لم تعتمد بعد وتحتاج مراجعة المالك |
-| مصفوفة صلاحيات DRAFT متاحة | 11/64 | توجد صياغة أولية في مسودات المراكز، لكنها ليست RBAC/ABAC نهائية |
+| مصفوفة صلاحيات DRAFT متاحة | 12/64 | توجد صياغة أولية في مسودات المراكز، لكنها ليست RBAC/ABAC نهائية |
 
 هذه أعداد تصنيفية مستخرجة من التقارير 45–49، وليست نسبة إنجاز أو قياساً لحالة التطبيق. وقد يجمع المحور الواحد أكثر من تصنيف في الحقل نفسه.
 
@@ -127,6 +127,10 @@
 
 
 تحديث 2026-11-15: أضيفت الوثيقة 60 لمسودات C02/C03، إلى جانب مسودة C01 في الوثيقة 59. أصبحت 11 محاور (AX-001..AX-010 وAX-025) تحمل مسودات أولية للبيانات والعقود والصلاحيات. بقيت المراجعة والاعتماد والاختبارات الفعلية مفتوحة.
+
+
+
+تحديث 2026-11-15: أضيفت مسودة C04 في الوثيقة 61، وحدثت حالة AX-011 إلى مسودة بيانات وعقود وصلاحيات بانتظار المراجعة. لا يعني ذلك اعتماد مخطط أو API أو تنفيذ اختبار.
 
 ## 6. الخطوة التالية
 
