@@ -539,3 +539,8 @@
 ## 175 — مرشحات ربط أحداث وموافقات C11–C14
 
 [175-c11-c14-event-approval-to-acceptance-candidate-crosswalk.md](175-c11-c14-event-approval-to-acceptance-candidate-crosswalk.md) — 28 مرشح حدث و8 مرشحات موافقة إلى سيناريوهات القبول؛ كلها غير معتمدة وغير منفذة وتحتاج مراجعة المالك.
+
+
+## 176 — الخطة الموحدة لإغلاق اختبارات المراكز الأربعة عشر
+
+[176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md](176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md) — خط أساس موحد للعمليات والأحداث والموافقات وسيناريوهات القبول في C01–C14، مع خطة P0/P1/P2 لإغلاق الاعتماد والتنفيذ والنشر.
