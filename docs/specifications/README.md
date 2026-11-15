@@ -348,3 +348,8 @@
 ## 121 — حزمة إغلاق ملكية عمليات C01/C02/C03/C05
 
 [121-c01-c02-c03-c05-operation-ownership-decision-pack.md](121-c01-c02-c03-c05-operation-ownership-decision-pack.md) — قائمة مفردة بكل العمليات الـ62 التي لا تحمل إحالة OWN مؤهلة، موزعة على C01 (16) وC02 (12) وC03 (11) وC05 (23)، مع نموذج قرار لا يفرض ملكية تخمينية.
+
+
+## 122 — التحقق الدلالي من إحالات OWN المؤهلة
+
+[122-qualified-ownership-semantic-validation-workpaper.md](122-qualified-ownership-semantic-validation-workpaper.md) — يحول 139 إحالة OWN المؤهلة شكلياً إلى قائمة تحقق دلالية لكل عملية؛ يميز صلاحية الصيغة عن اعتماد نطاق القرار والمالك وSoR والخدمة المشتركة والاختبار، ولا يعلن الإحالات مغلقة دون مراجعة المالكين.
