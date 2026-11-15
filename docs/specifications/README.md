@@ -549,3 +549,8 @@
 ## 177 — تدقيق التنفيذ الحالي وجاهزية إصدار قابل للنشر
 
 [177-current-implementation-and-release-readiness-audit.md](177-current-implementation-and-release-readiness-audit.md) — جرد أدلة التنفيذ الحالي على Angular وAndroid وخدمات Firebase، مع تحديد ما هو محاكاة وما لم يُبنَ أو يُختبر أو يُنشر بعد.
+
+
+## 178 — تدقيق Firebase وFirestore والأمن والاختبارات وجاهزية النشر
+
+[178-firebase-firestore-security-testing-release-audit.md](178-firebase-firestore-security-testing-release-audit.md) — مراجعة ساكنة لقواعد Firestore وFirebase config والمصادقة والتخزين والاختبارات وCI؛ توثق مخاطر P0 في تغيير الملكية وتعديل سجلات التدقيق/الموافقات والتعامل المباشر مع الأسرار، وتفصل ما لم يختبره Emulator أو build أو deploy. لا تغييرات تنفيذية أو موافقة بدء برمجة.
