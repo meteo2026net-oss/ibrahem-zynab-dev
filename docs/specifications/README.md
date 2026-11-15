@@ -328,3 +328,8 @@
 ## 117 — تدقيق دلالة عملية الموافقة
 
 [117-approval-operation-semantic-classification.md](117-approval-operation-semantic-classification.md) — تصنيف أولي للأفعال المحمية إلى طلب/قرار/تنفيذ، وتحديد الحالات التي لا يظهر لها قرار مستقل أو تحتاج حسم SH-03. لا يعتمد أسماء APIs أو workflow ولا يغلق بوابة البرمجة.
+
+
+## 118 — مصفوفة ربط الموافقات بخدمة SH-03
+
+[118-approval-sh03-consumer-and-lifecycle-crosswalk.md](118-approval-sh03-consumer-and-lifecycle-crosswalk.md) — ربط الأنواع الـ26 بمراحل الطلب والتعيين والقرار والفعل المحمي، وتدقيق اختلاف قائمة مستهلكي SH-03 في الوثيقة 23. مسودة بانتظار اعتماد المالكين.
