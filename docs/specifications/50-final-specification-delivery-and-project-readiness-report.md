@@ -366,3 +366,6 @@
 
 
 - **توضيح 117:** أظهر فحص عقد SH-03 في الوثيقة 23 وجود عمليات موافقة عامة مقترحة (createRequest/submitRequest/assignApprover/approve/reject/requestChanges/cancel/expire/getDecision) وحالات lifecycle؛ لكنها NOT APPROVED. الفجوة الدقيقة الآن هي ربط الأنواع الـ26 بهذه العمليات العامة وتحديد ما يحتاج قرار مجال منفصلاً، لا غياب تصميم SH-03 المقترح.
+
+
+- **118:** أضيف crosswalk مفرد للأنواع الـ26 يربط SH-03 create/submit/assign/decision مع الفعل المحمي، وكشف خمسة مراكز لديها أنواع موافقات لكنها غير مدرجة في consumer matrix للخدمة (C03/C07/C08/C12/C14). كما حدد فجوة دلالة استهلاك القرار قبل الفعل المحمي. جميعها OWNER REVIEW؛ لا APIs أو workflows أو اختبارات منفذة.
