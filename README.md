@@ -171,3 +171,5 @@
 - [111 — تدقيق إحالات قرارات الملكية المؤهلة](docs/specifications/111-qualified-ownership-reference-audit-for-operation-inventory.md) — فحص 201 عملية: 139 لها إحالات OWN36/OWN72 مؤهلة و62 ما زالت TBD؛ لا يمثل اعتماداً للملكية.
 
 - [112 — فجوة الربط المفرد بين عمليات API ومعرفات الاختبارات](docs/specifications/112-operation-to-test-exact-mapping-gap-register.md) — 201/201 عملية ما زالت بلا Exact Test ID في سجل 97؛ 89 معرفاً أصلياً في المصدر لا تثبت تغطية مفردة.
+
+- [113 — تدقيق الإغلاق المتكامل لمحاور العمليات والأحداث والموافقات](docs/specifications/113-cross-axis-traceability-closure-audit.md) — يجمع 201 عملية و106 أحداث و26 نوع موافقة، ويحدد فجوات التتبع المفرد والملكية والاعتماد.
