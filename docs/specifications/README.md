@@ -374,3 +374,8 @@
 ## 128 — حزمة تتبع C11 للبناء والإصدارات والنشر
 
 [128-c11-build-release-deployment-traceability-workpaper.md](128-c11-build-release-deployment-traceability-workpaper.md) — تتبع 12 عملية و14 حدثاً و3 موافقات مرشحة و22 سيناريو قبول محلياً؛ يوضح حدود SH-03/08/10/11/14/15 وتعارض validateBuildConfiguration بين C05 وC11. جميع القرارات والاختبارات ما زالت OWNER REVIEW / NOT RUN، ولا توجد موافقة تنفيذ.
+
+
+## 129 — حزمة تتبع C12 للمعرفة والتوثيق
+
+[129-c12-knowledge-documentation-traceability-workpaper.md](129-c12-knowledge-documentation-traceability-workpaper.md) — تتبع 12 عملية و9 أحداث وموافقتين مرشحتين و22 سيناريو محلياً؛ يوضح حدود C12 مقابل C08 وSH-07/16 وSH-03/04، مع فجوات ACL وretention وinvalidation وprovenance. الحالات OWNER REVIEW / NOT RUN ولا اعتماد أو تنفيذ.
