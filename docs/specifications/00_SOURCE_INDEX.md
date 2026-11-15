@@ -289,3 +289,9 @@
 - **Result:** 25/26 operation-name references exist; 8 are decision-named but not contractually validated, 17 are request/execution/review/export actions that do not themselves prove a decision, and APR-C07-02 lacks a decision operation. Exact approval-test links: 0/26; all 26 remain OWNER REVIEW.
 - **Source correction:** chapter 126.1 says the central approval service serves all centers C01–C14; the nine-center consumer list in the derived matrix is incomplete. Direct integration per center remains open.
 - **Status:** no workflow/API/schema implementation or code changes; owner approval required.
+
+## Workpaper 158 — C05–C07 function catalog title reconciliation
+- **File:** [158-c05-c07-function-catalog-title-reconciliation.md](158-c05-c07-function-catalog-title-reconciliation.md)
+- **Scope:** exact source-ID and title comparison for 52 source functions in C05–C07 against catalog 12.
+- **Result:** all 52 IDs are present; 47 titles match exactly; five title differences are isolated to C06-F09, F10, F11, F14 and F17.
+- **Status:** exact-ID/title audit completed; differences require center-owner decision. No aliases were silently approved and no product code/API/schema/database was changed.
