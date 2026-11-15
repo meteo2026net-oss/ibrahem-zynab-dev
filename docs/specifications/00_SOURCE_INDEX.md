@@ -301,3 +301,9 @@
 - **Scope:** distinguishes 57 source function IDs (C01–C04) from 58 proposed screen records in catalog 19.
 - **Result:** catalog 19 is a screen catalog using Cxx-SCR IDs, not a canonical function catalog using Cxx-F IDs. C01–C03 have equal counts but no proven 1:1 mapping; C04 has 16 source functions and 17 screens. Function-to-screen links remain unapproved.
 - **Status:** gap type clarified; no source IDs renamed, no product code/API/schema/database changed.
+
+## Workpaper 160 — C01–C04 function-to-screen candidate crosswalk
+- **File:** [160-c01-c04-function-to-screen-candidate-crosswalk.md](160-c01-c04-function-to-screen-candidate-crosswalk.md)
+- **Scope:** all 57 source functions in C01–C04 mapped to candidate screen locations in catalog 19.
+- **Result:** 54 semantic candidates and 3 cross-cutting candidates; C04-SCR-01 remains an unassigned dashboard/entry screen. Candidate relationships are not exact or approved and include potential many-to-many mappings.
+- **Status:** owner review required; no code/API/schema/database changes.
