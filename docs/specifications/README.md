@@ -246,3 +246,6 @@
 | [87 حزمة النسخ والاستعادة SH-15](87-sh15-backup-recovery-ownership-decision-dossier.md) | تفصل كتالوج النسخ عن ملكية بيانات المصدر والتشفير؛ RTO/RPO TBD |
 | [88 حزمة الخصوصية والاحتفاظ والحذف](88-privacy-retention-deletion-and-legal-hold-decision-dossier.md) | تصنيف وغرض واحتفاظ وحذف وحجز قانوني؛ لا مدد أو أسس مخترعة |
 | [89 سجل Zero Trust وأهداف التعافي](89-zero-trust-and-operational-recovery-objectives-decision-register.md) | يحفظ التعارض ويحدد قرارات SLO/RTO/RPO/freshness المفتوحة |
+
+
+| [90 حزمة ملكية المعرفة SH-16 وحدود C12](90-sh16-knowledge-ownership-and-c12-boundary-dossier.md) | تفصل المحتوى الأصلي عن الفهرسة والاستشهاد والبحث العام، مع ACL/provenance/freshness؛ مفتوحة وغير منفذة |
