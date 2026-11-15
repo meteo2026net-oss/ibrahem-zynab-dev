@@ -238,3 +238,9 @@
 - ربط مرشح مستخرج من جداول العمليات لـ34/81 عملية: C08 (11/11)، C09 (12/12)، C10 (11/11).
 - 47 عملية C11–C14 تحتاج crosswalk صريحاً يراجعه مالك المركز؛ لم تُستنتج روابط من تشابه الأسماء أو ترتيب الصفوف.
 - الروابط CANDIDATE فقط؛ لا تغير 0/81 exact links في سجل 97، وجميع السيناريوهات SPECIFIED / NOT RUN.
+
+## Workpaper 150 — C11–C14 operation-to-local-acceptance semantic candidates
+- الملف: [150-c11-c14-operation-to-local-acceptance-semantic-candidates.md](./150-c11-c14-operation-to-local-acceptance-semantic-candidates.md)
+- أُعدت 47 مرشحات دلالية للعمليات: C11 (12)، C12 (12)، C13 (10)، C14 (13)، اعتماداً على أوصاف العمليات والسيناريوهات المحلية 128–131.
+- الروابط SEMANTIC CANDIDATES / OWNER REVIEW REQUIRED؛ لم تُنقل إلى سجل 97 ولم تصبح exact approved links.
+- مع الوثيقة 149 توجد مرشحات لجميع العمليات الـ81، لكن 0/81 فقط exact approved؛ جميع السيناريوهات SPECIFIED / NOT RUN.
