@@ -136,3 +136,8 @@
 ## 15. مطابقة الفصول 160–162 — 2026-11-15
 
 أضيفت [الوثيقة 139](139-chapters160-162-decision-register-final-audit-and-mprts-release-workpaper.md). استعيد الفصل 160 بدورة القرار وحالاته واختباراته، والفصل 161 بعشرة محاور تدقيق وبوابة مراجعة، والفصل 162 بهيكل MPRTS وقوالب التوثيق والإصدارات. ربطت النتائج بالمشكلات القائمة: OWN، exact Test IDs، تعارض Zero Trust، COST/DASH، وتعريف C14. لا تمثل الوثيقة اجتياز التدقيق أو إصدار 1.0.
+
+
+## Update — 2026-11-15: chapter 163 readiness verification
+
+The complete source text of chapter 163 was re-read from Export 07 (lines 3832–4280) and mapped to gates G-01..G-15 in workpaper [140](140-chapter163-executive-summary-readiness-gate-crosswalk.md). Chapter 163 is an executive summary and approval-gate chapter, not a detailed screen/function specification. The inspected Export 07 contains subsequent detailed center sections B-05, B-06 and B-07 and ends by naming C08 as the next section; detailed B-08..B-14 content is therefore still NOT RECOVERED from this export. Preserve the historical C14 continuity label in the source and apply the current C14 Dashboard reconciliation in the consolidated specification, with continuity as a cross-cutting capability. No gate is promoted to approved solely by this crosswalk.
