@@ -367,3 +367,9 @@
 - الملف: [169-field-gap-decision-and-evidence-closure-workplan.md](169-field-gap-decision-and-evidence-closure-workplan.md)
 - يحول فجوات FLD-01..26 إلى قرارات محددة وأدوار مراجعة وأدلة دنيا وبوابات مرحلية؛ لا يعين أشخاصاً أو يقرر الملكية نيابة عن المالكين.
 - 26/26 فجوة لها متطلبات إغلاق موثقة؛ 0 قرار ملكية اعتمدته الوثيقة؛ لا روابط اختبار exact أو اختبارات منفذة أو تغييرات تنفيذية جديدة.
+
+
+## Workpaper 170 — سجل المراسي المرشحة لربط فجوات الحقول بعقود العمليات والأحداث والموافقات
+- الملف: [170-field-to-contract-candidate-anchor-register.md](170-field-to-contract-candidate-anchor-register.md)
+- يضيف مراسي OP/EVT/APR مفردة مرشحة لفجوات FLD-01..26، ويميزها عن الروابط المعتمدة؛ يكشف فجوة APR-C07-02 وعدم اكتمال مطابقة بعض أسماء الموافقات مع Operation IDs.
+- روابط Field→Contract المعتمدة الجديدة: 0؛ Exact Test links الجديدة: 0؛ لا تغييرات تنفيذية.
