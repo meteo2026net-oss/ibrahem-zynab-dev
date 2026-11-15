@@ -312,3 +312,8 @@
 
 ## تنبيه ملكية عمليات البناء — الوثيقة 108
 يوجد اختلاف مصدرّي في موضع `validateBuildConfiguration`: الفصل 135.9 يضعها ضمن C11، بينما 97 يضع OP-C05-081 ضمن C05. يجب ألا يعتمد ربط AX أو OWN أو الاختبار لهذه العملية قبل حسم مالك المجال وحدود C05/C11.
+
+
+## Acceptance source reconciliation update — 2026-11-16
+
+See [workpaper 142](142-acceptance-id-vs-recovered-scenario-reconciliation.md): 130 source IDs from Export 07 and 86 DOCX-derived SRC-AT locators are separate inventories. Neither establishes exact Operation→Test, Event→Test, or Approval→Test links. Keep the exact test fields TBD/OWNER REVIEW until a canonical test registry and owner-reviewed mapping are supplied; no test execution is implied.
