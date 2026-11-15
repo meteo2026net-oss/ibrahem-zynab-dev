@@ -77,3 +77,5 @@
 - `87-sh15-backup-recovery-ownership-decision-dossier.md`: ملكية النسخ والاستعادة ومفاتيح التشفير وأهداف RTO/RPO؛ مفتوحة وغير منفذة.
 - `88-privacy-retention-deletion-and-legal-hold-decision-dossier.md`: تصنيف البيانات والغرض والاحتفاظ والحذف والحجز القانوني؛ مفتوحة وغير معتمدة.
 - `89-zero-trust-and-operational-recovery-objectives-decision-register.md`: تعارض Zero Trust وأهداف SLO/RTO/RPO/freshness؛ مفتوحة ولا تحسم الموافقات.
+
+- `90-sh16-knowledge-ownership-and-c12-boundary-dossier.md`: حدود C12/SH-16/SH-07 وملكية المحتوى والفهرسة والاستشهاد وACL/provenance؛ مفتوحة وغير منفذة.
