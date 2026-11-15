@@ -167,3 +167,5 @@
 
 
 - [110 — تدقيق منشأ أسماء سجل العمليات الكامل C01–C14](docs/specifications/110-full-operation-inventory-source-name-provenance-audit.md) — يغطي 201 عملية: 5 مطابقة حرفية، 7 مرشحات دلالية، 83 اسماً لم يثبت حرفياً ضمن نطاق تدقيق 108، و106 عمليات خارج نطاق ذلك التدقيق. الوثيقة مشتقة وغير معتمدة.
+
+- [111 — تدقيق إحالات قرارات الملكية المؤهلة](docs/specifications/111-qualified-ownership-reference-audit-for-operation-inventory.md) — فحص 201 عملية: 139 لها إحالات OWN36/OWN72 مؤهلة و62 ما زالت TBD؛ لا يمثل اعتماداً للملكية.
