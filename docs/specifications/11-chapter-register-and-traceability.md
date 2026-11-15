@@ -166,3 +166,9 @@ Workpaper [144](144-source-function-id-registry-and-catalog-gap-audit-c01-c07.md
 ## Candidate Function→API operation crosswalk — 2026-11-16
 
 Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) proposes semantic candidate links for 100 of 109 source functions in C01–C07 against 113 distinct operations from the 120-operation subset of inventory 97. Nine functions have no clear operation in that subset, and seven operations remain without a candidate function. **No link is exact or owner-approved**; these candidates do not close the exact Operation→Test or Function→Operation traceability gaps.
+
+## Derived contract inventory C08–C14 — 2026-11-16
+- Workpaper 146: [جرد العقود المشتقة ومصفوفة فجوات المصدر والملكية](146-c08-c14-derived-contract-inventory-source-gap-matrix.md).
+- راجع العقود 64–70 وحزم التتبع 126–131: 81 عملية مرشحة، 55 حدثاً، 14 نوع موافقة، 124 سيناريو محلياً SPECIFIED / NOT RUN.
+- الأعداد ليست إضافات إلى خطوط الأساس 201/106/26 قبل إزالة التداخل. B08–B14 غير مستعادة؛ لا معرفات مصدرية مستنتجة ولا اعتماد أو تنفيذ برمجي.
+
