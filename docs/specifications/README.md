@@ -333,3 +333,8 @@
 ## 118 — مصفوفة ربط الموافقات بخدمة SH-03
 
 [118-approval-sh03-consumer-and-lifecycle-crosswalk.md](118-approval-sh03-consumer-and-lifecycle-crosswalk.md) — ربط الأنواع الـ26 بمراحل الطلب والتعيين والقرار والفعل المحمي، وتدقيق اختلاف قائمة مستهلكي SH-03 في الوثيقة 23. مسودة بانتظار اعتماد المالكين.
+
+
+## 119 — تدقيق منشأ متطلبات الموافقات
+
+[119-approval-source-provenance-and-sh03-scope-audit.md](119-approval-source-provenance-and-sh03-scope-audit.md) — يميز المتطلبات المصدرية الأصلية للموافقة المركزية عن أسماء عمليات SH-03 وحالاته المقترحة، ويثبت شمول جميع المراكز على مستوى الخدمة المشتركة.
