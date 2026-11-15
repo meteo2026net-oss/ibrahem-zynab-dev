@@ -363,3 +363,6 @@
 
 
 - **117:** تدقيق دلالي يوضح أن مطابقة 25/26 في 116 تعني وجود أسماء الأفعال المحمية لا عمليات قرار الموافقة. يميز 26 حالة بين DECISION-NAMED وREQUEST/EXECUTION/REVIEW، ويحدد 13 قرار إغلاق مطلوباً؛ جميعها OWNER DECISION REQUIRED. لا يوجد workflow أو اختبار مفرد معتمد أو تنفيذ برمجي.
+
+
+- **توضيح 117:** أظهر فحص عقد SH-03 في الوثيقة 23 وجود عمليات موافقة عامة مقترحة (createRequest/submitRequest/assignApprover/approve/reject/requestChanges/cancel/expire/getDecision) وحالات lifecycle؛ لكنها NOT APPROVED. الفجوة الدقيقة الآن هي ربط الأنواع الـ26 بهذه العمليات العامة وتحديد ما يحتاج قرار مجال منفصلاً، لا غياب تصميم SH-03 المقترح.
