@@ -353,3 +353,8 @@
 ## 122 — التحقق الدلالي من إحالات OWN المؤهلة
 
 [122-qualified-ownership-semantic-validation-workpaper.md](122-qualified-ownership-semantic-validation-workpaper.md) — يحول 139 إحالة OWN المؤهلة شكلياً إلى قائمة تحقق دلالية لكل عملية؛ يميز صلاحية الصيغة عن اعتماد نطاق القرار والمالك وSoR والخدمة المشتركة والاختبار، ولا يعلن الإحالات مغلقة دون مراجعة المالكين.
+
+
+## 123 — تدقيق إغلاق حدود SH-08/13/14/15 عبر دورة التشغيل
+
+[123-sh08-sh13-sh14-sh15-cross-service-operational-closure-audit.md](123-sh08-sh13-sh14-sh15-cross-service-operational-closure-audit.md) — يراجع حدود تنفيذ المهام والموصلات والمراقبة والنسخ والاستعادة، ويحدد 16 قرار تماس و14 سيناريو تكامل مشتقاً؛ جميع القرارات OPEN والاختبارات NOT RUN.
