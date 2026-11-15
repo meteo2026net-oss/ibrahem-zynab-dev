@@ -161,3 +161,8 @@ Workpaper [143](143-full-source-acceptance-id-register-c01-c07.md) transcribes a
 ## Source function ID registry — 2026-11-16
 
 Workpaper [144](144-source-function-id-registry-and-catalog-gap-audit-c01-c07.md) recovers 109 source function IDs and titles from Export 07 B-01..B-07. It records a catalog-preservation gap for C01–C04 (57 IDs absent as source IDs from current operational catalog 19) and notes that C05–C07 IDs are preserved in catalog 12 but still require detailed content reconciliation. This is an ID/source inventory, not approval of function contracts or mappings to operations/tests.
+
+
+## Candidate Function→API operation crosswalk — 2026-11-16
+
+Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) proposes semantic candidate links for 100 of 109 source functions in C01–C07 against 113 distinct operations from the 120-operation subset of inventory 97. Nine functions have no clear operation in that subset. **No link is exact or owner-approved**; these candidates do not close the exact Operation→Test or Function→Operation traceability gaps.
