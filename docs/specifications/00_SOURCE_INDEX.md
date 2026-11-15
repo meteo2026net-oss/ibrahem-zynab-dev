@@ -409,3 +409,9 @@
 ## Workpaper 177 — تدقيق التنفيذ الحالي وجاهزية الإصدار
 - الملف: [177-current-implementation-and-release-readiness-audit.md](177-current-implementation-and-release-readiness-audit.md)
 - تدقيق قراءة فقط لبنية Angular وAndroid وFirebase وملفات build/auth/persistence؛ يميز الموجود فعلياً عن المحاكاة والوظائف غير المثبتة، ويحدد اختبارات وبوابات الإصدار غير المنفذة.
+
+
+## Workpaper 178 — تدقيق Firebase وFirestore والأمن والاختبارات وجاهزية النشر
+- الملف: [178-firebase-firestore-security-testing-release-audit.md](178-firebase-firestore-security-testing-release-audit.md)
+- تدقيق قراءة ساكنة لقواعد Firestore وFirebase config وAngular auth/persistence واختبارات Android/Angular وGitHub Actions. يحدد مخاطر P0 مؤكدة من نص القواعد: قابلية تغيير userId عند التحديث، قابلية تعديل/حذف audit logs وapproval requests من العميل، وقراءة/كتابة سجلات الأسرار والاعتمادات مباشرة؛ ويصنف فجوات Emulator/indexes/App Check والـCI.
+- لا Emulator tests أو builds أو deploy في هذه الجولة؛ لا تغييرات على الكود أو القواعد أو API أو schema أو قاعدة البيانات. النتائج ليست موافقة على بدء البرمجة.
