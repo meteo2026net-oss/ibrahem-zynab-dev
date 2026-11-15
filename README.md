@@ -201,3 +201,6 @@
 
 ## تدقيق روابط الاختبار والملكية C08–C14 — 2026-11-16
 أضيف workpaper 148: [تدقيق روابط الاختبارات والملكية والموافقات](docs/specifications/148-c08-c14-operation-event-approval-test-linkage-gap-audit.md). فحص حقول السجلات كشف أن 0/81 عملية لها رابط اختبار exact، و0/55 حدثاً لها رابط Event→Test exact، و14/14 موافقة ما زالت OWNER REVIEW؛ وحقلا Qualified OWN وDomain SoR للأحداث TBD. السيناريوهات المحلية 124 SPECIFIED / NOT RUN. هذه فجوات تتبع واعتماد، وليست دليلاً على غياب الوظائف أو نجاح تنفيذها.
+
+## روابط اختبار مرشحة لعمليات C08–C10 — 2026-11-16
+أضيف workpaper 149: [ربط مرشح بين العمليات وسيناريوهات القبول](docs/specifications/149-c08-c10-operation-to-local-acceptance-candidate-crosswalk.md). حُددت روابط مرشحة صريحة لـ34 عملية (C08: 11، C09: 12، C10: 11)، بينما 47 عملية في C11–C14 لا تملك crosswalk صريحاً في جداولها الحالية. هذه روابط CANDIDATE وليست exact approved links؛ كل السيناريوهات SPECIFIED / NOT RUN.
