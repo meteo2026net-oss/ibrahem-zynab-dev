@@ -49,3 +49,5 @@
 
 - `64-c08-files-media-contract-draft.md` إلى `70-c14-dashboard-contract-draft.md`: مسودات عقود C08–C14، مشتقة وغير معتمدة.
 - `71-cross-center-contracts-final-consolidated-review.md`: مراجعة موحدة لعقود C01–C14 وملكية البيانات والواجهات والصلاحيات والاختبارات والتبعيات؛ مرشح مراجعة وليس اعتماداً نهائياً.
+
+- `72-ownership-boundaries-and-dependency-decision-register.md`: سجل قرارات OWN-01..10 لفصل ملكية المجالات عن SH-01..SH-16، ومصفوفة RACI وبوابات العقود والاختبارات؛ مشتق وغير معتمد.
