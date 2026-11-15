@@ -64,3 +64,5 @@
 - `80-acceptance-test-catalog-c01-c14.md`: كتالوج اختبارات القبول والتكامل والأمن للمراكز، يميز معرفات المصدر عن الاختبارات الموصوفة والمنفذة، ويشترط run/build/environment/evidence قبل PASS؛ غير منفذ.
 
 - `81-ownership-id-namespace-and-contract-consistency-audit.md`: تدقيق مصدرّي لتصادم معرفات OWN بين الوثيقتين 36 و72، ومطابقة 76–80، وتحديد فجوات SH-11 والمؤسسة/مساحة العمل والأدوار؛ غير معتمد ولا يمثل تنفيذًا.
+
+- `82-qualified-ownership-decision-id-registry.md`: سجل namespace مؤهل لقرارات الملكية OWN36-nn وOWN72-nn، ومطابقة إحالات 77–80، وفجوات الملكية المستقلة؛ غير معتمد ولا ينشئ تغييرات تنفيذية.
