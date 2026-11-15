@@ -544,3 +544,8 @@
 ## 176 — الخطة الموحدة لإغلاق اختبارات المراكز الأربعة عشر
 
 [176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md](176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md) — خط أساس موحد للعمليات والأحداث والموافقات وسيناريوهات القبول في C01–C14، مع خطة P0/P1/P2 لإغلاق الاعتماد والتنفيذ والنشر.
+
+
+## 177 — تدقيق التنفيذ الحالي وجاهزية إصدار قابل للنشر
+
+[177-current-implementation-and-release-readiness-audit.md](177-current-implementation-and-release-readiness-audit.md) — جرد أدلة التنفيذ الحالي على Angular وAndroid وخدمات Firebase، مع تحديد ما هو محاكاة وما لم يُبنَ أو يُختبر أو يُنشر بعد.
