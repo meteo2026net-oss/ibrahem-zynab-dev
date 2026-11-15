@@ -343,3 +343,9 @@
 - يوحد توصيات OWN-01..10 في الوثيقة 72 مع حدود Domain SoR/Shared Service SoR، ويثبت ضرورة التمييز بين OWN36 وOWN72 بسبب تصادم المعرفات في المصدرين.
 - يوضح أن SH-03 تخدم نطاق C01–C14 مصدرّياً، مع بقاء التكامل المباشر وقرار الموافقة لكل مجال مفتوحين. يسجل فجوة المصدر لـSH-17–SH-20 دون اختراع وظائف أو ملاك.
 - الحالة: مراجعة مشتقة وغير معتمدة؛ لا تغييرات كود/API/قاعدة بيانات ولا إذن بالبرمجة.
+
+
+## Workpaper 166 — سجل إغلاق قرارات الأمن والتكلفة واللوحة والتعافي
+- الملف: [166-security-cost-dashboard-and-recovery-decision-closure-register.md](166-security-cost-dashboard-and-recovery-decision-closure-register.md)
+- يوحد تعارض Zero Trust، وتصادم معرفات COST/DASH بين الاختبارات والقرارات، وملكية SH-11 والميزانيات، وأهداف RTO/RPO/SLO/freshness، واعتماديات DEP. يفصل النص المصدر عن القرار المقترح، ولا يضع قيماً رقمية أو يعين ملاكاً أو يحول الاختبارات غير المنفذة إلى نتائج.
+- الحالة: SOURCE-BASED / DERIVED / OWNER REVIEW REQUIRED / NOT APPROVED / NOT IMPLEMENTED. لا تغيير في كود التطبيق أو APIs أو قاعدة البيانات.
