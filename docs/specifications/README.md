@@ -394,3 +394,8 @@
 ## 132 — حزمة الإغلاق التتبعي الموحدة للمراكز C01–C07
 
 [132-c01-c07-unified-traceability-closure-workpaper.md](132-c01-c07-unified-traceability-closure-workpaper.md) — مراجعة 120 عملية و51 حدثاً و12 موافقة مرشحة عبر المراكز السبعة، وتفصيل حدود الملكية والاعتماد والاختبار؛ توثق فجوة APR-C07-02 وغياب exact Event→Test IDs. جميع القرارات OWNER REVIEW والاختبارات NOT RUN.
+
+
+## 133 — المراجعة النهائية الموحدة للمراكز الأربعة عشر وجاهزية المواصفات
+
+[133-global-fourteen-center-specification-readiness-consolidation.md](133-global-fourteen-center-specification-readiness-consolidation.md) — تجميع نتائج المراكز C01–C14: 64 محوراً، 201 عملية، 106 أحداث، 26 موافقة، و26 فجوة حقول؛ يحدد فجوات الملكية والاختبارات والمصدر وبوابة اعتماد المواصفات. الحكم NOT APPROVED / NOT READY FOR CODING.
