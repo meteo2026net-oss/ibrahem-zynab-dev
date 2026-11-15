@@ -17,7 +17,7 @@
 - **المراجع:** 02/C02، 03/محركات التصميم والتنفيذ، 12/C05، 20/C05، وقرار محرر الإجراءات المرئي واللغة الطبيعية.
 - **المتاح:** بناء سلوك العناصر بالطريقتين المرئية واللغوية؛ triggers/actions/targets وحالات المكونات؛ مراجعة منطق التنفيذ واختباره قبل الاعتماد؛ محرك البرمجة مستقل عن Angular.
 - **الناقص:** workflow/behavior DSL أو IR schema، أنواع الإجراءات والأحداث، typing والتحقق، إدارة الحالة والآثار الجانبية، sandbox وقيود الموارد والشبكة، الصلاحيات، idempotency والتعويض، اختبار المنطق.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA/API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** تجربة بناء المنطق معتمدة من حيث المبدأ؛ محرك التنفيذ غير مكتمل المواصفات.
 
 ### AX-042 — إدارة البيانات والتحليلات
