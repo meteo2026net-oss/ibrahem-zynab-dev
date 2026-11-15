@@ -358,3 +358,8 @@
 ## 123 — تدقيق إغلاق حدود SH-08/13/14/15 عبر دورة التشغيل
 
 [123-sh08-sh13-sh14-sh15-cross-service-operational-closure-audit.md](123-sh08-sh13-sh14-sh15-cross-service-operational-closure-audit.md) — يراجع حدود تنفيذ المهام والموصلات والمراقبة والنسخ والاستعادة، ويحدد 16 قرار تماس و14 سيناريو تكامل مشتقاً؛ جميع القرارات OPEN والاختبارات NOT RUN.
+
+
+## 124 — تدقيق حدود SH-09/10/11/12/16
+
+[124-sh09-sh10-sh11-sh12-sh16-cross-service-boundary-closure-audit.md](124-sh09-sh10-sh11-sh12-sh16-cross-service-boundary-closure-audit.md) — يوحد حدود الأحداث والإصدارات والتكاليف والإعدادات والمعرفة، ويحدد 20 قرار تماس و18 سيناريو تكامل مشتقاً؛ القرارات OPEN والاختبارات NOT RUN.
