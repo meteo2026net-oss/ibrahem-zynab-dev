@@ -519,3 +519,8 @@
 ## 171 — تسوية أسماء عمليات الموافقات ومعرفات العمليات C08–C14
 
 [171-c08-c14-approval-operation-exact-name-reconciliation.md](171-c08-c14-approval-operation-exact-name-reconciliation.md) — يثبت مطابقة الاسم الحرفية بين أسماء العمليات في 14 نوع موافقة C08–C14 ومعرفات العمليات المقابلة في السجل 97. المطابقة لا تعتمد أن العملية تمثل قرار الموافقة أو أن الملكية أو الاختبارات أُغلقت؛ تبقى APR-C07-02 والفجوات التشغيلية مفتوحة.
+
+
+## 172 — تسوية معرفات وسيناريوهات اختبارات القبول C08–C14
+
+[172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md](172-c08-c14-acceptance-test-identifier-and-scenario-reconciliation.md) — يقارن فضاءات معرفات الاختبارات في مسودات عقود C08–C14 مع workpapers اللاحقة، ويوثق فرق 76 مقابل 124 (+48) دون افتراض aliases أو روابط exact معتمدة.
