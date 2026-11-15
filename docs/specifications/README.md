@@ -304,3 +304,5 @@
 | [107 مصفوفة حدود الخدمات المشتركة على مستوى عمليات API](107-shared-service-operation-boundary-crosswalk.md) | يراجع 95 عملية مرشحة عبر C04/C06/C07/C09/C11/C14 ويفصل Domain Job عن execution/connector/telemetry؛ لا APIs منفذة |
 
 | [108 تدقيق أسماء عمليات API مقابل المصدر الأصلي](108-source-name-audit-for-shared-service-affected-api-operations.md) | فحص 95 عملية من C04/C06/C07/C09/C11/C14: خمس مطابقات حرفية و90 اسماً غير مطابق حرفياً، مع locators ونظائر دلالية تحتاج قراراً |
+
+| [109 مرشحات الاختبار المصدرية لأحداث الخدمات المشتركة](109-source-test-scenario-candidates-for-shared-service-events.md) | يربط 50 حدثاً بمرشحات DATA/API/AT/DASH-INT أو سيناريوهات مصدر غير مرقمة؛ جميع الروابط دلالية مرشحة وليست Exact، ولا اختبارات منفذة |
