@@ -195,3 +195,7 @@ Workpaper [145](145-c01-c07-function-to-api-operation-candidate-crosswalk.md) pr
 - Workpaper 151: [مرشحات ربط الأحداث بالاختبارات المحلية](151-c08-c14-event-to-local-acceptance-semantic-candidates.md).
 - 55 مرشحاً دلالياً (11 C08، 10 C09، 6 C10، 14 C11، 9 C12، 4 C13، 1 C14). ليست روابط exact أو معتمدة؛ تبقى 0/55 exact Event→Test، والاختبارات NOT RUN.
 
+## Workpaper 152 — historical source recovery C08–C14
+- [152-c08-c14-historical-source-content-recovery-and-version-map.md](152-c08-c14-historical-source-content-recovery-and-version-map.md) يسجل الفصول التاريخية المستعادة من Export 01–03: 27–33، 93، 102، 142، 150، 152، 153.
+- تصحيح نطاق الفجوة: B08–B14 IDs غير مستعادة من Export 07، لكن محتوى تاريخياً للمراكز السبعة موجود ويحتاج version-aware reconciliation قبل اعتماده.
+
