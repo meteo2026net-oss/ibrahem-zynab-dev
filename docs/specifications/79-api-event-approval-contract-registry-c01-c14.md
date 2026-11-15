@@ -195,3 +195,8 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 - لا تنشأ APIs أو queues أو topics أو code قبل اعتماد المالكين وموافقة بدء التنفيذ.
 
 **API/EVENT/APPROVAL CONTRACT REGISTRY / REVIEW CANDIDATE / NOT APPROVED / NO IMPLEMENTATION.**
+
+
+## ملحق 82 — ربط العقود بقرارات ملكية غير ملتبسة
+
+يجب أن تحمل كل عملية API/Event/Approval معرف قرار ملكية مؤهلاً: OWN36-nn أو OWN72-nn، مع تحديد Domain SoR وDomain Owner وAPI Owner. لا تستخدم OWN-nn منفرداً لأن الوثيقتين 36 و72 تستخدمان الأرقام نفسها لمعانٍ مختلفة. راجع الوثيقة 82. هذا شرط توثيق مقترح ولم تُنشأ APIs أو topics أو schemas تنفيذية.
