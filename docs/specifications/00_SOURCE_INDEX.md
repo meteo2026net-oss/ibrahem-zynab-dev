@@ -276,3 +276,16 @@
 - **Findings:** 100 functions have semantic operation candidates and 9 do not; 113 operations are used by candidates and 7 remain unmatched. Exact approved function→operation links: 0; exact Operation→Test: 0/120; exact Event→Test: 0/51; all 12 approvals remain OWNER REVIEW.
 - **Acceptance detail:** 15/130 source IDs have a separate expected result in the source table; 115 have scenario labels only. All remain NOT EXECUTED.
 - **Status:** derived audit, not approved; no product code, API, schema or database changes; coding remains unauthorized.
+
+## Workpaper 156 — C01–C07 event-to-acceptance candidates
+- **File:** [156-c01-c07-event-to-acceptance-semantic-candidates.md](156-c01-c07-event-to-acceptance-semantic-candidates.md)
+- **Scope:** 51 event records across C01–C07 mapped to candidate source acceptance locators in 104.
+- **Result:** 51 semantic candidates; 0 exact approved Event→Test links. C02 entries are acceptance criteria, not original numbered test cases; all scenarios remain NOT EXECUTED.
+- **Status:** owner review required; no event schema/API/code changes.
+
+## Workpaper 157 — approval semantics and SH-03 consumer reconciliation
+- **File:** [157-approval-semantic-closure-and-sh03-consumer-reconciliation.md](157-approval-semantic-closure-and-sh03-consumer-reconciliation.md)
+- **Scope:** reconciles 26 approval types against operation semantics and original source evidence.
+- **Result:** 25/26 operation-name references exist; 8 are decision-named but not contractually validated, 17 are request/execution/review/export actions that do not themselves prove a decision, and APR-C07-02 lacks a decision operation. Exact approval-test links: 0/26; all 26 remain OWNER REVIEW.
+- **Source correction:** chapter 126.1 says the central approval service serves all centers C01–C14; the nine-center consumer list in the derived matrix is incomplete. Direct integration per center remains open.
+- **Status:** no workflow/API/schema implementation or code changes; owner approval required.
