@@ -254,3 +254,9 @@
 | OP-97-T08 | schema readiness | request/response/error/version rules مكتملة | SPECIFIED / NOT RUN |
 
 **لا تنشئ الوثيقة API endpoints أو schemas أو صلاحيات. جميع 201 سجلاً مرشحاً للمراجعة، ولا تغلق RI-94 أو GAP-044.**
+
+
+
+## ملحق 99 — ربط كل عملية بمحاور AX
+
+أضيفت الوثيقة 99 لتقديم ربط مرشح لكل Operation ID من السجلات الـ201 مع عناوين محاور AX-001..064، وعائلة اختبار المركز، ومرجع OWN. الربط مشتق آلياً من اسم العملية وعنوان المحور، لذلك لا يعد اعتماداً دلالياً أو إثبات تغطية. يظل exact test ID وsource locator وowner approval مفتوحاً.
