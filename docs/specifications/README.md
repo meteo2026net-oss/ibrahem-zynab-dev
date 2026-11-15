@@ -384,3 +384,8 @@
 ## 130 — حزمة تتبع C13 للإعدادات والتوريث
 
 [130-c13-settings-inheritance-traceability-workpaper.md](130-c13-settings-inheritance-traceability-workpaper.md) — تتبع 10 عمليات و4 أحداث مقترحة ونوعي موافقة و20 سيناريو محلياً؛ يوضح ملكية C13 مقابل SH-12 ومالكي إعدادات المجالات، مع فجوات precedence والأسرار والتطبيق والتراجع. جميع الاختبارات NOT RUN والقرارات OWNER REVIEW.
+
+
+## 131 — حزمة تتبع C14 للوحة التحكم والإسقاطات
+
+[131-c14-dashboard-projection-traceability-workpaper.md](131-c14-dashboard-projection-traceability-workpaper.md) — تتبع 13 عملية وحدثاً واحداً مقترحاً وموافقة تصدير واحدة و22 سيناريو محلياً؛ يثبت حدود C14 كطبقة قراءة وتجميع وتخصيص لا تملك مصادر المجالات، مع فجوات KPI/freshness/cache/ACL/export. الاختبارات NOT RUN والقرارات OWNER REVIEW.
