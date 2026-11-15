@@ -419,3 +419,8 @@
 ## 137 — إغلاق الفصول 141–143: التكلفة ولوحة التحكم والتدقيق
 
 [137-cost-dashboard-architecture-audit-closure-workpaper.md](137-cost-dashboard-architecture-audit-closure-workpaper.md) — تفصيل COST/DASH/AUD، ملكية بيانات C14، عتبات التكلفة المقترحة، وتعارض namespaces بين معرفات الاختبارات والقرارات. الوثيقة workpaper وليست استعادة للفصل المصدر 137، ولا اعتماداً أو اختباراً منفذاً.
+
+
+## 138 — مطابقة نموذج اعتماديات المراكز الأربعة عشر والفصل 159
+
+[138-chapter159-fourteen-center-dependency-model-and-validation-workpaper.md](138-chapter159-fourteen-center-dependency-model-and-validation-workpaper.md) — استعادة أنواع الاعتماديات الستة ومصفوفة C01–C14، وحالات الاعتماد، وقواعد الدورات والاستثناءات، واختبارات DEP-01..14 والقرارات المقترحة. لا يثبت تنفيذ الاختبارات أو اعتماد القرارات، ولا يغلق فجوات OWN أو الاختبارات المفردة. Workpaper وليست فصلاً مصدرياً.
