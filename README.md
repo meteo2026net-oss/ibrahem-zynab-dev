@@ -101,3 +101,6 @@
 
 
 **حزم الإعدادات والتعافي والخصوصية:** أضيفت الوثائق [86](docs/specifications/86-sh12-configuration-ownership-and-precedence-decision-dossier.md) و[87](docs/specifications/87-sh15-backup-recovery-ownership-decision-dossier.md) و[88](docs/specifications/88-privacy-retention-deletion-and-legal-hold-decision-dossier.md) و[89](docs/specifications/89-zero-trust-and-operational-recovery-objectives-decision-register.md). جميعها توثيق قرارات مفتوحة؛ لا تعني اعتماد السياسات أو تنفيذ خدمات النسخ والخصوصية والتعافي.
+
+
+**ملكية المعرفة والفهرسة:** أضيفت [الوثيقة 90 — SH-16 وحدود C12](docs/specifications/90-sh16-knowledge-ownership-and-c12-boundary-dossier.md) لفصل المحتوى الأصلي عن خدمات الفهرسة والاستشهاد والبحث العام؛ جميع القرارات والاختبارات مفتوحة وغير منفذة.
