@@ -173,3 +173,9 @@
 تؤكد مراجعة 94 أن مجموعات الاختبارات في هذا الملف لا ترتبط بعد بكل عملية API وحدث وموافقة على نحو مفرد. يجب أن يضاف لكل عقد test ID أو N/A مبرر من المالك، مع محور AX/source وقرار OWN مؤهل. تظل API-79 وEVT-79 وAPR-79 وINT-80 وSEC-80 واختبارات 91–95 SPECIFIED / NOT RUN أو BLOCKED؛ لا توجد run IDs جديدة.
 
 أضيفت مجموعة ART-95-T01..T14 في الوثيقة 95 لفحص artifact digest/provenance/signature/immutability/tenant access/promotion/revocation/retention/recovery. تبقى الاختبارات SPECIFIED / NOT RUN أو BLOCKED.
+
+
+
+## ملحق 97 — ربط الاختبارات على مستوى العملية
+
+أضيفت الوثيقة 97 لتوفير سجل 201 عملية مفردة، مع عائلة الاختبار الخاصة بكل مركز. لا يزال exact test ID لكل عملية TBD/OWNER REVIEW؛ وجود عائلة اختبار لا يثبت تغطية العملية. تبقى OP-97-T01..T08 SPECIFIED / NOT RUN.
