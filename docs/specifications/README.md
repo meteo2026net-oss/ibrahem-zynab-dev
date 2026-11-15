@@ -302,3 +302,5 @@
 | [105 تدقيق منشأ معرفات الاختبارات الأصلية والمشتقة](105-test-id-source-provenance-and-derived-catalog-audit.md) | يثبت 89 معرف اختبار أصلياً فريداً عبر 8 عائلات، ويفصلها عن DRAFT-AT/Cxx-AT وGATE IDs والأمثلة الافتراضية؛ يصحح منشأ المعرفات دون ادعاء تنفيذ |
 | [106 مصفوفة حدود الخدمات المشتركة على مستوى الأحداث](106-shared-service-event-boundary-crosswalk.md) | يربط 50 حدثاً من C04/C06/C07/C09/C11/C14 بحدود SH-08/13/14 وSH-15 حيث يلزم، دون ادعاء اعتماد أو exact tests |
 | [107 مصفوفة حدود الخدمات المشتركة على مستوى عمليات API](107-shared-service-operation-boundary-crosswalk.md) | يراجع 95 عملية مرشحة عبر C04/C06/C07/C09/C11/C14 ويفصل Domain Job عن execution/connector/telemetry؛ لا APIs منفذة |
+
+| [108 تدقيق أسماء عمليات API مقابل المصدر الأصلي](108-source-name-audit-for-shared-service-affected-api-operations.md) | فحص 95 عملية من C04/C06/C07/C09/C11/C14: خمس مطابقات حرفية و90 اسماً غير مطابق حرفياً، مع locators ونظائر دلالية تحتاج قراراً |
