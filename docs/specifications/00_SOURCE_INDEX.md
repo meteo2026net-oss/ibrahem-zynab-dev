@@ -268,3 +268,11 @@
 
 ### تحديث تدقيق تغطية عمليات Workpaper 154
 أضيف فحص تغطية آلي لأسماء العمليات الـ81: 80/81 لها مرشح شاشة/وحدة وظيفية؛ OP-C14-201 `invalidateProjection` موثقة كعملية داخلية لا تتطلب شاشة. أضيفت `requestPolicyChange` و`decideSecurityException` إلى C10 و`attestArtifact` إلى C11. جميع المطابقات SEMANTIC CANDIDATE فقط، ولا تتغير روابط الاختبار exact.
+
+
+## Workpaper 155 — C01–C07 function/operation/test reconciliation
+- **File:** [155-c01-c07-function-operation-test-reconciliation.md](155-c01-c07-function-operation-test-reconciliation.md)
+- **Scope:** reconciles 109 source functions, 120 proposed operations, 130 source acceptance IDs, 51 events and 12 approval types across C01–C07.
+- **Findings:** 100 functions have semantic operation candidates and 9 do not; 113 operations are used by candidates and 7 remain unmatched. Exact approved function→operation links: 0; exact Operation→Test: 0/120; exact Event→Test: 0/51; all 12 approvals remain OWNER REVIEW.
+- **Acceptance detail:** 15/130 source IDs have a separate expected result in the source table; 115 have scenario labels only. All remain NOT EXECUTED.
+- **Status:** derived audit, not approved; no product code, API, schema or database changes; coding remains unauthorized.
