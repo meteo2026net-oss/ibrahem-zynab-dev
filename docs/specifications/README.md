@@ -431,3 +431,5 @@
 [139-chapters160-162-decision-register-final-audit-and-mprts-release-workpaper.md](139-chapters160-162-decision-register-final-audit-and-mprts-release-workpaper.md) — مطابقة سجل القرارات وحالاته ومجالاته، محاور التدقيق العشرة واختباراته، وهيكل MPRTS وقوالب المراكز والوظائف والإصدارات. تربط النتائج بالفجوات المثبتة في المستودع وتؤكد أن التدقيق لم يجتز وأن MPRTS 1.0 لم تصدر. Workpaper وليست اعتماداً أو إذناً بالبرمجة.
 
 | [140 مطابقة الفصل 163 وبوابة الجاهزية](140-chapter163-executive-summary-readiness-gate-crosswalk.md) | مطابقة G-01..G-15 مع الأدلة الفعلية، وتأكيد حدود الفصل 163 وفجوة C08–C14 وتسوية C14؛ لا يمثل اعتماداً أو إذناً بالبرمجة |
+
+| [141 سجل معرفات B-01–B-07 وتصحيح الإسناد](141-b01-b07-source-id-registry-and-attribution-correction.md) | جرد 111 شاشة و109 وظيفة و130 معرف اختبار قبول، وتحديد مواقعها في Export 07 وتصحيح نسبتها إلى B-01–B-07 بدلاً من الفصل 163 |
