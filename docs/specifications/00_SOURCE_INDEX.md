@@ -51,3 +51,4 @@
 - `71-cross-center-contracts-final-consolidated-review.md`: مراجعة موحدة لعقود C01–C14 وملكية البيانات والواجهات والصلاحيات والاختبارات والتبعيات؛ مرشح مراجعة وليس اعتماداً نهائياً.
 
 - `72-ownership-boundaries-and-dependency-decision-register.md`: سجل قرارات OWN-01..10 لفصل ملكية المجالات عن SH-01..SH-16، ومصفوفة RACI وبوابات العقود والاختبارات؛ مشتق وغير معتمد.
+- `73-entity-field-ownership-reconciliation-c01-c14.md`: مطابقة مستوى الكيان والحقل للعقود 59–70 مع 23/32/36، وتحديد FLD-01..26؛ مسودة مشتقة غير معتمدة، ولا تمثل schema تنفيذية.
