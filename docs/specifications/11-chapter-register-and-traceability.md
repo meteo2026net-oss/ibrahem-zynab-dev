@@ -146,3 +146,8 @@ The complete source text of chapter 163 was re-read from Export 07 (lines 3832�
 ## Source attribution correction — B-01..B-07
 
 The detailed C01–C07 screen, function, and acceptance-test identifiers previously attributed to chapter 163 are actually in the separate aggregated center sections B-01..B-07 of Export 07 (lines 5359–13073). Chapter 163 (lines 3832–4280) is the executive summary and approval-gate chapter and does not contain those detailed ID lists. Workpaper [141](141-b01-b07-source-id-registry-and-attribution-correction.md) records the 111/109/130 source-ID inventory and exact section ranges; document [136](136-c01-c07-chapter163-screen-function-id-crosswalk.md) has been corrected. Preserve this distinction in future traceability work.
+
+
+## Acceptance test source reconciliation — 2026-11-16
+
+Workpaper [142](142-acceptance-id-vs-recovered-scenario-reconciliation.md) separates 130 unique `Cxx-AT-nn` identifiers in Export 07 B-01..B-07 from 86 local `SRC-AT` locators recovered from the master DOCX in document 104. The two inventories have different source provenance and granularity; no one-to-one equivalence or combined total is valid without owner-reviewed mapping. Document 80's DRAFT-AT and other derived test families remain distinct. All test definitions/evidence and execution states remain open/NOT RUN.
