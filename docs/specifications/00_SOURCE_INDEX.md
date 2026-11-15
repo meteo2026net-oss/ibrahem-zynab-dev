@@ -399,3 +399,8 @@
 ## Workpaper 175 — مرشحات ربط أحداث وموافقات C11–C14
 - الملف: [175-c11-c14-event-approval-to-acceptance-candidate-crosswalk.md](175-c11-c14-event-approval-to-acceptance-candidate-crosswalk.md)
 - يقدم 28 مرشح Event→Test و8 مرشحات Approval→Test؛ جميعها دلالية وغير معتمدة، مع توثيق المنتجين/المستهلكين وحدود الملكية وبوابات الإغلاق.
+
+
+## Workpaper 176 — الخطة الموحدة لإغلاق اختبارات المراكز الأربعة عشر
+- الملف: [176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md](176-fourteen-center-acceptance-and-traceability-unified-closure-plan.md)
+- توحيد خط أساس 14 مركزاً: 201 عملية، 106 أحداث، 26 موافقة، و254 سيناريو workpaper؛ توثيق فجوات الملكية والاختبارات والقرارات وبوابات الإغلاق. لا اعتماد أو تنفيذ اختبارات جديد.
