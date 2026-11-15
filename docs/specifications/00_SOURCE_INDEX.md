@@ -98,3 +98,9 @@
 
 - `94-api-event-approval-test-referential-integrity-audit.md`: تدقيق ربط API/Event/Approval/Tests؛ النتيجة PARTIAL، مع فجوات مفردة في producer/owner/AX/OWN/test.
 - `95-c11-artifact-registry-ownership-decision-dossier.md`: حزمة قرار FLD-16 وVER-85-09 لفصل artifact record عن binary storage وprovenance/signing وrelease lifecycle؛ OPEN / NOT APPROVED.
+
+
+
+## إضافة 2026-11-15 — سجل العمليات المفردة
+
+- `97-operation-level-api-test-ownership-inventory.md`: تفكيك 201 عملية API من 79 إلى Operation IDs مفردة، مع type/API Owner candidates وعائلة اختبار وOWN/TBD؛ لا schemas أو endpoints منفذة.
