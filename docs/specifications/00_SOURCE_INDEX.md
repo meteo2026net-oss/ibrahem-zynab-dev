@@ -90,6 +90,10 @@
 
 
 
+## إضافة 2026-11-15 — سجل أحداث المراكز
+
+- `96-center-event-inventory-and-producer-boundary-crosswalk.md`: سجل أحداث C01–C14، مع فصل أسماء SOURCE-RECOVERED عن PROPOSED-IN-79 وتحديد حدود المنتج/المستهلك. لا يعتمد schemas أو topics.
+
 ## إضافات 2026-11-15 — تدقيق traceability وArtifact Registry
 
 - `94-api-event-approval-test-referential-integrity-audit.md`: تدقيق ربط API/Event/Approval/Tests؛ النتيجة PARTIAL، مع فجوات مفردة في producer/owner/AX/OWN/test.
