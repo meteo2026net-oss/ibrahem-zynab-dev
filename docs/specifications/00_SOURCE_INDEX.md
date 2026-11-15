@@ -169,3 +169,11 @@
 - **Verified scope:** executive summary, 14-center list, principles, capabilities, logical architecture, gates G-01..G-15, deliverables and FINAL-01..07.
 - **Important limitation:** chapter 163 is not a screen/function catalog and contains no execution evidence. Export 07 continues with detailed B-05/B-06/B-07 sections and explicitly points to C08 as the next part; C08–C14 detailed source text remains unrecovered in the inspected exports.
 - **Readiness:** chapter text verified; all gate statuses remain partial/open as documented; MPRTS 1.0 not issued; specification approval not recorded; coding not authorized.
+
+
+## Workpaper 141 — B-01..B-07 source ID registry
+
+- **Source:** `docs/source-conversations/2026-11-10-export-part-07.txt`, sections B-01..B-07, lines 5359–13073.
+- **Attribution correction:** the screen/function/acceptance IDs are in B-01..B-07, not in chapter 163. Chapter 163 (around lines 3832–4280) is the executive summary and approval gate.
+- **Inventory:** 111 unique screen IDs, 109 unique function IDs, and 130 unique acceptance-test IDs across C01–C07.
+- **Status:** source IDs verified; catalog mapping partial; acceptance definitions/evidence and owner approvals remain open; B-08..B-14 detail not recovered from Export 07.
