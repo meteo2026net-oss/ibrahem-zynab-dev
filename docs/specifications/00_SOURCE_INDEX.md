@@ -373,3 +373,9 @@
 - الملف: [170-field-to-contract-candidate-anchor-register.md](170-field-to-contract-candidate-anchor-register.md)
 - يضيف مراسي OP/EVT/APR مفردة مرشحة لفجوات FLD-01..26، ويميزها عن الروابط المعتمدة؛ يكشف فجوة APR-C07-02 وعدم اكتمال مطابقة بعض أسماء الموافقات مع Operation IDs.
 - روابط Field→Contract المعتمدة الجديدة: 0؛ Exact Test links الجديدة: 0؛ لا تغييرات تنفيذية.
+
+
+## Workpaper 171 — تسوية أسماء عمليات الموافقات ومعرفات العمليات C08–C14
+- الملف: [171-c08-c14-approval-operation-exact-name-reconciliation.md](171-c08-c14-approval-operation-exact-name-reconciliation.md)
+- تمت مطابقة أسماء العمليات المذكورة في 14 نوع موافقة في السجل 98 حرفياً مع Operation IDs في السجل 97 (14/14). هذا يثبت المطابقة الاسمية فقط ولا يعتمد تنفيذ الموافقات أو الملكية أو الاختبارات.
+- تبقى APR-C07-02 فجوة مستقلة؛ Exact Test links والاختبارات والاعتمادات دون تغيير.
