@@ -95,3 +95,6 @@
 
 
 **حزمة المؤسسة ومساحة العمل والأدوار:** أضيفت الوثيقة [84 — حزمة حسم ملكية tenant/workspace/roles](docs/specifications/84-tenant-workspace-role-ownership-decision-dossier.md). تفصل ملكية السجلات والعضويات عن خدمات الهوية والتفويض، وتبقي قرارات المالكين مفتوحة؛ لا يوجد تنفيذ لصلاحيات فعلية.
+
+
+**حزمة SH-10 للإصدارات:** أضيفت الوثيقة [85 — حزمة حسم ملكية الإصدارات](docs/specifications/85-sh10-version-ownership-and-lifecycle-decision-dossier.md)، وتفصل metadata الإصدارات عن محتوى المجالات ودورة النشر في C11؛ لا يوجد تنفيذ لخدمة الإصدارات أو artifact registry.
