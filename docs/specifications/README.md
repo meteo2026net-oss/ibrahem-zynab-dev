@@ -323,3 +323,8 @@
 - [115 — تدقيق المطابقة الحرفية لأسماء أحداث المجال الـ106](docs/specifications/115-full-inventory-domain-event-source-name-audit.md) — لم يثبت أي اسم حدث حرفياً في DOCX (0/106)؛ 95 حدثاً SOURCE-RECOVERED مفهوماً و11 PROPOSED، وجميعها تحتاج مراجعة الاسم والعقد.
 
 - [116 — تدقيق ترابط أنواع الموافقات الـ26 مع العمليات والاختبارات](docs/specifications/116-approval-type-operation-test-traceability-audit.md) — 25 نوعاً تشير إلى عملية موجودة في 97، وAPR-C07-02 يشير إلى approveQualityWaiver غير الموجود؛ لا توجد اختبارات مفردة معتمدة.
+
+
+## 117 — تدقيق دلالة عملية الموافقة
+
+[117-approval-operation-semantic-classification.md](117-approval-operation-semantic-classification.md) — تصنيف أولي للأفعال المحمية إلى طلب/قرار/تنفيذ، وتحديد الحالات التي لا يظهر لها قرار مستقل أو تحتاج حسم SH-03. لا يعتمد أسماء APIs أو workflow ولا يغلق بوابة البرمجة.
