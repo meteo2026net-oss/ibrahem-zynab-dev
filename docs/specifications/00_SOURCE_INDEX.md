@@ -232,3 +232,9 @@
 - تدقيق الحقول الفعلية: 0/81 Operation→Test exact؛ 0/55 Event→Test exact؛ 14/14 Approval OWNER REVIEW؛ حقلا Qualified OWN وDomain SoR للأحداث ما زالا TBD.
 - توجد 124 سيناريو قبول محلياً لكنها SPECIFIED / NOT RUN، ولا تُعد روابط exact أو أدلة تنفيذ.
 - النتيجة تفصل Identifier presence عن traceability definition وعن execution evidence.
+
+## Workpaper 149 — C08–C10 operation-to-local-acceptance candidate crosswalk
+- الملف: [149-c08-c10-operation-to-local-acceptance-candidate-crosswalk.md](./149-c08-c10-operation-to-local-acceptance-candidate-crosswalk.md)
+- ربط مرشح مستخرج من جداول العمليات لـ34/81 عملية: C08 (11/11)، C09 (12/12)، C10 (11/11).
+- 47 عملية C11–C14 تحتاج crosswalk صريحاً يراجعه مالك المركز؛ لم تُستنتج روابط من تشابه الأسماء أو ترتيب الصفوف.
+- الروابط CANDIDATE فقط؛ لا تغير 0/81 exact links في سجل 97، وجميع السيناريوهات SPECIFIED / NOT RUN.
