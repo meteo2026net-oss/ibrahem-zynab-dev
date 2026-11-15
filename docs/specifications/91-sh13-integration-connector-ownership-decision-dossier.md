@@ -92,3 +92,7 @@
 تعيين مالك SH-13 وC09؛ اعتماد manifest/connection schemas؛ تعيين Secret Manager؛ اعتماد allowlist وegress/OAuth/webhook policies؛ تحديد مزودي الإصدار الأول ونطاقاتهم؛ حسم source-of-truth والمزامنة؛ ربط كل API/event/approval بقرار OWN72-02 واختبار؛ ثم تنفيذ الاختبارات وتسجيل الأدلة.
 
 **لا تغلق هذه الوثيقة OWN72-02 أو FLD-12، ولا تنشئ موصلاً أو API أو صلاحية أو secret store.**
+
+
+## تحديث التتبع المفرد — الوثيقتان 106 و107
+أضيفت مصفوفة 106 لتتبع أحداث C09 ضمن حدود SH-13/SH-09، ومصفوفة 107 لعمليات C09 الاثنتي عشرة ضمن SH-13/SH-08. هذه إحالات مرشحة لا تحسم INT-91-01..14 أو OWN72-02، ولا تربط عملية/حدثاً باختبار مفرد. تبقى schemas وmanifest وOAuth/webhook/egress والسياسات OPEN.
