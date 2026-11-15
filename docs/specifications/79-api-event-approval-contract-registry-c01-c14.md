@@ -200,3 +200,8 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 ## ملحق 82 — ربط العقود بقرارات ملكية غير ملتبسة
 
 يجب أن تحمل كل عملية API/Event/Approval معرف قرار ملكية مؤهلاً: OWN36-nn أو OWN72-nn، مع تحديد Domain SoR وDomain Owner وAPI Owner. لا تستخدم OWN-nn منفرداً لأن الوثيقتين 36 و72 تستخدمان الأرقام نفسها لمعانٍ مختلفة. راجع الوثيقة 82. هذا شرط توثيق مقترح ولم تُنشأ APIs أو topics أو schemas تنفيذية.
+
+
+## ملحق 85 — عقود الإصدارات والموافقات
+
+كل أمر تغيير versioned resource يجب أن يميز baseVersion/expectedVersion عن contractVersion، ويربط approvalRef ببصمة المورد والإصدار المقصود، ويعيد التحقق قبل التطبيق. SH-10 يحتفظ metadata المقترحة، ومالك المجال يتحقق من المحتوى، وC11 يملك release lifecycle. راجع الوثيقة 85؛ هذه متطلبات عقد مقترحة وليست API منفذة.
