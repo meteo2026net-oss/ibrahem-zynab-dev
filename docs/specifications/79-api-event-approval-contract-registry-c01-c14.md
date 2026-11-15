@@ -234,6 +234,10 @@ approvalRef, requestType, resourceRef, resourceVersion, contentHash, requestedBy
 
 كشف التدقيق 94 أن مجموعات العمليات والأحداث في هذا السجل لا تكفي وحدها لإثبات التتبع. قبل الاعتماد يجب تفكيك كل اسم إلى Contract ID مفرد وربطه بـDomain Owner/SoR وAPI Owner أو Event Producer/Consumer وOWN مؤهل وAX/source وtest ID، أو N/A بمبرر مالك. كما يجب فصل أحداث C06 عن C07، وتثبيت C01 event inventory، وفصل معنى C09/C11 عن خدمات التنفيذ والنقل والمراقبة والنسخ. راجع RI-94-01..14.
 
+## ملحق 96 — سجل الأحداث الموحد للمراكز
+
+أضيفت الوثيقة 96 لتجميع أحداث C01–C14 ومصدر كل اسم وحدود منتج المعنى مقابل SH-08/09/13/14/15. تستعيد أسماء C01 من 59 وأحداث C08/C09/C11/C12 من عقودها 64/65/67/68؛ وتبقي أحداث C10/C13/C14 الموسومة PROPOSED-IN-79 مقترحات غير مستعادة حرفياً. لا يعني التجميع اعتماد event schemas أو topics أو producer/consumer permissions. راجع EVT-96-T01..T12، وكلها SPECIFIED / NOT RUN.
+
 ## ملحق 95 — عمليات Artifact Registry المرشحة
 
 تظل عمليات artifact في C11 ضمن قائمة مرشحة غير معتمدة. تراجع الحزمة 95 فصل سجل المخرج عن binary storage وprovenance/signing وrelease lifecycle. لا تعتمد هذه الإضافة عمليات جديدة أو schemas أو endpoints، وتظل FLD-16 وVER-85-09 OPEN.
