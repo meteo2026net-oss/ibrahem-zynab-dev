@@ -108,3 +108,7 @@ Queued, Scheduled, Ready, Running, RetryScheduled, CancelRequested, Cancelled, S
 اعتماد مالك SH-08؛ تعريف job envelope والحالات والانتقالات؛ تحديد semantics للإلغاء والـretry والـreplay؛ اعتماد leases/worker model/quotas/fairness؛ ربط كل مركز مستهلك بـDomain Job Contract؛ تحديد output/log retention؛ ربط API/events/approvals بـOWN72-06 وقرارات المجالات؛ ثم تنفيذ الاختبارات بأدلة.
 
 **لا تغلق هذه الوثيقة OWN72-06 أو OWN36-08/09 ولا تنشئ queue أو worker أو scheduler أو API أو migration.**
+
+
+## تحديث التتبع المفرد — الوثيقتان 106 و107
+أضيفت 106 لتمييز أحداث المجال المرتبطة بمحاولات التنفيذ، و107 لتتبع عمليات C04/C06/C07/C09/C11 التي قد تستدعي SH-08. لا تنقل هذه المصفوفات ملكية Domain Job إلى SH-08 ولا تحسم TASK-92-01..15 أو OWN72-06. تظل سياسة retry/cancel/replay/leases/fairness والاختبارات غير معتمدة وغير منفذة.
