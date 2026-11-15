@@ -261,3 +261,7 @@
 | [96 سجل أحداث المراكز C01–C14](96-center-event-inventory-and-producer-boundary-crosswalk.md) | يجمع أحداث العقود المصدرية والمقترحات، ويفصل Domain Event عن التنفيذ والنقل والمراقبة |
 | [94 تدقيق تكامل API/Event/Approval/Tests](94-api-event-approval-test-referential-integrity-audit.md) | يسجل فجوات الربط المفرد بين كل عقد ومالك الحقيقة والقرار المؤهل ومحور المتطلب واختبار القبول |
 | [95 حزمة ملكية Artifact Registry في C11](95-c11-artifact-registry-ownership-decision-dossier.md) | تفصل سجل المخرج عن binary storage والتوقيع وprovenance ودورة الإصدار؛ قرارات مفتوحة |
+
+
+
+| [97 سجل العمليات المفردة وربط API بالاختبارات والملكية](97-operation-level-api-test-ownership-inventory.md) | يفكك 201 عملية من C01–C14 إلى Operation IDs؛ الملاك والأنواع والاختبارات ما زالت مرشحة للمراجعة |
