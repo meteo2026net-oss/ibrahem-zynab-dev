@@ -134,3 +134,8 @@
 ## ملحق 84 — اختبارات tenant/workspace/role ownership
 
 اربط اختبارات scope وmembership وrole assignment بحزمة القرار 84: TENANT-84-T01..T05 وROLE-84-T01..T10. تظل هذه الحالات SPECIFIED / NOT RUN أو BLOCKED حيث نصت الحزمة؛ لا تحولها إلى نتائج تنفيذ. وتبقى INT-80-03 وSEC-80-01/02/13 وINT-80-15 نقاط ربط مشتركة.
+
+
+## ملحق 85 — اختبارات ملكية الإصدارات
+
+أضيفت حالات VER-85-T01..T12 في الوثيقة 85 لفصل SH-10 metadata عن محتوى المجال وC11 release lifecycle وartifact registry. تبقى الحالات SPECIFIED / NOT RUN أو BLOCKED بحسب الحزمة، ولا توجد أدلة تنفيذ.
