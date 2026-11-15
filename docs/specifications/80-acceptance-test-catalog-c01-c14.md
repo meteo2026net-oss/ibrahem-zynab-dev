@@ -139,3 +139,8 @@
 ## ملحق 85 — اختبارات ملكية الإصدارات
 
 أضيفت حالات VER-85-T01..T12 في الوثيقة 85 لفصل SH-10 metadata عن محتوى المجال وC11 release lifecycle وartifact registry. تبقى الحالات SPECIFIED / NOT RUN أو BLOCKED بحسب الحزمة، ولا توجد أدلة تنفيذ.
+
+
+## ملاحق 86–89 — اختبارات الإعدادات والنسخ والخصوصية والتعافي
+
+أضيفت مجموعات CFG-86-T01..T10 وBAK-87-T01..T12 وPRIV-88-T01..T12 وOPS-89-T01..T08. جميعها SPECIFIED / NOT RUN أو BLOCKED حيث أشير إلى TBD. تعارض Zero Trust لا يعد نتيجة اختبار ولا قراراً معتمداً. يلزم تسجيل run/build/environment/actor/evidence عند التنفيذ الفعلي.
