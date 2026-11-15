@@ -554,3 +554,7 @@
 ## 178 — تدقيق Firebase وFirestore والأمن والاختبارات وجاهزية النشر
 
 [178-firebase-firestore-security-testing-release-audit.md](178-firebase-firestore-security-testing-release-audit.md) — مراجعة ساكنة لقواعد Firestore وFirebase config والمصادقة والتخزين والاختبارات وCI؛ توثق مخاطر P0 في تغيير الملكية وتعديل سجلات التدقيق/الموافقات والتعامل المباشر مع الأسرار، وتفصل ما لم يختبره Emulator أو build أو deploy. لا تغييرات تنفيذية أو موافقة بدء برمجة.
+
+## 179 — تدقيق مستودعات Android والتكاملات وخزنة الأسرار
+
+[179-android-integrations-and-secrets-vault-implementation-audit.md](179-android-integrations-and-secrets-vault-implementation-audit.md) — مراجعة ساكنة تثبت فجوات جوهرية في خزنة الأسرار (مفتاح ثابت داخل العميل، fallback إلى plaintext، وفك التشفير على Android) وتحدد عمليات GitHub/Telegram المحاكاة مقابل التكامل الحقيقي. لا تغييرات تنفيذية أو اتصالات حية.
