@@ -87,3 +87,10 @@
 - `91-sh13-integration-connector-ownership-decision-dossier.md`: حزمة ملكية SH-13 مقابل C09، مع مراجع الأسرار وOAuth/webhooks والمزامنة؛ جميع القرارات مفتوحة والاختبارات غير منفذة.
 - `92-sh08-shared-task-execution-ownership-decision-dossier.md`: فصل Domain Job عن Shared Execution Job ونتائج المجال عن حالة التنفيذ؛ جميع القرارات مفتوحة.
 - `93-sh14-operational-monitoring-ownership-decision-dossier.md`: فصل telemetry التشغيلية عن جودة C07 ونشر C11 وعرض C14؛ SLO/freshness والاحتفاظ ما زالت TBD.
+
+
+
+## إضافات 2026-11-15 — تدقيق traceability وArtifact Registry
+
+- `94-api-event-approval-test-referential-integrity-audit.md`: تدقيق ربط API/Event/Approval/Tests؛ النتيجة PARTIAL، مع فجوات مفردة في producer/owner/AX/OWN/test.
+- `95-c11-artifact-registry-ownership-decision-dossier.md`: حزمة قرار FLD-16 وVER-85-09 لفصل artifact record عن binary storage وprovenance/signing وrelease lifecycle؛ OPEN / NOT APPROVED.
