@@ -18,7 +18,7 @@
 - **المتاح:** إدارة الوكلاء المتخصصين والمهارات والأدوات والتفويض والمهام والتخطيط والتنسيق والذاكرة والمزودين والسياسات والتكاليف والمراقبة ومراجعة النتائج والتعارضات والموافقات والإيقاف والتدقيق والتقييم.
 - **قوة الدليل:** أسماء الوظائف ودورة حياة المهمة ومبادئ العزل/التفويض في 12 موثقة؛ تفاصيل 20 مقترحة DRAFT.
 - **الناقص:** مواصفات الدور والمهارة ومخرجاتها، مخطط فريق الوكلاء، خوارزمية التنسيق، سياسات إسناد المهام، سجل التقييم، حدود المسؤولية ومصفوفة الصلاحيات، واختبارات التنفيذ الفعلية.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-RECOVERED؛ SCR=SOURCE-REFERENCE-FOUND / DETAIL-PENDING؛ DATA=SCHEMA-MISSING؛ API=DERIVED-DRAFT-AVAILABLE؛ AUTH=SOURCE-REFERENCE-FOUND / MATRIX-INCOMPLETE؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** نطاق المركز معروف؛ لا توجد مواصفات تنفيذية معتمدة كاملة للوكلاء.
 
 ### AX-018 — تعدد مزودي ونماذج الذكاء الاصطناعي
@@ -26,7 +26,7 @@
 - **المتاح:** طبقة مزودين/محولات لتجنب الارتباط بمزود واحد؛ تسجيل النموذج والمزود والتكلفة؛ حدود استهلاك؛ مهلات وإعادة محاولة وبدائل؛ عزل بيانات المشاريع؛ إدارة مراجع الأسرار.
 - **قوة الدليل:** متطلبات التعدد موثقة، لكن أسماء المزودين الواردة في 10 خيارات وليست اعتماداً نهائياً، كما أن 10 تصنف الخط التقني PRELIMINARY / PENDING TECHNICAL REVIEW.
 - **الناقص:** قائمة مزودين معتمدة للإصدار الأول، مصفوفة النماذج والقدرات والسياقات واللغات، schemas موحدة، سياسة fallback، سياسة بيانات وخصوصية لكل مزود، تقييم جودة وتكلفة، حدود الميزانية، وإدارة الأسرار والتدوير.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=SCHEMA-MISSING؛ AUTH=OWNER-REVIEW؛ TEST=TEST-NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** دعم تعدد المزودين مطلب معماري؛ اختيار المزودين والنماذج لم يُعتمد بالكامل.
 
 ### AX-019 — العمل الفردي والجماعي
@@ -66,7 +66,7 @@
 - **المتاح:** أقل صلاحية؛ فصل المصادقة عن التفويض؛ تحقق خادمي؛ عزل المؤسسات والمشاريع؛ حماية الأسرار؛ سجل تدقيق؛ موافقات؛ منع الوكلاء من رفع الصلاحيات أو تعديل سجل التدقيق؛ الأمن جزء من دورة الاختبار والنشر.
 - **قوة الدليل:** المبادئ موجودة في عدة مصادر؛ SH-01..SH-04 مسماة في المصدر 132.6؛ تفاصيل 23 و36 تظل مقترحة؛ كتالوج C10 في 19 مشتق.
 - **الناقص:** threat model مكتمل، تصنيف البيانات، مصفوفة RBAC/ABAC لكل فعل ومورد ونطاق، إدارة مفاتيح وتدوير، incident response/SLA، سياسات احتفاظ، ضوابط سلسلة التوريد، اختبار اختراق مستقل، وسياسة استثناءات/قبول مخاطر. تعارض حالة Zero Trust المسجل في 43 لا يحسمه هذا التقرير.
-- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=SCHEMA-MISSING؛ API=DERIVED-DRAFT-AVAILABLE؛ AUTH=SOURCE-REFERENCE-FOUND / MATRIX-INCOMPLETE؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
+- **الحالة:** REQ=SOURCE-REFERENCE-FOUND؛ FUN=SOURCE-REFERENCE-FOUND + DERIVED-DRAFT-AVAILABLE؛ SCR=DERIVED-DRAFT-AVAILABLE؛ DATA=PROPOSED-DRAFT-AVAILABLE / SCHEMA-REVIEW-PENDING؛ API=PROPOSED-DRAFT-AVAILABLE / CONTRACT-REVIEW-PENDING؛ AUTH=PROPOSED-MATRIX-DRAFT / OWNER-REVIEW؛ TEST=TEST-SPECIFIED-PARTIALLY / NOT-EXECUTED؛ EVIDENCE=MISSING.
 - **الحكم:** المبادئ الأمنية الأساسية واضحة؛ منظومة الضوابط التفصيلية والأدلة لا تزال مفتوحة.
 
 ### AX-024 — واجهة إدارة المصمم نفسه
