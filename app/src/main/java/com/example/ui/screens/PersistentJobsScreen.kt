@@ -1,6 +1,8 @@
 package com.example.ui.screens
 
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,6 +35,7 @@ import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.RocketLaunch
+import androidx.compose.material.icons.filled.SaveAlt
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -63,6 +66,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.io.File
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import com.example.data.model.JobStatus
 import com.example.data.model.PersistentJob
 import com.example.data.model.Project
@@ -94,6 +100,31 @@ fun PersistentJobsScreen(
     var newJobTitle by remember { mutableStateOf("") }
     var newJobPrompt by remember { mutableStateOf("") }
     var isSubmitting by remember { mutableStateOf(false) }
+    var pendingArchive by remember { mutableStateOf<File?>(null) }
+
+    val saveArchiveLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("application/zip")
+    ) { destination ->
+        val archive = pendingArchive
+        pendingArchive = null
+        if (destination != null && archive != null) {
+            scope.launch {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val output = context.contentResolver.openOutputStream(destination)
+                            ?: throw IllegalStateException("تعذر فتح ملف الوجهة.")
+                        output.use { target -> archive.inputStream().use { input -> input.copyTo(target) } }
+                        archive.delete()
+                    }
+                    Toast.makeText(context, "تم حفظ أرشيف المشروع بنجاح", Toast.LENGTH_LONG).show()
+                } catch (_: Exception) {
+                    Toast.makeText(context, "تعذر تصدير المشروع.", Toast.LENGTH_LONG).show()
+                }
+            }
+        } else {
+            archive?.delete()
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize().metraGradientBackground) {
         Column(
@@ -123,7 +154,7 @@ fun PersistentJobsScreen(
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "WorkManager • Worker Lease System",
+                                text = "Cloud Tasks • Cloud Run • Worker Lease System",
                                 color = MaterialTheme.colorScheme.primary,
                                 style = MaterialTheme.typography.labelSmall
                             )
@@ -131,7 +162,7 @@ fun PersistentJobsScreen(
                     }
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "تستمر المهام في التنفيذ حتى بعد إغلاق التطبيق، وتُستأنف آلياً عند إعادة التشغيل من آخر نقطة آمنة.",
+                        text = "تُنفذ المهام على الخادم ولا تتطلب بقاء التطبيق مفتوحاً. تعتمد إعادة المحاولة على حالة المهمة وانتهاء مهلة الحجز؛ استعادة التنفيذ من نقطة تحقق ليست مفعلة بعد.",
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 12.sp,
                         lineHeight = 18.sp
@@ -301,24 +332,33 @@ fun PersistentJobsScreen(
                     items(filteredJobs) { job ->
                         JobCard(
                             job = job,
-                            onPause = {
-                                scope.launch {
-                                    persistentJobRepository.pauseJob(job.jobId)
-                                }
-                            },
-                            onResume = {
-                                scope.launch {
-                                    persistentJobRepository.resumeJob(job.jobId)
-                                }
-                            },
                             onCancel = {
                                 scope.launch {
-                                    persistentJobRepository.cancelJob(job.jobId)
+                                    try {
+                                        persistentJobRepository.cancelJob(job.jobId)
+                                    } catch (_: Exception) {
+                                        Toast.makeText(context, "تعذر إلغاء المهمة.", Toast.LENGTH_LONG).show()
+                                    }
                                 }
                             },
                             onRetry = {
                                 scope.launch {
-                                    persistentJobRepository.retryJob(job.jobId)
+                                    try {
+                                        persistentJobRepository.retryJob(job.jobId)
+                                        Toast.makeText(context, "تمت إعادة جدولة المهمة", Toast.LENGTH_SHORT).show()
+                                    } catch (_: Exception) {
+                                        Toast.makeText(context, "تعذرت إعادة المحاولة.", Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                            },
+                            onExport = {
+                                scope.launch {
+                                    try {
+                                        pendingArchive = persistentJobRepository.exportGeneratedProjectArchive(job.jobId)
+                                        saveArchiveLauncher.launch("project-" + job.jobId.take(8) + ".zip")
+                                    } catch (_: Exception) {
+                                        Toast.makeText(context, "لا توجد ملفات قابلة للتصدير.", Toast.LENGTH_LONG).show()
+                                    }
                                 }
                             },
                             onNavigateToApprovals = onNavigateToApprovals
@@ -333,10 +373,9 @@ fun PersistentJobsScreen(
 @Composable
 private fun JobCard(
     job: PersistentJob,
-    onPause: () -> Unit,
-    onResume: () -> Unit,
     onCancel: () -> Unit,
     onRetry: () -> Unit,
+    onExport: () -> Unit,
     onNavigateToApprovals: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -473,19 +512,19 @@ private fun JobCard(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    if (job.status == JobStatus.RUNNING) {
-                        IconButton(onClick = onPause, modifier = Modifier.size(32.dp)) {
-                            Icon(Icons.Default.Pause, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
-                        }
-                    } else if (job.status == JobStatus.PAUSED) {
-                        IconButton(onClick = onResume, modifier = Modifier.size(32.dp)) {
-                            Icon(Icons.Default.PlayArrow, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                    if (job.status == JobStatus.QUEUED || job.status == JobStatus.RUNNING) {
+                        IconButton(onClick = onCancel, modifier = Modifier.size(32.dp)) {
+                            Icon(Icons.Default.Close, contentDescription = "إلغاء المهمة", tint = MetraRose)
                         }
                     }
-
-                    if (job.status != JobStatus.COMPLETED && job.status != JobStatus.CANCELLED) {
-                        IconButton(onClick = onCancel, modifier = Modifier.size(32.dp)) {
-                            Icon(Icons.Default.Close, contentDescription = null, tint = MetraRose)
+                    if (job.status == JobStatus.FAILED || job.status == JobStatus.WAITING_FOR_RETRY) {
+                        IconButton(onClick = onRetry, modifier = Modifier.size(32.dp)) {
+                            Icon(Icons.Default.Refresh, contentDescription = "إعادة المحاولة", tint = MaterialTheme.colorScheme.primary)
+                        }
+                    }
+                    if (job.status == JobStatus.COMPLETED) {
+                        IconButton(onClick = onExport, modifier = Modifier.size(32.dp)) {
+                            Icon(Icons.Default.SaveAlt, contentDescription = "تصدير ملفات المشروع", tint = MetraEmerald)
                         }
                     }
                 }
