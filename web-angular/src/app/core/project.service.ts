@@ -256,22 +256,9 @@ export class ProjectService {
   }
 
   runAnalysis(): void {
-    this.patch({
-      analysisDone: true,
-      requirements: [
-        { id: 'R-01', text: 'تصفح قائمة المنتجات', priority: 'high', approved: false },
-        { id: 'R-02', text: 'إضافة منتج إلى السلة', priority: 'high', approved: false },
-        { id: 'R-03', text: 'إتمام الطلب بعد تسجيل الدخول', priority: 'high', approved: false },
-        { id: 'R-04', text: 'إدارة المنتجات من لوحة البائع', priority: 'high', approved: false },
-        { id: 'R-05', text: 'عرض حالة الطلب للمستخدم', priority: 'medium', approved: false },
-        { id: 'R-06', text: 'البحث والفلترة حسب التصنيف', priority: 'medium', approved: false },
-      ],
-      agentTasks: [
-        { id: '#A-' + Date.now().toString().slice(-4), agent: 'Analysis', description: 'تحليل محدّث', status: 'done' },
-        ...this.state().agentTasks,
-      ],
-    });
-    this.touchProject(this.state().activeProjectId, { phase: 1, progress: 20 });
+    // Analysis is unavailable until a real analysis provider is configured.
+    // Preserve the user's idea and existing requirements; never fabricate results.
+    this.patch({ analysisDone: false });
   }
 
   toggleRequirement(id: string): void {
@@ -299,14 +286,8 @@ export class ProjectService {
   }
 
   runAllPendingTests(): void {
-    this.state.update((s) => ({
-      ...s,
-      tests: s.tests.map((t) =>
-        t.result === 'pending'
-          ? { ...t, result: Math.random() > 0.25 ? 'pass' : 'fail' }
-          : t
-      ),
-    }));
+    // Test execution must be performed by a real test runner, not random UI state.
+    return;
   }
 
   appendBuildLog(line: string): void {
@@ -314,28 +295,11 @@ export class ProjectService {
   }
 
   simulateBuild(): void {
+    // Placeholder retained for compatibility; it must never claim an artifact exists.
     this.patch({
-      lastApk: { name: 'app-debug.apk', size: '—', ready: false },
-      buildLog: ['[بدء] توليد الكود...'],
+      lastApk: { name: 'غير متاح — لم يُنفّذ بناء فعلي', size: '—', ready: false },
+      buildLog: ['[متوقف] خدمة توليد الكود والبناء غير موصولة. لم يتم إنشاء أي حزمة.'],
     });
-    setTimeout(() => this.appendBuildLog('[..] توليد الشاشات والنماذج...'), 400);
-    setTimeout(() => this.appendBuildLog('[..] توليد الوظائف...'), 900);
-    setTimeout(() => this.appendBuildLog('[OK] اكتمال التوليد — 42 ملفاً'), 1400);
-    setTimeout(() => this.appendBuildLog('[..] بناء الحزمة...'), 1800);
-    setTimeout(() => {
-      this.appendBuildLog('[OK] نجاح البناء — app-debug.apk (18.6 MB)');
-      this.patch({ lastApk: { name: 'app-debug.apk', size: '18.6 MB', ready: true } });
-      this.touchProject(this.state().activeProjectId, { phase: 7, progress: 55 });
-      this.state.update((s) => ({
-        ...s,
-        release: {
-          ...s.release,
-          checklist: s.release.checklist.map((c) =>
-            c.label.includes('البناء') ? { ...c, done: true } : c
-          ),
-        },
-      }));
-    }, 2600);
   }
 
   setFunctionNatural(text: string): void {
@@ -395,17 +359,8 @@ export class ProjectService {
   }
 
   publishRelease(): boolean {
-    const r = this.state().release;
-    if (!r.checklist.every((c) => c.done)) return false;
-    this.state.update((s) => ({
-      ...s,
-      release: {
-        ...s.release,
-        lastPublished: new Date().toLocaleString('ar-SA'),
-      },
-    }));
-    this.touchProject(this.state().activeProjectId, { phase: 9, progress: 70 });
-    return true;
+    // A completed local checklist is not a deployment. Require a real release provider.
+    return false;
   }
 
   setCommentStatus(index: number, status: 'open' | 'approved' | 'changes'): void {
@@ -424,20 +379,8 @@ export class ProjectService {
   }
 
   runQueuedAgents(): void {
-    this.state.update((s) => ({
-      ...s,
-      agentTasks: s.agentTasks.map((t) =>
-        t.status === 'queued' ? { ...t, status: 'running' as const } : t
-      ),
-    }));
-    setTimeout(() => {
-      this.state.update((s) => ({
-        ...s,
-        agentTasks: s.agentTasks.map((t) =>
-          t.status === 'running' ? { ...t, status: 'review' as const } : t
-        ),
-      }));
-    }, 1200);
+    // Agent orchestration requires a trusted backend; never simulate completion.
+    return;
   }
 
   resetDemoData(): void {
