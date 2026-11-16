@@ -21,7 +21,7 @@ Date: 2026-11-16
 
 ## Not yet complete
 
-- Functions TypeScript CI is running for this change; pass status must be confirmed.
+- Functions TypeScript CI passed for the queue and lease implementation on run 43835870434.
 - No Cloud Tasks dispatcher, worker runtime, or live IAM service account has been provisioned.
 - Android `PersistentJobRepository` and `TaskOrchestrator` still need migration to these callables/private endpoints. Until then, the client-side orchestration path must not be considered production-ready.
 - Emulator integration tests for queue races, expired leases, idempotency collisions, cancellation, and worker authorization are still required.
