@@ -4,6 +4,7 @@ const express = require("express");
 const { GoogleAuth } = require("google-auth-library");
 const { GoogleGenAI } = require("@google/genai");
 const { extractText } = require("./gemini-response");
+const { JobControl } = require("./job-control");
 
 const app = express();
 app.disable("x-powered-by");
@@ -60,8 +61,7 @@ app.post("/tasks", async (req, res) => {
   let lease;
   let heartbeatTimer;
   let heartbeatBusy = false;
-  let leaseLost = false;
-  let cancellationRequested = false;
+  const control = new JobControl();
   try {
     const claimed = await callPrivateFunction("claimPersistentJob", { jobId, workerId });
     if (claimed?.cancelled || claimed?.alreadyFinished) {
@@ -81,9 +81,9 @@ app.post("/tasks", async (req, res) => {
         const heartbeat = await callPrivateFunction("renewPersistentJobLease", {
           jobId, workerId, leaseToken: lease.leaseToken
         });
-        if (heartbeat?.cancellationRequested === true) cancellationRequested = true;
+        control.observeHeartbeat(heartbeat);
       } catch (error) {
-        leaseLost = true;
+        control.observeHeartbeatFailure();
         console.error("Worker heartbeat failed", { jobId, message: error.message });
       } finally {
         heartbeatBusy = false;
@@ -131,11 +131,11 @@ app.post("/tasks", async (req, res) => {
       contents: prompt,
       config: { temperature: 0.2, maxOutputTokens: 8192 }
     });
-    if (leaseLost) {
+    if (control.leaseLost) {
       res.status(503).json({ error: "worker-lease-lost", jobId });
       return;
     }
-    if (cancellationRequested) {
+    if (control.cancellationRequested) {
       await callPrivateFunction("finishPersistentJob", {
         jobId, workerId, leaseToken: lease.leaseToken,
         state: "CANCELLED", summary: "Cancelled while the AI model was processing."
@@ -174,7 +174,7 @@ app.post("/tasks", async (req, res) => {
     console.error("Persistent job execution failed", {
       jobId, message: error.message, status: error.response?.status
     });
-    if (lease && !leaseLost) {
+    if (lease && !control.leaseLost) {
       try {
         await callPrivateFunction("finishPersistentJob", {
           jobId, workerId, leaseToken: lease.leaseToken,
