@@ -34,10 +34,10 @@ fun initializeFirebaseApp(context: Context): Boolean {
             .setProjectId(BuildConfig.FIREBASE_PROJECT_ID)
             .setGcmSenderId(BuildConfig.FIREBASE_MESSAGING_SENDER_ID)
             .apply {
-                if (BuildConfig.FIREBASE_STORAGE_BUCKET.isNotBlank()) {
+                if (BuildConfig.FIREBASE_STORAGE_BUCKET.isNotBlank() && !BuildConfig.FIREBASE_STORAGE_BUCKET.startsWith("CONFIGURE_")) {
                     setStorageBucket(BuildConfig.FIREBASE_STORAGE_BUCKET)
                 }
-                if (BuildConfig.FIREBASE_DATABASE_URL.isNotBlank()) {
+                if (BuildConfig.FIREBASE_DATABASE_URL.isNotBlank() && !BuildConfig.FIREBASE_DATABASE_URL.startsWith("CONFIGURE_")) {
                     setDatabaseUrl(BuildConfig.FIREBASE_DATABASE_URL)
                 }
             }
