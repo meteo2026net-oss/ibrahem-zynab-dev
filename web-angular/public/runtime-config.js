@@ -1,6 +1,13 @@
-// Public Firebase Web configuration. The API key is not a server secret.
-// Replace the empty value with the Web API Key from Firebase project settings.
-// Restrict the key by HTTP referrer in Google Cloud Console.
+// Public Firebase Web configuration. These values are identifiers, not server secrets.
+// Restrict the API key by HTTP referrer. Never place service-account credentials here.
 window.__APP_CONFIG__ = {
-  firebaseApiKey: ''
+  apiKey: '',
+  authDomain: '',
+  projectId: '',
+  appId: '',
+  messagingSenderId: '',
+  storageBucket: '',
+  measurementId: '',
+  functionsRegion: 'us-central1',
+  appCheckSiteKey: ''
 };
