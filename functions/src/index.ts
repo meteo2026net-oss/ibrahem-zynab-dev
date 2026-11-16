@@ -746,7 +746,15 @@ export const finishPersistentJob = onRequest(
       ? request.body.resultText.slice(0, 80000) : "";
     const resultModel = typeof request.body?.resultModel === "string"
       ? request.body.resultModel.slice(0, 120) : "";
-    const resultFiles = state === "SUCCEEDED" ? sanitizeResultFiles(request.body?.resultFiles) : [];
+    let resultFiles: ReturnType<typeof sanitizeResultFiles> = [];
+    if (state === "SUCCEEDED") {
+      try {
+        resultFiles = sanitizeResultFiles(request.body?.resultFiles);
+      } catch {
+        response.status(400).json({ error: "invalid-generated-project-files" });
+        return;
+      }
+    }
     const finalState = await db.runTransaction(async (tx) => {
       const { ref, data } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
       const resolvedState = data.cancelRequested === true ? "CANCELLED" : state;
