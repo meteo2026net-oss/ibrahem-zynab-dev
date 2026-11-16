@@ -444,3 +444,8 @@
 ## Workpaper 183 — الدفعة التنفيذية الأولى: إغلاق المصادقة التجريبية في واجهة الويب
 - الملف: [183-first-implementation-batch-web-auth-fail-closed.md](183-first-implementation-batch-web-auth-fail-closed.md)
 - أول تغيير كود بعد موافقة المالك: إزالة إنشاء جلسة admin محلية وقبول بيانات اعتماد شكلية، وإضافة اختبارات وحدة لسلوك fail-closed. الدخول الإنتاجي لم يُربط بعد؛ الاختبارات والبناء والنشر NOT RUN.
+
+
+## Workpaper 184 — الدفعة التنفيذية الثانية: منع نجاحات سير العمل الوهمية
+- الملف: [184-second-implementation-batch-remove-fake-workflow-success.md](184-second-implementation-batch-remove-fake-workflow-success.md)
+- أوقفت الدفعة نتائج التحليل الثابتة والاختبارات العشوائية ونجاح البناء الوهمي والنشر المحلي المضلل وتشغيل الوكلاء المحاكى. لم يتم توصيل المحركات البديلة بعد؛ اختبارات Angular والبناء والنشر بانتظار تحقق CI.
