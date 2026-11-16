@@ -636,3 +636,8 @@
 ## 195 — خط إصدار Android الموقّع
 
 [195-signed-android-release-pipeline.md](195-signed-android-release-pipeline.md) — workflow يدوي لبناء AAB موقّع باستخدام keystore محفوظ في GitHub Secrets.
+
+
+## 196 — طابور المهام وعقود العامل الموثوقة
+
+[196-trusted-orchestration-queue-and-leases.md](196-trusted-orchestration-queue-and-leases.md) — طابور مهام خادمي مع idempotency وleases وheartbeat وإلغاء آمن عبر Cloud Functions.
