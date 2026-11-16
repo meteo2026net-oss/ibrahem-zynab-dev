@@ -120,16 +120,9 @@ class PersistentJobRepository(private val context: Context) {
     suspend fun getGeneratedProjectFiles(jobId: String): List<GeneratedProjectFile> = withContext(Dispatchers.IO) {
         val result = getJobResult(jobId)
         val rawFiles = result["resultFiles"] as? List<*> ?: emptyList<Any>()
-        rawFiles.mapNotNull { raw ->
-            val file = raw as? Map<*, *> ?: return@mapNotNull null
-            val path = file["path"] as? String ?: return@mapNotNull null
-            val content = file["content"] as? String ?: return@mapNotNull null
-            if (path.isBlank() || path.startsWith("/") || path.contains("\\") ||
-                path.split("/").any { it.isBlank() || it == "." || it == ".." || it.startsWith(".") }) {
-                return@mapNotNull null
-            }
-            GeneratedProjectFile(path = path, content = content)
-        }
+        val files = rawFiles.mapNotNull { GeneratedProjectFile.fromMap(it) }
+        val seen = HashSet<String>()
+        files.filter { seen.add(it.path.lowercase()) }
     }
 
     suspend fun pauseJob(jobId: String) {
