@@ -601,3 +601,8 @@
 ## 188 — تقوية قواعد أمان Firestore
 
 [188-firestore-security-hardening.md](188-firestore-security-hardening.md) — فرض ثبات مالك المستند، ومنع التعديل المباشر لسجلات التحكم والتدقيق، وحجب مجموعات الأسرار والاعتمادات عن العملاء لحين توفير backend موثوق. اختبارات Emulator والنشر ما زالت مطلوبة.
+
+
+## 189 — دورة حياة حساب Firebase
+
+[189-firebase-account-lifecycle.md](189-firebase-account-lifecycle.md) — إضافة التسجيل وتأكيد البريد وطلب إعادة تعيين كلمة المرور في Firebase Authentication. يتطلب CI وضبط Firebase الفعلي، كما أن فرض التحقق من البريد على كل جلسة ما زال مطلوباً.
