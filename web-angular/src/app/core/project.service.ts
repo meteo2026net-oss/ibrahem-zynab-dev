@@ -150,11 +150,57 @@ function defaultState(): AppState {
   };
 }
 
+function isProject(value: unknown): value is Project {
+  if (!value || typeof value !== 'object') return false;
+  const project = value as Partial<Project>;
+  return typeof project.id === 'string' && project.id.length > 0 &&
+    typeof project.name === 'string' && typeof project.description === 'string' &&
+    ['active', 'draft', 'archived'].includes(project.status ?? '') &&
+    Number.isFinite(project.phase) && Number.isFinite(project.progress) &&
+    Array.isArray(project.platforms) && typeof project.updatedAt === 'string';
+}
+
+function normalizeState(value: unknown): AppState {
+  const defaults = defaultState();
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return defaults;
+  const saved = value as Partial<AppState>;
+  const projects = Array.isArray(saved.projects)
+    ? saved.projects.filter(isProject)
+    : defaults.projects;
+  const activeProjectId =
+    typeof saved.activeProjectId === 'string' &&
+    projects.some((project) => project.id === saved.activeProjectId)
+      ? saved.activeProjectId
+      : projects[0]?.id ?? '';
+
+  return {
+    ...defaults,
+    ...saved,
+    projects,
+    activeProjectId,
+    ideaText: typeof saved.ideaText === 'string' ? saved.ideaText : defaults.ideaText,
+    requirements: Array.isArray(saved.requirements) ? saved.requirements : defaults.requirements,
+    entities: Array.isArray(saved.entities) ? saved.entities : defaults.entities,
+    tests: Array.isArray(saved.tests) ? saved.tests : defaults.tests,
+    agentTasks: Array.isArray(saved.agentTasks) ? saved.agentTasks : defaults.agentTasks,
+    buildLog: Array.isArray(saved.buildLog) ? saved.buildLog : defaults.buildLog,
+    functionSteps: Array.isArray(saved.functionSteps) ? saved.functionSteps : defaults.functionSteps,
+    designPages: Array.isArray(saved.designPages) ? saved.designPages : defaults.designPages,
+    team: Array.isArray(saved.team) ? saved.team : defaults.team,
+    comments: Array.isArray(saved.comments) ? saved.comments : defaults.comments,
+    monitorErrors: Array.isArray(saved.monitorErrors) ? saved.monitorErrors : defaults.monitorErrors,
+    roles: Array.isArray(saved.roles) ? saved.roles : defaults.roles,
+    settings: saved.settings && typeof saved.settings === 'object' ? saved.settings : defaults.settings,
+    release: saved.release && typeof saved.release === 'object' ? saved.release : defaults.release,
+    lastApk: saved.lastApk && typeof saved.lastApk === 'object' ? saved.lastApk : defaults.lastApk,
+  };
+}
+
 function loadState(): AppState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultState();
-    return { ...defaultState(), ...JSON.parse(raw) };
+    return normalizeState(JSON.parse(raw) as unknown);
   } catch {
     return defaultState();
   }
@@ -226,6 +272,7 @@ export class ProjectService {
   }
 
   selectProject(id: string): void {
+    if (!this.projects().some((project) => project.id === id)) return;
     this.patch({ activeProjectId: id });
   }
 
