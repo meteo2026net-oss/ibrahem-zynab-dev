@@ -621,3 +621,8 @@
 ## 192 — أساس الخلفية الموثوقة في Firebase
 
 [192-trusted-firebase-backend-foundation.md](192-trusted-firebase-backend-foundation.md) — Cloud Functions محمية بـ App Check لإدارة الأسرار بمفتاح Cloud KMS والموافقات مع تدقيق خادمي؛ تتطلب إعداد موارد Google Cloud قبل النشر.
+
+
+## 193 — إعداد Android والإصدار
+
+[193-android-runtime-and-release-gates.md](193-android-runtime-and-release-gates.md) — توثيق إعداد Firebase/OAuth/App Check ومفتاح التوقيع الدائم المطلوب قبل نشر Android.
