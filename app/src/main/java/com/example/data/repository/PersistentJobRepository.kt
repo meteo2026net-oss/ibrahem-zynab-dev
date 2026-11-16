@@ -124,7 +124,7 @@ class PersistentJobRepository(private val context: Context) {
             val file = raw as? Map<*, *> ?: return@mapNotNull null
             val path = file["path"] as? String ?: return@mapNotNull null
             val content = file["content"] as? String ?: return@mapNotNull null
-            if (path.isBlank() || path.startsWith("/") || path.contains("\\\\") ||
+            if (path.isBlank() || path.startsWith("/") || path.contains("\\") ||
                 path.split("/").any { it.isBlank() || it == "." || it == ".." || it.startsWith(".") }) {
                 return@mapNotNull null
             }
