@@ -1,1 +1,0 @@
-This marker triggers the isolated, sequential Angular 19 -> 20 -> 21 migration workflow. The migration is committed only after unit tests, production build, and critical/high npm audit checks pass.
