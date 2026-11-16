@@ -2,34 +2,25 @@ package com.example.data.repository
 
 import android.content.Context
 import android.util.Log
-import androidx.work.BackoffPolicy
-import androidx.work.Constraints
-import androidx.work.Data
-import androidx.work.ExistingWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.R
 import com.example.data.model.AgentRole
 import com.example.data.model.JobStatus
 import com.example.data.model.JobStep
 import com.example.data.model.JobStepType
 import com.example.data.model.PersistentJob
-import com.example.data.worker.PersistentJobWorker
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.google.firebase.Timestamp
-import java.util.Date
+import com.google.firebase.functions.FirebaseFunctions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.util.Date
 import java.util.UUID
-import java.util.concurrent.TimeUnit
-
 
 internal fun parsePersistentJobStatus(raw: String?): JobStatus {
     return when (raw?.trim()?.uppercase()) {
@@ -49,21 +40,15 @@ internal fun parseFirestoreMillis(value: Any?): Long? = when (value) {
     else -> null
 }
 
-class PersistentJobRepository(
-    private val context: Context
-) {
+class PersistentJobRepository(private val context: Context) {
     private val firestore by lazy {
-        val databaseId = context.getString(R.string.firestore_database_id)
-        Firebase.firestore(databaseId)
+        Firebase.firestore(context.getString(R.string.firestore_database_id))
     }
-
-    private val workManager by lazy {
-        WorkManager.getInstance(context)
-    }
+    private val functions by lazy { FirebaseFunctions.getInstance() }
 
     /**
-     * Creates a new durable job, persists it to Firestore, and enqueues a WorkManager task
-     * that will run in the background even if the app, browser, or screen is turned off.
+     * Creates a durable server-side queue record. This does not execute the task:
+     * the trusted worker/dispatcher must be deployed before queued work can run.
      */
     suspend fun createAndScheduleJob(
         projectId: String,
@@ -72,23 +57,33 @@ class PersistentJobRepository(
         userPrompt: String,
         customSteps: List<JobStep>? = null
     ): PersistentJob = withContext(Dispatchers.IO) {
-        // The Android client must not create persistent_jobs directly: Firestore
-        // rules intentionally deny client writes and the trusted dispatcher is not
-        // yet deployed. Fail explicitly instead of creating a local_worker job or
-        // scheduling a WorkManager task that cannot securely execute it.
-        throw IllegalStateException(
-            "Background job execution is not available yet. Deploy and connect the trusted backend worker before scheduling jobs."
-        )
-
         val user = Firebase.auth.currentUser
-        val userId = user?.uid ?: "local_worker"
-        val jobId = UUID.randomUUID().toString()
+            ?: throw IllegalStateException("Sign in before creating a background job.")
+        require(projectId.isNotBlank()) { "Project ID is required." }
+        require(title.isNotBlank()) { "Job title is required." }
+        require(userPrompt.isNotBlank()) { "Job prompt is required." }
 
+        val response = functions.getHttpsCallable("createPersistentJob").call(
+            mapOf(
+                "projectId" to projectId,
+                "projectName" to projectName,
+                "jobType" to "APP_DESIGN",
+                "title" to title,
+                "prompt" to userPrompt,
+                "idempotencyKey" to UUID.randomUUID().toString()
+            )
+        ).await()
+        val payload = response.data as? Map<*, *>
+            ?: throw IllegalStateException("Trusted job service returned an invalid response.")
+        val jobId = payload["jobId"] as? String
+            ?: throw IllegalStateException("Trusted job service did not return a job ID.")
+        val reused = payload["reused"] as? Boolean ?: false
         val steps = customSteps ?: generateDefaultPipelineSteps(jobId, userPrompt)
+        val now = System.currentTimeMillis()
 
-        val job = PersistentJob(
+        PersistentJob(
             jobId = jobId,
-            userId = userId,
+            userId = user.uid,
             projectId = projectId,
             projectName = projectName,
             title = title,
@@ -97,114 +92,33 @@ class PersistentJobRepository(
             steps = steps.toMutableList(),
             currentStepIndex = 0,
             progressPercent = 0,
+            createdAt = now,
+            updatedAt = now,
             executionLogs = mutableListOf(
-                "[${formatTime(System.currentTimeMillis())}] تم إنشاء المهمة الدائمة وجدولتها في نظام التنفيذ الخلفي المستمر."
+                if (reused) "تم استرجاع المهمة السابقة باستخدام مفتاح منع التكرار."
+                else "تم حفظ المهمة في طابور الخادم. لن يبدأ التنفيذ حتى نشر العامل الخلفي الموثوق."
             )
         )
-
-        // 1. Save to persistent database
-        firestore.collection("persistent_jobs").document(jobId)
-            .set(job.toFirestoreMap())
-            .await()
-
-        // 2. Schedule via WorkManager
-        enqueueWorkManagerTask(job)
-
-        job
     }
 
-    private fun enqueueWorkManagerTask(job: PersistentJob) {
-        val inputData = Data.Builder()
-            .putString(PersistentJobWorker.KEY_JOB_ID, job.jobId)
-            .putString(PersistentJobWorker.KEY_JOB_TITLE, job.title)
-            .build()
-
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val workRequest = OneTimeWorkRequestBuilder<PersistentJobWorker>()
-            .setConstraints(constraints)
-            .setInputData(inputData)
-            .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 10, TimeUnit.SECONDS)
-            .addTag("metra_job")
-            .addTag("project_${job.projectId}")
-            .build()
-
-        workManager.enqueueUniqueWork(
-            "job_${job.jobId}",
-            ExistingWorkPolicy.REPLACE,
-            workRequest
-        )
+    suspend fun pauseJob(jobId: String) {
+        throw UnsupportedOperationException("Pausing is unavailable until the trusted worker supports pause requests.")
     }
 
-    suspend fun pauseJob(jobId: String) = withContext(Dispatchers.IO) {
-        throw IllegalStateException("Trusted background-job backend is not deployed; pauseJob is unavailable.")
-
-        firestore.collection("persistent_jobs").document(jobId)
-            .update(
-                mapOf(
-                    "status" to JobStatus.PAUSED.id,
-                    "updatedAt" to System.currentTimeMillis()
-                )
-            ).await()
-        workManager.cancelUniqueWork("job_$jobId")
-    }
-
-    suspend fun resumeJob(jobId: String) = withContext(Dispatchers.IO) {
-        throw IllegalStateException("Trusted background-job backend is not deployed; resumeJob is unavailable.")
-
-        val doc = firestore.collection("persistent_jobs").document(jobId).get().await()
-        if (doc.exists()) {
-            val data = doc.data ?: return@withContext
-            val stepsRaw = data["stepsData"] as? List<Map<String, Any?>> ?: emptyList()
-            val steps = stepsRaw.map { JobStep.fromMap(it) }.toMutableList()
-            val logsRaw = data["logs"] as? List<String> ?: emptyList()
-
-            val job = PersistentJob(
-                jobId = jobId,
-                userId = data["userId"] as? String ?: "",
-                projectId = data["projectId"] as? String ?: "",
-                projectName = data["projectName"] as? String ?: "",
-                title = data["title"] as? String ?: "",
-                userPrompt = data["userPrompt"] as? String ?: "",
-                status = JobStatus.QUEUED,
-                steps = steps,
-                currentStepIndex = (data["currentStepIndex"] as? Number)?.toInt() ?: 0,
-                progressPercent = (data["progressPercent"] as? Number)?.toInt() ?: 0,
-                totalTokensUsed = (data["totalTokensUsed"] as? Number)?.toInt() ?: 0,
-                estimatedCostUsd = (data["estimatedCostUsd"] as? Number)?.toDouble() ?: 0.0,
-                createdAt = (data["createdAt"] as? Number)?.toLong() ?: System.currentTimeMillis(),
-                updatedAt = System.currentTimeMillis(),
-                executionLogs = logsRaw.toMutableList()
-            )
-
-            job.executionLogs.add("[${formatTime(System.currentTimeMillis())}] تم استئناف المهمة من نقطة التوقف الأخيرة (${job.currentStepIndex + 1}/${job.steps.size}).")
-
-            firestore.collection("persistent_jobs").document(jobId)
-                .set(job.toFirestoreMap())
-                .await()
-
-            enqueueWorkManagerTask(job)
-        }
+    suspend fun resumeJob(jobId: String) {
+        throw UnsupportedOperationException("Resuming is unavailable until the trusted worker supports checkpoint resume.")
     }
 
     suspend fun cancelJob(jobId: String) = withContext(Dispatchers.IO) {
-        throw IllegalStateException("Trusted background-job backend is not deployed; cancelJob is unavailable.")
-
-        firestore.collection("persistent_jobs").document(jobId)
-            .update(
-                mapOf(
-                    "status" to JobStatus.CANCELLED.id,
-                    "completedAt" to System.currentTimeMillis(),
-                    "updatedAt" to System.currentTimeMillis()
-                )
-            ).await()
-        workManager.cancelUniqueWork("job_$jobId")
+        Firebase.auth.currentUser ?: throw IllegalStateException("Sign in before cancelling a job.")
+        functions.getHttpsCallable("cancelPersistentJob")
+            .call(mapOf("jobId" to jobId))
+            .await()
+        Unit
     }
 
-    suspend fun retryJob(jobId: String) = withContext(Dispatchers.IO) {
-        resumeJob(jobId)
+    suspend fun retryJob(jobId: String) {
+        throw UnsupportedOperationException("Retry is unavailable until the trusted worker retry policy is deployed.")
     }
 
     fun getJobsFlow(projectId: String?): Flow<List<PersistentJob>> = flow {
