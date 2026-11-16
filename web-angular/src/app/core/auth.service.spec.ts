@@ -226,6 +226,62 @@ describe('AuthService Firebase Authentication', () => {
     expect(service.getIdToken()).toBeNull();
   });
 
+
+  it('shares one in-flight refresh request across concurrent callers', async () => {
+    const clock = spyOn(Date, 'now').and.returnValue(0);
+    const signIn = service.login('person@example.com', 'correct-password');
+    http.expectOne((req) => req.url.includes('accounts:signInWithPassword')).flush({
+      localId: 'firebase-user-1',
+      email: 'person@example.com',
+      idToken: 'first-id-token',
+      refreshToken: 'first-refresh-token',
+      expiresIn: '3600',
+    });
+    expect(await signIn).toBeTrue();
+
+    clock.and.returnValue(3_550_000);
+    const first = service.getValidIdToken();
+    const second = service.getValidIdToken();
+    const request = http.expectOne((req) => req.url.includes('securetoken.googleapis.com/v1/token'));
+    request.flush({
+      id_token: 'renewed-id-token',
+      refresh_token: 'renewed-refresh-token',
+      expires_in: '3600',
+      user_id: 'firebase-user-1',
+    });
+
+    expect(await first).toBe('renewed-id-token');
+    expect(await second).toBe('renewed-id-token');
+  });
+
+  it('does not restore a session when an old refresh response arrives after logout', async () => {
+    const clock = spyOn(Date, 'now').and.returnValue(0);
+    const signIn = service.login('person@example.com', 'correct-password');
+    http.expectOne((req) => req.url.includes('accounts:signInWithPassword')).flush({
+      localId: 'firebase-user-1',
+      email: 'person@example.com',
+      idToken: 'first-id-token',
+      refreshToken: 'first-refresh-token',
+      expiresIn: '3600',
+    });
+    expect(await signIn).toBeTrue();
+
+    clock.and.returnValue(3_550_000);
+    const refreshed = service.getValidIdToken();
+    const request = http.expectOne((req) => req.url.includes('securetoken.googleapis.com/v1/token'));
+    service.logout();
+    request.flush({
+      id_token: 'stale-id-token',
+      refresh_token: 'stale-refresh-token',
+      expires_in: '3600',
+      user_id: 'firebase-user-1',
+    });
+
+    expect(await refreshed).toBeNull();
+    expect(service.isLoggedIn()).toBeFalse();
+    expect(service.getIdToken()).toBeNull();
+  });
+
   it('clears the in-memory ID token on logout', async () => {
     service.logout();
     expect(service.getIdToken()).toBeNull();
