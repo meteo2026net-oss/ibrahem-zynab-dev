@@ -144,13 +144,24 @@ export class AuthService {
           { grant_type: 'refresh_token', refresh_token: this.refreshToken }
         )
       );
-      if (!response.id_token || !response.refresh_token) {
+      const currentUid = this.userSignal()?.uid;
+      const refreshedExpirySeconds = Number(response.expires_in);
+      if (
+        !currentUid ||
+        response.user_id !== currentUid ||
+        !response.id_token ||
+        !response.refresh_token ||
+        !Number.isFinite(refreshedExpirySeconds) ||
+        refreshedExpirySeconds <= 0
+      ) {
+        // A refresh response must remain bound to the account that initiated it.
+        // Fail closed rather than accepting a token for a different Firebase UID.
         this.logout();
         return null;
       }
       this.idToken = response.id_token;
       this.refreshToken = response.refresh_token;
-      this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expires_in) || 0) * 1000;
+      this.tokenExpiresAt = Date.now() + refreshedExpirySeconds * 1000;
       return this.idToken;
     } catch {
       this.logout();
