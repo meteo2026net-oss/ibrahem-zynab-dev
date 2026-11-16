@@ -31,7 +31,7 @@ The release signing configuration is present in Gradle but has not been tested w
 
 ## Other Android hardening still required
 
-- Disable Android Auto Backup or define explicit exclusions for local databases, auth/session data, and secrets. Current manifest still has `allowBackup=true`.
+- Android Auto Backup has now been disabled (`allowBackup=false`) and backup-rule manifest references removed in commit 7f35ab67407ae88a681f0bacdfedbad317b62475; the resulting manifest change is pending CI re-verification.
 - Integrate the callable Functions in the mobile repository before enabling the Secrets Vault UI.
 - Move orchestration, job leases, heartbeats, approvals, idempotency, and external side effects to trusted server functions.
 - Run end-to-end tests on a real configured Firebase project and supported Android devices.
