@@ -52,6 +52,15 @@ jobs:
       - name: Build production bundle
         run: npm run build -- --configuration production
 
+      - name: Upload production web bundle
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: intelligent-app-designer-web-production
+          path: web-angular/dist/intelligent-app-designer/
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Capture dependency security audit
         if: always()
         run: npm audit --json > npm-audit.json || true
