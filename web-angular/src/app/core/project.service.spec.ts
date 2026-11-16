@@ -92,4 +92,18 @@ describe('ProjectService honest local workflow behavior', () => {
     service.selectProject('missing-project');
     expect(service.activeProjectId()).toBe(activeId);
   });
+
+  it('restores a default project when persisted project list is empty', () => {
+    localStorage.setItem('iad-app-state-v1', JSON.stringify({
+      projects: [],
+      activeProjectId: 'missing-project',
+    }));
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ProjectService);
+
+    expect(service.projects().length).toBeGreaterThan(0);
+    expect(service.activeProject()).toBeDefined();
+    expect(service.activeProjectId()).toBe(service.projects()[0].id);
+  });
 });
