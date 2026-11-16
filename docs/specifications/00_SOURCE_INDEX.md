@@ -449,3 +449,8 @@
 ## Workpaper 184 — الدفعة التنفيذية الثانية: منع نجاحات سير العمل الوهمية
 - الملف: [184-second-implementation-batch-remove-fake-workflow-success.md](184-second-implementation-batch-remove-fake-workflow-success.md)
 - أوقفت الدفعة نتائج التحليل الثابتة والاختبارات العشوائية ونجاح البناء الوهمي والنشر المحلي المضلل وتشغيل الوكلاء المحاكى. لم يتم توصيل المحركات البديلة بعد؛ اختبارات Angular والبناء والنشر بانتظار تحقق CI.
+
+
+## Workpaper 185 — الدفعة التنفيذية الثالثة: مسودات منطق الوظائف وصدق الحالة الابتدائية
+- الملف: [185-third-implementation-batch-function-drafts-and-truthful-state.md](185-third-implementation-batch-function-drafts-and-truthful-state.md)
+- تحويل وصف الوظائف إلى مسودات محلية قابلة للمراجعة، تعطيل الاختبارات/تنسيق الوكلاء غير الموصول، وبدء مؤشرات البناء والاختبار والإطلاق بحالة غير مثبتة. CI لهذه الدفعة PENDING وقت التقرير.
