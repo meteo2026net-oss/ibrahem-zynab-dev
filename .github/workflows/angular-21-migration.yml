@@ -5,6 +5,10 @@ on:
     branches: [chore/angular-21-security-upgrade]
     paths:
       - "web-angular/UPGRADE_TO_ANGULAR_22"
+  pull_request:
+    branches: [main]
+    paths:
+      - "web-angular/UPGRADE_TO_ANGULAR_22"
   workflow_dispatch:
 
 permissions:
