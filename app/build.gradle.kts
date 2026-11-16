@@ -19,8 +19,14 @@ android {
     versionCode = 1
     versionName = "1.0"
 
+    val localEnvProperties = java.util.Properties().apply {
+      val envFile = rootProject.file(".env")
+      if (envFile.isFile) envFile.inputStream().use { load(it) }
+    }
     fun configValue(name: String): String =
-      providers.gradleProperty(name).orElse(providers.environmentVariable(name)).getOrElse("")
+      providers.gradleProperty(name)
+        .orElse(providers.environmentVariable(name))
+        .getOrElse(localEnvProperties.getProperty(name, ""))
         .replace("\\", "\\\\").replace("\"", "\\\"")
 
     buildConfigField("String", "FIREBASE_API_KEY", "\"${configValue("FIREBASE_API_KEY")}\"")
@@ -30,8 +36,7 @@ android {
     buildConfigField("String", "FIREBASE_STORAGE_BUCKET", "\"${configValue("FIREBASE_STORAGE_BUCKET")}\"")
     buildConfigField("String", "FIREBASE_DATABASE_URL", "\"${configValue("FIREBASE_DATABASE_URL")}\"")
     buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"${configValue("GOOGLE_WEB_CLIENT_ID")}\"")
-    val vaultBackendEnabled = providers.gradleProperty("VAULT_BACKEND_ENABLED")
-      .orElse(providers.environmentVariable("VAULT_BACKEND_ENABLED")).getOrElse("false")
+    val vaultBackendEnabled = configValue("VAULT_BACKEND_ENABLED").ifBlank { "false" }
     buildConfigField("boolean", "VAULT_BACKEND_ENABLED", vaultBackendEnabled)
 
 
