@@ -19,6 +19,7 @@ interface FirebaseAuthResponse {
 }
 
 interface RuntimeAppConfig {
+  apiKey?: string;
   firebaseApiKey?: string;
 }
 
@@ -33,7 +34,8 @@ type RuntimeGlobal = typeof globalThis & { __APP_CONFIG__?: RuntimeAppConfig };
 export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly apiKey =
-    (globalThis as RuntimeGlobal).__APP_CONFIG__?.firebaseApiKey?.trim() ?? '';
+    ((globalThis as RuntimeGlobal).__APP_CONFIG__?.apiKey ??
+      (globalThis as RuntimeGlobal).__APP_CONFIG__?.firebaseApiKey)?.trim() ?? '';
   private idToken: string | null = null;
   private refreshToken: string | null = null;
   private tokenExpiresAt = 0;
