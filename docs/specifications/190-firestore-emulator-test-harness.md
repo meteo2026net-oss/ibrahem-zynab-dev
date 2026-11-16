@@ -20,7 +20,7 @@ Date: 2026-11-16
 
 - First emulator attempt failed before tests because the nested Firebase config pointed outside its project directory. This was a harness/configuration error, not a rules assertion failure.
 - The configuration was corrected to use the root `firebase.json`; the obsolete nested emulator config was removed and the local test script was aligned with the root config.
-- The corrected emulator workflow passed: 7/7 Firestore Emulator assertions succeeded on run 43832163309.
+- The corrected emulator workflow passed: 7/7 Firestore Emulator assertions succeeded on runs 43832163309 and 43832378735. The latter run also verified the package's local test script after removal of the obsolete nested config.
 - Angular CI for the updated root Firebase configuration passed tests and production build.
 - No production Firestore rules deployment was performed.
 
