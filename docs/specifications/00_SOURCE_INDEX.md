@@ -489,3 +489,8 @@
 ## Workpaper 192 — أساس الخلفية الموثوقة في Firebase
 - الملف: [192-trusted-firebase-backend-foundation.md](192-trusted-firebase-backend-foundation.md)
 - إضافة Cloud Functions لإدارة خزنة الأسرار عبر Cloud KMS، وقوائم بيانات آمنة، وطلبات الموافقة وقراراتها مع App Check وتدقيق خادمي. لم يتم النشر؛ يلزم إعداد KMS ومعرّف قاعدة Firestore وصلاحيات الخدمة.
+
+
+## Workpaper 193 — إعداد Android والإصدار
+- الملف: [193-android-runtime-and-release-gates.md](193-android-runtime-and-release-gates.md)
+- توثيق الفارق بين نجاح تجميع Android وبين جاهزية Firebase وقت التشغيل، ومتطلبات google-services/OAuth/App Check ومفتاح توقيع الإصدار الدائم.
