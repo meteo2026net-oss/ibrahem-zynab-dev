@@ -1,4 +1,5 @@
 import { Injectable, signal, computed, effect } from '@angular/core';
+import { AuthService } from './auth.service';
 import {
   AppState,
   Project,
@@ -10,6 +11,10 @@ import {
 } from './models';
 
 const STORAGE_KEY = 'iad-app-state-v1';
+
+function storageKeyForUser(userId: string): string {
+  return `${STORAGE_KEY}:${userId}`;
+}
 
 function defaultState(): AppState {
   return {
@@ -197,19 +202,10 @@ function normalizeState(value: unknown): AppState {
   };
 }
 
-function loadState(): AppState {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultState();
-    return normalizeState(JSON.parse(raw) as unknown);
-  } catch {
-    return defaultState();
-  }
-}
-
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
-  private readonly state = signal<AppState>(loadState());
+  private readonly state = signal<AppState>(defaultState());
+  private activeStorageOwner: string | null = null;
 
   readonly projects = computed(() => this.state().projects);
   readonly activeProjectId = computed(() => this.state().activeProjectId);
@@ -248,13 +244,28 @@ export class ProjectService {
     };
   });
 
-  constructor() {
+  constructor(private readonly auth: AuthService) {
     effect(() => {
-      const s = this.state();
+      const owner = this.auth.user()?.uid ?? 'anonymous';
+      const currentState = this.state();
+
+      // Switch storage namespaces atomically when the authenticated account changes.
+      // Never copy the previous account's in-memory state into the next account's key.
+      if (this.activeStorageOwner !== owner) {
+        this.activeStorageOwner = owner;
+        try {
+          const raw = localStorage.getItem(storageKeyForUser(owner));
+          this.state.set(raw ? normalizeState(JSON.parse(raw) as unknown) : defaultState());
+        } catch {
+          this.state.set(defaultState());
+        }
+        return;
+      }
+
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+        localStorage.setItem(storageKeyForUser(owner), JSON.stringify(currentState));
       } catch {
-        /* ignore quota */
+        /* ignore storage quota or browser privacy-mode failures */
       }
     });
   }
@@ -442,7 +453,8 @@ export class ProjectService {
   }
 
   resetDemoData(): void {
-    localStorage.removeItem(STORAGE_KEY);
+    const owner = this.auth.user()?.uid ?? 'anonymous';
+    localStorage.removeItem(storageKeyForUser(owner));
     this.state.set(defaultState());
   }
 }
