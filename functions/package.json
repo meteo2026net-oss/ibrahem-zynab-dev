@@ -2,7 +2,9 @@
   "name": "intelligent-app-designer-functions",
   "private": true,
   "main": "lib/index.js",
-  "engines": { "node": "22" },
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "clean": "node -e \"require('node:fs').rmSync('lib',{recursive:true,force:true})\""
@@ -10,9 +12,10 @@
   "dependencies": {
     "@google-cloud/kms": "5.5.0",
     "firebase-admin": "13.6.0",
-    "firebase-functions": "6.4.0"
+    "firebase-functions": "6.4.0",
+    "@google-cloud/tasks": "^6.2.1"
   },
   "devDependencies": {
     "typescript": "5.8.3"
   }
-}
+}\n
