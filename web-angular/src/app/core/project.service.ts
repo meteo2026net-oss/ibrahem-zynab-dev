@@ -164,9 +164,10 @@ function normalizeState(value: unknown): AppState {
   const defaults = defaultState();
   if (!value || typeof value !== 'object' || Array.isArray(value)) return defaults;
   const saved = value as Partial<AppState>;
-  const projects = Array.isArray(saved.projects)
+  const restoredProjects = Array.isArray(saved.projects)
     ? saved.projects.filter(isProject)
-    : defaults.projects;
+    : [];
+  const projects = restoredProjects.length > 0 ? restoredProjects : defaults.projects;
   const activeProjectId =
     typeof saved.activeProjectId === 'string' &&
     projects.some((project) => project.id === saved.activeProjectId)
