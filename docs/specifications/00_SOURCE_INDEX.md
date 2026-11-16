@@ -484,3 +484,8 @@
 ## Workpaper 191 — حزمة الويب الإنتاجية وخط بناء Android
 - الملف: [191-web-artifact-and-android-ci.md](191-web-artifact-and-android-ci.md)
 - إضافة artifact لحزمة Angular الإنتاجية، وإنشاء workflow مستقل لاختبارات Android وبناء APK تجريبي. اجتاز بناء الويب والاختبارات، أما Android فيجري إصلاح مسار Gradle والتحقق منه؛ لا توجد حزمة إصدار Android موقعة بعد.
+
+
+## Workpaper 192 — أساس الخلفية الموثوقة في Firebase
+- الملف: [192-trusted-firebase-backend-foundation.md](192-trusted-firebase-backend-foundation.md)
+- إضافة Cloud Functions لإدارة خزنة الأسرار عبر Cloud KMS، وقوائم بيانات آمنة، وطلبات الموافقة وقراراتها مع App Check وتدقيق خادمي. لم يتم النشر؛ يلزم إعداد KMS ومعرّف قاعدة Firestore وصلاحيات الخدمة.
