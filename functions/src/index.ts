@@ -8,7 +8,7 @@ import { HttpsError, onCall } from "firebase-functions/v2/https";
 if (getApps().length === 0) initializeApp();
 
 const databaseId = process.env.FIRESTORE_DATABASE_ID || "(default)";
-const db = getFirestore(undefined, databaseId);
+const db = getFirestore(getApps()[0]!, databaseId);
 const kms = new KeyManagementServiceClient();
 
 const secretServices = new Set([
