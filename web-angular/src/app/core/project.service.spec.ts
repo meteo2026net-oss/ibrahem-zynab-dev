@@ -56,4 +56,40 @@ describe('ProjectService honest local workflow behavior', () => {
     service.runQueuedAgents();
     expect(service.agentTasks().map((task) => task.status)).toEqual(before);
   });
+
+  it('recovers safely from malformed persisted JSON', () => {
+    localStorage.setItem('iad-app-state-v1', '{not-json');
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ProjectService);
+
+    expect(service.projects().length).toBeGreaterThan(0);
+    expect(service.activeProject()).toBeDefined();
+    expect(service.requirements().length).toBeGreaterThan(0);
+  });
+
+  it('normalizes invalid persisted collections and active project references', () => {
+    localStorage.setItem('iad-app-state-v1', JSON.stringify({
+      projects: null,
+      activeProjectId: 'missing-project',
+      requirements: null,
+      tests: 'not-an-array',
+      agentTasks: null,
+    }));
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ProjectService);
+
+    expect(Array.isArray(service.projects())).toBeTrue();
+    expect(service.activeProjectId()).toBe(service.projects()[0].id);
+    expect(Array.isArray(service.requirements())).toBeTrue();
+    expect(Array.isArray(service.tests())).toBeTrue();
+    expect(Array.isArray(service.agentTasks())).toBeTrue();
+  });
+
+  it('ignores attempts to select a project that does not exist', () => {
+    const activeId = service.activeProjectId();
+    service.selectProject('missing-project');
+    expect(service.activeProjectId()).toBe(activeId);
+  });
 });
