@@ -310,7 +310,7 @@ export class ProjectService {
     const source = this.state().functionNatural.trim();
     if (!source) return;
     const lines = source
-      .split(/[\\n.!؟؛]+/)
+      .split(/[\n.!؟؛]+/)
       .map((line) => line.trim())
       .filter(Boolean)
       .slice(0, 20);
