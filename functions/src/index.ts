@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { KeyManagementServiceClient } from "@google-cloud/kms";
 import { getApps, initializeApp } from "firebase-admin/app";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
-import { HttpsError, onCall } from "firebase-functions/v2/https";
+import { HttpsError, onCall, onRequest } from "firebase-functions/v2/https";
 
 if (getApps().length === 0) initializeApp();
 
@@ -180,6 +180,96 @@ export const deleteVaultSecret = onCall(
   }
 );
 
+/**
+ * Private IAM-invoked endpoint for trusted server workers only.
+ * Cloud Run IAM must grant roles/run.invoker only to the worker service account.
+ * This endpoint intentionally returns plaintext only to an authenticated
+ * server-to-server caller; never expose it through a client callable.
+ */
+export const resolveVaultSecretForTrustedWorker = onRequest(
+  { invoker: "private", timeoutSeconds: 30, memory: "256MiB" },
+  async (request, response) => {
+    if (request.method !== "POST") {
+      response.status(405).json({ error: "method-not-allowed" });
+      return;
+    }
+    const userId = requireText(request.body?.userId, "userId", 128);
+    const projectId = requireText(request.body?.projectId, "projectId", 128);
+    const referenceKey = requireText(request.body?.referenceKey, "referenceKey", 160);
+    const requestingService = requireText(request.body?.requestingService, "requestingService", 80);
+    const requestingAgent = requireText(request.body?.requestingAgent, "requestingAgent", 80);
+    const operation = requireText(request.body?.operation, "operation", 80);
+
+    if (!secretServices.has(requestingService) ||
+        !secretAgents.has(requestingAgent) ||
+        !secretOperations.has(operation)) {
+      response.status(403).json({ error: "operation-not-allowed" });
+      return;
+    }
+
+    const snapshot = await db.collection("project_secrets_vault")
+      .where("userId", "==", userId)
+      .where("projectId", "==", projectId)
+      .where("secretReferenceKey", "==", referenceKey)
+      .limit(1)
+      .get();
+    if (snapshot.empty) {
+      response.status(404).json({ error: "secret-not-found" });
+      return;
+    }
+
+    const secretDoc = snapshot.docs[0]!;
+    const secret = secretDoc.data();
+    const expiresAt = secret.expiresAt;
+    if (typeof expiresAt === "number" && expiresAt <= Date.now()) {
+      response.status(410).json({ error: "secret-expired" });
+      return;
+    }
+    if (!Array.isArray(secret.allowedServices) || !secret.allowedServices.includes(requestingService) ||
+        !Array.isArray(secret.allowedAgents) || !secret.allowedAgents.includes(requestingAgent) ||
+        !Array.isArray(secret.allowedOperations) || !secret.allowedOperations.includes(operation)) {
+      response.status(403).json({ error: "secret-scope-denied" });
+      return;
+    }
+    if (typeof secret.encryptedSecretValue !== "string" || secret.encryptedSecretValue.length === 0) {
+      response.status(500).json({ error: "secret-ciphertext-missing" });
+      return;
+    }
+
+    const [decrypted] = await kms.decrypt({
+      name: requireKmsKeyName(),
+      ciphertext: Buffer.from(secret.encryptedSecretValue, "base64"),
+    });
+    if (!decrypted.plaintext) {
+      response.status(500).json({ error: "kms-decryption-failed" });
+      return;
+    }
+
+    await db.runTransaction(async (tx) => {
+      const fresh = await tx.get(secretDoc.ref);
+      if (!fresh.exists || fresh.get("userId") !== userId ||
+          fresh.get("secretReferenceKey") !== referenceKey) {
+        throw new HttpsError("failed-precondition", "Secret changed during resolution.");
+      }
+      tx.update(secretDoc.ref, { lastUsedAt: FieldValue.serverTimestamp() });
+      tx.create(db.collection("audit_logs").doc(), {
+        userId,
+        projectId,
+        action: "VAULT_SECRET_RESOLVED",
+        targetId: secretDoc.id,
+        actor: requestingService,
+        agent: requestingAgent,
+        operation,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+    });
+
+    response.status(200).json({
+      secretValue: Buffer.from(decrypted.plaintext as Uint8Array).toString("utf8"),
+    });
+  }
+);
+
 export const createApprovalRequest = onCall(
   { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
   async (request) => {
@@ -194,25 +284,27 @@ export const createApprovalRequest = onCall(
     await assertProjectOwner(uid, projectId);
     const id = randomUUID();
     const expiresAt = Date.now() + 15 * 60 * 1000;
-    await db.collection("approval_requests").doc(id).create({
-      userId: uid,
-      projectId,
-      operationType,
-      description,
-      targetEntityId,
-      requestedBy: uid,
-      status: "PENDING",
-      version: 1,
-      expiresAt,
-      createdAt: FieldValue.serverTimestamp(),
-    });
-    await db.collection("audit_logs").add({
-      userId: uid,
-      projectId,
-      action: "APPROVAL_REQUEST_CREATED",
-      targetId: id,
-      createdAt: FieldValue.serverTimestamp(),
-      actor: uid,
+    await db.runTransaction(async (tx) => {
+      tx.create(db.collection("approval_requests").doc(id), {
+        userId: uid,
+        projectId,
+        operationType,
+        description,
+        targetEntityId,
+        requestedBy: uid,
+        status: "PENDING",
+        version: 1,
+        expiresAt,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+      tx.create(db.collection("audit_logs").doc(), {
+        userId: uid,
+        projectId,
+        action: "APPROVAL_REQUEST_CREATED",
+        targetId: id,
+        createdAt: FieldValue.serverTimestamp(),
+        actor: uid,
+      });
     });
     return { id, status: "PENDING", expiresAt };
   }
