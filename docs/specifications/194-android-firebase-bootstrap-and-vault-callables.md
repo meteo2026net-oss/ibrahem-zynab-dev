@@ -25,7 +25,7 @@ Date: 2026-11-16
 
 ## Verification and remaining gates
 
-- Android CI is running for this integration. Do not treat this batch as verified until unit tests and APK assembly both pass.
+- The first Android build exposed empty BuildConfig fields when optional environment values were blank. The implementation now uses the existing Secrets Gradle Plugin with explicit non-secret CONFIGURE_* sentinels, and runtime initialization rejects those sentinels. The corrected Android CI run 43836075590 is still executing; unit tests and APK assembly must both pass before this batch is verified.
 - The earlier Android run 43833854909 passed unit tests and produced a debug APK artifact, but it predates this Functions SDK integration.
 - No live Firebase runtime credentials have been supplied to this repository. Firebase sign-in, Functions, and App Check cannot be validated against the actual production project yet.
 - The Cloud Functions code has passed TypeScript CI, but no cloud deployment or KMS runtime test has been performed.
