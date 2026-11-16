@@ -479,3 +479,8 @@
 ## Workpaper 190 — اختبارات قواعد Firestore بالمحاكي
 - الملف: [190-firestore-emulator-test-harness.md](190-firestore-emulator-test-harness.md)
 - إضافة حزمة اختبار مستقلة وworkflow لمحاكي Firestore تغطي ملكية البيانات وثبات userId وسجلات التدقيق والموافقات والوظائف والأسرار. المحاولة الأولى توقفت بسبب مسار قواعد خارج مجلد المشروع؛ صُحح الإعداد ويجري التحقق من التشغيل الثاني.
+
+
+## Workpaper 191 — حزمة الويب الإنتاجية وخط بناء Android
+- الملف: [191-web-artifact-and-android-ci.md](191-web-artifact-and-android-ci.md)
+- إضافة artifact لحزمة Angular الإنتاجية، وإنشاء workflow مستقل لاختبارات Android وبناء APK تجريبي. اجتاز بناء الويب والاختبارات، أما Android فيجري إصلاح مسار Gradle والتحقق منه؛ لا توجد حزمة إصدار Android موقعة بعد.
