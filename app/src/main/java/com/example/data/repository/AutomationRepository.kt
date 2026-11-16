@@ -200,17 +200,9 @@ class AutomationRepository(private val db: FirebaseFirestore) {
                 }
             }
             "/backup" -> {
-                if (activeProject == null) {
-                    TelegramCommandResponse("⚠️ اختر مشروعاً أولاً لإنشاء نسخة احتياطية له.")
-                } else {
-                    val snapshot = createProjectBackup(activeProject, emptyList(), emptyList())
-                    TelegramCommandResponse(
-                        "💾 *تم إنشاء نسخة احتياطية مشفرة بنجاح!*\n" +
-                        "• الإصدار: ${snapshot.snapshotVersion}\n" +
-                        "• البصمة الرقمية: ${snapshot.sha256Checksum.take(16)}...\n" +
-                        "• الوجهة: Google Drive المخصص للمشروع"
-                    )
-                }
+                TelegramCommandResponse(
+                    "💾 خدمة النسخ الاحتياطي السحابي غير مفعلة حالياً. لم يتم إنشاء نسخة أو إرسال بيانات إلى Google Drive. يلزم إعداد تخزين موثوق وتشفير خادمي قبل تفعيل هذه العملية."
+                )
             }
             "/jobs" -> {
                 val jobsSnapshot = db.collection("persistent_jobs")
@@ -552,6 +544,8 @@ class AutomationRepository(private val db: FirebaseFirestore) {
         tasks: List<ProjectTask>,
         files: List<StoredFile>
     ): ProjectBackupSnapshot {
+        throw IllegalStateException("Cloud backup is disabled until a trusted encrypted storage backend is deployed.")
+
         val uid = requireUserId()
         val docRef = db.collection("project_backups").document()
         val version = "v" + System.currentTimeMillis().toString().takeLast(6)
@@ -605,6 +599,8 @@ class AutomationRepository(private val db: FirebaseFirestore) {
     }
 
     suspend fun restoreBackup(snapshot: ProjectBackupSnapshot): Boolean {
+        throw IllegalStateException("Backup restore is disabled until the trusted backup backend is deployed.")
+
         val checksumNow = CryptoUtils.calculateSha256(snapshot.encryptedData.toByteArray())
         if (checksumNow != snapshot.sha256Checksum) {
             throw SecurityException("Backup Integrity Check Failed: Checksum does not match!")
