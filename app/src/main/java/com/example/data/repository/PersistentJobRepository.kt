@@ -101,6 +101,17 @@ class PersistentJobRepository(private val context: Context) {
         )
     }
 
+    suspend fun getJobResult(jobId: String): Map<String, Any?> = withContext(Dispatchers.IO) {
+        require(jobId.isNotBlank()) { "Job ID is required." }
+        Firebase.auth.currentUser ?: throw IllegalStateException("Sign in before retrieving a job result.")
+        val response = functions.getHttpsCallable("getPersistentJobResult")
+            .call(mapOf("jobId" to jobId))
+            .await()
+        @Suppress("UNCHECKED_CAST")
+        (response.data as? Map<String, Any?>)
+            ?: throw IllegalStateException("Trusted job service returned an invalid result.")
+    }
+
     suspend fun pauseJob(jobId: String) {
         throw UnsupportedOperationException("Pausing is unavailable until the trusted worker supports pause requests.")
     }
