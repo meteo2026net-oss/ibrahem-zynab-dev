@@ -459,3 +459,8 @@
 ## Workpaper 186 — الدفعة التنفيذية الرابعة: مصادقة Firebase للويب
 - الملف: [186-fourth-implementation-batch-firebase-web-auth.md](186-fourth-implementation-batch-firebase-web-auth.md)
 - ربط نموذج الدخول بـ Firebase Authentication REST مع حفظ الرموز في الذاكرة وتجديد ID token وإضافة اختبارات HTTP؛ يلزم ضبط Web API Key وتفعيل Email/Password، ولا تزال بيانات المشاريع محلية.
+
+
+## Workpaper 187 — الدفعة التنفيذية الخامسة: إصلاح CI ومراجعة الاعتماديات
+- الملف: [187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md](187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md)
+- توثق نتيجة CI: 11/11 اختباراً ناجحاً وبناء إنتاج فاشل بسبب نوع تدقيق غير متوافق؛ الإصلاحات محفوظة، وإعادة CI قيد الانتظار. سجل npm أظهر 44 تنبيهاً أمنياً تحتاج مراجعة مستقلة.
