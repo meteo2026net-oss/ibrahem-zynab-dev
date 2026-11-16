@@ -1,5 +1,5 @@
 import { Buffer } from "node:buffer";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { KeyManagementServiceClient } from "@google-cloud/kms";
 import { getApps, initializeApp } from "firebase-admin/app";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
@@ -267,6 +267,265 @@ export const resolveVaultSecretForTrustedWorker = onRequest(
     response.status(200).json({
       secretValue: Buffer.from(decrypted.plaintext as Uint8Array).toString("utf8"),
     });
+  }
+);
+
+const jobStates = new Set(["SUCCEEDED", "FAILED", "CANCELLED"]);
+
+function requireWorkerRequest(request: { body?: Record<string, unknown> }) {
+  return {
+    jobId: requireText(request.body?.jobId, "jobId", 128),
+    workerId: requireText(request.body?.workerId, "workerId", 128),
+    leaseToken: requireText(request.body?.leaseToken, "leaseToken", 128),
+  };
+}
+
+async function verifyAndReadLease(
+  tx: FirebaseFirestore.Transaction,
+  jobId: string,
+  workerId: string,
+  leaseToken: string
+) {
+  const ref = db.collection("persistent_jobs").doc(jobId);
+  const snapshot = await tx.get(ref);
+  if (!snapshot.exists) throw new HttpsError("not-found", "Job not found.");
+  const data = snapshot.data()!;
+  if (data.status !== "RUNNING" || data.workerId !== workerId ||
+      data.leaseToken !== leaseToken || typeof data.leaseExpiresAt !== "number" ||
+      data.leaseExpiresAt <= Date.now()) {
+    throw new HttpsError("failed-precondition", "Worker lease is invalid, expired, or no longer owned.");
+  }
+  return { ref, data };
+}
+
+export const createPersistentJob = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const projectId = requireText(request.data?.projectId, "projectId", 128);
+    const jobType = requireText(request.data?.jobType, "jobType", 80);
+    const title = requireText(request.data?.title, "title", 200);
+    const prompt = requireText(request.data?.prompt, "prompt", 20000);
+    const idempotencyKey = requireText(request.data?.idempotencyKey, "idempotencyKey", 128);
+    await assertProjectOwner(uid, projectId);
+
+    const idempotencyId = createHash("sha256")
+      .update(`${uid}:${projectId}:${idempotencyKey}`)
+      .digest("hex");
+    const idempotencyRef = db.collection("idempotency_records").doc(idempotencyId);
+    const jobId = randomUUID();
+    const jobRef = db.collection("persistent_jobs").doc(jobId);
+    const result = await db.runTransaction(async (tx) => {
+      const existing = await tx.get(idempotencyRef);
+      if (existing.exists) {
+        return { jobId: existing.get("jobId") as string, reused: true };
+      }
+      tx.create(jobRef, {
+        userId: uid,
+        projectId,
+        jobType,
+        title,
+        prompt,
+        status: "QUEUED",
+        progress: 0,
+        currentStepIndex: 0,
+        attempts: 0,
+        cancelRequested: false,
+        workerId: null,
+        leaseToken: null,
+        leaseExpiresAt: 0,
+        createdAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      tx.create(idempotencyRef, {
+        userId: uid,
+        projectId,
+        actionType: "CREATE_PERSISTENT_JOB",
+        idempotencyKey,
+        jobId,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+      tx.create(db.collection("audit_logs").doc(), {
+        userId: uid,
+        projectId,
+        action: "PERSISTENT_JOB_QUEUED",
+        targetId: jobId,
+        actor: uid,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+      return { jobId, reused: false };
+    });
+    return result;
+  }
+);
+
+export const listPersistentJobs = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const projectId = requireText(request.data?.projectId, "projectId", 128);
+    await assertProjectOwner(uid, projectId);
+    const snapshot = await db.collection("persistent_jobs")
+      .where("userId", "==", uid)
+      .where("projectId", "==", projectId)
+      .limit(50)
+      .get();
+    return {
+      jobs: snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          projectId: data.projectId,
+          jobType: data.jobType,
+          title: data.title,
+          status: data.status,
+          progress: data.progress ?? 0,
+          currentStepIndex: data.currentStepIndex ?? 0,
+          attempts: data.attempts ?? 0,
+          cancelRequested: data.cancelRequested ?? false,
+          createdAt: data.createdAt?.toMillis?.() ?? null,
+          updatedAt: data.updatedAt?.toMillis?.() ?? null,
+        };
+      }),
+    };
+  }
+);
+
+export const cancelPersistentJob = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const jobId = requireText(request.data?.jobId, "jobId", 128);
+    await db.runTransaction(async (tx) => {
+      const ref = db.collection("persistent_jobs").doc(jobId);
+      const snapshot = await tx.get(ref);
+      if (!snapshot.exists || snapshot.get("userId") !== uid) {
+        throw new HttpsError("not-found", "Job not found.");
+      }
+      const status = snapshot.get("status");
+      if (status === "QUEUED") {
+        tx.update(ref, { status: "CANCELLED", updatedAt: FieldValue.serverTimestamp() });
+      } else if (status === "RUNNING") {
+        tx.update(ref, { cancelRequested: true, updatedAt: FieldValue.serverTimestamp() });
+      } else {
+        throw new HttpsError("failed-precondition", "Job is already finished.");
+      }
+      tx.create(db.collection("audit_logs").doc(), {
+        userId: uid,
+        projectId: snapshot.get("projectId"),
+        action: "PERSISTENT_JOB_CANCEL_REQUESTED",
+        targetId: jobId,
+        actor: uid,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+    });
+    return { jobId, cancellationRequested: true };
+  }
+);
+
+/** IAM-private lease claim; worker identity comes from its service configuration. */
+export const claimPersistentJob = onRequest(
+  { invoker: "private", timeoutSeconds: 20, memory: "256MiB" },
+  async (request, response) => {
+    if (request.method !== "POST") {
+      response.status(405).json({ error: "method-not-allowed" });
+      return;
+    }
+    const jobId = requireText(request.body?.jobId, "jobId", 128);
+    const workerId = requireText(request.body?.workerId, "workerId", 128);
+    const leaseToken = randomUUID();
+    const now = Date.now();
+    const leaseExpiresAt = now + 60_000;
+    const result = await db.runTransaction(async (tx) => {
+      const ref = db.collection("persistent_jobs").doc(jobId);
+      const snapshot = await tx.get(ref);
+      if (!snapshot.exists) throw new HttpsError("not-found", "Job not found.");
+      const data = snapshot.data()!;
+      const expired = typeof data.leaseExpiresAt !== "number" || data.leaseExpiresAt <= now;
+      if (data.status !== "QUEUED" && !(data.status === "RUNNING" && expired)) {
+        throw new HttpsError("failed-precondition", "Job is not available to claim.");
+      }
+      if (data.cancelRequested === true) {
+        tx.update(ref, { status: "CANCELLED", updatedAt: FieldValue.serverTimestamp() });
+        return { cancelled: true };
+      }
+      tx.update(ref, {
+        status: "RUNNING",
+        workerId,
+        leaseToken,
+        leaseExpiresAt,
+        heartbeatAt: FieldValue.serverTimestamp(),
+        attempts: (typeof data.attempts === "number" ? data.attempts : 0) + 1,
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      return { cancelled: false, job: data };
+    });
+    if (result.cancelled) {
+      response.status(409).json({ error: "job-cancelled" });
+      return;
+    }
+    response.status(200).json({ jobId, workerId, leaseToken, leaseExpiresAt, job: result.job });
+  }
+);
+
+export const renewPersistentJobLease = onRequest(
+  { invoker: "private", timeoutSeconds: 15, memory: "256MiB" },
+  async (request, response) => {
+    if (request.method !== "POST") {
+      response.status(405).json({ error: "method-not-allowed" });
+      return;
+    }
+    const { jobId, workerId, leaseToken } = requireWorkerRequest(request);
+    const leaseExpiresAt = Date.now() + 60_000;
+    await db.runTransaction(async (tx) => {
+      const { ref } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
+      tx.update(ref, {
+        leaseExpiresAt,
+        heartbeatAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+    });
+    response.status(200).json({ jobId, leaseExpiresAt });
+  }
+);
+
+export const finishPersistentJob = onRequest(
+  { invoker: "private", timeoutSeconds: 20, memory: "256MiB" },
+  async (request, response) => {
+    if (request.method !== "POST") {
+      response.status(405).json({ error: "method-not-allowed" });
+      return;
+    }
+    const { jobId, workerId, leaseToken } = requireWorkerRequest(request);
+    const state = request.body?.state;
+    if (typeof state !== "string" || !jobStates.has(state)) {
+      response.status(400).json({ error: "invalid-job-state" });
+      return;
+    }
+    const summary = typeof request.body?.summary === "string" ? request.body.summary.slice(0, 4000) : "";
+    await db.runTransaction(async (tx) => {
+      const { ref, data } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
+      const finalState = data.cancelRequested === true ? "CANCELLED" : state;
+      tx.update(ref, {
+        status: finalState,
+        summary,
+        progress: finalState === "SUCCEEDED" ? 100 : (data.progress ?? 0),
+        workerId: null,
+        leaseToken: null,
+        leaseExpiresAt: 0,
+        finishedAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      tx.create(db.collection("audit_logs").doc(), {
+        userId: data.userId,
+        projectId: data.projectId,
+        action: `PERSISTENT_JOB_${finalState}`,
+        targetId: jobId,
+        actor: workerId,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+    });
+    response.status(200).json({ jobId, state });
   }
 );
 
