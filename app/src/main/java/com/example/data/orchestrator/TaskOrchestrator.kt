@@ -54,6 +54,24 @@ class TaskOrchestrator(
         workerId: String,
         leaseToken: String
     ): JobExecutionResult = withContext(Dispatchers.IO) {
+        // Client-side orchestration is intentionally disabled. Durable leases,
+        // approvals and state transitions are owned by the trusted Functions worker.
+        // Never fall back to a local_worker identity or write privileged collections
+        // directly from an Android client.
+        val signedInUserId = Firebase.auth.currentUser?.uid.orEmpty()
+        val deferredJob = PersistentJob(
+            jobId = jobId,
+            userId = signedInUserId,
+            projectId = "",
+            projectName = "",
+            title = "مهمة بانتظار العامل الخلفي الموثوق",
+            userPrompt = ""
+        )
+        return@withContext JobExecutionResult.Failed(
+            deferredJob,
+            "Trusted backend worker is not deployed or connected. The job remains pending; client-side execution is disabled for security."
+        )
+
         val user = Firebase.auth.currentUser
         val userId = user?.uid ?: "local_worker"
 
