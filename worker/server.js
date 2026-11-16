@@ -71,8 +71,8 @@ app.post("/tasks", async (req, res) => {
   let leaseLost = false;
   try {
     const claimed = await callPrivateFunction("claimPersistentJob", { jobId, workerId });
-    if (claimed?.error === "job-cancelled") {
-      res.status(200).json({ jobId, state: "CANCELLED" });
+    if (claimed?.cancelled || claimed?.alreadyFinished) {
+      res.status(200).json({ jobId, state: claimed.state || "CANCELLED" });
       return;
     }
     lease = claimed;
@@ -166,8 +166,8 @@ app.post("/tasks", async (req, res) => {
     res.status(200).json({ jobId, state: "SUCCEEDED" });
   } catch (error) {
     if (!lease && error.response?.status === 409 &&
-        error.response?.data?.error === "job-cancelled") {
-      res.status(200).json({ jobId, state: "CANCELLED" });
+        error.response?.data?.error === "job-already-claimed") {
+      res.status(503).json({ error: "job-lease-currently-owned", jobId });
       return;
     }
     console.error("Persistent job execution failed", {
