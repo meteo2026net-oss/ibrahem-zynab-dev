@@ -586,3 +586,8 @@
 ## 185 — الدفعة التنفيذية الثالثة: مسودات الوظائف وصدق حالة المشروع
 
 [185-third-implementation-batch-function-drafts-and-truthful-state.md](185-third-implementation-batch-function-drafts-and-truthful-state.md) — تحويل وصف الوظائف إلى مسودات محلية، ومنع ادعاءات نجاح غير مستندة إلى تنفيذ فعلي، وإضافة اختبارات خدمة.
+
+
+## 186 — الدفعة التنفيذية الرابعة: مصادقة Firebase للويب
+
+[186-fourth-implementation-batch-firebase-web-auth.md](186-fourth-implementation-batch-firebase-web-auth.md) — تكامل Firebase Email/Password وتجديد الرموز في الذاكرة واختبارات المصادقة؛ يلزم ضبط إعداد Firebase قبل الاستخدام.
