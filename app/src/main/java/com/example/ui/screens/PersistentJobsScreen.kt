@@ -244,8 +244,13 @@ fun PersistentJobsScreen(
                                     Toast.makeText(context, "يرجى ملء كافة الحقول", Toast.LENGTH_SHORT).show()
                                     return@Button
                                 }
-                                val pId = currentProject?.id ?: "global_project"
-                                val pName = currentProject?.name ?: "مشروع عام"
+                                val project = currentProject
+                                if (project == null) {
+                                    Toast.makeText(context, "أنشئ مشروعاً أو اختر مشروعاً قبل جدولة المهمة.", Toast.LENGTH_LONG).show()
+                                    return@Button
+                                }
+                                val pId = project.id
+                                val pName = project.name
                                 isSubmitting = true
                                 scope.launch {
                                     try {
