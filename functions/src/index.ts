@@ -601,15 +601,16 @@ export const renewPersistentJobLease = onRequest(
     }
     const { jobId, workerId, leaseToken } = requireWorkerRequest(request);
     const leaseExpiresAt = Date.now() + 60_000;
-    await db.runTransaction(async (tx) => {
-      const { ref } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
+    const cancellationRequested = await db.runTransaction(async (tx) => {
+      const { ref, data } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
       tx.update(ref, {
         leaseExpiresAt,
         heartbeatAt: FieldValue.serverTimestamp(),
         updatedAt: FieldValue.serverTimestamp(),
       });
+      return data.cancelRequested === true;
     });
-    response.status(200).json({ jobId, leaseExpiresAt });
+    response.status(200).json({ jobId, leaseExpiresAt, cancellationRequested });
   }
 );
 
