@@ -78,19 +78,13 @@ app.post("/tasks", async (req, res) => {
       if (heartbeatBusy || leaseLost || !lease) return;
       heartbeatBusy = true;
       try {
-        await callPrivateFunction("updatePersistentJobProgress", {
-          jobId, workerId, leaseToken: lease.leaseToken,
-          progress: 25, currentStepIndex: 1,
-          message: "AI generation in progress"
+        const heartbeat = await callPrivateFunction("renewPersistentJobLease", {
+          jobId, workerId, leaseToken: lease.leaseToken
         });
+        if (heartbeat?.cancellationRequested === true) cancellationRequested = true;
       } catch (error) {
-        if (error.response?.status === 409 &&
-            error.response?.data?.error === "job-cancellation-requested") {
-          cancellationRequested = true;
-        } else {
-          leaseLost = true;
-          console.error("Worker heartbeat failed", { jobId, message: error.message });
-        }
+        leaseLost = true;
+        console.error("Worker heartbeat failed", { jobId, message: error.message });
       } finally {
         heartbeatBusy = false;
       }
