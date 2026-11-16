@@ -4,14 +4,16 @@
   "version": "1.0.0",
   "description": "Private Cloud Run worker for trusted persistent AI jobs",
   "main": "server.js",
-  "engines": { "node": "22" },
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
     "start": "node server.js",
     "check": "node --check server.js"
   },
   "dependencies": {
-    "@google-cloud/vertexai": "1.10.0",
     "express": "4.21.2",
-    "google-auth-library": "9.15.1"
+    "google-auth-library": "9.15.1",
+    "@google/genai": "3.3.0"
   }
 }
