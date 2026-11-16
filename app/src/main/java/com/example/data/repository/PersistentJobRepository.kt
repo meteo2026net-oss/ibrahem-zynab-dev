@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.example.R
 import com.example.data.model.AgentRole
+import com.example.data.model.GeneratedProjectArchive
 import com.example.data.model.GeneratedProjectFile
 import com.example.data.model.JobStatus
 import com.example.data.model.JobStep
@@ -20,6 +21,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 import java.util.Date
 import java.util.UUID
 
@@ -123,6 +126,26 @@ class PersistentJobRepository(private val context: Context) {
         val files = rawFiles.mapNotNull { GeneratedProjectFile.fromMap(it) }
         val seen = HashSet<String>()
         files.filter { seen.add(it.path.lowercase()) }
+    }
+
+    /**
+     * Exports a completed generated project to a ZIP in the app cache directory.
+     * The caller may share the returned file through an approved content URI.
+     */
+    suspend fun exportGeneratedProjectArchive(jobId: String): File = withContext(Dispatchers.IO) {
+        require(jobId.matches(Regex("^[A-Za-z0-9-]{1,128}$"))) { "Invalid job ID." }
+        val files = getGeneratedProjectFiles(jobId)
+        require(files.isNotEmpty()) { "This job has no generated project files to export." }
+        val archive = File(context.cacheDir, "generated-project-$jobId.zip")
+        try {
+            FileOutputStream(archive).use { output ->
+                GeneratedProjectArchive.write(files, output)
+            }
+        } catch (error: Exception) {
+            archive.delete()
+            throw error
+        }
+        archive
     }
 
     suspend fun pauseJob(jobId: String) {
