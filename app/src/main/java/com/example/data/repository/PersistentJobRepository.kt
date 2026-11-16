@@ -51,6 +51,14 @@ class PersistentJobRepository(
         userPrompt: String,
         customSteps: List<JobStep>? = null
     ): PersistentJob = withContext(Dispatchers.IO) {
+        // The Android client must not create persistent_jobs directly: Firestore
+        // rules intentionally deny client writes and the trusted dispatcher is not
+        // yet deployed. Fail explicitly instead of creating a local_worker job or
+        // scheduling a WorkManager task that cannot securely execute it.
+        throw IllegalStateException(
+            "Background job execution is not available yet. Deploy and connect the trusted backend worker before scheduling jobs."
+        )
+
         val user = Firebase.auth.currentUser
         val userId = user?.uid ?: "local_worker"
         val jobId = UUID.randomUUID().toString()
