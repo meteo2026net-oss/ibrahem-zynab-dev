@@ -118,6 +118,8 @@ class PersistentJobRepository(
     }
 
     suspend fun pauseJob(jobId: String) = withContext(Dispatchers.IO) {
+        throw IllegalStateException("Trusted background-job backend is not deployed; pauseJob is unavailable.")
+
         firestore.collection("persistent_jobs").document(jobId)
             .update(
                 mapOf(
@@ -129,6 +131,8 @@ class PersistentJobRepository(
     }
 
     suspend fun resumeJob(jobId: String) = withContext(Dispatchers.IO) {
+        throw IllegalStateException("Trusted background-job backend is not deployed; resumeJob is unavailable.")
+
         val doc = firestore.collection("persistent_jobs").document(jobId).get().await()
         if (doc.exists()) {
             val data = doc.data ?: return@withContext
@@ -165,6 +169,8 @@ class PersistentJobRepository(
     }
 
     suspend fun cancelJob(jobId: String) = withContext(Dispatchers.IO) {
+        throw IllegalStateException("Trusted background-job backend is not deployed; cancelJob is unavailable.")
+
         firestore.collection("persistent_jobs").document(jobId)
             .update(
                 mapOf(
