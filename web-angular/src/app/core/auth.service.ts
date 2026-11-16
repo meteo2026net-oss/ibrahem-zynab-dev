@@ -108,13 +108,17 @@ export class AuthService {
   }
 
   private acceptAuthResponse(response: FirebaseAuthResponse): boolean {
-    if (!response.idToken || !response.localId || !response.email || !response.refreshToken) {
+    const expirySeconds = Number(response.expiresIn);
+    if (
+      !response.idToken || !response.localId || !response.email || !response.refreshToken ||
+      !Number.isFinite(expirySeconds) || expirySeconds <= 0
+    ) {
       this.logout();
       return false;
     }
     this.idToken = response.idToken;
     this.refreshToken = response.refreshToken;
-    this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expiresIn) || 0) * 1000;
+    this.tokenExpiresAt = Date.now() + expirySeconds * 1000;
     this.userSignal.set({
       uid: response.localId,
       name: response.displayName?.trim() || response.email.split('@')[0],
