@@ -313,8 +313,8 @@ async function dispatchPersistentJob(jobId: string): Promise<"ENQUEUED" | "NOT_C
   const queue = process.env.CLOUD_TASKS_QUEUE;
   const workerUrl = process.env.JOB_WORKER_URL;
   const workerServiceAccount = process.env.JOB_WORKER_SERVICE_ACCOUNT;
-  const workerAudience = process.env.JOB_WORKER_AUDIENCE || workerUrl;
-  if (!project || !location || !queue || !workerUrl || !workerServiceAccount) {
+  const workerAudience = process.env.JOB_WORKER_AUDIENCE;
+  if (!project || !location || !queue || !workerUrl || !workerAudience || !workerServiceAccount) {
     return "NOT_CONFIGURED";
   }
 
