@@ -306,6 +306,7 @@ export const createPersistentJob = onCall(
     const jobType = requireText(request.data?.jobType, "jobType", 80);
     const title = requireText(request.data?.title, "title", 200);
     const prompt = requireText(request.data?.prompt, "prompt", 20000);
+    const projectName = typeof request.data?.projectName === "string" ? request.data.projectName.slice(0, 200) : "";
     const idempotencyKey = requireText(request.data?.idempotencyKey, "idempotencyKey", 128);
     await assertProjectOwner(uid, projectId);
 
@@ -323,11 +324,14 @@ export const createPersistentJob = onCall(
       tx.create(jobRef, {
         userId: uid,
         projectId,
+        projectName,
         jobType,
         title,
         prompt,
+        userPrompt: prompt,
         status: "QUEUED",
         progress: 0,
+        progressPercent: 0,
         currentStepIndex: 0,
         attempts: 0,
         cancelRequested: false,
