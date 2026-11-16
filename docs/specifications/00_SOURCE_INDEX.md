@@ -494,3 +494,8 @@
 ## Workpaper 193 — إعداد Android والإصدار
 - الملف: [193-android-runtime-and-release-gates.md](193-android-runtime-and-release-gates.md)
 - توثيق الفارق بين نجاح تجميع Android وبين جاهزية Firebase وقت التشغيل، ومتطلبات google-services/OAuth/App Check ومفتاح توقيع الإصدار الدائم.
+
+
+## Workpaper 194 — تهيئة Firebase في Android وربط خزنة الأسرار
+- الملف: [194-android-firebase-bootstrap-and-vault-callables.md](194-android-firebase-bootstrap-and-vault-callables.md)
+- إضافة تهيئة Firebase من إعدادات البناء أو ملف .env، وشاشة إعداد عند غياب القيم، وربط مستودع الأسرار بـ Cloud Functions مع إبقاء الواجهة معطلة حتى نشر الخادم.
