@@ -127,7 +127,14 @@ app.post("/tasks", async (req, res) => {
       generationConfig: { temperature: 0.2, maxOutputTokens: 8192 }
     });
 
-    await update(25, 1, "Sending the task to the configured server-side AI model");
+    if (!await update(25, 1, "Sending the task to the configured server-side AI model")) {
+      await callPrivateFunction("finishPersistentJob", {
+        jobId, workerId, leaseToken: lease.leaseToken,
+        state: "CANCELLED", summary: "Cancelled before model execution."
+      });
+      res.status(200).json({ jobId, state: "CANCELLED" });
+      return;
+    }
     const generated = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: prompt }] }]
     });
