@@ -122,7 +122,7 @@ app.post("/tasks", async (req, res) => {
     }
 
     const ai = new GoogleGenAI({
-      vertexai: true,
+      enterprise: true,
       project: required("GCP_PROJECT_ID", projectId),
       location
     });
