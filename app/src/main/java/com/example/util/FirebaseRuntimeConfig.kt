@@ -21,7 +21,7 @@ fun initializeFirebaseApp(context: Context): Boolean {
         "FIREBASE_PROJECT_ID" to BuildConfig.FIREBASE_PROJECT_ID,
         "FIREBASE_MESSAGING_SENDER_ID" to BuildConfig.FIREBASE_MESSAGING_SENDER_ID
     )
-    val missing = required.filterValues { it.isBlank() }.keys
+    val missing = required.filterValues { it.isBlank() || it.startsWith("CONFIGURE_") }.keys
     if (missing.isNotEmpty()) {
         Log.w(TAG, "Firebase is not configured. Missing build values: ${missing.joinToString()}")
         return false
