@@ -15,6 +15,12 @@ describe('ProjectService honest local workflow behavior', () => {
     localStorage.clear();
   });
 
+  it('starts with no claimed build, test, or release evidence', () => {
+    expect(service.lastApk().ready).toBeFalse();
+    expect(service.tests().every((test) => test.result === 'pending')).toBeTrue();
+    expect(service.release().checklist.every((item) => !item.done)).toBeTrue();
+  });
+
   it('creates draft steps from the supplied natural-language description', () => {
     service.setFunctionNatural('تحقق من تسجيل الدخول\nأضف المنتج للسلة\nعند النجاح اعرض رسالة\nعند الفشل اعرض الخطأ');
     service.convertNaturalToSteps();
