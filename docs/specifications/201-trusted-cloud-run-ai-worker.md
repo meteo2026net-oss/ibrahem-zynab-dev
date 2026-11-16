@@ -14,7 +14,7 @@
 2. Cloud Run IAM verifies the caller. The service must not allow unauthenticated invocation.
 3. The worker claims the job using the private Firebase Functions endpoint.
 4. The worker renews its lease every 20 seconds and reports progress.
-5. The worker calls Vertex AI using the Cloud Run service identity (no AI key is embedded in the app).
+5. The worker calls Gemini Enterprise Agent Platform (Vertex AI) using the Cloud Run service identity (no AI key is embedded in the app).
 6. The result text, model name, summary and terminal state are saved through the lease-guarded finish endpoint.
 7. The owner retrieves the result through `getPersistentJobResult`.
 
@@ -35,7 +35,7 @@ gcloud tasks queues create app-designer-jobs --location=us-central1 --project=PR
 
 Deploy the worker from source (no Dockerfile required):
 ```sh
-gcloud run deploy app-designer-worker --source=worker --region=us-central1 --project=PROJECT_ID --service-account=WORKER_RUNTIME_SA --no-allow-unauthenticated --timeout=900 --set-env-vars=GCP_PROJECT_ID=PROJECT_ID,FUNCTIONS_BASE_URL=https://us-central1-PROJECT_ID.cloudfunctions.net,VERTEX_AI_LOCATION=us-central1,VERTEX_AI_MODEL=gemini-2.5-flash
+gcloud run deploy app-designer-worker --source=worker --region=us-central1 --project=PROJECT_ID --service-account=WORKER_RUNTIME_SA --no-allow-unauthenticated --timeout=900 --set-env-vars=GCP_PROJECT_ID=PROJECT_ID,FUNCTIONS_BASE_URL=https://us-central1-PROJECT_ID.cloudfunctions.net,VERTEX_AI_LOCATION=us-central1,VERTEX_AI_MODEL=gemini-3.8-flash
 ```
 
 Set `JOB_WORKER_URL` to the deployed service URL plus `/tasks`; set `JOB_WORKER_AUDIENCE` to the Cloud Run service URL without the path. Set `JOB_WORKER_SERVICE_ACCOUNT` to the service account whose OIDC identity Cloud Tasks will attach. Configure the same values in `functions/.env` (never commit that file).
