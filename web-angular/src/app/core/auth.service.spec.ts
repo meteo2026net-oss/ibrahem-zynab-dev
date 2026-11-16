@@ -52,6 +52,22 @@ describe('AuthService Firebase Authentication', () => {
     expect(service.getIdToken()).toBe('verified-id-token');
   });
 
+
+  it('rejects a Firebase sign-in response with an invalid token expiry', async () => {
+    const result = service.login('person@example.com', 'correct-password');
+    http.expectOne((req) => req.url.includes('accounts:signInWithPassword')).flush({
+      localId: 'firebase-user-1',
+      email: 'person@example.com',
+      idToken: 'token-without-valid-expiry',
+      refreshToken: 'refresh-token',
+      expiresIn: 'invalid',
+    });
+
+    expect(await result).toBeFalse();
+    expect(service.isLoggedIn()).toBeFalse();
+    expect(service.getIdToken()).toBeNull();
+  });
+
   it('creates an ordinary Firebase user account', async () => {
     const result = service.register('new-person@example.com', 'strong-pass-123');
     const request = http.expectOne((req) => req.url.includes('accounts:signUp'));
