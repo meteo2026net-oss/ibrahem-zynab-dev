@@ -499,3 +499,8 @@
 ## Workpaper 194 — تهيئة Firebase في Android وربط خزنة الأسرار
 - الملف: [194-android-firebase-bootstrap-and-vault-callables.md](194-android-firebase-bootstrap-and-vault-callables.md)
 - إضافة تهيئة Firebase من إعدادات البناء أو ملف .env، وشاشة إعداد عند غياب القيم، وربط مستودع الأسرار بـ Cloud Functions مع إبقاء الواجهة معطلة حتى نشر الخادم.
+
+
+## Workpaper 195 — خط إصدار Android الموقّع
+- الملف: [195-signed-android-release-pipeline.md](195-signed-android-release-pipeline.md)
+- إضافة workflow يدوي لبناء AAB موقّع بعد توفير keystore وكلمات مروره في GitHub Secrets وإعداد Firebase Variables. لم يتم تشغيله لعدم توفر بيانات توقيع المالك.
