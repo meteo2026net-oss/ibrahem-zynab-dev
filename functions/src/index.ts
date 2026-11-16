@@ -583,6 +583,10 @@ export const claimPersistentJob = onRequest(
       response.status(409).json({ error: "job-already-claimed", state: result.state });
       return;
     }
+    if (!("job" in result)) {
+      response.status(500).json({ error: "job-claim-result-invalid" });
+      return;
+    }
     response.status(200).json({ jobId, workerId, leaseToken, leaseExpiresAt, job: result.job });
   }
 );
