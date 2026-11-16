@@ -37,7 +37,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24.15.0
           cache: npm
           cache-dependency-path: web-angular/package-lock.json
 
@@ -69,6 +69,11 @@ jobs:
         if: always()
         run: |
           node -e "const a=require('./npm-audit.json'); console.log('Vulnerability totals:', JSON.stringify(a.metadata?.vulnerabilities ?? {})); for (const [name, item] of Object.entries(a.vulnerabilities ?? {})) console.log(JSON.stringify({name, severity:item.severity, direct:item.isDirect, range:item.range, fixAvailable:item.fixAvailable}));"
+
+      - name: Enforce high and critical dependency audit gate
+        if: success()
+        run: |
+          node -e "const a=require('./npm-audit.json'); const v=a.metadata?.vulnerabilities ?? {}; console.log('Enforced audit gate:', JSON.stringify(v)); if ((v.high ?? 0) > 0 || (v.critical ?? 0) > 0) process.exit(1);"
 
       - name: Upload dependency audit report
         if: always()
