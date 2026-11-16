@@ -474,3 +474,8 @@
 ## Workpaper 189 — دورة حياة حساب Firebase
 - الملف: [189-firebase-account-lifecycle.md](189-firebase-account-lifecycle.md)
 - إضافة إنشاء الحساب وإرسال تأكيد البريد وطلب إعادة تعيين كلمة المرور في Firebase Authentication، مع اختبارات خدمة وتحديث واجهة الدخول. يلزم التحقق من CI وضبط Firebase الفعلي؛ فرض تأكيد البريد على جميع الجلسات ما زال عملاً متبقياً.
+
+
+## Workpaper 190 — اختبارات قواعد Firestore بالمحاكي
+- الملف: [190-firestore-emulator-test-harness.md](190-firestore-emulator-test-harness.md)
+- إضافة حزمة اختبار مستقلة وworkflow لمحاكي Firestore تغطي ملكية البيانات وثبات userId وسجلات التدقيق والموافقات والوظائف والأسرار. المحاولة الأولى توقفت بسبب مسار قواعد خارج مجلد المشروع؛ صُحح الإعداد ويجري التحقق من التشغيل الثاني.
