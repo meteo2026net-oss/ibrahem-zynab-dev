@@ -123,9 +123,16 @@ class PersistentJobRepository(private val context: Context) {
     suspend fun getGeneratedProjectFiles(jobId: String): List<GeneratedProjectFile> = withContext(Dispatchers.IO) {
         val result = getJobResult(jobId)
         val rawFiles = result["resultFiles"] as? List<*> ?: emptyList<Any>()
-        val files = rawFiles.mapNotNull { GeneratedProjectFile.fromMap(it) }
+        if (rawFiles.isEmpty()) return@withContext emptyList()
+        val files = rawFiles.map { raw ->
+            GeneratedProjectFile.fromMap(raw)
+                ?: throw IllegalStateException("The server returned an invalid generated project file.")
+        }
         val seen = HashSet<String>()
-        files.filter { seen.add(it.path.lowercase()) }
+        require(files.all { seen.add(it.path.lowercase()) }) {
+            "The server returned duplicate generated project paths."
+        }
+        files
     }
 
     /**
