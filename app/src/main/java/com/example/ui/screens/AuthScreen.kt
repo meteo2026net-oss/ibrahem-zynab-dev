@@ -56,6 +56,7 @@ import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialCancellationException
 import com.example.R
+import com.example.BuildConfig
 import com.example.ui.theme.metraGradientBackground
 import com.example.ui.theme.MetraCyan
 import com.example.ui.theme.MetraEmerald
@@ -290,10 +291,9 @@ fun onGoogleSignInClicked(
     scope: CoroutineScope,
     onAuthCancelled: () -> Unit = {}
 ) {
-    val clientId = try {
-        context.getString(R.string.default_web_client_id)
-    } catch (e: Exception) {
-        onAuthError("Google Sign-In configuration missing: default_web_client_id not found")
+    val clientId = BuildConfig.GOOGLE_WEB_CLIENT_ID.trim()
+    if (clientId.isBlank()) {
+        onAuthError("تسجيل Google غير مهيأ بعد. أضف GOOGLE_WEB_CLIENT_ID إلى إعدادات البناء ثم أعد البناء.")
         return
     }
 
