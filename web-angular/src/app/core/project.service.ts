@@ -307,12 +307,26 @@ export class ProjectService {
   }
 
   convertNaturalToSteps(): void {
-    const steps: FunctionStep[] = [
-      { id: 1, title: 'التحقق من تسجيل الدخول', detail: 'مستخرج من الوصف', kind: 'check' },
-      { id: 2, title: 'تنفيذ الإجراء الرئيسي', detail: 'addToCart / العملية المذكورة', kind: 'action' },
-      { id: 3, title: 'معالجة النجاح', detail: 'رسالة وتحديث الواجهة', kind: 'success' },
-      { id: 4, title: 'معالجة الفشل', detail: 'عرض الخطأ', kind: 'error' },
-    ];
+    const source = this.state().functionNatural.trim();
+    if (!source) return;
+    const lines = source
+      .split(/[\\n.!؟؛]+/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .slice(0, 20);
+    const steps: FunctionStep[] = lines.map((line, index) => {
+      const normalized = line.toLowerCase();
+      const kind: FunctionStep['kind'] =
+        /إذا|إن |تحقق|تأكد|قبل/.test(normalized) ? 'check' :
+        /خطأ|فشل|تعذر|وإلا/.test(normalized) ? 'error' :
+        /نجاح|بنجاح|عند اكتمال/.test(normalized) ? 'success' : 'action';
+      return {
+        id: index + 1,
+        title: line.length > 72 ? line.slice(0, 69) + '…' : line,
+        detail: 'مسودة مستخرجة محلياً من نص المستخدم — تحتاج مراجعة',
+        kind,
+      };
+    });
     this.patch({ functionSteps: steps });
   }
 
