@@ -68,8 +68,8 @@ describe('AuthService Firebase Authentication', () => {
       email: 'admin@example.com',
       role: 'admin',
     }));
-    const fresh = new AuthService();
-    expect(fresh.isLoggedIn()).toBeFalse();
+    expect(service.isLoggedIn()).toBeFalse();
+    expect(service.getIdToken()).toBeNull();
   });
 
   it('clears the in-memory ID token on logout', async () => {
