@@ -27,10 +27,10 @@ export class ReleaseComponent {
     this.store.setReleaseVersion(this.version, this.notes);
     const ok = this.store.publishRelease();
     if (ok) {
-      this.message = 'تم النشر بنجاح (محاكاة)';
+      this.message = 'تم تأكيد النشر';
       this.toast.success(this.message);
     } else {
-      this.message = 'تعذّر النشر: أكمل قائمة التحقق أولاً';
+      this.message = 'لم يتم النشر: خدمة النشر الفعلية غير موصولة. قائمة التحقق المحلية لا تنشئ إصداراً منشوراً.';
       this.toast.error(this.message);
     }
   }
