@@ -2,7 +2,7 @@
 
 const express = require("express");
 const { GoogleAuth } = require("google-auth-library");
-const { VertexAI } = require("@google-cloud/vertexai");
+const { GoogleGenAI } = require("@google/genai");
 
 const app = express();
 app.disable("x-powered-by");
@@ -39,6 +39,9 @@ async function callPrivateFunction(name, payload) {
 }
 
 function extractText(response) {
+  if (typeof response?.text === "string" && response.text.trim()) {
+    return response.text.trim();
+  }
   const candidates = response && response.candidates;
   if (!Array.isArray(candidates) || !candidates.length) {
     throw new Error("The model returned no candidates.");
@@ -118,13 +121,10 @@ app.post("/tasks", async (req, res) => {
       return;
     }
 
-    const vertex = new VertexAI({
+    const ai = new GoogleGenAI({
+      vertexai: true,
       project: required("GCP_PROJECT_ID", projectId),
       location
-    });
-    const model = vertex.getGenerativeModel({
-      model: modelName,
-      generationConfig: { temperature: 0.2, maxOutputTokens: 8192 }
     });
 
     if (!await update(25, 1, "Sending the task to the configured server-side AI model")) {
@@ -135,8 +135,10 @@ app.post("/tasks", async (req, res) => {
       res.status(200).json({ jobId, state: "CANCELLED" });
       return;
     }
-    const generated = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: prompt }] }]
+    const generated = await ai.models.generateContent({
+      model: modelName,
+      contents: prompt,
+      config: { temperature: 0.2, maxOutputTokens: 8192 }
     });
     if (leaseLost) {
       res.status(503).json({ error: "worker-lease-lost", jobId });
