@@ -475,6 +475,31 @@ export const listPersistentJobs = onCall(
   }
 );
 
+export const getPersistentJobResult = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const jobId = requireText(request.data?.jobId, "jobId", 128);
+    const snapshot = await db.collection("persistent_jobs").doc(jobId).get();
+    if (!snapshot.exists || snapshot.get("userId") !== uid) {
+      throw new HttpsError("not-found", "Job not found.");
+    }
+    const data = snapshot.data()!;
+    await assertProjectOwner(uid, data.projectId);
+    return {
+      jobId,
+      status: data.status ?? "UNKNOWN",
+      progressPercent: data.progressPercent ?? data.progress ?? 0,
+      summary: data.summary ?? "",
+      resultText: data.resultText ?? "",
+      resultModel: data.resultModel ?? "",
+      createdAt: data.createdAt?.toMillis?.() ?? null,
+      updatedAt: data.updatedAt?.toMillis?.() ?? null,
+      finishedAt: data.finishedAt?.toMillis?.() ?? null,
+    };
+  }
+);
+
 export const cancelPersistentJob = onCall(
   { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
   async (request) => {
