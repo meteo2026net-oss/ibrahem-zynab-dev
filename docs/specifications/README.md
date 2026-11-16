@@ -558,3 +558,7 @@
 ## 179 — تدقيق مستودعات Android والتكاملات وخزنة الأسرار
 
 [179-android-integrations-and-secrets-vault-implementation-audit.md](179-android-integrations-and-secrets-vault-implementation-audit.md) — مراجعة ساكنة تثبت فجوات جوهرية في خزنة الأسرار (مفتاح ثابت داخل العميل، fallback إلى plaintext، وفك التشفير على Android) وتحدد عمليات GitHub/Telegram المحاكاة مقابل التكامل الحقيقي. لا تغييرات تنفيذية أو اتصالات حية.
+
+## 180 — تدقيق محرك التنفيذ وقواعد البيانات والنسخ الاحتياطي والتعافي
+
+[180-execution-orchestration-database-and-disaster-recovery-audit.md](180-execution-orchestration-database-and-disaster-recovery-audit.md) — مراجعة ساكنة تكشف أن worker leases والموافقات وidempotency لا تحقق الضمانات المعلنة، وأن SQL والمزامنة والنسخ الاحتياطي والاستعادة الحالية محاكاة/سجلات حالة وليست عمليات فعلية مكتملة. لا تغييرات تنفيذية.
