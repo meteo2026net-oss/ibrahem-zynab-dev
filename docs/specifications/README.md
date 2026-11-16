@@ -562,3 +562,7 @@
 ## 180 — تدقيق محرك التنفيذ وقواعد البيانات والنسخ الاحتياطي والتعافي
 
 [180-execution-orchestration-database-and-disaster-recovery-audit.md](180-execution-orchestration-database-and-disaster-recovery-audit.md) — مراجعة ساكنة تكشف أن worker leases والموافقات وidempotency لا تحقق الضمانات المعلنة، وأن SQL والمزامنة والنسخ الاحتياطي والاستعادة الحالية محاكاة/سجلات حالة وليست عمليات فعلية مكتملة. لا تغييرات تنفيذية.
+
+## 181 — تدقيق مزودي الذكاء الاصطناعي وتوليد المشروع والتصدير
+
+[181-ai-providers-web-project-generation-and-export-audit.md](181-ai-providers-web-project-generation-and-export-audit.md) — مراجعة ساكنة تفرق بين طلبات HTTP مباشرة لمزودي AI في Android وبين تطوير ذاتي محاكى، وتوثق مصادقة Angular المحلية وتخزين المشاريع محلياً، وتكشف أن ZIP التصدير يحوي محتوى اصطناعياً وأن حالة اكتمال المزامنة لا تثبت نقلاً خارجياً. لا تغييرات تنفيذية أو اتصالات حية أو اختبارات.
