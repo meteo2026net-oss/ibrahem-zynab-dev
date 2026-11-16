@@ -31,6 +31,6 @@ jobs:
       - name: Install dependencies
         working-directory: functions
         run: npm install --no-package-lock
-      - name: Compile TypeScript
+      - name: Compile and test Firebase Functions
         working-directory: functions
-        run: npm run build
+        run: npm test
