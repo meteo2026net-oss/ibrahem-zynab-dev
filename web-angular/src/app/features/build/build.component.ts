@@ -16,7 +16,6 @@ export class BuildComponent {
 
   build(): void {
     this.store.simulateBuild();
-    this.toast.info('بدأ البناء...');
-    setTimeout(() => this.toast.success('اكتمل البناء'), 2800);
+    this.toast.error('لم يبدأ البناء: محرك التوليد والبناء غير موصول، ولم يتم إنشاء ملف APK.');
   }
 }
