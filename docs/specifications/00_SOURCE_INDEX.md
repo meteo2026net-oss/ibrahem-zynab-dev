@@ -427,3 +427,9 @@
 - الملف: [180-execution-orchestration-database-and-disaster-recovery-audit.md](180-execution-orchestration-database-and-disaster-recovery-audit.md)
 - مراجعة TaskOrchestrator وPersistentJobWorker وAutomationRepository وDatabaseIntegrationRepository؛ توثق غياب الاستحواذ الذري على worker lease والتحقق من leaseToken، استمرار التنفيذ بعد فشل heartbeat/persistence، ضعف ربط الموافقة وidempotency، ومحاكاة SQL والمزامنة والنسخ الاحتياطي/الاستعادة بدلاً من تنفيذها فعلياً.
 - قراءة ساكنة فقط؛ لا تشغيل مهام أو استعلامات أو مزامنة أو نسخ احتياطي، ولا تغييرات تنفيذية.
+
+
+## Workpaper 181 — تدقيق مزودي الذكاء الاصطناعي وتوليد المشروع والتصدير
+- الملف: [181-ai-providers-web-project-generation-and-export-audit.md](181-ai-providers-web-project-generation-and-export-audit.md)
+- يميز بين اتصالات HTTP مباشرة ظاهرة في Android لمزودي AI وبين مسار تطوير ذاتي محاكى، ويرصد المصادقة المحلية في Angular وبيانات المشاريع المحلية، كما يثبت أن ZIP التصدير يحتوي محتوى اصطناعياً وأن حالة COMPLETED لا تثبت نقلاً خارجياً.
+- قراءة ساكنة فقط؛ لا اتصالات API أو اختبارات أو build أو deploy، ولا تغييرات تنفيذية.
