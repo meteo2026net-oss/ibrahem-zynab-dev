@@ -421,3 +421,9 @@
 - الملف: [179-android-integrations-and-secrets-vault-implementation-audit.md](179-android-integrations-and-secrets-vault-implementation-audit.md)
 - يراجع ProjectRepository وSecretsVaultRepository وCryptoUtils وIntegrationsRepository؛ يثبت وجود مفتاح تشفير ثابت داخل العميل وfallback إلى plaintext عند فشل التشفير، وأن فك الأسرار يتم داخل Android رغم تسمية Backend-only، وأن عمليات GitHub/Telegram المعروضة تتضمن محاكاة لا اتصالات حقيقية.
 - تدقيق قراءة ساكنة فقط؛ لا اتصالات خارجية أو اختبارات أو تغييرات كود. لا يعد إذناً ببدء البرمجة.
+
+
+## Workpaper 180 — تدقيق محرك التنفيذ وقواعد البيانات والنسخ الاحتياطي والتعافي
+- الملف: [180-execution-orchestration-database-and-disaster-recovery-audit.md](180-execution-orchestration-database-and-disaster-recovery-audit.md)
+- مراجعة TaskOrchestrator وPersistentJobWorker وAutomationRepository وDatabaseIntegrationRepository؛ توثق غياب الاستحواذ الذري على worker lease والتحقق من leaseToken، استمرار التنفيذ بعد فشل heartbeat/persistence، ضعف ربط الموافقة وidempotency، ومحاكاة SQL والمزامنة والنسخ الاحتياطي/الاستعادة بدلاً من تنفيذها فعلياً.
+- قراءة ساكنة فقط؛ لا تشغيل مهام أو استعلامات أو مزامنة أو نسخ احتياطي، ولا تغييرات تنفيذية.
