@@ -148,6 +148,20 @@ class MetraCoreUnitTest {
         }
     }
 
+
+    @Test
+    fun testTrustedBackendJobStatusAndTimestampCompatibility() {
+        assertEquals(com.example.data.model.JobStatus.QUEUED, com.example.data.repository.parsePersistentJobStatus("QUEUED"))
+        assertEquals(com.example.data.model.JobStatus.RUNNING, com.example.data.repository.parsePersistentJobStatus("RUNNING"))
+        assertEquals(com.example.data.model.JobStatus.COMPLETED, com.example.data.repository.parsePersistentJobStatus("SUCCEEDED"))
+        assertEquals(com.example.data.model.JobStatus.WAITING_FOR_APPROVAL, com.example.data.repository.parsePersistentJobStatus("WAITING_FOR_APPROVAL"))
+        assertEquals(com.example.data.model.JobStatus.FAILED, com.example.data.repository.parsePersistentJobStatus("FAILED"))
+        assertEquals(com.example.data.model.JobStatus.CANCELLED, com.example.data.repository.parsePersistentJobStatus("CANCELLED"))
+        assertEquals(1700000000000L, com.example.data.repository.parseFirestoreMillis(1700000000000L))
+        assertEquals(1700000000000L, com.example.data.repository.parseFirestoreMillis(java.util.Date(1700000000000L)))
+        assertEquals(1700000000000L, com.example.data.repository.parseFirestoreMillis(com.google.firebase.Timestamp(1700000000, 0)))
+    }
+
     @Test
     fun testTelegramCommandsList() {
         val supportedCommands = listOf(
