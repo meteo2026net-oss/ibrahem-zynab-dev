@@ -24,10 +24,10 @@ The Functions runtime service account needs permission to create tasks in the se
 This change implements dispatch only. It does not create or deploy the Cloud Tasks queue, Cloud Run service, service accounts, IAM bindings, or worker code. Until those infrastructure resources exist and `JOB_WORKER_URL` is configured, dispatch status will be `NOT_CONFIGURED` and jobs will remain queued. A task can be delivered only after a real worker endpoint exists.
 
 ## Failure recovery
-A task creation failure is visible as `FAILED` and is logged with a non-secret error code. Repeating the callable with the same idempotency key retries task creation because the job identifier is stable. A future scheduled reconciler should retry stale `FAILED` jobs without requiring a client retry and should alert on persistent failures.
+A task creation failure is visible as `FAILED` and is logged with a non-secret error code. Repeating the callable with the same idempotency key retries task creation because the job identifier is stable. The scheduled `reconcilePersistentJobDispatch` function now checks up to 50 failed dispatch records each minute, retries queued jobs, and records the new dispatch status. It uses deterministic task names so ambiguous create-task responses are safe to retry. Persistent failures still require operational alerting and inspection.
 
 ## Validation still required
 - Functions CI compilation after the dependency update.
-- Emulator or integration tests for task creation, duplicate task names, missing configuration, Cloud Tasks API failures, and callable retries.
+- Emulator or integration tests for task creation, duplicate task names, missing configuration, Cloud Tasks API failures, scheduled reconciliation, and callable retries.
 - A deployed staging queue and authenticated Cloud Run worker to validate OIDC and IAM end-to-end.
 - Worker lease claim, progress, cancellation, and finish integration tests.
