@@ -2,7 +2,7 @@ import { Buffer } from "node:buffer";
 import { createHash, randomUUID } from "node:crypto";
 import { KeyManagementServiceClient } from "@google-cloud/kms";
 import { getApps, initializeApp } from "firebase-admin/app";
-import { FieldValue, getFirestore } from "firebase-admin/firestore";
+import { FieldValue, getFirestore, type Transaction } from "firebase-admin/firestore";
 import { HttpsError, onCall, onRequest } from "firebase-functions/v2/https";
 
 if (getApps().length === 0) initializeApp();
@@ -281,7 +281,7 @@ function requireWorkerRequest(request: { body?: Record<string, unknown> }) {
 }
 
 async function verifyAndReadLease(
-  tx: FirebaseFirestore.Transaction,
+  tx: Transaction,
   jobId: string,
   workerId: string,
   leaseToken: string
