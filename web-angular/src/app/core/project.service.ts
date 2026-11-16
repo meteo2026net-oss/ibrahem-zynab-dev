@@ -288,6 +288,26 @@ export class ProjectService {
     this.patch({ activeProjectId: id });
   }
 
+  replaceProjectsFromCloud(projects: Project[]): void {
+    if (!Array.isArray(projects)) return;
+    this.state.update((s) => {
+      const valid = projects.filter(isProject);
+      const activeProjectId = valid.some((project) => project.id === s.activeProjectId)
+        ? s.activeProjectId
+        : valid[0]?.id ?? '';
+      return { ...s, projects: valid, activeProjectId };
+    });
+  }
+
+  addCloudProject(project: Project): void {
+    if (!isProject(project)) return;
+    this.state.update((s) => ({
+      ...s,
+      projects: [project, ...s.projects.filter((item) => item.id !== project.id)],
+      activeProjectId: project.id,
+    }));
+  }
+
   addProject(data: { name: string; description: string; platforms: Platform[] }): void {
     const p: Project = {
       id: 'p' + Date.now(),
