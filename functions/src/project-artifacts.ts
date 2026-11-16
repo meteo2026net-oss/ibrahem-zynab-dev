@@ -13,6 +13,13 @@ export function sanitizeResultFiles(value: unknown): GeneratedProjectFile[] {
   }
   const seen = new Set<string>();
   let totalBytes = 0;
+  const secretPatterns = [
+    /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
+    /\bAIza[0-9A-Za-z_-]{30,}\b/,
+    /\bgh[pousr]_[A-Za-z0-9]{20,}\b/,
+    /\bsk-[A-Za-z0-9]{24,}\b/,
+    /\bAKIA[0-9A-Z]{16}\b/,
+  ];
   const blocked = new Set([
     ".env", ".env.local", ".env.production", "id_rsa", "id_ed25519",
     "credentials.json", "service-account.json",
@@ -35,6 +42,9 @@ export function sanitizeResultFiles(value: unknown): GeneratedProjectFile[] {
     const key = path.toLowerCase();
     if (seen.has(key)) throw new HttpsError("invalid-argument", "Duplicate generated file path.");
     seen.add(key);
+    if (secretPatterns.some((pattern) => pattern.test(file.content))) {
+      throw new HttpsError("invalid-argument", "Generated file contains credential-like material.");
+    }
     const bytes = Buffer.byteLength(file.content, "utf8");
     if (bytes > 16 * 1024) throw new HttpsError("invalid-argument", "Generated file exceeds 16 KiB.");
     totalBytes += bytes;
