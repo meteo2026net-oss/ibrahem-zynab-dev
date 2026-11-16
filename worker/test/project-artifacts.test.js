@@ -56,3 +56,15 @@ test("rejects too many files and oversized summaries", () => {
     summary: "x".repeat(4001), files: [{ path: "a.txt", content: "" }]
   }), /summary is missing or too long/);
 });
+
+test("rejects common provider credentials embedded in generated content", () => {
+  for (const content of [
+    "AIza" + "A".repeat(35),
+    "ghp_" + "a".repeat(30),
+    "-----BEGIN PRIVATE KEY-----"
+  ]) {
+    assert.throws(() => validateProjectArtifacts({
+      summary: "x", files: [{ path: "src/config.ts", content }]
+    }), /credential/);
+  }
+});
