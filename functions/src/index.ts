@@ -639,16 +639,16 @@ export const finishPersistentJob = onRequest(
       ? request.body.resultText.slice(0, 80000) : "";
     const resultModel = typeof request.body?.resultModel === "string"
       ? request.body.resultModel.slice(0, 120) : "";
-    await db.runTransaction(async (tx) => {
+    const finalState = await db.runTransaction(async (tx) => {
       const { ref, data } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
-      const finalState = data.cancelRequested === true ? "CANCELLED" : state;
+      const resolvedState = data.cancelRequested === true ? "CANCELLED" : state;
       tx.update(ref, {
-        status: finalState,
+        status: resolvedState,
         summary,
-        resultText: finalState === "SUCCEEDED" ? resultText : "",
-        resultModel: finalState === "SUCCEEDED" ? resultModel : "",
-        progress: finalState === "SUCCEEDED" ? 100 : (data.progress ?? 0),
-        progressPercent: finalState === "SUCCEEDED" ? 100 : (data.progressPercent ?? data.progress ?? 0),
+        resultText: resolvedState === "SUCCEEDED" ? resultText : "",
+        resultModel: resolvedState === "SUCCEEDED" ? resultModel : "",
+        progress: resolvedState === "SUCCEEDED" ? 100 : (data.progress ?? 0),
+        progressPercent: resolvedState === "SUCCEEDED" ? 100 : (data.progressPercent ?? data.progress ?? 0),
         workerId: null,
         leaseToken: null,
         leaseExpiresAt: 0,
@@ -658,13 +658,14 @@ export const finishPersistentJob = onRequest(
       tx.create(db.collection("audit_logs").doc(), {
         userId: data.userId,
         projectId: data.projectId,
-        action: `PERSISTENT_JOB_${finalState}`,
+        action: `PERSISTENT_JOB_${resolvedState}`,
         targetId: jobId,
         actor: workerId,
         createdAt: FieldValue.serverTimestamp(),
       });
+      return resolvedState;
     });
-    response.status(200).json({ jobId, state: data.cancelRequested === true ? "CANCELLED" : state });
+    response.status(200).json({ jobId, state: finalState });
   }
 );
 
