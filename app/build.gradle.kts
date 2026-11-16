@@ -38,7 +38,7 @@ android {
     buildConfigField("String", "FIREBASE_DATABASE_URL", "\"${configValue("FIREBASE_DATABASE_URL")}\"")
     buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"${configValue("GOOGLE_WEB_CLIENT_ID")}\"")
     val vaultBackendEnabled = configValue("VAULT_BACKEND_ENABLED").ifBlank { "false" }
-    buildConfigField("boolean", "VAULT_BACKEND_ENABLED", vaultBackendEnabled)
+    buildConfigField("String", "VAULT_BACKEND_ENABLED", "\"$vaultBackendEnabled\"")
 
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
