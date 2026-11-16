@@ -72,6 +72,37 @@ describe('AuthService Firebase Authentication', () => {
     expect(service.getIdToken()).toBeNull();
   });
 
+  it('refreshes an expiring Firebase ID token without browser storage', async () => {
+    const clock = spyOn(Date, 'now').and.returnValue(0);
+    const signIn = service.login('person@example.com', 'correct-password');
+    const signInRequest = http.expectOne((req) => req.url.includes('accounts:signInWithPassword'));
+    signInRequest.flush({
+      localId: 'firebase-user-1',
+      email: 'person@example.com',
+      idToken: 'first-id-token',
+      refreshToken: 'first-refresh-token',
+      expiresIn: '3600',
+    });
+    expect(await signIn).toBeTrue();
+
+    clock.and.returnValue(3_550_000);
+    const refreshed = service.getValidIdToken();
+    const refreshRequest = http.expectOne((req) => req.url.includes('securetoken.googleapis.com/v1/token'));
+    expect(refreshRequest.request.body).toEqual({
+      grant_type: 'refresh_token',
+      refresh_token: 'first-refresh-token',
+    });
+    refreshRequest.flush({
+      id_token: 'renewed-id-token',
+      refresh_token: 'renewed-refresh-token',
+      expires_in: '3600',
+      user_id: 'firebase-user-1',
+    });
+
+    expect(await refreshed).toBe('renewed-id-token');
+    expect(service.getIdToken()).toBe('renewed-id-token');
+  });
+
   it('clears the in-memory ID token on logout', async () => {
     service.logout();
     expect(service.getIdToken()).toBeNull();
