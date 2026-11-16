@@ -606,3 +606,8 @@
 ## 189 — دورة حياة حساب Firebase
 
 [189-firebase-account-lifecycle.md](189-firebase-account-lifecycle.md) — إضافة التسجيل وتأكيد البريد وطلب إعادة تعيين كلمة المرور في Firebase Authentication. يتطلب CI وضبط Firebase الفعلي، كما أن فرض التحقق من البريد على كل جلسة ما زال مطلوباً.
+
+
+## 190 — اختبارات قواعد Firestore بالمحاكي
+
+[190-firestore-emulator-test-harness.md](190-firestore-emulator-test-harness.md) — إضافة اختبارات آلية لقواعد الملكية وسجلات التحكم وبيانات الاعتماد عبر Firestore Emulator؛ التشغيل المصحح قيد التحقق.
