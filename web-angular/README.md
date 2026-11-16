@@ -58,3 +58,13 @@ npm run build -- --configuration production
 ## النشر
 
 يمكن بناء ملفات الويب الإنتاجية بواسطة أمر البناء أعلاه. لا يعني نجاح البناء وحده أن التطبيق متصل بخدمات Firebase أو أنه منشور. راجع إعدادات Netlify في جذر المستودع، واضبط Firebase وApp Check وخدمات الخلفية واختبارات التكامل قبل فتح التطبيق للمستخدمين.
+
+## Firebase project persistence API (backend available; web client pending)
+
+The Functions deployment now exports three authenticated, App-Check-enforced callable functions:
+
+- `createProject({ name, description, platforms })` → `{ projectId }`
+- `listProjects({})` → `{ projects }` (maximum 100 projects for the signed-in owner)
+- `updateProject({ projectId, name?, description?, platforms? })` → `{ projectId, updated: true }`
+
+Supported platform values are `Web`, `Android`, `iOS`, `Desktop`, and `Backend`. Project ownership is assigned from the verified Firebase Authentication UID, never from a client-supplied owner field. Creation and updates append audit records. The callable API is not yet consumed by Angular: local workspace storage remains the active UI persistence path until the client has a correctly configured Firebase App Check provider and the project/job repository adapter is implemented and tested.
