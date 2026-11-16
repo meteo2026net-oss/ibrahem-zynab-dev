@@ -526,7 +526,7 @@ private fun JobCard(
                             Icon(Icons.Default.Close, contentDescription = "إلغاء المهمة", tint = MetraRose)
                         }
                     }
-                    if (job.status == JobStatus.FAILED) {
+                    if (job.status == JobStatus.FAILED && job.retryCount < job.maxRetries) {
                         IconButton(onClick = onRetry, modifier = Modifier.size(32.dp)) {
                             Icon(Icons.Default.Refresh, contentDescription = "إعادة المحاولة", tint = MaterialTheme.colorScheme.primary)
                         }
