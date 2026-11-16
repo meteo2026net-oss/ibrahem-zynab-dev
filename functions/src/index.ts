@@ -313,6 +313,7 @@ async function dispatchPersistentJob(jobId: string): Promise<"ENQUEUED" | "NOT_C
   const queue = process.env.CLOUD_TASKS_QUEUE;
   const workerUrl = process.env.JOB_WORKER_URL;
   const workerServiceAccount = process.env.JOB_WORKER_SERVICE_ACCOUNT;
+  const workerAudience = process.env.JOB_WORKER_AUDIENCE || workerUrl;
   if (!project || !location || !queue || !workerUrl || !workerServiceAccount) {
     return "NOT_CONFIGURED";
   }
@@ -333,7 +334,7 @@ async function dispatchPersistentJob(jobId: string): Promise<"ENQUEUED" | "NOT_C
           body,
           oidcToken: {
             serviceAccountEmail: workerServiceAccount,
-            audience: workerUrl,
+            audience: workerAudience,
           },
         },
       },
@@ -634,12 +635,18 @@ export const finishPersistentJob = onRequest(
       return;
     }
     const summary = typeof request.body?.summary === "string" ? request.body.summary.slice(0, 4000) : "";
+    const resultText = typeof request.body?.resultText === "string"
+      ? request.body.resultText.slice(0, 80000) : "";
+    const resultModel = typeof request.body?.resultModel === "string"
+      ? request.body.resultModel.slice(0, 120) : "";
     await db.runTransaction(async (tx) => {
       const { ref, data } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
       const finalState = data.cancelRequested === true ? "CANCELLED" : state;
       tx.update(ref, {
         status: finalState,
         summary,
+        resultText: finalState === "SUCCEEDED" ? resultText : "",
+        resultModel: finalState === "SUCCEEDED" ? resultModel : "",
         progress: finalState === "SUCCEEDED" ? 100 : (data.progress ?? 0),
         progressPercent: finalState === "SUCCEEDED" ? 100 : (data.progressPercent ?? data.progress ?? 0),
         workerId: null,
