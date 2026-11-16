@@ -551,12 +551,15 @@ export const claimPersistentJob = onRequest(
       if (!snapshot.exists) throw new HttpsError("not-found", "Job not found.");
       const data = snapshot.data()!;
       const expired = typeof data.leaseExpiresAt !== "number" || data.leaseExpiresAt <= now;
+      if (data.status === "SUCCEEDED" || data.status === "FAILED" || data.status === "CANCELLED") {
+        return { cancelled: data.status === "CANCELLED", alreadyFinished: true, state: data.status };
+      }
       if (data.status !== "QUEUED" && !(data.status === "RUNNING" && expired)) {
-        throw new HttpsError("failed-precondition", "Job is not available to claim.");
+        return { busy: true, state: data.status };
       }
       if (data.cancelRequested === true) {
         tx.update(ref, { status: "CANCELLED", updatedAt: FieldValue.serverTimestamp() });
-        return { cancelled: true };
+        return { cancelled: true, alreadyFinished: true, state: "CANCELLED" };
       }
       tx.update(ref, {
         status: "RUNNING",
@@ -569,8 +572,15 @@ export const claimPersistentJob = onRequest(
       });
       return { cancelled: false, job: data };
     });
-    if (result.cancelled) {
-      response.status(409).json({ error: "job-cancelled" });
+    if (result.cancelled || result.alreadyFinished) {
+      response.status(200).json({
+        jobId, cancelled: result.cancelled, alreadyFinished: result.alreadyFinished,
+        state: result.state
+      });
+      return;
+    }
+    if (result.busy) {
+      response.status(409).json({ error: "job-already-claimed", state: result.state });
       return;
     }
     response.status(200).json({ jobId, workerId, leaseToken, leaseExpiresAt, job: result.job });
