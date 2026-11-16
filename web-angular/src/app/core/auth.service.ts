@@ -8,7 +8,7 @@ export interface AuthUser {
   role: 'user';
 }
 
-interface FirebasePasswordSignInResponse {
+interface FirebaseAuthResponse {
   localId: string;
   email: string;
   displayName?: string;
@@ -43,33 +43,83 @@ export class AuthService {
   readonly isLoggedIn = computed(() => this.userSignal() !== null);
   readonly isConfigured = this.apiKey.length > 0;
 
-  async login(email: string, password: string, _name?: string): Promise<boolean> {
+  async login(email: string, password: string): Promise<boolean> {
     this.logout();
     if (!this.isConfigured || !email.trim() || !password) return false;
 
     try {
       const response = await firstValueFrom(
-        this.http.post<FirebasePasswordSignInResponse>(
+        this.http.post<FirebaseAuthResponse>(
           `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${encodeURIComponent(this.apiKey)}`,
           { email: email.trim(), password, returnSecureToken: true }
         )
       );
-
-      if (!response.idToken || !response.localId || !response.email) return false;
-
-      this.idToken = response.idToken;
-      this.refreshToken = response.refreshToken;
-      this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expiresIn) || 0) * 1000;
-      this.userSignal.set({
-        name: response.displayName?.trim() || response.email.split('@')[0],
-        email: response.email,
-        role: 'user',
-      });
-      return true;
+      return this.acceptAuthResponse(response);
     } catch {
       this.logout();
       return false;
     }
+  }
+
+  async register(email: string, password: string): Promise<boolean> {
+    this.logout();
+    if (!this.isConfigured || !email.trim() || password.length < 6) return false;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<FirebaseAuthResponse>(
+          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${encodeURIComponent(this.apiKey)}`,
+          { email: email.trim(), password, returnSecureToken: true }
+        )
+      );
+      return this.acceptAuthResponse(response);
+    } catch {
+      this.logout();
+      return false;
+    }
+  }
+
+  async sendEmailVerification(): Promise<boolean> {
+    const token = await this.getValidIdToken();
+    if (!token || !this.isConfigured) return false;
+    try {
+      await firstValueFrom(this.http.post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${encodeURIComponent(this.apiKey)}`,
+        { requestType: 'VERIFY_EMAIL', idToken: token }
+      ));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async requestPasswordReset(email: string): Promise<boolean> {
+    if (!this.isConfigured || !email.trim()) return false;
+    try {
+      await firstValueFrom(this.http.post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${encodeURIComponent(this.apiKey)}`,
+        { requestType: 'PASSWORD_RESET', email: email.trim() }
+      ));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  private acceptAuthResponse(response: FirebaseAuthResponse): boolean {
+    if (!response.idToken || !response.localId || !response.email || !response.refreshToken) {
+      this.logout();
+      return false;
+    }
+    this.idToken = response.idToken;
+    this.refreshToken = response.refreshToken;
+    this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expiresIn) || 0) * 1000;
+    this.userSignal.set({
+      name: response.displayName?.trim() || response.email.split('@')[0],
+      email: response.email,
+      role: 'user',
+    });
+    return true;
   }
 
   getIdToken(): string | null {
@@ -89,10 +139,7 @@ export class AuthService {
           user_id: string;
         }>(
           `https://securetoken.googleapis.com/v1/token?key=${encodeURIComponent(this.apiKey)}`,
-          {
-            grant_type: 'refresh_token',
-            refresh_token: this.refreshToken,
-          }
+          { grant_type: 'refresh_token', refresh_token: this.refreshToken }
         )
       );
       if (!response.id_token || !response.refresh_token) {
