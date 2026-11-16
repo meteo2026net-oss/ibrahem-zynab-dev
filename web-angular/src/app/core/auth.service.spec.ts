@@ -5,8 +5,13 @@ describe('AuthService fail-closed authentication', () => {
   let service: AuthService;
 
   beforeEach(() => {
+    localStorage.clear();
     TestBed.configureTestingModule({});
     service = TestBed.inject(AuthService);
+  });
+
+  afterEach(() => {
+    TestBed.resetTestingModule();
     localStorage.clear();
   });
 
@@ -16,13 +21,15 @@ describe('AuthService fail-closed authentication', () => {
     expect(service.user()).toBeNull();
   });
 
-  it('does not restore an untrusted localStorage session', () => {
+  it('does not restore an untrusted localStorage session on service initialization', () => {
+    TestBed.resetTestingModule();
     localStorage.setItem('iad-auth-v1', JSON.stringify({
       name: 'Demo admin',
       email: 'admin@example.com',
       role: 'admin',
     }));
 
+    TestBed.configureTestingModule({});
     const fresh = TestBed.inject(AuthService);
     expect(fresh.isLoggedIn()).toBeFalse();
     expect(fresh.user()).toBeNull();
