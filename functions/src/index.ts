@@ -456,6 +456,10 @@ export const retryPersistentJob = onCall(
         throw new HttpsError("not-found", "Job not found.");
       }
       const data = snapshot.data()!;
+      const projectSnapshot = await tx.get(db.collection("projects").doc(data.projectId));
+      if (!projectSnapshot.exists || projectSnapshot.get("userId") !== uid) {
+        throw new HttpsError("permission-denied", "Project access denied.");
+      }
       if (data.status !== "FAILED") {
         throw new HttpsError("failed-precondition", "Only failed jobs can be retried.");
       }
