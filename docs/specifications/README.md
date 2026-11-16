@@ -626,3 +626,8 @@
 ## 193 — إعداد Android والإصدار
 
 [193-android-runtime-and-release-gates.md](193-android-runtime-and-release-gates.md) — توثيق إعداد Firebase/OAuth/App Check ومفتاح التوقيع الدائم المطلوب قبل نشر Android.
+
+
+## 194 — تهيئة Firebase في Android وربط خزنة الأسرار
+
+[194-android-firebase-bootstrap-and-vault-callables.md](194-android-firebase-bootstrap-and-vault-callables.md) — تهيئة Firebase من إعدادات محلية آمنة، وشاشة إعداد عند غيابها، وربط خزنة الأسرار بوظائف الخادم.
