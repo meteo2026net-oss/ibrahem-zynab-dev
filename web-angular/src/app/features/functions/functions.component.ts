@@ -20,13 +20,14 @@ export class FunctionsComponent {
   convert(): void {
     this.store.setFunctionNatural(this.natural);
     this.store.convertNaturalToSteps();
-    this.toast.success('تم تحويل الوصف إلى خطوات');
+    if (this.natural.trim()) this.toast.info('أُنشئت مسودة خطوات محلية؛ راجعها قبل اعتمادها.');
+    else this.toast.error('اكتب وصف الوظيفة أولاً.');
   }
 
   test(): void {
     this.tested = true;
-    this.testMsg = 'تم اختبار التسلسل بنجاح (محاكاة): تسجيل الدخول → addToCart → رسالة نجاح';
-    this.toast.success('نجح اختبار الوظيفة');
+    this.testMsg = 'لم يُنفّذ اختبار فعلي: يلزم ربط مشغل تنفيذ واختبار آمن قبل اعتماد الوظيفة.';
+    this.toast.error('مشغل اختبار الوظائف غير موصول.');
   }
 
   kindClass(k: string): string {
