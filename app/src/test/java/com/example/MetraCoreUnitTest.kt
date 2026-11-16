@@ -18,13 +18,14 @@ import org.junit.Test
 class MetraCoreUnitTest {
 
     @Test
-    fun testCryptoUtilsEncryptionAndDecryption() {
-        val originalSecret = "sk-proj-999888777666555444333222111"
-        val encrypted = CryptoUtils.encrypt(originalSecret)
-        assertNotEquals(originalSecret, encrypted)
-
-        val decrypted = CryptoUtils.decrypt(encrypted)
-        assertEquals(originalSecret, decrypted)
+    fun testClientSideSecretEncryptionFailsClosed() {
+        val originalSecret = "test-secret-value"
+        org.junit.Assert.assertThrows(UnsupportedOperationException::class.java) {
+            CryptoUtils.encrypt(originalSecret)
+        }
+        org.junit.Assert.assertThrows(UnsupportedOperationException::class.java) {
+            CryptoUtils.decrypt("previous-client-ciphertext")
+        }
     }
 
     @Test
@@ -127,28 +128,24 @@ class MetraCoreUnitTest {
     }
 
     @Test
-    fun testBackupEncryptionAndRestoreIntegrity() {
-        val rawSnapshot = """{"project":"METRA","owner":"المطور التقني ابراهيم زينب","phone":"0934884157"}"""
-        val encrypted = CryptoUtils.encrypt(rawSnapshot)
-        val checksum = CryptoUtils.calculateSha256(encrypted.toByteArray())
+    fun testBackupPayloadChecksumIntegrityDoesNotClaimEncryption() {
+        val snapshotPayload = """{"project":"sample","owner":"test-user"}"""
+        val checksum = CryptoUtils.calculateSha256(snapshotPayload.toByteArray())
 
         val snapshot = ProjectBackupSnapshot(
-            id = "bkp_1",
-            projectName = "METRA",
+            id = "bkp_test",
+            projectName = "sample",
             snapshotVersion = "v1.0.0",
-            encryptedData = encrypted,
+            encryptedData = snapshotPayload,
             sha256Checksum = checksum,
-            status = "VERIFIED"
+            status = "CHECKSUM_VERIFIED_NOT_ENCRYPTED"
         )
 
-        // Verify checksum matches
         val currentChecksum = CryptoUtils.calculateSha256(snapshot.encryptedData.toByteArray())
         assertEquals(snapshot.sha256Checksum, currentChecksum)
-
-        // Verify decryption recovers original payload
-        val decrypted = CryptoUtils.decrypt(snapshot.encryptedData)
-        assertEquals(rawSnapshot, decrypted)
-        assertTrue(decrypted.contains("0934884157"))
+        org.junit.Assert.assertThrows(UnsupportedOperationException::class.java) {
+            CryptoUtils.encrypt(snapshotPayload)
+        }
     }
 
     @Test
@@ -586,34 +583,13 @@ class MetraCoreUnitTest {
     // ========================================================
 
     @Test
-    fun testSecretsVaultEncryptionAndReferenceSystem() {
-        val rawPassword = "SuperSecret_P@ssw0rd_9988!"
-        val encrypted = CryptoUtils.encrypt(rawPassword)
+    fun testSecretsVaultClientEncryptionIsDisabledUntilTrustedBackendExists() {
+        val rawPassword = "test-password"
         val masked = CryptoUtils.maskSecret(rawPassword)
-
-        val secret = com.example.data.model.VaultSecret(
-            id = "sec_101",
-            userId = "usr_ibrahim",
-            projectId = "proj_metra",
-            secretName = "db_production_pass",
-            secretType = com.example.data.model.SecretType.DATABASE_PASSWORD.name,
-            secretReferenceKey = "SEC_REF_DB_PRODUCTION_PASS_998877",
-            encryptedSecretValue = encrypted,
-            maskedSecretValue = masked,
-            allowedServices = listOf("DATABASE_CONNECTOR"),
-            allowedAgents = listOf("CODE_DEVELOPER")
-        )
-
-        // 1. Ensure raw password is NOT stored plaintext
-        assertNotEquals(rawPassword, secret.encryptedSecretValue)
-        assertTrue(secret.maskedSecretValue.startsWith("••••"))
-
-        // 2. Verify decryption in Backend layer recovers original password
-        val decrypted = CryptoUtils.decrypt(secret.encryptedSecretValue)
-        assertEquals(rawPassword, decrypted)
-
-        // 3. Verify Reference Key format provided to LLM
-        assertTrue(secret.secretReferenceKey.startsWith("SEC_REF_"))
+        assertTrue(masked.startsWith("••••"))
+        org.junit.Assert.assertThrows(UnsupportedOperationException::class.java) {
+            CryptoUtils.encrypt(rawPassword)
+        }
     }
 
     @Test
