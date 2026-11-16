@@ -516,3 +516,10 @@
 - إزالة صلاحيات العميل عن مجموعة `project_backups` وإضافة اختبار Emulator يمنع القراءة والكتابة والحذف من العميل. نجحت اختبارات Firestore 8/8 في التشغيل 43863860808.
 - تحديث Android لقراءة حالات المهام من مخطط Functions (بما فيه SUCCEEDED والطوابع الزمنية Firestore Timestamp وحقلي prompt/progress) وإضافة اختبار توافق. نجح بناء Android السابق بعد إصلاحات الأمان؛ تحقق CI لهذا التعديل الجديد جارٍ.
 - نجح Angular unit tests وبناء الإنتاج في التشغيل 43863841528، لكن تدقيق npm ما زال يعرض 44 ثغرة (2 حرجة، 15 عالية، 25 متوسطة، 2 منخفضة). لا يوجد نشر إنتاجي فعلي.
+
+
+## Workpaper 198 — ربط تطبيق Android بطابور المهام الموثوق
+- الملف: [198-android-trusted-job-queue-integration.md](198-android-trusted-job-queue-integration.md)
+- استبدال الكتابة المباشرة إلى `persistent_jobs` باستدعاء Cloud Function `createPersistentJob`، وربط الإلغاء بـ `cancelPersistentJob`. لا يبدأ التنفيذ حتى نشر العامل الخلفي والموزّع.
+- مواءمة بيانات Android مع مخطط الخادم (الحالات، التقدم، prompt، وطوابع Firestore الزمنية). اجتازت اختبارات Android في التشغيل 43864553883، وبُني APK تجريبي ورفع artifact رقم 14224803870.
+- اجتاز تجميع TypeScript لوظائف Firebase التشغيل 43864577107. النشر الفعلي غير منفذ.
