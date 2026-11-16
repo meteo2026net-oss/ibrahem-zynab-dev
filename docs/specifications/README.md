@@ -581,3 +581,8 @@
 ## 184 — الدفعة التنفيذية الثانية: نزاهة نتائج التحليل والبناء والاختبار والنشر
 
 [184-second-implementation-batch-remove-fake-workflow-success.md](184-second-implementation-batch-remove-fake-workflow-success.md) — إزالة حالات النجاح المحاكاة التي لا تستند إلى تنفيذ فعلي، مع توثيق المحركات التي لا تزال بحاجة إلى بناء وربط.
+
+
+## 185 — الدفعة التنفيذية الثالثة: مسودات الوظائف وصدق حالة المشروع
+
+[185-third-implementation-batch-function-drafts-and-truthful-state.md](185-third-implementation-batch-function-drafts-and-truthful-state.md) — تحويل وصف الوظائف إلى مسودات محلية، ومنع ادعاءات نجاح غير مستندة إلى تنفيذ فعلي، وإضافة اختبارات خدمة.
