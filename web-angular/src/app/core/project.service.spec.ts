@@ -1,0 +1,53 @@
+import { TestBed } from '@angular/core/testing';
+import { ProjectService } from './project.service';
+
+describe('ProjectService honest local workflow behavior', () => {
+  let service: ProjectService;
+
+  beforeEach(() => {
+    localStorage.clear();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ProjectService);
+  });
+
+  afterEach(() => {
+    TestBed.resetTestingModule();
+    localStorage.clear();
+  });
+
+  it('creates draft steps from the supplied natural-language description', () => {
+    service.setFunctionNatural('تحقق من تسجيل الدخول\nأضف المنتج للسلة\nعند النجاح اعرض رسالة\nعند الفشل اعرض الخطأ');
+    service.convertNaturalToSteps();
+
+    const steps = service.functionSteps();
+    expect(steps.length).toBe(4);
+    expect(steps[0].kind).toBe('check');
+    expect(steps[1].kind).toBe('action');
+    expect(steps[2].kind).toBe('success');
+    expect(steps[3].kind).toBe('error');
+    expect(steps.every((step) => step.detail.includes('مسودة'))).toBeTrue();
+  });
+
+  it('does not generate random pass/fail test outcomes', () => {
+    const before = service.tests().map((test) => test.result);
+    service.runAllPendingTests();
+    expect(service.tests().map((test) => test.result)).toEqual(before);
+  });
+
+  it('does not report a build artifact as ready without a build provider', () => {
+    service.simulateBuild();
+    expect(service.lastApk().ready).toBeFalse();
+    expect(service.buildLog().join(' ')).toContain('لم يتم إنشاء أي حزمة');
+  });
+
+  it('does not mark a local checklist as a deployed release', () => {
+    expect(service.publishRelease()).toBeFalse();
+    expect(service.release().lastPublished).toBeUndefined();
+  });
+
+  it('does not advance queued agents without an orchestration backend', () => {
+    const before = service.agentTasks().map((task) => task.status);
+    service.runQueuedAgents();
+    expect(service.agentTasks().map((task) => task.status)).toEqual(before);
+  });
+});
