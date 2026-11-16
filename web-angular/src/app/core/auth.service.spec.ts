@@ -85,6 +85,7 @@ describe('AuthService Firebase Authentication', () => {
     expect(await login).toBeTrue();
 
     const result = service.sendEmailVerification();
+    await Promise.resolve();
     const request = http.expectOne((req) => req.url.includes('accounts:sendOobCode'));
     expect(request.request.body).toEqual({
       requestType: 'VERIFY_EMAIL',
