@@ -4,6 +4,13 @@ const MAX_FILES = 40;
 const MAX_FILE_BYTES = 16 * 1024;
 const MAX_TOTAL_BYTES = 160 * 1024;
 const PATH_SEGMENT = /^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/;
+const SECRET_PATTERNS = [
+  /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
+  /\\bAIza[0-9A-Za-z_-]{30,}\\b/,
+  /\\bgh[pousr]_[A-Za-z0-9]{20,}\\b/,
+  /\\bsk-[A-Za-z0-9]{24,}\\b/,
+  /\\bAKIA[0-9A-Z]{16}\\b/
+];
 const BLOCKED_NAMES = new Set([
   ".env", ".env.local", ".env.production", "id_rsa", "id_ed25519",
   "credentials.json", "service-account.json"
@@ -42,6 +49,9 @@ function validateProjectArtifacts(value) {
     if (seen.has(normalized)) throw new Error("Duplicate generated file path: " + path);
     seen.add(normalized);
 
+    if (SECRET_PATTERNS.some(pattern => pattern.test(file.content))) {
+      throw new Error("Generated file appears to contain a credential: " + path);
+    }
     const bytes = Buffer.byteLength(file.content, "utf8");
     if (bytes > MAX_FILE_BYTES) throw new Error("Generated file exceeds 16 KiB: " + path);
     totalBytes += bytes;
