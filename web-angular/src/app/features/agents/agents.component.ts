@@ -40,6 +40,6 @@ export class AgentsComponent {
   runQueued(): void {
     this.store.runQueuedAgents();
     this.toast.error('لم يتم تشغيل الوكلاء: خدمة التنسيق الخلفية غير موصولة.');
-    this.audit.log('user', 'run_agents', 'queue', 'blocked', 'No trusted orchestration backend configured');
+    this.audit.log('user', 'run_agents', 'queue', 'denied', 'No trusted orchestration backend configured');
   }
 }
