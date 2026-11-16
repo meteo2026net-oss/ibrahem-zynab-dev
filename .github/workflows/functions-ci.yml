@@ -1,0 +1,36 @@
+name: Firebase Functions CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "functions/**"
+      - ".github/workflows/functions-ci.yml"
+  pull_request:
+    paths:
+      - "functions/**"
+      - ".github/workflows/functions-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: functions-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Type-check Firebase Functions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        working-directory: functions
+        run: npm install --no-package-lock
+      - name: Compile TypeScript
+        working-directory: functions
+        run: npm run build
