@@ -6,11 +6,13 @@ on:
     paths:
       - "firestore.rules"
       - "firestore-tests/**"
+      - "firebase.json"
       - ".github/workflows/firestore-rules-ci.yml"
   pull_request:
     paths:
       - "firestore.rules"
       - "firestore-tests/**"
+      - "firebase.json"
       - ".github/workflows/firestore-rules-ci.yml"
   workflow_dispatch:
 
@@ -36,10 +38,8 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
       - name: Install test dependencies
-        working-directory: firestore-tests
-        run: npm install --no-package-lock
+        run: npm --prefix firestore-tests install --no-package-lock
       - name: Run Firestore Emulator rules tests
-        working-directory: firestore-tests
-        run: npm test
+        run: ./firestore-tests/node_modules/.bin/firebase emulators:exec --only firestore --project demo-iad-rules --config firebase.json "node --test firestore-tests/rules.test.mjs"
