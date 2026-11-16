@@ -19,6 +19,14 @@ android {
     versionCode = 1
     versionName = "1.0"
 
+    val googleWebClientId = providers.gradleProperty("GOOGLE_WEB_CLIENT_ID")
+      .orElse(providers.environmentVariable("GOOGLE_WEB_CLIENT_ID"))
+      .getOrElse("")
+      .replace("\\", "\\\\")
+      .replace("\"", "\\\"")
+    buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
+
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
