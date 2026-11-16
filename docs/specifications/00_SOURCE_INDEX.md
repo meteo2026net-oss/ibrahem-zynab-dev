@@ -527,3 +527,5 @@
 - [199 — عقد تحديث تقدم المهام المحمية بعقدة التنفيذ](./199-persistent-job-progress-endpoint-contract.md): يوثق نقطة تحديث التقدم المقيدة بملكية lease، منع تراجع النسبة، وسلوك الإلغاء والإنهاء، مع توضيح أن dispatcher وworker runtime والتكامل الفعلي لم تُنجز بعد.
 
 - [200 — إعداد موزع Cloud Tasks وعقد التشغيل](./200-cloud-tasks-dispatch-configuration.md): يشرح إعدادات الطابور وOIDC وصلاحيات IAM وحالات الإرسال، ويفصل بوضوح بين تنفيذ dispatch الحالي وغياب Cloud Run worker والبنية المنشورة.
+
+- [201 — عامل الذكاء الاصطناعي الموثوق على Cloud Run](./201-trusted-cloud-run-ai-worker.md): يوثق خدمة العامل، تجديد Lease، تنفيذ Vertex AI، حفظ واسترجاع النتائج، حدود التنفيذ الأولي، ومتطلبات النشر وIAM.
