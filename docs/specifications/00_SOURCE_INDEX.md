@@ -464,3 +464,8 @@
 ## Workpaper 187 — الدفعة التنفيذية الخامسة: إصلاح CI ومراجعة الاعتماديات
 - الملف: [187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md](187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md)
 - توثق نتيجة CI: 11/11 اختباراً ناجحاً وبناء إنتاج فاشل بسبب نوع تدقيق غير متوافق؛ الإصلاحات محفوظة، وإعادة CI قيد الانتظار. سجل npm أظهر 44 تنبيهاً أمنياً تحتاج مراجعة مستقلة.
+
+
+## Workpaper 188 — تقوية قواعد أمان Firestore
+- الملف: [188-firestore-security-hardening.md](188-firestore-security-hardening.md)
+- إغلاق تعديل مالك المستند، وجعل سجلات التدقيق والموافقات والمهام ونقاط التحقق وسجلات منع التكرار للقراءة فقط من العميل، وحجب مجموعات بيانات الاعتماد والأسرار عن عملاء الويب والهاتف حتى إنشاء وسيط خلفي موثوق. لا تزال اختبارات Firebase Emulator والنشر غير منفذة.
