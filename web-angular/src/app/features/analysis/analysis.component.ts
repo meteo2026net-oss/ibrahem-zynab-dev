@@ -23,11 +23,9 @@ export class AnalysisComponent {
   run(): void {
     this.analyzing = true;
     this.store.setIdeaText(this.idea);
-    setTimeout(() => {
-      this.store.runAnalysis();
-      this.analyzing = false;
-      this.toast.success('اكتمل التحليل — راجع المتطلبات');
-    }, 700);
+    this.store.runAnalysis();
+    this.analyzing = false;
+    this.toast.error('لم يُنفّذ التحليل: مزود التحليل غير موصول. احتُفظ بفكرتك دون توليد متطلبات وهمية.');
   }
 
   priorityLabel(p: string): string {
