@@ -34,3 +34,16 @@ test("enforces aggregate project size limit", () => {
   }));
   assert.throws(() => sanitizeResultFiles(files), /exceeds 160 KiB/);
 });
+
+test("rejects common provider credentials embedded in file contents", () => {
+  for (const content of [
+    "AIza" + "A".repeat(35),
+    "ghp_" + "a".repeat(30),
+    "-----BEGIN PRIVATE KEY-----",
+  ]) {
+    assert.throws(
+      () => sanitizeResultFiles([{ path: "src/config.ts", content }]),
+      /credential-like material/,
+    );
+  }
+});
