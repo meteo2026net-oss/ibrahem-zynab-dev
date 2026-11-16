@@ -552,14 +552,14 @@ export const claimPersistentJob = onRequest(
       const data = snapshot.data()!;
       const expired = typeof data.leaseExpiresAt !== "number" || data.leaseExpiresAt <= now;
       if (data.status === "SUCCEEDED" || data.status === "FAILED" || data.status === "CANCELLED") {
-        return { cancelled: data.status === "CANCELLED", alreadyFinished: true, state: data.status };
+        return { cancelled: data.status === "CANCELLED", alreadyFinished: true, busy: false, state: data.status, job: null };
       }
       if (data.status !== "QUEUED" && !(data.status === "RUNNING" && expired)) {
-        return { busy: true, state: data.status };
+        return { cancelled: false, alreadyFinished: false, busy: true, state: data.status, job: null };
       }
       if (data.cancelRequested === true) {
         tx.update(ref, { status: "CANCELLED", updatedAt: FieldValue.serverTimestamp() });
-        return { cancelled: true, alreadyFinished: true, state: "CANCELLED" };
+        return { cancelled: true, alreadyFinished: true, busy: false, state: "CANCELLED", job: null };
       }
       tx.update(ref, {
         status: "RUNNING",
@@ -570,7 +570,7 @@ export const claimPersistentJob = onRequest(
         attempts: (typeof data.attempts === "number" ? data.attempts : 0) + 1,
         updatedAt: FieldValue.serverTimestamp(),
       });
-      return { cancelled: false, job: data };
+      return { cancelled: false, alreadyFinished: false, busy: false, state: "RUNNING", job: data };
     });
     if (result.cancelled || result.alreadyFinished) {
       response.status(200).json({
