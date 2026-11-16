@@ -1,8 +1,10 @@
-import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../../core/project.service';
-import { Platform, ProjectStatus } from '../../core/models';
+import { Platform, ProjectStatus, Project } from '../../core/models';
+import { CloudWorkspaceService } from '../../core/cloud-workspace.service';
+import { ToastService } from '../../core/toast.service';
 
 @Component({
   selector: 'app-projects',
@@ -12,8 +14,29 @@ import { Platform, ProjectStatus } from '../../core/models';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './projects.component.scss',
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
   private readonly store = inject(ProjectService);
+  private readonly cloud = inject(CloudWorkspaceService);
+  private readonly toast = inject(ToastService);
+  saving = false;
+
+  ngOnInit(): void {
+    this.cloud.listProjects().then(({ projects }) => {
+      const mapped: Project[] = projects.map((project) => ({
+        id: project.id,
+        name: project.name,
+        description: project.description,
+        status: project.status,
+        phase: project.phase,
+        progress: project.progress,
+        platforms: project.platforms,
+        updatedAt: project.updatedAt ? new Date(project.updatedAt).toLocaleDateString('ar') : '—',
+      }));
+      this.store.replaceProjectsFromCloud(mapped);
+    }).catch(() => {
+      this.toast.error('تعذر تحميل المشاريع السحابية؛ يتم عرض البيانات المحلية الحالية.');
+    });
+  }
 
   readonly projects = this.store.projects;
   readonly activeId = this.store.activeProjectId;
@@ -37,17 +60,36 @@ export class ProjectsComponent {
     return ({ active: 'badge-success', draft: 'badge-primary', archived: 'badge-muted' } as const)[s];
   }
   select(id: string): void { this.store.selectProject(id); }
-  create(): void {
+  async create(): Promise<void> {
+    if (this.saving) return;
     const selected: Platform[] = [];
     if (this.platforms.android) selected.push('Android');
     if (this.platforms.ios) selected.push('iOS');
     if (this.platforms.web) selected.push('Web');
     if (this.platforms.desktop) selected.push('Desktop');
-    this.store.addProject({
-      name: this.newName || 'مشروع جديد',
-      description: this.newDesc || 'بدون وصف',
-      platforms: selected.length ? selected : ['Web'],
-    });
-    this.showCreate = false;
+    const input = {
+      name: this.newName.trim() || 'مشروع جديد',
+      description: this.newDesc.trim() || 'بدون وصف',
+      platforms: selected.length ? selected : ['Web'] as Platform[],
+    };
+    this.saving = true;
+    try {
+      const { projectId } = await this.cloud.createProject(input);
+      const project: Project = {
+        id: projectId,
+        ...input,
+        status: 'draft',
+        phase: 0,
+        progress: 0,
+        updatedAt: new Date().toLocaleDateString('ar'),
+      };
+      this.store.addCloudProject(project);
+      this.showCreate = false;
+      this.toast.success('تم إنشاء المشروع في Firebase.');
+    } catch (error) {
+      this.toast.error(error instanceof Error ? error.message : 'تعذر إنشاء المشروع السحابي.');
+    } finally {
+      this.saving = false;
+    }
   }
 }
