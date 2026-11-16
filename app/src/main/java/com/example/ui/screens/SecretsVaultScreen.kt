@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -35,6 +36,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -52,6 +54,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.BuildConfig
 import com.example.data.model.Project
 import com.example.data.model.SecretType
 import com.example.data.model.VaultSecret
@@ -72,12 +75,14 @@ fun SecretsVaultScreen(
     val scope = rememberCoroutineScope()
     val secrets by secretsVaultRepository.observeSecrets(currentProject?.id ?: "").collectAsState(initial = emptyList())
 
-    var showAddModal by remember { mutableStateOf(false) }
+    var showAddDialog by remember { mutableStateOf(false) }
     var secretName by remember { mutableStateOf("") }
     var secretType by remember { mutableStateOf(SecretType.DATABASE_PASSWORD) }
     var secretValue by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-    var isPasswordVisible by remember { mutableStateOf(false) }
+    var isSaving by remember { mutableStateOf(false) }
+    var saveError by remember { mutableStateOf<String?>(null) }
+    val vaultBackendEnabled = BuildConfig.VAULT_BACKEND_ENABLED
 
     Box(modifier = Modifier.fillMaxSize().metraGradientBackground) {
         Column(
@@ -110,15 +115,15 @@ fun SecretsVaultScreen(
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "غير مفعّل — يتطلب خادم أسرار موثوقاً",
-                                color = MetraRose,
+                                text = if (vaultBackendEnabled) "الخادم الموثوق مفعّل" else "غير مفعّل — يتطلب خادم أسرار موثوقاً",
+                                color = if (vaultBackendEnabled) MetraEmerald else MetraRose,
                                 style = MaterialTheme.typography.labelSmall
                             )
                         }
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "حُظر حفظ الأسرار وقراءتها من التطبيق مؤقتاً. لن تُخزّن أي قيمة سرية حتى تجهيز خدمة خلفية موثوقة لإدارتها وتشفيرها.",
+                        text = if (vaultBackendEnabled) "تُدار الأسرار عبر Cloud Functions وCloud KMS. لا تُحفظ مفاتيح التشفير داخل التطبيق ولا يُعاد النص الصريح إلى العميل." else "حُظر حفظ الأسرار وقراءتها مؤقتاً. لن تُخزّن أي قيمة سرية حتى نشر الخادم الموثوق وتفعيل إعداداته.",
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 12.sp,
                         lineHeight = 18.sp
@@ -141,19 +146,70 @@ fun SecretsVaultScreen(
                 )
 
                 Button(
-                    onClick = { },
-                    enabled = false,
+                    onClick = { showAddDialog = true },
+                    enabled = vaultBackendEnabled,
                     colors = ButtonDefaults.buttonColors(containerColor = MetraIndigo),
                     shape = RoundedCornerShape(10.dp)
                 ) {
                     Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text("غير متاح حالياً", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    Text(if (vaultBackendEnabled) "إضافة سر" else "غير متاح حالياً", fontWeight = FontWeight.Bold, fontSize = 12.sp)
                 }
             }
 
             Spacer(modifier = Modifier.height(12.dp))
 
+            if (showAddDialog) {
+                AlertDialog(
+                    onDismissRequest = { if (!isSaving) showAddDialog = false },
+                    title = { Text("إضافة سر إلى الخزنة") },
+                    text = {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            OutlinedTextField(value = secretName, onValueChange = { secretName = it }, label = { Text("اسم السر") }, singleLine = true)
+                            OutlinedTextField(value = secretValue, onValueChange = { secretValue = it }, label = { Text("القيمة السرية") }, visualTransformation = PasswordVisualTransformation())
+                            OutlinedTextField(value = description, onValueChange = { description = it }, label = { Text("وصف اختياري") })
+                            if (saveError != null) Text(saveError.orEmpty(), color = MaterialTheme.colorScheme.error)
+                        }
+                    },
+                    confirmButton = {
+                        Button(
+                            enabled = !isSaving && secretName.isNotBlank() && secretValue.isNotBlank(),
+                            onClick = {
+                                val projectId = currentProject?.id
+                                if (projectId.isNullOrBlank()) {
+                                    saveError = "اختر مشروعاً أولاً."
+                                    return@Button
+                                }
+                                isSaving = true
+                                saveError = null
+                                scope.launch {
+                                    try {
+                                        secretsVaultRepository.addSecret(
+                                            projectId = projectId,
+                                            secretName = secretName,
+                                            secretType = secretType,
+                                            plainSecretValue = secretValue,
+                                            description = description
+                                        )
+                                        secretName = ""
+                                        secretValue = ""
+                                        description = ""
+                                        showAddDialog = false
+                                        Toast.makeText(context, "تم حفظ بيانات السر عبر الخادم.", Toast.LENGTH_SHORT).show()
+                                    } catch (error: Exception) {
+                                        saveError = error.localizedMessage ?: "تعذر حفظ السر."
+                                    } finally {
+                                        isSaving = false
+                                    }
+                                }
+                            }
+                        ) { Text(if (isSaving) "جارٍ الحفظ..." else "حفظ") }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { showAddDialog = false }, enabled = !isSaving) { Text("إلغاء") }
+                    }
+                )
+            }
 
             if (secrets.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
