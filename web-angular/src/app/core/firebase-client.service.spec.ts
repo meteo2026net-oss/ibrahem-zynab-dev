@@ -58,10 +58,9 @@ describe('FirebaseClientService', () => {
     expect(getToken).toHaveBeenCalled();
     const [url, options] = fetchSpy.calls.mostRecent().args;
     expect(url).toBe('https://europe-west2-sample-project.cloudfunctions.net/createProject');
-    expect(options?.headers).toEqual(jasmine.objectContaining({
-      Authorization: 'Bearer firebase-id-token',
-      'X-Firebase-AppCheck': 'app-check-token',
-    }));
+    const headers = options?.headers as Record<string, string>;
+    expect(headers.Authorization).toBe('Bearer firebase-id-token');
+    expect(headers['X-Firebase-AppCheck']).toBe('app-check-token');
     expect(JSON.parse(String(options?.body))).toEqual({ data: { name: 'Demo' } });
   });
 
