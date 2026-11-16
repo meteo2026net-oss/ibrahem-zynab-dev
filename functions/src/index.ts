@@ -493,6 +493,54 @@ export const renewPersistentJobLease = onRequest(
   }
 );
 
+/**
+ * IAM-private progress endpoint. A worker may only advance progress while it
+ * owns a live lease. Progress is monotonic and capped below 100 until finish.
+ */
+export const updatePersistentJobProgress = onRequest(
+  { invoker: "private", timeoutSeconds: 15, memory: "256MiB" },
+  async (request, response) => {
+    if (request.method !== "POST") {
+      response.status(405).json({ error: "method-not-allowed" });
+      return;
+    }
+    const { jobId, workerId, leaseToken } = requireWorkerRequest(request);
+    const progress = request.body?.progress;
+    const currentStepIndex = request.body?.currentStepIndex;
+    const message = typeof request.body?.message === "string"
+      ? request.body.message.slice(0, 500) : "";
+    if (!Number.isSafeInteger(progress) || (progress as number) < 0 ||
+        (progress as number) > 99 ||
+        !Number.isSafeInteger(currentStepIndex) || (currentStepIndex as number) < 0) {
+      response.status(400).json({ error: "invalid-progress" });
+      return;
+    }
+
+    const result = await db.runTransaction(async (tx) => {
+      const { ref, data } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
+      if (data.cancelRequested === true) return { cancelled: true, progress: data.progress ?? 0 };
+      const previousProgress = typeof data.progress === "number" ? data.progress : 0;
+      if ((progress as number) < previousProgress) {
+        throw new HttpsError("failed-precondition", "Job progress cannot move backwards.");
+      }
+      tx.update(ref, {
+        progress,
+        progressPercent: progress,
+        currentStepIndex,
+        progressMessage: message,
+        heartbeatAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      return { cancelled: false, progress };
+    });
+    if (result.cancelled) {
+      response.status(409).json({ error: "job-cancellation-requested", progress: result.progress });
+      return;
+    }
+    response.status(200).json({ jobId, progress: result.progress });
+  }
+);
+
 export const finishPersistentJob = onRequest(
   { invoker: "private", timeoutSeconds: 20, memory: "256MiB" },
   async (request, response) => {
@@ -514,6 +562,7 @@ export const finishPersistentJob = onRequest(
         status: finalState,
         summary,
         progress: finalState === "SUCCEEDED" ? 100 : (data.progress ?? 0),
+        progressPercent: finalState === "SUCCEEDED" ? 100 : (data.progressPercent ?? data.progress ?? 0),
         workerId: null,
         leaseToken: null,
         leaseExpiresAt: 0,
@@ -529,7 +578,7 @@ export const finishPersistentJob = onRequest(
         createdAt: FieldValue.serverTimestamp(),
       });
     });
-    response.status(200).json({ jobId, state });
+    response.status(200).json({ jobId, state: data.cancelRequested === true ? "CANCELLED" : state });
   }
 );
 
