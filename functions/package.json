@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "clean": "node -e \"require('node:fs').rmSync('lib',{recursive:true,force:true})\""
+    "clean": "node -e \"require('node:fs').rmSync('lib',{recursive:true,force:true})\"",
+    "test": "npm run build && node --test test/*.test.cjs"
   },
   "dependencies": {
     "@google-cloud/kms": "5.5.0",
@@ -18,4 +19,4 @@
   "devDependencies": {
     "typescript": "5.8.3"
   }
-}\n
+}
