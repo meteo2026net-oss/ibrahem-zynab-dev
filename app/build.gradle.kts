@@ -1,5 +1,4 @@
 import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
-import java.util.Properties
 
 plugins {
   alias(libs.plugins.android.application)
@@ -19,27 +18,6 @@ android {
     targetSdk = 36
     versionCode = 1
     versionName = "1.0"
-
-    val localEnvProperties = Properties().apply {
-      val envFile = rootProject.file(".env")
-      if (envFile.isFile) envFile.inputStream().use { load(it) }
-    }
-    fun configValue(name: String): String =
-      providers.gradleProperty(name)
-        .orElse(providers.environmentVariable(name))
-        .getOrElse(localEnvProperties.getProperty(name, ""))
-        .replace("\\", "\\\\").replace("\"", "\\\"")
-
-    buildConfigField("String", "FIREBASE_API_KEY", "\"${configValue("FIREBASE_API_KEY")}\"")
-    buildConfigField("String", "FIREBASE_APP_ID", "\"${configValue("FIREBASE_APP_ID")}\"")
-    buildConfigField("String", "FIREBASE_PROJECT_ID", "\"${configValue("FIREBASE_PROJECT_ID")}\"")
-    buildConfigField("String", "FIREBASE_MESSAGING_SENDER_ID", "\"${configValue("FIREBASE_MESSAGING_SENDER_ID")}\"")
-    buildConfigField("String", "FIREBASE_STORAGE_BUCKET", "\"${configValue("FIREBASE_STORAGE_BUCKET")}\"")
-    buildConfigField("String", "FIREBASE_DATABASE_URL", "\"${configValue("FIREBASE_DATABASE_URL")}\"")
-    buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"${configValue("GOOGLE_WEB_CLIENT_ID")}\"")
-    val vaultBackendEnabled = configValue("VAULT_BACKEND_ENABLED").ifBlank { "false" }
-    buildConfigField("String", "VAULT_BACKEND_ENABLED", "\"$vaultBackendEnabled\"")
-
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
