@@ -75,7 +75,7 @@ app.post("/tasks", async (req, res) => {
     }
 
     heartbeatTimer = setInterval(async () => {
-      if (heartbeatBusy || leaseLost || !lease) return;
+      if (heartbeatBusy || control.leaseLost || !lease) return;
       heartbeatBusy = true;
       try {
         const heartbeat = await callPrivateFunction("renewPersistentJobLease", {
