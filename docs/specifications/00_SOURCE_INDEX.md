@@ -454,3 +454,8 @@
 ## Workpaper 185 — الدفعة التنفيذية الثالثة: مسودات منطق الوظائف وصدق الحالة الابتدائية
 - الملف: [185-third-implementation-batch-function-drafts-and-truthful-state.md](185-third-implementation-batch-function-drafts-and-truthful-state.md)
 - تحويل وصف الوظائف إلى مسودات محلية قابلة للمراجعة، تعطيل الاختبارات/تنسيق الوكلاء غير الموصول، وبدء مؤشرات البناء والاختبار والإطلاق بحالة غير مثبتة. CI لهذه الدفعة PENDING وقت التقرير.
+
+
+## Workpaper 186 — الدفعة التنفيذية الرابعة: مصادقة Firebase للويب
+- الملف: [186-fourth-implementation-batch-firebase-web-auth.md](186-fourth-implementation-batch-firebase-web-auth.md)
+- ربط نموذج الدخول بـ Firebase Authentication REST مع حفظ الرموز في الذاكرة وتجديد ID token وإضافة اختبارات HTTP؛ يلزم ضبط Web API Key وتفعيل Email/Password، ولا تزال بيانات المشاريع محلية.
