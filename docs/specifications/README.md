@@ -611,3 +611,8 @@
 ## 190 — اختبارات قواعد Firestore بالمحاكي
 
 [190-firestore-emulator-test-harness.md](190-firestore-emulator-test-harness.md) — إضافة اختبارات آلية لقواعد الملكية وسجلات التحكم وبيانات الاعتماد عبر Firestore Emulator؛ التشغيل المصحح قيد التحقق.
+
+
+## 191 — حزمة الويب الإنتاجية وخط بناء Android
+
+[191-web-artifact-and-android-ci.md](191-web-artifact-and-android-ci.md) — حفظ حزمة Angular الإنتاجية كـ Artifact وإضافة مسار CI مستقل لـ Android؛ Android ما زال قيد التحقق ولا يمثل APK تجريبي إصداراً نهائياً.
