@@ -88,7 +88,7 @@ fun SecretsVaultScreen(
             // Security Banner
             MetraCard(
                 modifier = Modifier.fillMaxWidth(),
-                borderColor = MetraEmerald.copy(alpha = 0.3f)
+                borderColor = MetraRose.copy(alpha = 0.45f)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -96,10 +96,10 @@ fun SecretsVaultScreen(
                             modifier = Modifier
                                 .size(38.dp)
                                 .clip(CircleShape)
-                                .background(MetraEmerald.copy(alpha = 0.1f)),
+                                .background(MetraRose.copy(alpha = 0.1f)),
                             contentAlignment = Alignment.Center
                         ) {
-                            Icon(Icons.Default.Shield, contentDescription = null, tint = MetraEmerald, modifier = Modifier.size(22.dp))
+                            Icon(Icons.Default.Shield, contentDescription = null, tint = MetraRose, modifier = Modifier.size(22.dp))
                         }
                         Spacer(modifier = Modifier.width(12.dp))
                         Column(modifier = Modifier.weight(1f)) {
@@ -110,15 +110,15 @@ fun SecretsVaultScreen(
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "Secure Reference • AES-256 Encryption",
-                                color = MetraEmerald,
+                                text = "غير مفعّل — يتطلب خادم أسرار موثوقاً",
+                                color = MetraRose,
                                 style = MaterialTheme.typography.labelSmall
                             )
                         }
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "تُشفر كلمات المرور والأسرار بـ AES-256 وتُحل حصرياً في بيئة التشغيل الآمنة. لا يتم تسريب الأسرار أبداً للـ Prompts.",
+                        text = "حُظر حفظ الأسرار وقراءتها من التطبيق مؤقتاً. لن تُخزّن أي قيمة سرية حتى تجهيز خدمة خلفية موثوقة لإدارتها وتشفيرها.",
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 12.sp,
                         lineHeight = 18.sp
@@ -141,87 +141,19 @@ fun SecretsVaultScreen(
                 )
 
                 Button(
-                    onClick = { showAddModal = !showAddModal },
+                    onClick = { },
+                    enabled = false,
                     colors = ButtonDefaults.buttonColors(containerColor = MetraIndigo),
                     shape = RoundedCornerShape(10.dp)
                 ) {
                     Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(if (showAddModal) "إغلاق" else "إضافة سر", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    Text("غير متاح حالياً", fontWeight = FontWeight.Bold, fontSize = 12.sp)
                 }
             }
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            if (showAddModal) {
-                MetraCard(modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text("إضافة سر جديد", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        OutlinedTextField(
-                            value = secretName,
-                            onValueChange = { secretName = it },
-                            label = { Text("اسم السر") },
-                            colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                                unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
-                            ),
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        OutlinedTextField(
-                            value = secretValue,
-                            onValueChange = { secretValue = it },
-                            label = { Text("القيمة السرية") },
-                            visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                            trailingIcon = {
-                                IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
-                                    Icon(if (isPasswordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff, contentDescription = null)
-                                }
-                            },
-                            colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                                unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
-                            ),
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        Button(
-                            onClick = {
-                                if (secretName.isBlank() || secretValue.isBlank()) {
-                                    Toast.makeText(context, "يرجى ملء كافة الحقول", Toast.LENGTH_SHORT).show()
-                                    return@Button
-                                }
-                                val pId = currentProject?.id ?: "global"
-                                scope.launch {
-                                    secretsVaultRepository.addSecret(
-                                        projectId = pId,
-                                        secretName = secretName,
-                                        secretType = secretType,
-                                        plainSecretValue = secretValue,
-                                        description = description
-                                    )
-                                    showAddModal = false
-                                    secretName = ""
-                                    secretValue = ""
-                                    Toast.makeText(context, "تم حفظ السر مشفراً بنجاح", Toast.LENGTH_SHORT).show()
-                                }
-                            },
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(10.dp)
-                        ) {
-                            Text("تشفير وحفظ السر", fontWeight = FontWeight.Bold)
-                        }
-                    }
-                }
-            }
 
             if (secrets.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
