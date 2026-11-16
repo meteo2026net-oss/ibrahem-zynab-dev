@@ -61,6 +61,7 @@ app.post("/tasks", async (req, res) => {
   let heartbeatTimer;
   let heartbeatBusy = false;
   let leaseLost = false;
+  let cancellationRequested = false;
   try {
     const claimed = await callPrivateFunction("claimPersistentJob", { jobId, workerId });
     if (claimed?.cancelled || claimed?.alreadyFinished) {
@@ -77,12 +78,19 @@ app.post("/tasks", async (req, res) => {
       if (heartbeatBusy || leaseLost || !lease) return;
       heartbeatBusy = true;
       try {
-        await callPrivateFunction("renewPersistentJobLease", {
-          jobId, workerId, leaseToken: lease.leaseToken
+        await callPrivateFunction("updatePersistentJobProgress", {
+          jobId, workerId, leaseToken: lease.leaseToken,
+          progress: 25, currentStepIndex: 1,
+          message: "AI generation in progress"
         });
       } catch (error) {
-        leaseLost = true;
-        console.error("Worker lease renewal failed", { jobId, message: error.message });
+        if (error.response?.status === 409 &&
+            error.response?.data?.error === "job-cancellation-requested") {
+          cancellationRequested = true;
+        } else {
+          leaseLost = true;
+          console.error("Worker heartbeat failed", { jobId, message: error.message });
+        }
       } finally {
         heartbeatBusy = false;
       }
@@ -131,6 +139,14 @@ app.post("/tasks", async (req, res) => {
     });
     if (leaseLost) {
       res.status(503).json({ error: "worker-lease-lost", jobId });
+      return;
+    }
+    if (cancellationRequested) {
+      await callPrivateFunction("finishPersistentJob", {
+        jobId, workerId, leaseToken: lease.leaseToken,
+        state: "CANCELLED", summary: "Cancelled while the AI model was processing."
+      });
+      res.status(200).json({ jobId, state: "CANCELLED" });
       return;
     }
 
