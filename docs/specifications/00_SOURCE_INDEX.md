@@ -509,3 +509,10 @@
 ## Workpaper 196 — طابور المهام وعقود العامل الموثوقة
 - الملف: [196-trusted-orchestration-queue-and-leases.md](196-trusted-orchestration-queue-and-leases.md)
 - إضافة إنشاء مهام idempotent، وقوائم المستخدم، والإلغاء، وواجهات عامل خاصة لامتلاك lease وتجديد heartbeat وإنهاء المهمة، مع معاملات وتدقيق خادمي.
+
+
+## Workpaper 197 — تشديد صلاحيات النسخ الاحتياطي وتوافق حالات المهام الخلفية
+- الملف: [197-backup-access-hardening-and-backend-job-schema-compatibility.md](197-backup-access-hardening-and-backend-job-schema-compatibility.md)
+- إزالة صلاحيات العميل عن مجموعة `project_backups` وإضافة اختبار Emulator يمنع القراءة والكتابة والحذف من العميل. نجحت اختبارات Firestore 8/8 في التشغيل 43863860808.
+- تحديث Android لقراءة حالات المهام من مخطط Functions (بما فيه SUCCEEDED والطوابع الزمنية Firestore Timestamp وحقلي prompt/progress) وإضافة اختبار توافق. نجح بناء Android السابق بعد إصلاحات الأمان؛ تحقق CI لهذا التعديل الجديد جارٍ.
+- نجح Angular unit tests وبناء الإنتاج في التشغيل 43863841528، لكن تدقيق npm ما زال يعرض 44 ثغرة (2 حرجة، 15 عالية، 25 متوسطة، 2 منخفضة). لا يوجد نشر إنتاجي فعلي.
