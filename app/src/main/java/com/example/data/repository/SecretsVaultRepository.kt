@@ -36,7 +36,7 @@ class SecretsVaultRepository(
         allowedOperations: List<String> = listOf("READ_SCHEMA", "EXECUTE_QUERY", "CONNECT"),
         expiresAt: Long? = null
     ): VaultSecret = withContext(Dispatchers.IO) {
-        check(BuildConfig.VAULT_BACKEND_ENABLED) { "Secrets Vault backend is not enabled in this build." }
+        check(BuildConfig.VAULT_BACKEND_ENABLED.equals("true", ignoreCase = true)) { "Secrets Vault backend is not enabled in this build." }
         val uid = Firebase.auth.currentUser?.uid
             ?: throw IllegalStateException("Must be signed in to store a secret.")
         require(secretName.isNotBlank()) { "Secret name is required." }
@@ -80,7 +80,7 @@ class SecretsVaultRepository(
     }
 
     suspend fun deleteSecret(secretId: String, projectId: String) = withContext(Dispatchers.IO) {
-        check(BuildConfig.VAULT_BACKEND_ENABLED) { "Secrets Vault backend is not enabled in this build." }
+        check(BuildConfig.VAULT_BACKEND_ENABLED.equals("true", ignoreCase = true)) { "Secrets Vault backend is not enabled in this build." }
         Firebase.auth.currentUser ?: throw IllegalStateException("Must be signed in.")
         functions.getHttpsCallable("deleteVaultSecret")
             .call(mapOf("secretId" to secretId, "projectId" to projectId))
@@ -101,7 +101,7 @@ class SecretsVaultRepository(
 
     fun observeSecrets(projectId: String): Flow<List<VaultSecret>> = flow {
         val uid = Firebase.auth.currentUser?.uid
-        if (!BuildConfig.VAULT_BACKEND_ENABLED || uid == null || projectId.isBlank()) {
+        if (!BuildConfig.VAULT_BACKEND_ENABLED.equals("true", ignoreCase = true) || uid == null || projectId.isBlank()) {
             emit(emptyList())
             return@flow
         }
