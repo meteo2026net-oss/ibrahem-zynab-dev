@@ -1,0 +1,38 @@
+name: Trusted Worker CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - ".github/workflows/worker-ci.yml"
+  pull_request:
+    paths:
+      - "worker/**"
+      - ".github/workflows/worker-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: worker-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  worker:
+    name: Validate Cloud Run worker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: worker/package.json
+      - name: Install worker dependencies
+        working-directory: worker
+        run: npm install --no-package-lock --ignore-scripts --no-audit --no-fund
+      - name: Validate JavaScript syntax
+        working-directory: worker
+        run: npm run check
