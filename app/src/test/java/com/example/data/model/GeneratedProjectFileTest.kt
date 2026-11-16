@@ -33,3 +33,30 @@ class GeneratedProjectFileTest {
         assertNull(GeneratedProjectFile.fromMap(mapOf("path" to "src/a.kt")))
     }
 }
+
+    @Test
+    fun rejectsCredentialLikeContent() {
+        assertNull(
+            GeneratedProjectFile.fromMap(
+                mapOf("path" to "src/config.kt", "content" to "AIza" + "A".repeat(35))
+            )
+        )
+        assertNull(
+            GeneratedProjectFile.fromMap(
+                mapOf("path" to "src/config.kt", "content" to "-----BEGIN PRIVATE KEY-----")
+            )
+        )
+        @Test
+    fun rejectsCredentialLikeContent() {
+        assertNull(
+            GeneratedProjectFile.fromMap(
+                mapOf("path" to "src/config.kt", "content" to "AIza" + "A".repeat(35))
+            )
+        )
+        assertNull(
+            GeneratedProjectFile.fromMap(
+                mapOf("path" to "src/config.kt", "content" to "-----BEGIN PRIVATE KEY-----")
+            )
+        )
+    }
+}
