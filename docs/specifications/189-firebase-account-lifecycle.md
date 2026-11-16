@@ -21,4 +21,4 @@ Date: 2026-11-16
 
 ## Verification
 
-CI is triggered for each Angular source/test update. The final CI run for the latest commit must be checked before treating this batch as verified. Firebase Console configuration and live email delivery have not been exercised from this repository workflow.
+CI passed for the account lifecycle code: 14/14 Angular tests succeeded and the production build completed on run 43831888050. Firebase Console configuration and live email delivery have not been exercised from this repository workflow.
