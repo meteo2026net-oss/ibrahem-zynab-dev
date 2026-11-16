@@ -576,3 +576,8 @@
 ## 183 — الدفعة التنفيذية الأولى: المصادقة الآمنة المغلقة افتراضياً
 
 [183-first-implementation-batch-web-auth-fail-closed.md](183-first-implementation-batch-web-auth-fail-closed.md) — إزالة تسجيل الدخول التجريبي ومنح admin محلياً، وإضافة اختبارات وحدة للمصادقة المغلقة افتراضياً. لم يربط مزود هوية بعد؛ الاختبارات والبناء والنشر لم تُشغّل.
+
+
+## 184 — الدفعة التنفيذية الثانية: نزاهة نتائج التحليل والبناء والاختبار والنشر
+
+[184-second-implementation-batch-remove-fake-workflow-success.md](184-second-implementation-batch-remove-fake-workflow-success.md) — إزالة حالات النجاح المحاكاة التي لا تستند إلى تنفيذ فعلي، مع توثيق المحركات التي لا تزال بحاجة إلى بناء وربط.
