@@ -440,6 +440,9 @@ export const listPersistentJobs = onCall(
           currentStepIndex: data.currentStepIndex ?? 0,
           attempts: data.attempts ?? 0,
           cancelRequested: data.cancelRequested ?? false,
+          dispatchStatus: data.dispatchStatus ?? "UNKNOWN",
+          progressPercent: data.progressPercent ?? data.progress ?? 0,
+          progressMessage: data.progressMessage ?? "",
           createdAt: data.createdAt?.toMillis?.() ?? null,
           updatedAt: data.updatedAt?.toMillis?.() ?? null,
         };
