@@ -31,8 +31,6 @@ import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.HourglassTop
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.RocketLaunch
 import androidx.compose.material.icons.filled.SaveAlt
@@ -528,7 +526,7 @@ private fun JobCard(
                             Icon(Icons.Default.Close, contentDescription = "إلغاء المهمة", tint = MetraRose)
                         }
                     }
-                    if (job.status == JobStatus.FAILED || job.status == JobStatus.WAITING_FOR_RETRY) {
+                    if (job.status == JobStatus.FAILED) {
                         IconButton(onClick = onRetry, modifier = Modifier.size(32.dp)) {
                             Icon(Icons.Default.Refresh, contentDescription = "إعادة المحاولة", tint = MaterialTheme.colorScheme.primary)
                         }
