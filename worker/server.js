@@ -130,11 +130,11 @@ app.post("/tasks", async (req, res) => {
     const generated = await ai.models.generateContent({
       model: modelName,
       contents: [
-        "You are generating a real software project artifact package. Return ONLY valid JSON with this exact shape: {\\"summary\\": string, \\"files\\": [{\\"path\\": string, \\"content\\": string}]}.",
+        "You are generating a real software project artifact package. Return ONLY valid JSON with this exact shape: {\"summary\": string, \"files\": [{\"path\": string, \"content\": string}]}.",
         "Generate 1 to 40 useful text files. Use relative paths only. Do not include secrets, credentials, hidden files, binary data, or deployment credentials. Keep each file under 16 KiB and the complete package under 160 KiB.",
         "Make the project coherent, include a README and appropriate source/configuration files, and do not claim tests were run unless you provide executable test files.",
-        "User requirements:\\n" + prompt
-      ].join("\\n\\n"),
+        "User requirements:\n" + prompt
+      ].join("\n\n"),
       config: { temperature: 0.2, maxOutputTokens: 8192, responseMimeType: "application/json" }
     });
     if (control.leaseLost) {
