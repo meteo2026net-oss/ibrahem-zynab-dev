@@ -292,7 +292,7 @@ fun onGoogleSignInClicked(
     onAuthCancelled: () -> Unit = {}
 ) {
     val clientId = BuildConfig.GOOGLE_WEB_CLIENT_ID.trim()
-    if (clientId.isBlank()) {
+    if (clientId.isBlank() || clientId.startsWith("CONFIGURE_")) {
         onAuthError("تسجيل Google غير مهيأ بعد. أضف GOOGLE_WEB_CLIENT_ID إلى إعدادات البناء ثم أعد البناء.")
         return
     }
