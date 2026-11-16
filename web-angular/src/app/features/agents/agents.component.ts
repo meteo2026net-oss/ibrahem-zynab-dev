@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../../core/project.service';
 import { ToastService } from '../../core/toast.service';
@@ -10,6 +10,7 @@ import { AgentStatus } from '../../core/models';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './agents.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './agents.component.scss',
 })
 export class AgentsComponent {

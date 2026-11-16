@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, KeyValuePipe } from '@angular/common';
 import { KnowledgeService, KnowledgeDoc } from '../../core/knowledge.service';
@@ -10,6 +10,7 @@ import { ToastService } from '../../core/toast.service';
   standalone: true,
   imports: [FormsModule, DatePipe],
   templateUrl: './knowledge.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './knowledge.component.scss',
 })
 export class KnowledgeComponent {

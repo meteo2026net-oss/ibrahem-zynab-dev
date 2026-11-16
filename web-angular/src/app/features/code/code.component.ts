@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { ProjectService } from '../../core/project.service';
 import { ToastService } from '../../core/toast.service';
 import { AuditService } from '../../core/audit.service';
@@ -8,6 +8,7 @@ import { AuditService } from '../../core/audit.service';
   standalone: true,
   imports: [],
   templateUrl: './code.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './code.component.scss',
 })
 export class CodeComponent {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProjectService } from '../../core/project.service';
@@ -10,6 +10,7 @@ import { APP_SCREENS } from '../../core/catalog';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './analysis.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './analysis.component.scss',
 })
 export class AnalysisComponent {

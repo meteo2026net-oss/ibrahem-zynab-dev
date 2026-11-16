@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ProjectService } from '../../core/project.service';
@@ -12,6 +12,7 @@ import { Platform } from '../../core/models';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './wizard.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './wizard.component.scss',
 })
 export class WizardComponent {

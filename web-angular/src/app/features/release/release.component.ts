@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../../core/project.service';
 import { ToastService } from '../../core/toast.service';
@@ -8,6 +8,7 @@ import { ToastService } from '../../core/toast.service';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './release.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './release.component.scss',
 })
 export class ReleaseComponent {

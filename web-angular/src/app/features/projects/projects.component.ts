@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../../core/project.service';
@@ -9,6 +9,7 @@ import { Platform, ProjectStatus } from '../../core/models';
   standalone: true,
   imports: [NgClass, FormsModule],
   templateUrl: './projects.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './projects.component.scss',
 })
 export class ProjectsComponent {

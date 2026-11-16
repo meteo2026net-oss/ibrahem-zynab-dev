@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProjectService } from '../../core/project.service';
@@ -10,6 +10,7 @@ import { ToastService } from '../../core/toast.service';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './pages-manager.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './pages-manager.component.scss',
 })
 export class PagesManagerComponent {

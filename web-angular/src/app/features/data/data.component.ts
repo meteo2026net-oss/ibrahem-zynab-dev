@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ProjectService } from '../../core/project.service';
 import { ToastService } from '../../core/toast.service';
 
@@ -7,6 +7,7 @@ import { ToastService } from '../../core/toast.service';
   standalone: true,
   imports: [],
   templateUrl: './data.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './data.component.scss',
 })
 export class DataComponent {

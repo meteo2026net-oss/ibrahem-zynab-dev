@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ToastService } from '../../core/toast.service';
 
 interface Asset {
@@ -13,6 +13,7 @@ interface Asset {
   standalone: true,
   imports: [],
   templateUrl: './media.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './media.component.scss',
 })
 export class MediaComponent {

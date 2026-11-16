@@ -1,1 +1,0 @@
-This marker triggers the isolated Angular 22 migration workflow. It is removed only after tests, production build, and the configured dependency audit pass.

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StoreService } from '../../services/store.service';
@@ -9,6 +9,7 @@ import { ToastService } from '../../../core/toast.service';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './checkout.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './checkout.component.scss',
 })
 export class CheckoutComponent {
