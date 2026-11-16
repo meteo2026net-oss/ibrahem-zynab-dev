@@ -167,7 +167,7 @@ app.post("/tasks", async (req, res) => {
       leaseToken: lease.leaseToken,
       state: "SUCCEEDED",
       summary: project.summary,
-      resultText: JSON.stringify({ summary: project.summary, files: project.files }),
+      resultText: project.summary,
       resultFiles: project.files,
       resultModel: modelName
     });
