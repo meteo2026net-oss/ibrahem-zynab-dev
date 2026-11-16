@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check gemini-response.js && node --check job-control.js",
+    "check": "node --check server.js && node --check gemini-response.js && node --check job-control.js && node --check project-artifacts.js",
     "test": "node --test"
   },
   "dependencies": {
