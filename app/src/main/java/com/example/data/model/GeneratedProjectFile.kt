@@ -12,10 +12,10 @@ data class GeneratedProjectFile(
         private val segmentPattern = Regex("^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$")
         private val credentialPatterns = listOf(
             Regex("""-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"""),
-            Regex("""\\bAIza[0-9A-Za-z_-]{30,}\\b"""),
-            Regex("""\\bgh[pousr]_[A-Za-z0-9]{20,}\\b"""),
-            Regex("""\\bsk-[A-Za-z0-9]{24,}\\b"""),
-            Regex("""\\bAKIA[0-9A-Z]{16}\\b""")
+            Regex("""\bAIza[0-9A-Za-z_-]{30,}\b"""),
+            Regex("""\bgh[pousr]_[A-Za-z0-9]{20,}\b"""),
+            Regex("""\bsk-[A-Za-z0-9]{24,}\b"""),
+            Regex("""\bAKIA[0-9A-Z]{16}\b""")
         )
         private val blockedNames = setOf(
             ".env", ".env.local", ".env.production", "id_rsa", "id_ed25519",
