@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.example.R
 import com.example.data.model.AgentRole
+import com.example.data.model.GeneratedProjectFile
 import com.example.data.model.JobStatus
 import com.example.data.model.JobStep
 import com.example.data.model.JobStepType
@@ -110,6 +111,25 @@ class PersistentJobRepository(private val context: Context) {
         @Suppress("UNCHECKED_CAST")
         (response.data as? Map<String, Any?>)
             ?: throw IllegalStateException("Trusted job service returned an invalid result.")
+    }
+
+    /**
+     * Returns the bounded, server-validated text files produced by a completed
+     * project-generation job. This method never writes or executes generated code.
+     */
+    suspend fun getGeneratedProjectFiles(jobId: String): List<GeneratedProjectFile> = withContext(Dispatchers.IO) {
+        val result = getJobResult(jobId)
+        val rawFiles = result["resultFiles"] as? List<*> ?: emptyList<Any>()
+        rawFiles.mapNotNull { raw ->
+            val file = raw as? Map<*, *> ?: return@mapNotNull null
+            val path = file["path"] as? String ?: return@mapNotNull null
+            val content = file["content"] as? String ?: return@mapNotNull null
+            if (path.isBlank() || path.startsWith("/") || path.contains("\\\\") ||
+                path.split("/").any { it.isBlank() || it == "." || it == ".." || it.startsWith(".") }) {
+                return@mapNotNull null
+            }
+            GeneratedProjectFile(path = path, content = content)
+        }
     }
 
     suspend fun pauseJob(jobId: String) {
