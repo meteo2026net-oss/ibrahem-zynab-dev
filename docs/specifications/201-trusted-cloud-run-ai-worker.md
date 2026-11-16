@@ -2,7 +2,7 @@
 
 ## Delivered source components
 - `worker/server.js`: private HTTP worker with `/health` and `/tasks`.
-- `worker/package.json`: Node.js 22 runtime and pinned top-level dependencies.
+- `worker/package.json`: Node.js 22 runtime with exact top-level dependency versions, including the current `@google/genai` 3.3.0 SDK.
 - `worker/.env.example`: non-secret runtime configuration template.
 - `.github/workflows/worker-ci.yml`: JavaScript syntax validation workflow.
 - Firebase Functions now persist generated output through `finishPersistentJob`, and `getPersistentJobResult` returns it only to the authenticated owner.
@@ -14,7 +14,7 @@
 2. Cloud Run IAM verifies the caller. The service must not allow unauthenticated invocation.
 3. The worker claims the job using the private Firebase Functions endpoint.
 4. The worker renews its lease every 20 seconds and reports progress.
-5. The worker calls Gemini Enterprise Agent Platform (Vertex AI) using the Cloud Run service identity (no AI key is embedded in the app).
+5. The worker uses `@google/genai` 3.3.0 with the `enterprise: true` backend and Gemini Enterprise Agent Platform, authenticated through the Cloud Run service identity (no AI key is embedded in the app). The deprecated `@google-cloud/vertexai` SDK is not used.
 6. The result text, model name, summary and terminal state are saved through the lease-guarded finish endpoint.
 7. The owner retrieves the result through `getPersistentJobResult`.
 
