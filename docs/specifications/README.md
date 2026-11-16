@@ -631,3 +631,8 @@
 ## 194 — تهيئة Firebase في Android وربط خزنة الأسرار
 
 [194-android-firebase-bootstrap-and-vault-callables.md](194-android-firebase-bootstrap-and-vault-callables.md) — تهيئة Firebase من إعدادات محلية آمنة، وشاشة إعداد عند غيابها، وربط خزنة الأسرار بوظائف الخادم.
+
+
+## 195 — خط إصدار Android الموقّع
+
+[195-signed-android-release-pipeline.md](195-signed-android-release-pipeline.md) — workflow يدوي لبناء AAB موقّع باستخدام keystore محفوظ في GitHub Secrets.
