@@ -18,7 +18,7 @@ This is the private Cloud Run worker for persistent AI design jobs. It is not a 
     ]
   }
   ```
-- `project-artifacts.js` rejects invalid JSON, absolute/traversal/hidden paths, credential-like filenames, duplicate paths, more than 40 files, files larger than 16 KiB, and packages larger than 160 KiB.
+- `project-artifacts.js` rejects invalid JSON, absolute/traversal/hidden paths, credential-like filenames, duplicate paths, more than 40 files, files larger than 16 KiB, packages larger than 160 KiB, and common provider/private-key credential patterns in file contents.
 - Firebase Functions independently validates the files before storing them in the persistent job document. The authenticated owner retrieves them through `getPersistentJobResult`.
 
 ## Configuration
