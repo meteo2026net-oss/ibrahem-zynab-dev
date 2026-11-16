@@ -1,4 +1,5 @@
 import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
+import java.util.Properties
 
 plugins {
   alias(libs.plugins.android.application)
@@ -19,7 +20,7 @@ android {
     versionCode = 1
     versionName = "1.0"
 
-    val localEnvProperties = java.util.Properties().apply {
+    val localEnvProperties = Properties().apply {
       val envFile = rootProject.file(".env")
       if (envFile.isFile) envFile.inputStream().use { load(it) }
     }
