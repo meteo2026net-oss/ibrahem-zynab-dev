@@ -29,7 +29,6 @@ service cloud.firestore {
         'ai_agents',
         'telegram_events',
         'sync_records',
-        'project_backups',
         'app_notifications',
         'ai_model_registry',
         'failover_logs'
@@ -42,7 +41,6 @@ service cloud.firestore {
         'ai_agents',
         'telegram_events',
         'sync_records',
-        'project_backups',
         'app_notifications',
         'ai_model_registry',
         'failover_logs'
@@ -55,7 +53,6 @@ service cloud.firestore {
         'ai_agents',
         'telegram_events',
         'sync_records',
-        'project_backups',
         'app_notifications',
         'ai_model_registry',
         'failover_logs'
@@ -68,7 +65,6 @@ service cloud.firestore {
         'ai_agents',
         'telegram_events',
         'sync_records',
-        'project_backups',
         'app_notifications',
         'ai_model_registry',
         'failover_logs'
