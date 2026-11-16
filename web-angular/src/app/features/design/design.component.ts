@@ -54,12 +54,12 @@ export class DesignComponent {
     return this.products.slice(0, this.cartQty).reduce((s, p) => s + p.price, 0);
   }
 
-  aiGenerate(): void {
+  addSuggestedScreens(): void {
     for (const s of APP_SCREENS.slice(0, 6)) {
       if (!this.store.designPages().some((p) => p.name === s.name)) {
         this.store.addDesignPage(s.name);
       }
     }
-    this.toast.success('تم توليد صفحات أساسية بالذكاء الاصطناعي (محاكاة)');
+    this.toast.info('أُضيفت شاشات مقترحة من القالب المحلي؛ ليست نتيجة توليد ذكاء اصطناعي.');
   }
 }
