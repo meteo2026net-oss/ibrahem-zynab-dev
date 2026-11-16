@@ -24,11 +24,13 @@ import com.example.data.repository.ProjectRepository
 import com.example.data.repository.SecretsVaultRepository
 import com.example.data.repository.StorageRepository
 import com.example.ui.screens.AuthScreen
+import com.example.ui.screens.FirebaseSetupRequiredScreen
 import com.example.ui.screens.MainScaffold
 import com.example.ui.theme.DarkNavyBg
 import com.example.ui.theme.MetraTheme
 import com.example.util.configureAppCheck
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
@@ -56,6 +58,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MetraAppRoot() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    if (FirebaseApp.getApps(context).isEmpty()) {
+        FirebaseSetupRequiredScreen()
+        return
+    }
+    MetraAuthenticatedAppRoot()
+}
+
+@Composable
+private fun MetraAuthenticatedAppRoot() {
     var currentUser by remember { mutableStateOf(Firebase.auth.currentUser) }
 
     DisposableEffect(Unit) {
