@@ -3,6 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
 export interface AuthUser {
+  uid: string;
   name: string;
   email: string;
   role: 'user';
@@ -115,6 +116,7 @@ export class AuthService {
     this.refreshToken = response.refreshToken;
     this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expiresIn) || 0) * 1000;
     this.userSignal.set({
+      uid: response.localId,
       name: response.displayName?.trim() || response.email.split('@')[0],
       email: response.email,
       role: 'user',
