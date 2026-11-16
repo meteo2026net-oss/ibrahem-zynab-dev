@@ -616,3 +616,8 @@
 ## 191 — حزمة الويب الإنتاجية وخط بناء Android
 
 [191-web-artifact-and-android-ci.md](191-web-artifact-and-android-ci.md) — حفظ حزمة Angular الإنتاجية كـ Artifact وإضافة مسار CI مستقل لـ Android؛ Android ما زال قيد التحقق ولا يمثل APK تجريبي إصداراً نهائياً.
+
+
+## 192 — أساس الخلفية الموثوقة في Firebase
+
+[192-trusted-firebase-backend-foundation.md](192-trusted-firebase-backend-foundation.md) — Cloud Functions محمية بـ App Check لإدارة الأسرار بمفتاح Cloud KMS والموافقات مع تدقيق خادمي؛ تتطلب إعداد موارد Google Cloud قبل النشر.
