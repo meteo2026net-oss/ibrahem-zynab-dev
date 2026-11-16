@@ -34,6 +34,8 @@ export class AuthService {
   private readonly apiKey =
     (globalThis as RuntimeGlobal).__APP_CONFIG__?.firebaseApiKey?.trim() ?? '';
   private idToken: string | null = null;
+  private refreshToken: string | null = null;
+  private tokenExpiresAt = 0;
 
   private readonly userSignal = signal<AuthUser | null>(null);
 
@@ -56,6 +58,8 @@ export class AuthService {
       if (!response.idToken || !response.localId || !response.email) return false;
 
       this.idToken = response.idToken;
+      this.refreshToken = response.refreshToken;
+      this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expiresIn) || 0) * 1000;
       this.userSignal.set({
         name: response.displayName?.trim() || response.email.split('@')[0],
         email: response.email,
@@ -72,8 +76,43 @@ export class AuthService {
     return this.idToken;
   }
 
+  async getValidIdToken(): Promise<string | null> {
+    if (!this.idToken || !this.refreshToken || !this.isConfigured) return null;
+    if (Date.now() < this.tokenExpiresAt - 60_000) return this.idToken;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<{
+          id_token: string;
+          refresh_token: string;
+          expires_in: string;
+          user_id: string;
+        }>(
+          `https://securetoken.googleapis.com/v1/token?key=${encodeURIComponent(this.apiKey)}`,
+          {
+            grant_type: 'refresh_token',
+            refresh_token: this.refreshToken,
+          }
+        )
+      );
+      if (!response.id_token || !response.refresh_token) {
+        this.logout();
+        return null;
+      }
+      this.idToken = response.id_token;
+      this.refreshToken = response.refresh_token;
+      this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expires_in) || 0) * 1000;
+      return this.idToken;
+    } catch {
+      this.logout();
+      return null;
+    }
+  }
+
   logout(): void {
     this.idToken = null;
+    this.refreshToken = null;
+    this.tokenExpiresAt = 0;
     this.userSignal.set(null);
   }
 }
