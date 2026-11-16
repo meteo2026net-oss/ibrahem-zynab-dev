@@ -5,6 +5,7 @@ import { CloudTasksClient } from "@google-cloud/tasks";
 import { getApps, initializeApp } from "firebase-admin/app";
 import { FieldValue, getFirestore, type Transaction } from "firebase-admin/firestore";
 import { HttpsError, onCall, onRequest } from "firebase-functions/v2/https";
+import { onSchedule } from "firebase-functions/v2/scheduler";
 
 if (getApps().length === 0) initializeApp();
 
@@ -413,6 +414,28 @@ export const createPersistentJob = onCall(
       dispatchUpdatedAt: FieldValue.serverTimestamp(),
     }, { merge: true });
     return { ...result, dispatchStatus };
+  }
+);
+
+/**
+ * Reconcile failed Cloud Tasks dispatches without relying on a client retry.
+ * Deterministic Cloud Tasks names make retries safe after ambiguous API results.
+ */
+export const reconcilePersistentJobDispatch = onSchedule(
+  { schedule: "every 1 minutes", timeoutSeconds: 60, memory: "256MiB" },
+  async () => {
+    const snapshot = await db.collection("persistent_jobs")
+      .where("dispatchStatus", "==", "FAILED")
+      .limit(50)
+      .get();
+    for (const doc of snapshot.docs) {
+      if (doc.get("status") !== "QUEUED") continue;
+      const dispatchStatus = await dispatchPersistentJob(doc.id);
+      await doc.ref.set({
+        dispatchStatus,
+        dispatchUpdatedAt: FieldValue.serverTimestamp(),
+      }, { merge: true });
+    }
   }
 );
 
