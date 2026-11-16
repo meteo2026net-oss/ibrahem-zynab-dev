@@ -118,6 +118,7 @@ fun PersistentJobsScreen(
                     }
                     Toast.makeText(context, "تم حفظ أرشيف المشروع بنجاح", Toast.LENGTH_LONG).show()
                 } catch (_: Exception) {
+                    archive.delete()
                     Toast.makeText(context, "تعذر تصدير المشروع.", Toast.LENGTH_LONG).show()
                 }
             }
@@ -247,17 +248,22 @@ fun PersistentJobsScreen(
                                 val pName = currentProject?.name ?: "مشروع عام"
                                 isSubmitting = true
                                 scope.launch {
-                                    persistentJobRepository.createAndScheduleJob(
-                                        projectId = pId,
-                                        projectName = pName,
-                                        title = newJobTitle,
-                                        userPrompt = newJobPrompt
-                                    )
-                                    isSubmitting = false
-                                    showCreateForm = false
-                                    newJobTitle = ""
-                                    newJobPrompt = ""
-                                    Toast.makeText(context, "تمت جدولة المهمة بنجاح", Toast.LENGTH_LONG).show()
+                                    try {
+                                        persistentJobRepository.createAndScheduleJob(
+                                            projectId = pId,
+                                            projectName = pName,
+                                            title = newJobTitle,
+                                            userPrompt = newJobPrompt
+                                        )
+                                        showCreateForm = false
+                                        newJobTitle = ""
+                                        newJobPrompt = ""
+                                        Toast.makeText(context, "تمت جدولة المهمة بنجاح", Toast.LENGTH_LONG).show()
+                                    } catch (_: Exception) {
+                                        Toast.makeText(context, "تعذر جدولة المهمة. تحقق من الاتصال وإعدادات الخادم.", Toast.LENGTH_LONG).show()
+                                    } finally {
+                                        isSubmitting = false
+                                    }
                                 }
                             },
                             enabled = !isSubmitting,
