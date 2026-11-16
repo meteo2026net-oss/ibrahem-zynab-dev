@@ -19,6 +19,8 @@ import com.example.data.worker.PersistentJobWorker
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
+import com.google.firebase.Timestamp
+import java.util.Date
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -27,6 +29,25 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.util.UUID
 import java.util.concurrent.TimeUnit
+
+
+internal fun parsePersistentJobStatus(raw: String?): JobStatus {
+    return when (raw?.trim()?.uppercase()) {
+        "SUCCEEDED", "SUCCESS", "COMPLETED" -> JobStatus.COMPLETED
+        "WAITING_FOR_APPROVAL", "WAITING_APPROVAL" -> JobStatus.WAITING_FOR_APPROVAL
+        "WAITING_FOR_RETRY", "WAITING_RETRY" -> JobStatus.WAITING_FOR_RETRY
+        else -> JobStatus.values().firstOrNull { status ->
+            status.id.equals(raw, ignoreCase = true) || status.name.equals(raw, ignoreCase = true)
+        } ?: JobStatus.QUEUED
+    }
+}
+
+internal fun parseFirestoreMillis(value: Any?): Long? = when (value) {
+    is Number -> value.toLong()
+    is Timestamp -> value.toDate().time
+    is Date -> value.time
+    else -> null
+}
 
 class PersistentJobRepository(
     private val context: Context
@@ -208,8 +229,8 @@ class PersistentJobRepository(
                 val stepsRaw = data["stepsData"] as? List<Map<String, Any?>> ?: emptyList()
                 val steps = stepsRaw.map { JobStep.fromMap(it) }.toMutableList()
                 val logsRaw = data["logs"] as? List<String> ?: emptyList()
-                val statusStr = data["status"] as? String ?: "queued"
-                val status = JobStatus.values().find { it.id == statusStr } ?: JobStatus.QUEUED
+                val statusStr = data["status"] as? String
+                val status = parsePersistentJobStatus(statusStr)
 
                 PersistentJob(
                     jobId = doc.id,
@@ -217,11 +238,11 @@ class PersistentJobRepository(
                     projectId = data["projectId"] as? String ?: "",
                     projectName = data["projectName"] as? String ?: "",
                     title = data["title"] as? String ?: "",
-                    userPrompt = data["userPrompt"] as? String ?: "",
+                    userPrompt = data["userPrompt"] as? String ?: data["prompt"] as? String ?: "",
                     status = status,
                     steps = steps,
                     currentStepIndex = (data["currentStepIndex"] as? Number)?.toInt() ?: 0,
-                    progressPercent = (data["progressPercent"] as? Number)?.toInt() ?: 0,
+                    progressPercent = ((data["progressPercent"] ?: data["progress"]) as? Number)?.toInt()?.coerceIn(0, 100) ?: 0,
                     workerId = data["workerId"] as? String,
                     leaseToken = data["leaseToken"] as? String,
                     leaseExpiresAt = (data["leaseExpiresAt"] as? Number)?.toLong(),
@@ -231,9 +252,9 @@ class PersistentJobRepository(
                     waitingApprovalId = data["waitingApprovalId"] as? String,
                     totalTokensUsed = (data["totalTokensUsed"] as? Number)?.toInt() ?: 0,
                     estimatedCostUsd = (data["estimatedCostUsd"] as? Number)?.toDouble() ?: 0.0,
-                    createdAt = (data["createdAt"] as? Number)?.toLong() ?: 0L,
-                    updatedAt = (data["updatedAt"] as? Number)?.toLong() ?: 0L,
-                    completedAt = (data["completedAt"] as? Number)?.toLong(),
+                    createdAt = parseFirestoreMillis(data["createdAt"]) ?: 0L,
+                    updatedAt = parseFirestoreMillis(data["updatedAt"]) ?: 0L,
+                    completedAt = parseFirestoreMillis(data["completedAt"]),
                     executionLogs = logsRaw.toMutableList()
                 )
             }.sortedByDescending { it.updatedAt }
