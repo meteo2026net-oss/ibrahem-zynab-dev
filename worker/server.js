@@ -158,6 +158,11 @@ app.post("/tasks", async (req, res) => {
     });
     res.status(200).json({ jobId, state: "SUCCEEDED" });
   } catch (error) {
+    if (!lease && error.response?.status === 409 &&
+        error.response?.data?.error === "job-cancelled") {
+      res.status(200).json({ jobId, state: "CANCELLED" });
+      return;
+    }
     console.error("Persistent job execution failed", {
       jobId, message: error.message, status: error.response?.status
     });
