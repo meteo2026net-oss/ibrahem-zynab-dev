@@ -1,6 +1,6 @@
 <div class="grid-2">
   <div class="card">
-    <div class="card-title">فريق {{ store.activeProject()?.name || 'المشروع' }}</div>
+    <div class="card-title">فريق {{ store.activeProject().name || 'المشروع' }}</div>
     @for (m of store.team(); track m.name) {
       <div class="member">
         <span><strong>{{ m.name }}</strong> — {{ m.role }}</span>
