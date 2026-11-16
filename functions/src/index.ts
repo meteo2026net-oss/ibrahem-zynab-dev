@@ -494,6 +494,7 @@ export const getPersistentJobResult = onCall(
       summary: data.summary ?? "",
       resultText: data.resultText ?? "",
       resultModel: data.resultModel ?? "",
+      resultFiles: Array.isArray(data.resultFiles) ? data.resultFiles : [],
       createdAt: data.createdAt?.toMillis?.() ?? null,
       updatedAt: data.updatedAt?.toMillis?.() ?? null,
       finishedAt: data.finishedAt?.toMillis?.() ?? null,
@@ -662,6 +663,39 @@ export const updatePersistentJobProgress = onRequest(
   }
 );
 
+function sanitizeResultFiles(value: unknown): Array<{ path: string; content: string }> {
+  if (!Array.isArray(value) || value.length < 1 || value.length > 40) {
+    throw new HttpsError("invalid-argument", "Generated result must contain between 1 and 40 files.");
+  }
+  const seen = new Set<string>();
+  let totalBytes = 0;
+  return value.map((entry: unknown) => {
+    if (!entry || typeof entry !== "object") {
+      throw new HttpsError("invalid-argument", "Invalid generated file entry.");
+    }
+    const file = entry as Record<string, unknown>;
+    if (typeof file.path !== "string" || typeof file.content !== "string") {
+      throw new HttpsError("invalid-argument", "Generated file path and content must be strings.");
+    }
+    const path = file.path.trim();
+    const segments = path.split("/");
+    const blocked = new Set([".env", ".env.local", ".env.production", "id_rsa", "id_ed25519", "credentials.json", "service-account.json"]);
+    if (!path || path.length > 240 || path.startsWith("/") || path.includes("\\") ||
+        segments.some((part) => !/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/.test(part)) ||
+        segments.some((part) => part.startsWith(".") || blocked.has(part.toLowerCase()))) {
+      throw new HttpsError("invalid-argument", "Unsafe generated file path.");
+    }
+    const key = path.toLowerCase();
+    if (seen.has(key)) throw new HttpsError("invalid-argument", "Duplicate generated file path.");
+    seen.add(key);
+    const bytes = Buffer.byteLength(file.content, "utf8");
+    if (bytes > 16 * 1024) throw new HttpsError("invalid-argument", "Generated file exceeds 16 KiB.");
+    totalBytes += bytes;
+    if (totalBytes > 160 * 1024) throw new HttpsError("invalid-argument", "Generated project exceeds 160 KiB.");
+    return { path, content: file.content };
+  });
+}
+
 export const finishPersistentJob = onRequest(
   { invoker: "private", timeoutSeconds: 20, memory: "256MiB" },
   async (request, response) => {
@@ -680,6 +714,7 @@ export const finishPersistentJob = onRequest(
       ? request.body.resultText.slice(0, 80000) : "";
     const resultModel = typeof request.body?.resultModel === "string"
       ? request.body.resultModel.slice(0, 120) : "";
+    const resultFiles = state === "SUCCEEDED" ? sanitizeResultFiles(request.body?.resultFiles) : [];
     const finalState = await db.runTransaction(async (tx) => {
       const { ref, data } = await verifyAndReadLease(tx, jobId, workerId, leaseToken);
       const resolvedState = data.cancelRequested === true ? "CANCELLED" : state;
@@ -688,6 +723,7 @@ export const finishPersistentJob = onRequest(
         summary,
         resultText: resolvedState === "SUCCEEDED" ? resultText : "",
         resultModel: resolvedState === "SUCCEEDED" ? resultModel : "",
+        resultFiles: resolvedState === "SUCCEEDED" ? resultFiles : [],
         progress: resolvedState === "SUCCEEDED" ? 100 : (data.progress ?? 0),
         progressPercent: resolvedState === "SUCCEEDED" ? 100 : (data.progressPercent ?? data.progress ?? 0),
         workerId: null,
