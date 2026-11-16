@@ -1,6 +1,7 @@
 import { Buffer } from "node:buffer";
 import { createHash, randomUUID } from "node:crypto";
 import { KeyManagementServiceClient } from "@google-cloud/kms";
+import { CloudTasksClient } from "@google-cloud/tasks";
 import { getApps, initializeApp } from "firebase-admin/app";
 import { FieldValue, getFirestore, type Transaction } from "firebase-admin/firestore";
 import { HttpsError, onCall, onRequest } from "firebase-functions/v2/https";
@@ -10,6 +11,7 @@ if (getApps().length === 0) initializeApp();
 const databaseId = process.env.FIRESTORE_DATABASE_ID || "(default)";
 const db = getFirestore(getApps()[0]!, databaseId);
 const kms = new KeyManagementServiceClient();
+const cloudTasks = new CloudTasksClient();
 
 const secretServices = new Set([
   "DATABASE_CONNECTOR", "GITHUB_SERVICE", "BACKEND_WORKER"
@@ -298,6 +300,52 @@ async function verifyAndReadLease(
   return { ref, data };
 }
 
+/**
+ * Dispatch a durable job to Cloud Tasks. A deterministic task name makes
+ * retries safe when the callable is repeated with the same idempotency key.
+ * The Cloud Run worker must verify the OIDC token and claim the job lease
+ * before doing any work.
+ */
+async function dispatchPersistentJob(jobId: string): Promise<"ENQUEUED" | "NOT_CONFIGURED" | "FAILED"> {
+  const project = process.env.CLOUD_TASKS_PROJECT_ID || process.env.GCLOUD_PROJECT;
+  const location = process.env.CLOUD_TASKS_LOCATION;
+  const queue = process.env.CLOUD_TASKS_QUEUE;
+  const workerUrl = process.env.JOB_WORKER_URL;
+  const workerServiceAccount = process.env.JOB_WORKER_SERVICE_ACCOUNT;
+  if (!project || !location || !queue || !workerUrl || !workerServiceAccount) {
+    return "NOT_CONFIGURED";
+  }
+
+  const parent = cloudTasks.queuePath(project, location, queue);
+  const taskName = `${parent}/tasks/job-${jobId}`;
+  const body = Buffer.from(JSON.stringify({ jobId })).toString("base64");
+  try {
+    await cloudTasks.createTask({
+      parent,
+      task: {
+        name: taskName,
+        dispatchDeadline: { seconds: 900 },
+        httpRequest: {
+          httpMethod: "POST",
+          url: workerUrl,
+          headers: { "Content-Type": "application/json" },
+          body,
+          oidcToken: {
+            serviceAccountEmail: workerServiceAccount,
+            audience: workerUrl,
+          },
+        },
+      },
+    });
+    return "ENQUEUED";
+  } catch (error) {
+    const code = (error as { code?: number }).code;
+    if (code === 6) return "ENQUEUED"; // ALREADY_EXISTS: idempotent retry
+    console.error("Cloud Tasks dispatch failed", { jobId, code });
+    return "FAILED";
+  }
+}
+
 export const createPersistentJob = onCall(
   { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
   async (request) => {
@@ -359,7 +407,12 @@ export const createPersistentJob = onCall(
       });
       return { jobId, reused: false };
     });
-    return result;
+    const dispatchStatus = await dispatchPersistentJob(result.jobId);
+    await db.collection("persistent_jobs").doc(result.jobId).set({
+      dispatchStatus,
+      dispatchUpdatedAt: FieldValue.serverTimestamp(),
+    }, { merge: true });
+    return { ...result, dispatchStatus };
   }
 );
 
