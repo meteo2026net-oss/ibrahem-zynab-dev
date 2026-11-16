@@ -21,9 +21,7 @@ interface RuntimeAppConfig {
   firebaseApiKey?: string;
 }
 
-interface RuntimeGlobal extends typeof globalThis {
-  __APP_CONFIG__?: RuntimeAppConfig;
-}
+type RuntimeGlobal = typeof globalThis & { __APP_CONFIG__?: RuntimeAppConfig };
 
 /**
  * Firebase Authentication REST integration.
