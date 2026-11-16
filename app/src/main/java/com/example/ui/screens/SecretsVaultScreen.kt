@@ -82,7 +82,7 @@ fun SecretsVaultScreen(
     var description by remember { mutableStateOf("") }
     var isSaving by remember { mutableStateOf(false) }
     var saveError by remember { mutableStateOf<String?>(null) }
-    val vaultBackendEnabled = BuildConfig.VAULT_BACKEND_ENABLED
+    val vaultBackendEnabled = BuildConfig.VAULT_BACKEND_ENABLED.equals("true", ignoreCase = true)
 
     Box(modifier = Modifier.fillMaxSize().metraGradientBackground) {
         Column(
