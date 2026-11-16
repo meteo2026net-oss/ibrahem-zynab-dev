@@ -5,6 +5,7 @@ const { GoogleAuth } = require("google-auth-library");
 const { GoogleGenAI } = require("@google/genai");
 const { extractText } = require("./gemini-response");
 const { JobControl } = require("./job-control");
+const { parseProjectArtifacts } = require("./project-artifacts");
 
 const app = express();
 app.disable("x-powered-by");
@@ -128,8 +129,13 @@ app.post("/tasks", async (req, res) => {
     }
     const generated = await ai.models.generateContent({
       model: modelName,
-      contents: prompt,
-      config: { temperature: 0.2, maxOutputTokens: 8192 }
+      contents: [
+        "You are generating a real software project artifact package. Return ONLY valid JSON with this exact shape: {\\"summary\\": string, \\"files\\": [{\\"path\\": string, \\"content\\": string}]}.",
+        "Generate 1 to 40 useful text files. Use relative paths only. Do not include secrets, credentials, hidden files, binary data, or deployment credentials. Keep each file under 16 KiB and the complete package under 160 KiB.",
+        "Make the project coherent, include a README and appropriate source/configuration files, and do not claim tests were run unless you provide executable test files.",
+        "User requirements:\\n" + prompt
+      ].join("\\n\\n"),
+      config: { temperature: 0.2, maxOutputTokens: 8192, responseMimeType: "application/json" }
     });
     if (control.leaseLost) {
       res.status(503).json({ error: "worker-lease-lost", jobId });
@@ -145,7 +151,7 @@ app.post("/tasks", async (req, res) => {
     }
 
     const output = extractText(generated);
-    if (!output) throw new Error("The AI model returned an empty result.");
+    const project = parseProjectArtifacts(output);
     if (!await update(90, 2, "Saving the generated result")) {
       await callPrivateFunction("finishPersistentJob", {
         jobId, workerId, leaseToken: lease.leaseToken,
@@ -160,8 +166,9 @@ app.post("/tasks", async (req, res) => {
       workerId,
       leaseToken: lease.leaseToken,
       state: "SUCCEEDED",
-      summary: output.slice(0, 4000),
-      resultText: output.slice(0, 80000),
+      summary: project.summary,
+      resultText: JSON.stringify({ summary: project.summary, files: project.files }),
+      resultFiles: project.files,
       resultModel: modelName
     });
     res.status(200).json({ jobId, state: "SUCCEEDED" });
