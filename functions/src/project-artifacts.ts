@@ -33,6 +33,7 @@ export function sanitizeResultFiles(value: unknown): GeneratedProjectFile[] {
       throw new HttpsError("invalid-argument", "Generated file path and content must be strings.");
     }
     const path = file.path.trim();
+    const content = file.content;
     const segments = path.split("/");
     if (!path || path.length > 240 || path.startsWith("/") || path.includes("\\") ||
         segments.some((part) => !/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/.test(part)) ||
@@ -42,13 +43,13 @@ export function sanitizeResultFiles(value: unknown): GeneratedProjectFile[] {
     const key = path.toLowerCase();
     if (seen.has(key)) throw new HttpsError("invalid-argument", "Duplicate generated file path.");
     seen.add(key);
-    if (secretPatterns.some((pattern) => pattern.test(file.content))) {
+    if (secretPatterns.some((pattern) => pattern.test(content))) {
       throw new HttpsError("invalid-argument", "Generated file contains credential-like material.");
     }
-    const bytes = Buffer.byteLength(file.content, "utf8");
+    const bytes = Buffer.byteLength(content, "utf8");
     if (bytes > 16 * 1024) throw new HttpsError("invalid-argument", "Generated file exceeds 16 KiB.");
     totalBytes += bytes;
     if (totalBytes > 160 * 1024) throw new HttpsError("invalid-argument", "Generated project exceeds 160 KiB.");
-    return { path, content: file.content };
+    return { path, content };
   });
 }
