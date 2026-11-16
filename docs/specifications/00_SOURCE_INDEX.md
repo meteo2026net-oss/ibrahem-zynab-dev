@@ -504,3 +504,8 @@
 ## Workpaper 195 — خط إصدار Android الموقّع
 - الملف: [195-signed-android-release-pipeline.md](195-signed-android-release-pipeline.md)
 - إضافة workflow يدوي لبناء AAB موقّع بعد توفير keystore وكلمات مروره في GitHub Secrets وإعداد Firebase Variables. لم يتم تشغيله لعدم توفر بيانات توقيع المالك.
+
+
+## Workpaper 196 — طابور المهام وعقود العامل الموثوقة
+- الملف: [196-trusted-orchestration-queue-and-leases.md](196-trusted-orchestration-queue-and-leases.md)
+- إضافة إنشاء مهام idempotent، وقوائم المستخدم، والإلغاء، وواجهات عامل خاصة لامتلاك lease وتجديد heartbeat وإنهاء المهمة، مع معاملات وتدقيق خادمي.
