@@ -596,3 +596,8 @@
 ## 187 — الدفعة التنفيذية الخامسة: إصلاح بناء الإنتاج ومراجعة الاعتماديات
 
 [187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md](187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md) — سجل CI يوضح نجاح الاختبارات وفشل البناء السابق، والإصلاحات المضافة وتنبيهات الاعتماديات الأمنية.
+
+
+## 188 — تقوية قواعد أمان Firestore
+
+[188-firestore-security-hardening.md](188-firestore-security-hardening.md) — فرض ثبات مالك المستند، ومنع التعديل المباشر لسجلات التحكم والتدقيق، وحجب مجموعات الأسرار والاعتمادات عن العملاء لحين توفير backend موثوق. اختبارات Emulator والنشر ما زالت مطلوبة.
