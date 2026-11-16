@@ -30,3 +30,9 @@ Date: 2026-11-16
 - No live Firebase runtime credentials have been supplied to this repository. Firebase sign-in, Functions, and App Check cannot be validated against the actual production project yet.
 - The Cloud Functions code has passed TypeScript CI, but no cloud deployment or KMS runtime test has been performed.
 - Production signing and AAB generation remain separate release gates.
+
+
+## App Check provider correction
+
+- Production Android App Check now uses Play Integrity; debug builds retain the Firebase debug provider. The previous reCAPTCHA site-key resource was removed because it is not the correct production provider for Android.
+- This provider change is awaiting Android CI verification and must be configured in the Firebase App Check console for the registered Android app.
