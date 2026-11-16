@@ -32,7 +32,8 @@
 
 @if (step() === 2 && analysisPreview(); as a) {
   <div class="card">
-    <div class="card-title">نتائج التحليل الأولي</div>
+    <div class="card-title">تصور أولي محلي — ليس تحليلاً بالذكاء الاصطناعي</div>
+    <p class="hint">تم استنتاج اقتراحات أولية من كلمات وصفك بقواعد بسيطة؛ راجعها وعدّلها قبل الاعتماد.</p>
     <p><strong>نوع التطبيق:</strong> {{ a.type }}</p>
     <p><strong>التعقيد التقديري:</strong> {{ a.complexity }}</p>
     <h4>الصفحات المقترحة</h4>
