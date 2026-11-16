@@ -75,7 +75,7 @@ describe('ProjectService honest local workflow behavior', () => {
   });
 
   it('normalizes invalid persisted collections and active project references', () => {
-    localStorage.setItem('iad-app-state-v1', JSON.stringify({
+    localStorage.setItem('iad-app-state-v1:anonymous', JSON.stringify({
       projects: null,
       activeProjectId: 'missing-project',
       requirements: null,
@@ -100,7 +100,7 @@ describe('ProjectService honest local workflow behavior', () => {
   });
 
   it('restores a default project when persisted project list is empty', () => {
-    localStorage.setItem('iad-app-state-v1', JSON.stringify({
+    localStorage.setItem('iad-app-state-v1:anonymous', JSON.stringify({
       projects: [],
       activeProjectId: 'missing-project',
     }));
