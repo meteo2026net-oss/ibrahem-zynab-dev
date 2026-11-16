@@ -591,3 +591,8 @@
 ## 186 — الدفعة التنفيذية الرابعة: مصادقة Firebase للويب
 
 [186-fourth-implementation-batch-firebase-web-auth.md](186-fourth-implementation-batch-firebase-web-auth.md) — تكامل Firebase Email/Password وتجديد الرموز في الذاكرة واختبارات المصادقة؛ يلزم ضبط إعداد Firebase قبل الاستخدام.
+
+
+## 187 — الدفعة التنفيذية الخامسة: إصلاح بناء الإنتاج ومراجعة الاعتماديات
+
+[187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md](187-fifth-implementation-batch-ci-build-fix-and-dependency-alerts.md) — سجل CI يوضح نجاح الاختبارات وفشل البناء السابق، والإصلاحات المضافة وتنبيهات الاعتماديات الأمنية.
