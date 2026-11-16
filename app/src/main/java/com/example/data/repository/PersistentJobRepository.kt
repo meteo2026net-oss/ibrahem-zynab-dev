@@ -171,8 +171,13 @@ class PersistentJobRepository(private val context: Context) {
         Unit
     }
 
-    suspend fun retryJob(jobId: String) {
-        throw UnsupportedOperationException("Retry is unavailable until the trusted worker retry policy is deployed.")
+    suspend fun retryJob(jobId: String) = withContext(Dispatchers.IO) {
+        Firebase.auth.currentUser ?: throw IllegalStateException("Sign in before retrying a job.")
+        require(jobId.isNotBlank()) { "Job ID is required." }
+        functions.getHttpsCallable("retryPersistentJob")
+            .call(mapOf("jobId" to jobId))
+            .await()
+        Unit
     }
 
     fun getJobsFlow(projectId: String?): Flow<List<PersistentJob>> = flow {
