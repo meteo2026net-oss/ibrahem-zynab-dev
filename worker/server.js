@@ -3,6 +3,7 @@
 const express = require("express");
 const { GoogleAuth } = require("google-auth-library");
 const { GoogleGenAI } = require("@google/genai");
+const { extractText } = require("./gemini-response");
 
 const app = express();
 app.disable("x-powered-by");
@@ -38,18 +39,6 @@ async function callPrivateFunction(name, payload) {
   return response.data;
 }
 
-function extractText(response) {
-  if (typeof response?.text === "string" && response.text.trim()) {
-    return response.text.trim();
-  }
-  const candidates = response && response.candidates;
-  if (!Array.isArray(candidates) || !candidates.length) {
-    throw new Error("The model returned no candidates.");
-  }
-  const parts = candidates[0].content && candidates[0].content.parts;
-  if (!Array.isArray(parts)) throw new Error("The model response has no content parts.");
-  return parts.map(part => typeof part.text === "string" ? part.text : "").join("").trim();
-}
 
 app.get("/health", (_req, res) => {
   res.status(200).json({ ok: true, service: "intelligent-app-designer-worker" });
@@ -145,7 +134,7 @@ app.post("/tasks", async (req, res) => {
       return;
     }
 
-    const output = extractText(generated.response);
+    const output = extractText(generated);
     if (!output) throw new Error("The AI model returned an empty result.");
     if (!await update(90, 2, "Saving the generated result")) {
       await callPrivateFunction("finishPersistentJob", {
