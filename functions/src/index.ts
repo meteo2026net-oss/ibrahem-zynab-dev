@@ -349,6 +349,127 @@ async function dispatchPersistentJob(jobId: string, generation = 0): Promise<"EN
   }
 }
 
+/**
+ * Owner-scoped project persistence API for web/mobile clients.
+ * App Check and Firebase Authentication are required for every operation.
+ */
+export const createProject = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const name = requireText(request.data?.name, "name", 120);
+    const description = typeof request.data?.description === "string"
+      ? request.data.description.slice(0, 2000) : "";
+    const allowedPlatforms = new Set(["Web", "Android", "iOS", "Desktop", "Backend"]);
+    const platforms = request.data?.platforms;
+    if (!Array.isArray(platforms) || platforms.length === 0 || platforms.length > 5 ||
+        !platforms.every((value: unknown) => typeof value === "string" && allowedPlatforms.has(value)) ||
+        new Set(platforms).size !== platforms.length) {
+      throw new HttpsError("invalid-argument", "Invalid project platforms.");
+    }
+
+    const projectId = randomUUID();
+    await db.runTransaction(async (tx) => {
+      tx.create(db.collection("projects").doc(projectId), {
+        userId: uid,
+        name,
+        description,
+        platforms,
+        status: "draft",
+        phase: 0,
+        progress: 0,
+        createdAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      tx.create(db.collection("audit_logs").doc(), {
+        userId: uid,
+        projectId,
+        action: "PROJECT_CREATED",
+        targetId: projectId,
+        actor: uid,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+    });
+    return { projectId };
+  }
+);
+
+export const listProjects = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const snapshot = await db.collection("projects")
+      .where("userId", "==", uid)
+      .limit(100)
+      .get();
+    return {
+      projects: snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          name: data.name ?? "",
+          description: data.description ?? "",
+          platforms: Array.isArray(data.platforms) ? data.platforms : [],
+          status: data.status ?? "draft",
+          phase: data.phase ?? 0,
+          progress: data.progress ?? 0,
+          createdAt: data.createdAt?.toMillis?.() ?? null,
+          updatedAt: data.updatedAt?.toMillis?.() ?? null,
+        };
+      }),
+    };
+  }
+);
+
+export const updateProject = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const projectId = requireText(request.data?.projectId, "projectId", 128);
+    const updates: Record<string, unknown> = {};
+    if (request.data?.name !== undefined) {
+      updates.name = requireText(request.data.name, "name", 120);
+    }
+    if (request.data?.description !== undefined) {
+      if (typeof request.data.description !== "string" || request.data.description.length > 2000) {
+        throw new HttpsError("invalid-argument", "Invalid description.");
+      }
+      updates.description = request.data.description;
+    }
+    if (request.data?.platforms !== undefined) {
+      const allowedPlatforms = new Set(["Web", "Android", "iOS", "Desktop", "Backend"]);
+      const platforms = request.data.platforms;
+      if (!Array.isArray(platforms) || platforms.length === 0 || platforms.length > 5 ||
+          !platforms.every((value: unknown) => typeof value === "string" && allowedPlatforms.has(value)) ||
+          new Set(platforms).size !== platforms.length) {
+        throw new HttpsError("invalid-argument", "Invalid project platforms.");
+      }
+      updates.platforms = platforms;
+    }
+    if (Object.keys(updates).length === 0) {
+      throw new HttpsError("invalid-argument", "At least one editable project field is required.");
+    }
+
+    await db.runTransaction(async (tx) => {
+      const ref = db.collection("projects").doc(projectId);
+      const snapshot = await tx.get(ref);
+      if (!snapshot.exists || snapshot.get("userId") !== uid) {
+        throw new HttpsError("not-found", "Project not found.");
+      }
+      tx.update(ref, { ...updates, updatedAt: FieldValue.serverTimestamp() });
+      tx.create(db.collection("audit_logs").doc(), {
+        userId: uid,
+        projectId,
+        action: "PROJECT_UPDATED",
+        targetId: projectId,
+        actor: uid,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+    });
+    return { projectId, updated: true };
+  }
+);
+
 export const createPersistentJob = onCall(
   { enforceAppCheck: true, timeoutSeconds: 15, memory: "256MiB" },
   async (request) => {

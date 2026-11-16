@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../../core/project.service';
 import { ToastService } from '../../core/toast.service';
@@ -9,6 +9,7 @@ import { DEMO_PRODUCTS, APP_SCREENS } from '../../core/catalog';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './design.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './design.component.scss',
 })
 export class DesignComponent {

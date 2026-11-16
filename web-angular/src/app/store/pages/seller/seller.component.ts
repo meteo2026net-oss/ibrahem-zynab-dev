@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { StoreService } from '../../services/store.service';
@@ -10,6 +10,7 @@ import { OrderStatus } from '../../services/store.models';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './seller.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './seller.component.scss',
 })
 export class SellerComponent {

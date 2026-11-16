@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { StoreService } from '../../services/store.service';
@@ -10,6 +10,7 @@ import { AuditService } from '../../../core/audit.service';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './shop-login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './shop-login.component.scss',
 })
 export class ShopLoginComponent {

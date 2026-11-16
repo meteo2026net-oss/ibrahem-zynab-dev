@@ -1,12 +1,13 @@
 <div class="page-header">
   <div>
     <h1>فريق الذكاء الاصطناعي</h1>
-    <p>مهام الوكلاء وحالاتها — مع طابور وتشغيل</p>
+    <p>إنشاء مهام دائمة عبر Firebase ومتابعة حالتها من الخادم</p>
   </div>
+  <button class="btn btn-secondary" type="button" (click)="refreshJobs()" [disabled]="loading">تحديث المهام</button>
 </div>
 
 <div class="card">
-  <div class="card-title">مهمة جديدة</div>
+  <div class="card-title">مهمة سحابية جديدة</div>
   <div class="toolbar">
     <select class="form-control" style="width:160px" [(ngModel)]="agent">
       <option>Analysis</option>
@@ -15,23 +16,38 @@
       <option>Test</option>
       <option>Security</option>
     </select>
-    <input class="form-control" style="flex:1;min-width:180px" [(ngModel)]="taskDesc" placeholder="وصف المهمة" />
-    <button class="btn btn-primary" type="button" (click)="enqueue()">إضافة</button>
-    <button class="btn btn-secondary" type="button" disabled title="يتطلب خدمة تنسيق خلفية">تشغيل الانتظار — غير متاح</button>
+    <input class="form-control" style="flex:1;min-width:180px" [(ngModel)]="taskDesc" placeholder="وصف المهمة وتعليمات التنفيذ" />
+    <button class="btn btn-primary" type="button" (click)="enqueue()" [disabled]="submitting || !store.activeProject()">إرسال إلى Firebase</button>
   </div>
+  @if (!store.activeProject()) {
+    <p class="text-muted">اختر مشروعاً سحابياً قبل إرسال المهام.</p>
+  }
 </div>
 
 <div class="card">
+  <div class="card-title">المهام الدائمة للمشروع الحالي</div>
+  @if (loading) { <p>جارٍ تحميل المهام...</p> }
+  @if (!loading && jobs.length === 0) { <p>لا توجد مهام سحابية لهذا المشروع.</p> }
   <div class="table-wrap">
     <table>
-      <thead><tr><th>المعرف</th><th>الوكيل</th><th>الوصف</th><th>الحالة</th></tr></thead>
+      <thead><tr><th>المعرف</th><th>النوع</th><th>المهمة</th><th>الحالة</th><th>التقدم</th><th>المحاولات</th><th>الإجراءات</th></tr></thead>
       <tbody>
-        @for (t of store.agentTasks(); track t.id) {
+        @for (job of jobs; track job.id) {
           <tr>
-            <td>{{ t.id }}</td>
-            <td>{{ t.agent }}</td>
-            <td>{{ t.description }}</td>
-            <td><span class="badge" [class]="statusClass(t.status)">{{ statusLabel(t.status) }}</span></td>
+            <td>{{ job.id.slice(0, 8) }}</td>
+            <td>{{ job.jobType }}</td>
+            <td>{{ job.title }}</td>
+            <td><span class="badge" [class.badge-success]="job.status === 'SUCCEEDED'" [class.badge-danger]="job.status === 'FAILED'" [class.badge-primary]="job.status === 'RUNNING'" [class.badge-muted]="job.status === 'QUEUED' || job.status === 'CANCELLED'">{{ jobStatusLabel(job.status) }}</span></td>
+            <td>{{ job.progressPercent }}% <small>{{ job.progressMessage }}</small></td>
+            <td>{{ job.attempts }} / 3</td>
+            <td>
+              @if (job.status === 'QUEUED' || job.status === 'RUNNING') {
+                <button class="btn btn-secondary" type="button" (click)="cancel(job)">إلغاء</button>
+              }
+              @if (job.status === 'FAILED' && job.attempts < 3) {
+                <button class="btn btn-primary" type="button" (click)="retry(job)">إعادة المحاولة</button>
+              }
+            </td>
           </tr>
         }
       </tbody>

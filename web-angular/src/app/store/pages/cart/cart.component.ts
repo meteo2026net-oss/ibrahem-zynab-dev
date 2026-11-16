@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StoreService } from '../../services/store.service';
 import { ToastService } from '../../../core/toast.service';
@@ -8,6 +8,7 @@ import { ToastService } from '../../../core/toast.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './cart.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {

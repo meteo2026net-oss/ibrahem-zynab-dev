@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { StoreService } from '../services/store.service';
 
@@ -7,6 +7,7 @@ import { StoreService } from '../services/store.service';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './store-shell.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './store-shell.component.scss',
 })
 export class StoreShellComponent {

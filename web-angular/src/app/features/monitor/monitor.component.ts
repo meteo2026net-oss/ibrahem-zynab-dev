@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { ProjectService } from '../../core/project.service';
 
 @Component({
@@ -6,6 +6,7 @@ import { ProjectService } from '../../core/project.service';
   standalone: true,
   imports: [],
   templateUrl: './monitor.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './monitor.component.scss',
 })
 export class MonitorComponent {

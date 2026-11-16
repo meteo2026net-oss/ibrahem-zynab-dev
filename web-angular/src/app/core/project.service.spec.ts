@@ -1,12 +1,18 @@
 import { TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
+import { AuthService, type AuthUser } from './auth.service';
 import { ProjectService } from './project.service';
 
 describe('ProjectService honest local workflow behavior', () => {
   let service: ProjectService;
+  let authUser: ReturnType<typeof signal<AuthUser | null>>;
 
   beforeEach(() => {
     localStorage.clear();
-    TestBed.configureTestingModule({});
+    authUser = signal<AuthUser | null>(null);
+    TestBed.configureTestingModule({
+      providers: [{ provide: AuthService, useValue: { user: authUser.asReadonly() } }],
+    });
     service = TestBed.inject(ProjectService);
   });
 
@@ -58,7 +64,7 @@ describe('ProjectService honest local workflow behavior', () => {
   });
 
   it('recovers safely from malformed persisted JSON', () => {
-    localStorage.setItem('iad-app-state-v1', '{not-json');
+    localStorage.setItem('iad-app-state-v1:anonymous', '{not-json');
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({});
     service = TestBed.inject(ProjectService);
@@ -69,7 +75,7 @@ describe('ProjectService honest local workflow behavior', () => {
   });
 
   it('normalizes invalid persisted collections and active project references', () => {
-    localStorage.setItem('iad-app-state-v1', JSON.stringify({
+    localStorage.setItem('iad-app-state-v1:anonymous', JSON.stringify({
       projects: null,
       activeProjectId: 'missing-project',
       requirements: null,
@@ -94,7 +100,7 @@ describe('ProjectService honest local workflow behavior', () => {
   });
 
   it('restores a default project when persisted project list is empty', () => {
-    localStorage.setItem('iad-app-state-v1', JSON.stringify({
+    localStorage.setItem('iad-app-state-v1:anonymous', JSON.stringify({
       projects: [],
       activeProjectId: 'missing-project',
     }));
@@ -106,4 +112,30 @@ describe('ProjectService honest local workflow behavior', () => {
     expect(service.activeProject()).toBeDefined();
     expect(service.activeProjectId()).toBe(service.projects()[0].id);
   });
+  it('isolates locally cached project data between signed-in accounts', () => {
+    TestBed.flushEffects();
+    service.setIdeaText('anonymous workspace');
+    TestBed.flushEffects();
+
+    authUser.set({ uid: 'account-a', name: 'Account A', email: 'a@example.com', role: 'user' });
+    TestBed.flushEffects();
+    expect(service.ideaText()).not.toBe('anonymous workspace');
+    service.setIdeaText('private workspace A');
+    TestBed.flushEffects();
+
+    authUser.set({ uid: 'account-b', name: 'Account B', email: 'b@example.com', role: 'user' });
+    TestBed.flushEffects();
+    expect(service.ideaText()).not.toBe('private workspace A');
+    service.setIdeaText('private workspace B');
+    TestBed.flushEffects();
+
+    authUser.set({ uid: 'account-a', name: 'Account A', email: 'a@example.com', role: 'user' });
+    TestBed.flushEffects();
+    expect(service.ideaText()).toBe('private workspace A');
+
+    expect(localStorage.getItem('iad-app-state-v1:account-a')).not.toBeNull();
+    expect(localStorage.getItem('iad-app-state-v1:account-b')).not.toBeNull();
+    expect(localStorage.getItem('iad-app-state-v1:anonymous')).not.toBeNull();
+  });
+
 });

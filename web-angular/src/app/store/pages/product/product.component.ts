@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StoreService } from '../../services/store.service';
@@ -9,6 +9,7 @@ import { ToastService } from '../../../core/toast.service';
   standalone: true,
   imports: [RouterLink, FormsModule],
   templateUrl: './product.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './product.component.scss',
 })
 export class ProductComponent {

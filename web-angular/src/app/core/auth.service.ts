@@ -3,6 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
 export interface AuthUser {
+  uid: string;
   name: string;
   email: string;
   role: 'user';
@@ -18,6 +19,7 @@ interface FirebaseAuthResponse {
 }
 
 interface RuntimeAppConfig {
+  apiKey?: string;
   firebaseApiKey?: string;
 }
 
@@ -32,10 +34,13 @@ type RuntimeGlobal = typeof globalThis & { __APP_CONFIG__?: RuntimeAppConfig };
 export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly apiKey =
-    (globalThis as RuntimeGlobal).__APP_CONFIG__?.firebaseApiKey?.trim() ?? '';
+    ((globalThis as RuntimeGlobal).__APP_CONFIG__?.apiKey ??
+      (globalThis as RuntimeGlobal).__APP_CONFIG__?.firebaseApiKey)?.trim() ?? '';
   private idToken: string | null = null;
   private refreshToken: string | null = null;
   private tokenExpiresAt = 0;
+  private authGeneration = 0;
+  private refreshInFlight: Promise<string | null> | null = null;
 
   private readonly userSignal = signal<AuthUser | null>(null);
 
@@ -107,14 +112,21 @@ export class AuthService {
   }
 
   private acceptAuthResponse(response: FirebaseAuthResponse): boolean {
-    if (!response.idToken || !response.localId || !response.email || !response.refreshToken) {
+    const expirySeconds = Number(response.expiresIn);
+    if (
+      !response.idToken || !response.localId || !response.email || !response.refreshToken ||
+      !Number.isFinite(expirySeconds) || expirySeconds <= 0
+    ) {
       this.logout();
       return false;
     }
+    this.authGeneration += 1;
+    this.refreshInFlight = null;
     this.idToken = response.idToken;
     this.refreshToken = response.refreshToken;
-    this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expiresIn) || 0) * 1000;
+    this.tokenExpiresAt = Date.now() + expirySeconds * 1000;
     this.userSignal.set({
+      uid: response.localId,
       name: response.displayName?.trim() || response.email.split('@')[0],
       email: response.email,
       role: 'user',
@@ -129,34 +141,64 @@ export class AuthService {
   async getValidIdToken(): Promise<string | null> {
     if (!this.idToken || !this.refreshToken || !this.isConfigured) return null;
     if (Date.now() < this.tokenExpiresAt - 60_000) return this.idToken;
+    if (this.refreshInFlight) return this.refreshInFlight;
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<{
-          id_token: string;
-          refresh_token: string;
-          expires_in: string;
-          user_id: string;
-        }>(
-          `https://securetoken.googleapis.com/v1/token?key=${encodeURIComponent(this.apiKey)}`,
-          { grant_type: 'refresh_token', refresh_token: this.refreshToken }
-        )
-      );
-      if (!response.id_token || !response.refresh_token) {
-        this.logout();
+    const expectedUid = this.userSignal()?.uid;
+    const expectedGeneration = this.authGeneration;
+    const refreshToken = this.refreshToken;
+    if (!expectedUid) return null;
+
+    let refreshPromise!: Promise<string | null>;
+    refreshPromise = (async () => {
+      try {
+        const response = await firstValueFrom(
+          this.http.post<{
+            id_token: string;
+            refresh_token: string;
+            expires_in: string;
+            user_id: string;
+          }>(
+            `https://securetoken.googleapis.com/v1/token?key=${encodeURIComponent(this.apiKey)}`,
+            { grant_type: 'refresh_token', refresh_token: refreshToken }
+          )
+        );
+
+        // A logout or a new sign-in may happen while the network request is pending.
+        // Never let an older response overwrite a newer authentication session.
+        if (expectedGeneration !== this.authGeneration) return null;
+
+        const refreshedExpirySeconds = Number(response.expires_in);
+        if (
+          this.userSignal()?.uid !== expectedUid ||
+          response.user_id !== expectedUid ||
+          !response.id_token ||
+          !response.refresh_token ||
+          !Number.isFinite(refreshedExpirySeconds) ||
+          refreshedExpirySeconds <= 0
+        ) {
+          this.logout();
+          return null;
+        }
+
+        this.idToken = response.id_token;
+        this.refreshToken = response.refresh_token;
+        this.tokenExpiresAt = Date.now() + refreshedExpirySeconds * 1000;
+        return this.idToken;
+      } catch {
+        if (expectedGeneration === this.authGeneration) this.logout();
         return null;
+      } finally {
+        if (this.refreshInFlight === refreshPromise) this.refreshInFlight = null;
       }
-      this.idToken = response.id_token;
-      this.refreshToken = response.refresh_token;
-      this.tokenExpiresAt = Date.now() + Math.max(0, Number(response.expires_in) || 0) * 1000;
-      return this.idToken;
-    } catch {
-      this.logout();
-      return null;
-    }
+    })();
+
+    this.refreshInFlight = refreshPromise;
+    return refreshPromise;
   }
 
   logout(): void {
+    this.authGeneration += 1;
+    this.refreshInFlight = null;
     this.idToken = null;
     this.refreshToken = null;
     this.tokenExpiresAt = 0;

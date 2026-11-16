@@ -1,0 +1,83 @@
+name: Angular 22 security and dependency migration
+
+on:
+  push:
+    branches: [chore/angular-21-security-upgrade]
+    paths:
+      - "web-angular/UPGRADE_TO_ANGULAR_22"
+  pull_request:
+    branches: [main]
+    paths:
+      - "web-angular/UPGRADE_TO_ANGULAR_22"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: angular-21-security-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate-and-verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web-angular
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+        with:
+          ref: chore/angular-21-security-upgrade
+          fetch-depth: 0
+
+      - name: Set up supported Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.15.0
+          cache: npm
+          cache-dependency-path: web-angular/package-lock.json
+
+      - name: Install current locked dependencies
+        run: npm ci
+
+      - name: Update TypeScript for Angular 22 compatibility
+        run: npm install --save-dev 'typescript@~6.0.0'
+
+      - name: Migrate Angular 21 to Angular 22
+        run: npx ng update @angular/core@22 @angular/cli@22 --allow-dirty
+        env:
+          NG_CLI_ANALYTICS: "false"
+
+      - name: Run Angular unit tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+
+      - name: Build production bundle
+        run: npm run build -- --configuration production
+
+      - name: Audit upgraded dependencies
+        run: |
+          npm audit --json > npm-audit-after-migration.json || true
+          node -e "const a=require('./npm-audit-after-migration.json'); const v=a.metadata?.vulnerabilities ?? {}; console.log('Post-migration audit:', JSON.stringify(v)); if ((v.critical ?? 0) > 0 || (v.high ?? 0) > 0) process.exit(1);"
+
+      - name: Upload migration audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-21-migration-audit
+          path: web-angular/npm-audit-after-migration.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Commit verified migration
+        if: success()
+        working-directory: .
+        run: |
+          rm -f web-angular/UPGRADE_TO_ANGULAR_22
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Upgrade Angular to supported version 22"
+          git push origin chore/angular-21-security-upgrade

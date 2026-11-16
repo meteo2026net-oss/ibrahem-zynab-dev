@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ProjectService } from '../../core/project.service';
 import { AuditService } from '../../core/audit.service';
@@ -8,6 +8,7 @@ import { AuditService } from '../../core/audit.service';
   standalone: true,
   imports: [DatePipe],
   templateUrl: './security.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './security.component.scss',
 })
 export class SecurityComponent {

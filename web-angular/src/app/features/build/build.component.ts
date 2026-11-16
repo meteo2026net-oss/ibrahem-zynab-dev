@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ProjectService } from '../../core/project.service';
 import { ToastService } from '../../core/toast.service';
 
@@ -7,6 +7,7 @@ import { ToastService } from '../../core/toast.service';
   standalone: true,
   imports: [],
   templateUrl: './build.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './build.component.scss',
 })
 export class BuildComponent {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ProjectService } from '../../core/project.service';
 
 @Component({
@@ -6,6 +6,7 @@ import { ProjectService } from '../../core/project.service';
   standalone: true,
   imports: [],
   templateUrl: './test.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './test.component.scss',
 })
 export class TestComponent {

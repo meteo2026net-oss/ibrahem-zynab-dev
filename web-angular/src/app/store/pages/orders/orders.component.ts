@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { StoreService } from '../../services/store.service';
@@ -8,6 +8,7 @@ import { StoreService } from '../../services/store.service';
   standalone: true,
   imports: [RouterLink, DatePipe],
   templateUrl: './orders.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './orders.component.scss',
 })
 export class OrdersComponent {
