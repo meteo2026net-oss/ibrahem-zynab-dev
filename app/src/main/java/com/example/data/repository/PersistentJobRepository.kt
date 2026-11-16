@@ -220,7 +220,7 @@ class PersistentJobRepository(private val context: Context) {
                     leaseToken = data["leaseToken"] as? String,
                     leaseExpiresAt = (data["leaseExpiresAt"] as? Number)?.toLong(),
                     heartbeatAt = (data["heartbeatAt"] as? Number)?.toLong(),
-                    retryCount = (data["retryCount"] as? Number)?.toInt() ?: 0,
+                    retryCount = ((data["attempts"] ?: data["retryCount"]) as? Number)?.toInt() ?: 0,
                     maxRetries = (data["maxRetries"] as? Number)?.toInt() ?: 3,
                     waitingApprovalId = data["waitingApprovalId"] as? String,
                     totalTokensUsed = (data["totalTokensUsed"] as? Number)?.toInt() ?: 0,
