@@ -72,6 +72,23 @@ describe('Firestore owner and control-plane rules', () => {
     }
   });
 
+
+  it('denies client access to project backup payloads until a trusted encrypted backup service exists', async () => {
+    await env.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), 'project_backups/backup-a'), {
+        userId: 'user-a',
+        encryptedData: 'test-payload',
+      });
+    });
+    const ownerDb = env.authenticatedContext('user-a').firestore();
+    const backup = doc(ownerDb, 'project_backups/backup-a');
+    await assertFails(getDoc(backup));
+    await assertFails(setDoc(doc(ownerDb, 'project_backups/backup-b'), {
+      userId: 'user-a', encryptedData: 'client-forged-payload',
+    }));
+    await assertFails(deleteDoc(backup));
+  });
+
   it('denies unauthenticated writes and unlisted collection access', async () => {
     const anonymousDb = env.unauthenticatedContext().firestore();
     await assertFails(setDoc(doc(anonymousDb, 'projects/anonymous'), { userId: 'anonymous' }));
