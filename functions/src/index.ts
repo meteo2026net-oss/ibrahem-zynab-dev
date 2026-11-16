@@ -425,11 +425,12 @@ export const createPersistentJob = onCall(
 export const reconcilePersistentJobDispatch = onSchedule(
   { schedule: "every 1 minutes", timeoutSeconds: 60, memory: "256MiB" },
   async () => {
-    const snapshot = await db.collection("persistent_jobs")
-      .where("dispatchStatus", "==", "FAILED")
-      .limit(50)
-      .get();
-    for (const doc of snapshot.docs) {
+    const [failed, notConfigured] = await Promise.all([
+      db.collection("persistent_jobs").where("dispatchStatus", "==", "FAILED").limit(50).get(),
+      db.collection("persistent_jobs").where("dispatchStatus", "==", "NOT_CONFIGURED").limit(50).get(),
+    ]);
+    const candidates = new Map([...failed.docs, ...notConfigured.docs].map((doc) => [doc.id, doc]));
+    for (const doc of candidates.values()) {
       if (doc.get("status") !== "QUEUED") continue;
       const dispatchStatus = await dispatchPersistentJob(doc.id);
       await doc.ref.set({
