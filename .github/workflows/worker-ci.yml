@@ -36,3 +36,6 @@ jobs:
       - name: Validate JavaScript syntax
         working-directory: worker
         run: npm run check
+      - name: Run worker unit tests
+        working-directory: worker
+        run: npm test
