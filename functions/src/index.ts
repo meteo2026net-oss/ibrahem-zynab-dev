@@ -308,7 +308,7 @@ async function verifyAndReadLease(
  * The Cloud Run worker must verify the OIDC token and claim the job lease
  * before doing any work.
  */
-async function dispatchPersistentJob(jobId: string): Promise<"ENQUEUED" | "NOT_CONFIGURED" | "FAILED"> {
+async function dispatchPersistentJob(jobId: string, generation = 0): Promise<"ENQUEUED" | "NOT_CONFIGURED" | "FAILED"> {
   const project = process.env.CLOUD_TASKS_PROJECT_ID || process.env.GCLOUD_PROJECT;
   const location = process.env.CLOUD_TASKS_LOCATION;
   const queue = process.env.CLOUD_TASKS_QUEUE;
@@ -320,7 +320,7 @@ async function dispatchPersistentJob(jobId: string): Promise<"ENQUEUED" | "NOT_C
   }
 
   const parent = cloudTasks.queuePath(project, location, queue);
-  const taskName = `${parent}/tasks/job-${jobId}`;
+  const taskName = `${parent}/tasks/job-${jobId}-${generation}`;
   const body = Buffer.from(JSON.stringify({ jobId })).toString("base64");
   try {
     await cloudTasks.createTask({
@@ -386,6 +386,7 @@ export const createPersistentJob = onCall(
         currentStepIndex: 0,
         attempts: 0,
         cancelRequested: false,
+        dispatchGeneration: 0,
         workerId: null,
         leaseToken: null,
         leaseExpiresAt: 0,
@@ -410,7 +411,7 @@ export const createPersistentJob = onCall(
       });
       return { jobId, reused: false };
     });
-    const dispatchStatus = await dispatchPersistentJob(result.jobId);
+    const dispatchStatus = await dispatchPersistentJob(result.jobId, 0);
     await db.collection("persistent_jobs").doc(result.jobId).set({
       dispatchStatus,
       dispatchUpdatedAt: FieldValue.serverTimestamp(),
@@ -433,12 +434,70 @@ export const reconcilePersistentJobDispatch = onSchedule(
     const candidates = new Map([...failed.docs, ...notConfigured.docs].map((doc) => [doc.id, doc]));
     for (const doc of candidates.values()) {
       if (doc.get("status") !== "QUEUED") continue;
-      const dispatchStatus = await dispatchPersistentJob(doc.id);
+      const generation = typeof doc.get("dispatchGeneration") === "number" ? doc.get("dispatchGeneration") as number : 0;
+      const dispatchStatus = await dispatchPersistentJob(doc.id, generation);
       await doc.ref.set({
         dispatchStatus,
         dispatchUpdatedAt: FieldValue.serverTimestamp(),
       }, { merge: true });
     }
+  }
+);
+
+export const retryPersistentJob = onCall(
+  { enforceAppCheck: true, timeoutSeconds: 30, memory: "256MiB" },
+  async (request) => {
+    const uid = requireUid(request);
+    const jobId = requireText(request.data?.jobId, "jobId", 128);
+    const ref = db.collection("persistent_jobs").doc(jobId);
+    const generation = await db.runTransaction(async (tx) => {
+      const snapshot = await tx.get(ref);
+      if (!snapshot.exists || snapshot.get("userId") !== uid) {
+        throw new HttpsError("not-found", "Job not found.");
+      }
+      const data = snapshot.data()!;
+      if (data.status !== "FAILED") {
+        throw new HttpsError("failed-precondition", "Only failed jobs can be retried.");
+      }
+      const attempts = typeof data.attempts === "number" ? data.attempts : 0;
+      if (attempts >= 3) {
+        throw new HttpsError("resource-exhausted", "The job reached its maximum of three execution attempts.");
+      }
+      const nextGeneration = (typeof data.dispatchGeneration === "number" ? data.dispatchGeneration : 0) + 1;
+      tx.update(ref, {
+        status: "QUEUED",
+        progress: 0,
+        progressPercent: 0,
+        currentStepIndex: 0,
+        cancelRequested: false,
+        dispatchStatus: "PENDING",
+        dispatchGeneration: nextGeneration,
+        workerId: null,
+        leaseToken: null,
+        leaseExpiresAt: 0,
+        summary: "",
+        resultText: "",
+        resultFiles: [],
+        resultModel: "",
+        finishedAt: FieldValue.delete(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      tx.create(db.collection("audit_logs").doc(), {
+        userId: uid,
+        projectId: data.projectId,
+        action: "PERSISTENT_JOB_RETRY_REQUESTED",
+        targetId: jobId,
+        actor: uid,
+        createdAt: FieldValue.serverTimestamp(),
+      });
+      return nextGeneration;
+    });
+    const dispatchStatus = await dispatchPersistentJob(jobId, generation);
+    await ref.set({
+      dispatchStatus,
+      dispatchUpdatedAt: FieldValue.serverTimestamp(),
+    }, { merge: true });
+    return { jobId, dispatchStatus, generation };
   }
 );
 
