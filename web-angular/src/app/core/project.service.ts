@@ -81,9 +81,9 @@ function defaultState(): AppState {
       },
     ],
     tests: [
-      { id: 'TC-01', title: 'إضافة للسلة — مستخدم مسجل', expected: 'نجاح + زيادة العداد', result: 'pass' },
-      { id: 'TC-02', title: 'إضافة للسلة — غير مسجل', expected: 'فتح تسجيل الدخول', result: 'pass' },
-      { id: 'TC-03', title: 'طلب وسلة فارغة', expected: 'منع + رسالة', result: 'fail' },
+      { id: 'TC-01', title: 'إضافة للسلة — مستخدم مسجل', expected: 'نجاح + زيادة العداد', result: 'pending' },
+      { id: 'TC-02', title: 'إضافة للسلة — غير مسجل', expected: 'فتح تسجيل الدخول', result: 'pending' },
+      { id: 'TC-03', title: 'طلب وسلة فارغة', expected: 'منع + رسالة', result: 'pending' },
       { id: 'TC-04', title: 'طلب ناجح', expected: 'طلب جديد + تفريغ السلة', result: 'pending' },
     ],
     agentTasks: [
@@ -91,12 +91,8 @@ function defaultState(): AppState {
       { id: '#D-045', agent: 'Design', description: 'توليد شاشة قائمة المنتجات', status: 'review' },
       { id: '#B-012', agent: 'Build', description: 'توليد كود Android', status: 'queued' },
     ],
-    buildLog: [
-      '[10:01] بدء توليد الكود — 8 شاشات',
-      '[10:04] اكتمال التوليد — 42 ملفاً',
-      '[10:08] نجاح البناء — app-debug.apk (18.4 MB)',
-    ],
-    lastApk: { name: 'app-debug.apk', size: '18.4 MB', ready: true },
+    buildLog: ['لم يتم تشغيل بناء بعد.'],
+    lastApk: { name: 'لا توجد حزمة بناء', size: '—', ready: false },
     functionSteps: [
       { id: 1, title: 'التحقق من تسجيل الدخول', detail: 'إن لم يكن مسجلاً → افتح تسجيل الدخول', kind: 'check' },
       { id: 2, title: 'كمية افتراضية', detail: 'quantity = 1', kind: 'action' },
@@ -137,9 +133,9 @@ function defaultState(): AppState {
       version: '0.1.0-beta',
       notes: 'أول نسخة تجريبية — تصفح وسلة وطلب ولوحة بائع',
       checklist: [
-        { label: 'نجاح البناء', done: true },
-        { label: 'اجتياز اختبارات المسار الحرج', done: true },
-        { label: 'مراجعة الأمان الأساسية', done: true },
+        { label: 'نجاح البناء', done: false },
+        { label: 'اجتياز اختبارات المسار الحرج', done: false },
+        { label: 'مراجعة الأمان الأساسية', done: false },
       ],
     },
     monitorErrors: [
