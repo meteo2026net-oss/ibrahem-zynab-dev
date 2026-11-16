@@ -99,7 +99,7 @@
           <div class="form-group"><label class="form-label">العنوان</label><input class="form-control mini" value="الرياض، حي النرجس" /></div>
           <div class="form-group"><label class="form-label">الجوال</label><input class="form-control mini" value="05xxxxxxx" /></div>
           <div class="cart-total">المبلغ: {{ selectedProduct.price * cartQty }} ر.س</div>
-          <button class="btn btn-success" style="width:100%" type="button" (click)="toast.success('تم تأكيد الطلب'); selectScreen('طلباتي')">تأكيد الطلب</button>
+          <button class="btn btn-success" style="width:100%" type="button" (click)="toast.info('هذه معاينة محلية فقط؛ لم يُرسل طلب إلى خادم أو قاعدة بيانات.'); selectScreen('طلباتي')">معاينة التأكيد</button>
         }
 
         @if (pageHint() === 'orders') {
@@ -123,11 +123,11 @@
           <div class="order-card">
             <strong>طلب #1042</strong>
             <div class="toolbar" style="margin:8px 0 0">
-              <button class="btn btn-sm btn-secondary" type="button">تجهيز</button>
-              <button class="btn btn-sm btn-primary" type="button">شحن</button>
+              <button class="btn btn-sm btn-secondary" type="button" disabled>تجهيز — نموذج</button>
+              <button class="btn btn-sm btn-primary" type="button" disabled>شحن — نموذج</button>
             </div>
           </div>
-          <button class="btn btn-primary" style="width:100%;margin-top:8px" type="button">+ منتج جديد</button>
+          <button class="btn btn-secondary" style="width:100%;margin-top:8px" type="button" disabled>إضافة منتج — غير موصولة</button>
         }
 
       </div>
@@ -149,6 +149,6 @@
         <option>فتح تسجيل الدخول</option>
       </select>
     </div>
-    <button class="btn btn-primary btn-sm" style="width:100%" type="button" (click)="toast.info('تم ربط الوظيفة (محاكاة)')">ربط وظيفة</button>
+    <button class="btn btn-primary btn-sm" style="width:100%" type="button" (click)="toast.error('لم يتم حفظ الربط: محرك تنفيذ الوظائف غير موصول.')">ربط وظيفة</button>
   </div>
 </div>
